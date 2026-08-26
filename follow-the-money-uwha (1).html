@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Follow the Money — UWHA, Election Hive, and the PAC That Isn't a PAC | The Weber County Hive</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Source+Serif+4:ital,wght@0,400;1,400&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'base',
+    themeVariables: {
+      background:'#faf7ef',
+      primaryColor:'#f0ecdf',
+      primaryTextColor:'#1c1c1a',
+      primaryBorderColor:'#c0572e',
+      lineColor:'#8c8878',
+      fontFamily:'Inter, sans-serif',
+      fontSize:'15px'
+    }
+  });
+</script>
+<style>
+  :root{
+    --paper:#f4f0e6;
+    --paper-card:#faf7ef;
+    --paper-card-2:#f0ecdf;
+    --ink:#1c1c1a;
+    --ink-dim:#5b5850;
+    --ink-dimmer:#8c8878;
+    --rust:#c0572e;
+    --amber:#d9a441;
+    --border:#ddd6c4;
+    --tier1:#2f6b52;
+    --tier2:#2c5f8a;
+    --tier3:#c76b1f;
+    --tier4:#7d2c3f;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--paper);color:var(--ink);font-family:'Source Serif 4', serif;line-height:1.6;}
+
+  header{
+    background:linear-gradient(160deg, #4a3018 0%, #241608 100%);
+    padding:64px 24px 50px;
+    border-bottom:4px solid var(--amber);
+  }
+  .header-inner{max-width:760px;margin:0 auto;}
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px; letter-spacing:3px;
+    color:#c9a06a; text-transform:uppercase;
+    margin-bottom:12px;
+  }
+  h1{
+    font-family:'Playfair Display', serif;
+    font-weight:800;
+    font-size:clamp(2.1rem, 5vw, 3.2rem);
+    color:#f4e6c8;
+    line-height:1.15;
+  }
+  header .dek{
+    color:#c9b896;
+    font-family:'Source Serif 4', serif;
+    font-style:italic;
+    margin-top:14px;
+    max-width:600px;
+    font-size:1.1rem;
+  }
+  .back-link{
+    display:inline-block;
+    margin-top:22px;
+    font-family:'Inter', sans-serif;
+    font-size:0.85rem; font-weight:600;
+    color:var(--amber); text-decoration:none;
+  }
+  .back-link:hover{text-decoration:underline;}
+
+  .wrap{max-width:760px;margin:0 auto;padding:52px 24px 100px;}
+
+  .intro{
+    color:var(--ink-dim);
+    font-size:1.05rem;
+    margin-bottom:44px;
+    padding-bottom:36px;
+    border-bottom:1px solid var(--border);
+  }
+  .intro strong{color:var(--ink);}
+
+  .tier{margin-bottom:52px;}
+  .tier-label{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px; letter-spacing:2px;
+    text-transform:uppercase;
+    margin-bottom:18px;
+  }
+  .tier-dot{width:10px; height:10px; border-radius:50%;}
+  .tier1 .tier-dot{background:var(--tier1);} .tier1 .tier-label{color:var(--tier1);}
+  .tier2 .tier-dot{background:var(--tier2);} .tier2 .tier-label{color:var(--tier2);}
+  .tier3 .tier-dot{background:var(--tier3);} .tier3 .tier-label{color:var(--tier3);}
+  .tier4 .tier-dot{background:var(--tier4);} .tier4 .tier-label{color:var(--tier4);}
+
+  .beat{
+    background:var(--paper-card);
+    border:1px solid var(--border);
+    border-left:4px solid var(--border);
+    border-radius:4px;
+    padding:22px 26px;
+    margin-bottom:16px;
+  }
+  .tier1 .beat{border-left-color:var(--tier1);}
+  .tier2 .beat{border-left-color:var(--tier2);}
+  .tier3 .beat{border-left-color:var(--tier3);}
+  .tier4 .beat{border-left-color:var(--tier4);}
+  .beat h3{
+    font-family:'Playfair Display', serif;
+    font-size:1.2rem;
+    margin-bottom:10px;
+    color:var(--ink);
+  }
+  .beat p{color:var(--ink-dim); font-size:0.98rem;}
+  .beat .source{
+    display:block;
+    margin-top:12px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    color:var(--ink-dimmer);
+  }
+
+  .caution{
+    background:var(--paper-card-2);
+    border:1px solid var(--border);
+    border-radius:4px;
+    padding:24px 26px;
+    margin-top:48px;
+  }
+  .caution h3{
+    font-family:'Playfair Display', serif;
+    font-size:1.1rem;
+    color:var(--rust);
+    margin-bottom:12px;
+  }
+  .caution ul{margin-left:20px; color:var(--ink-dim); font-size:0.92rem;}
+  .caution li{margin-bottom:8px;}
+
+  footer{
+    text-align:center;
+    padding:30px 24px 50px;
+    color:var(--ink-dimmer);
+    font-family:'Inter', sans-serif;
+    font-size:0.8rem;
+  }
+  footer a{color:var(--rust); text-decoration:none; font-weight:600;}
+
+  /* For Beginners section */
+  .beginners{
+    background:var(--paper-card-2);
+    border:2px solid var(--amber);
+    border-radius:8px;
+    padding:30px 28px;
+    margin-bottom:44px;
+  }
+  .beginners-eyebrow{
+    display:inline-block;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px; letter-spacing:2px;
+    text-transform:uppercase;
+    color:var(--amber);
+    background:var(--paper-card);
+    border:1px solid var(--amber);
+    padding:4px 12px;
+    border-radius:999px;
+    margin-bottom:16px;
+  }
+  .beginners h2{
+    font-family:'Playfair Display', serif;
+    font-size:1.5rem;
+    margin-bottom:14px;
+    color:var(--ink);
+  }
+  .beginners p{
+    font-size:1.02rem;
+    color:var(--ink-dim);
+    margin-bottom:14px;
+  }
+  .beginners p:last-child{margin-bottom:0;}
+  .beginners .step{
+    display:flex;
+    align-items:flex-start;
+    gap:12px;
+    margin-bottom:12px;
+  }
+  .step-num{
+    flex-shrink:0;
+    width:28px; height:28px;
+    border-radius:50%;
+    background:var(--amber);
+    color:#241608;
+    font-family:'IBM Plex Mono', monospace;
+    font-weight:600;
+    font-size:14px;
+    display:flex; align-items:center; justify-content:center;
+  }
+
+  .whos-who{margin-bottom:44px;}
+  .whos-who-title{
+    font-family:'Playfair Display', serif;
+    font-size:1.25rem;
+    margin-bottom:18px;
+    color:var(--ink);
+  }
+  .cast-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(220px, 1fr));
+    gap:14px;
+  }
+  .cast-card{
+    background:var(--paper-card);
+    border:1px solid var(--border);
+    border-radius:6px;
+    padding:16px 18px;
+  }
+  .cast-name{
+    font-family:'Playfair Display', serif;
+    font-weight:700;
+    font-size:1.02rem;
+    color:var(--ink);
+    margin-bottom:4px;
+  }
+  .cast-role{
+    display:inline-block;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:9.5px; letter-spacing:1px;
+    text-transform:uppercase;
+    color:var(--rust);
+    margin-bottom:8px;
+  }
+  .cast-card p{font-size:0.86rem; color:var(--ink-dim); margin:0;}
+
+  /* Ledger-style transaction table */
+  .ledger-box{
+    background:var(--paper-card);
+    border:1px solid var(--border);
+    border-radius:8px;
+    padding:24px 26px;
+    margin-bottom:20px;
+  }
+  .ledger-box h4{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px; letter-spacing:1.5px;
+    text-transform:uppercase;
+    color:var(--ink-dimmer);
+    margin-bottom:14px;
+  }
+  .ledger-row{
+    display:flex;
+    justify-content:space-between;
+    gap:12px;
+    padding:9px 0;
+    border-bottom:1px solid var(--border);
+    font-size:0.9rem;
+  }
+  .ledger-row:last-child{border-bottom:none;}
+  .ledger-date{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    color:var(--ink-dimmer);
+    flex-shrink:0;
+    width:74px;
+  }
+  .ledger-name{color:var(--ink); flex:1;}
+  .ledger-name .tag{
+    display:inline-block;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:9px;
+    color:var(--rust);
+    border:1px solid var(--rust);
+    border-radius:3px;
+    padding:1px 5px;
+    margin-left:6px;
+    vertical-align:middle;
+  }
+  .ledger-amt{
+    font-family:'IBM Plex Mono', monospace;
+    font-weight:600;
+    flex-shrink:0;
+    text-align:right;
+    min-width:90px;
+  }
+  .amt-in{color:var(--tier1);}
+  .amt-out{color:var(--tier4);}
+  .ledger-total{
+    display:flex;
+    justify-content:space-between;
+    padding-top:14px;
+    margin-top:6px;
+    border-top:2px solid var(--ink);
+    font-weight:700;
+    font-size:0.98rem;
+  }
+
+  /* Deep profiles section */
+  .profiles{margin:56px 0;}
+  .profiles-title{
+    font-family:'Playfair Display', serif;
+    font-size:1.7rem;
+    margin-bottom:10px;
+    color:var(--ink);
+  }
+  .profiles-sub{
+    color:var(--ink-dim);
+    font-style:italic;
+    font-size:0.98rem;
+    margin-bottom:28px;
+  }
+  .profile-block{
+    background:var(--paper-card);
+    border:1px solid var(--border);
+    border-radius:6px;
+    padding:26px 28px;
+    margin-bottom:20px;
+  }
+  .profile-head{
+    display:flex;
+    align-items:baseline;
+    gap:12px;
+    flex-wrap:wrap;
+    margin-bottom:10px;
+  }
+  .profile-name{
+    font-family:'Playfair Display', serif;
+    font-weight:700;
+    font-size:1.3rem;
+    color:var(--ink);
+  }
+  .profile-role{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px; letter-spacing:1px;
+    text-transform:uppercase;
+    color:var(--rust);
+  }
+  .profile-block p{color:var(--ink-dim); font-size:0.95rem; margin-bottom:10px;}
+  .profile-jobs{margin-top:14px;}
+  .profile-jobs-label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10px; letter-spacing:1.5px;
+    text-transform:uppercase;
+    color:var(--ink-dimmer);
+    margin-bottom:8px;
+  }
+  .profile-jobs ul{margin-left:20px;}
+  .profile-jobs li{color:var(--ink-dim); font-size:0.92rem; margin-bottom:5px;}
+  .profile-source{
+    display:block;
+    margin-top:12px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10.5px;
+    color:var(--ink-dimmer);
+  }
+
+  .diagram-box{
+    background:var(--paper-card);
+    border:1px solid var(--border);
+    border-radius:8px;
+    padding:24px;
+    margin-bottom:44px;
+    overflow-x:auto;
+  }
+  .diagram-box .diagram-caption{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    color:var(--ink-dimmer);
+    margin-bottom:16px;
+    text-align:center;
+  }
+  .mermaid{display:flex; justify-content:center;}
+
+  /* Sanderson flip cards */
+  .sanderson-cards-label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10px; letter-spacing:1.5px;
+    text-transform:uppercase;
+    color:var(--ink-dimmer);
+    margin:18px 0 6px;
+  }
+  .sanderson-cards-hint{
+    font-size:0.85rem;
+    color:var(--ink-dimmer);
+    font-style:italic;
+    margin-bottom:16px;
+  }
+  .sanderson-cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(215px, 1fr));
+    gap:16px;
+  }
+  .flip-card{
+    background-color:transparent;
+    height:250px;
+    perspective:1200px;
+    cursor:pointer;
+  }
+  .flip-card-inner{
+    position:relative;
+    width:100%;
+    height:100%;
+    transition:transform 0.6s;
+    transform-style:preserve-3d;
+  }
+  .flip-card.flipped .flip-card-inner{
+    transform:rotateY(180deg);
+  }
+  .flip-card-front, .flip-card-back{
+    position:absolute;
+    width:100%;
+    height:100%;
+    backface-visibility:hidden;
+    -webkit-backface-visibility:hidden;
+    border-radius:8px;
+    padding:18px 20px;
+    display:flex;
+    flex-direction:column;
+  }
+  .flip-card-front{
+    background:var(--paper-card-2);
+    border:1px solid var(--border);
+    justify-content:space-between;
+  }
+  .flip-card-back{
+    background:var(--paper-card);
+    border:1px solid var(--rust);
+    transform:rotateY(180deg);
+    overflow-y:auto;
+  }
+  .flip-card-tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10px; letter-spacing:1px;
+    text-transform:uppercase;
+    color:var(--rust);
+    margin-bottom:10px;
+  }
+  .flip-card-title{
+    font-family:'Playfair Display', serif;
+    font-weight:700;
+    font-size:1.12rem;
+    color:var(--ink);
+    line-height:1.28;
+  }
+  .flip-hint{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:9.5px;
+    color:var(--ink-dimmer);
+    margin-top:auto;
+    letter-spacing:0.5px;
+  }
+  .flip-card-back-title{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:9.5px; letter-spacing:1px;
+    text-transform:uppercase;
+    color:var(--rust);
+    margin-bottom:8px;
+  }
+  .flip-card-back p{
+    font-size:0.83rem;
+    color:var(--ink-dim);
+    margin-bottom:8px;
+    line-height:1.45;
+  }
+  .flip-card-back p:last-child{margin-bottom:0;}
+  .flip-card-outlier .flip-card-front{border-color:var(--rust); border-width:2px;}
+</style>
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <div class="eyebrow">The Weber County Hive · Money-Flow Ledger</div>
+      <h1>Follow the Money</h1>
+      <p class="dek">A tip about one housing nonprofit led to a Republican political committee that moved $730,000 through consultants, a self-dealing legislative treasurer, and a Washington DC Super PAC attorney's name.</p>
+      <a class="back-link" href="index.html">← Back to the Ledger</a>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <p class="intro">A public tweet started this: a claim that the Utah Legislature funded a nonprofit whose registered agent is also the Governor's own campaign manager. Every part of that claim checks out against primary sources — and following the money past it leads through both chambers of the Utah GOP's own campaign committees, a $25,000 personal payment to a legislative leadership treasurer, and a Washington DC attorney whose name keeps reappearing across Utah's political money network. Here's the trail, one confirmed step at a time.</p>
+
+    <div class="beginners">
+      <span class="beginners-eyebrow">For Beginners</span>
+      <h2>Wait — what actually happened here?</h2>
+      <p>Think of it like this. Your state government has a jar of tax money set aside to help people afford housing. Instead of giving that money straight to a housing project, lawmakers gave $2 million of it to a brand-new group — one that didn't exist a few months earlier — to run TV ads about housing.</p>
+      <div class="step">
+        <span class="step-num">1</span>
+        <p style="margin:0;">The people running that new group are the <strong>same people</strong> who run the Governor's campaigns and consult for the Attorney General.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">2</span>
+        <p style="margin:0;">That group paid <strong>$75,000</strong> to one of those same people's own private company — for the ads.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">3</span>
+        <p style="margin:0;">Meanwhile, a <strong>separate committee</strong> received $360,000 from the Utah House and Senate Republicans' own campaign funds and an out-of-state $100,000 individual gift — then paid that <strong>same private company</strong> again, paid a national polling firm and a national PR firm, and sent <strong>$25,000 directly to the treasurer</strong> who controls both House and Senate GOP PAC money.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">4</span>
+        <p style="margin:0;">That committee was set up by a <strong>Washington DC lawyer</strong> who has built five other similar Utah groups — all connected to the same small circle of donors and officials.</p>
+      </div>
+      <p>None of this is proven to be illegal. But it shows how a small circle of people can move public and political money back and forth to each other, through groups the public can't easily see into. That's what "follow the money" means here — and below is the paper trail, sourced document by document.</p>
+    </div>
+
+    <div class="whos-who">
+      <h2 class="whos-who-title">Who's who in this story</h2>
+      <div class="cast-grid">
+        <div class="cast-card">
+          <div class="cast-name">Spencer Cox</div>
+          <span class="cast-role">Governor of Utah</span>
+          <p>Utah's sitting Governor. Election Hive is his campaign's single largest documented vendor, and several people in this story sit inside his administration or his personal political circle.</p>
+        </div>
+        <div class="cast-card">
+          <div class="cast-name">Matt Lusty</div>
+          <span class="cast-role">Cox's campaign spokesperson</span>
+          <p>Founder of Election Hive, a political consulting firm that runs Gov. Cox's campaign. Also runs a second firm, Honey Communications, and is UWHA's registered agent.</p>
+        </div>
+        <div class="cast-card">
+          <div class="cast-name">Steve Waldrip</div>
+          <span class="cast-role">Cox's housing adviser</span>
+          <p>Holds a paid state job as Gov. Cox's Senior Advisor for Housing Strategy — while also sitting on UWHA's board, the nonprofit that got the $2 million.</p>
+        </div>
+        <div class="cast-card">
+          <div class="cast-name">Derek Brown</div>
+          <span class="cast-role">Utah Attorney General</span>
+          <p>The state's sitting AG. Was a director of UWHA starting the same month he opened his own campaign for Attorney General.</p>
+        </div>
+        <div class="cast-card">
+          <div class="cast-name">Kyle Palmer</div>
+          <span class="cast-role">Treasurer, House and Senate GOP PAC money</span>
+          <p>Treasurer of UHREC (House GOP) with sole authority over what it pays out, and holds treasurer roles at four other Utah PACs at once. Also personally received $25,000 from the committee at the center of this story.</p>
+        </div>
+        <div class="cast-card">
+          <div class="cast-name">Matthew T. Sanderson</div>
+          <span class="cast-role">Washington DC Super PAC attorney</span>
+          <p>Filed the paperwork that created Utahns for Balanced Government — the same lawyer behind five other Utah political groups tied to this same circle.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="diagram-box">
+      <div class="diagram-caption">The money trail, visually</div>
+      <div class="mermaid">
+flowchart TD
+    A["🏛️ Utah Legislature<br/>$2,000,000<br/>no-bid appropriation"] --> B["UWHA<br/>housing nonprofit"]
+    B -->|"$75,000"| C["Honey Communications<br/>Matt Lusty's firm"]
+    D["🐘 UHREC<br/>House GOP PAC<br/>Kyle Palmer, Treasurer"] -->|"$100,000"| E["Utahns for<br/>Balanced Government<br/>Political Issues Committee<br/>built by DC attorney<br/>Matthew Sanderson"]
+    D2["🐘 Utah Republican Senate<br/>Campaign Committee"] -->|"$50,000"| E
+    F2["Individual + corporate donors<br/>incl. $100K from an out-of-state<br/>individual"] -->|"$210,000"| E
+    E -->|"$8,950"| C
+    E -->|"$25,000"| PALMER2["Irish Elk LLC<br/>Kyle Palmer's own firm"]
+    E -->|"$121,500"| NAT["National consultants<br/>WPA Intelligence, DCI Group,<br/>Northbound Strategy"]
+    B -.board seat.-> F["Steve Waldrip<br/>Cox's Housing Adviser"]
+    B -.director.-> G["Derek Brown<br/>Attorney General"]
+    C -.owned by.-> H["Matt Lusty<br/>Cox campaign spokesperson"]
+
+    classDef gov fill:#f0ecdf,stroke:#2c5f8a,stroke-width:2px,color:#1c1c1a
+    classDef money fill:#faf7ef,stroke:#c76b1f,stroke-width:2px,color:#1c1c1a
+    classDef people fill:#faf7ef,stroke:#7d2c3f,stroke-width:2px,color:#1c1c1a
+    class A,D,D2 gov
+    class B,E,C,NAT money
+    class F,G,H,PALMER2 people
+      </div>
+    </div>
+
+    <div class="tier tier1">
+      <div class="tier-label"><span class="tier-dot"></span>Tier 1 — The tip, verified</div>
+      <div class="beat">
+        <h3>What Utah Workforce Housing Advocacy actually got</h3>
+        <p>UWHA — a nonprofit incorporated just weeks before the 2024 legislative session — received $1 million in direct, no-bid legislative appropriations in 2024, then another $1 million in FY25-26. No competing bidder. Matt Lusty, founder of the political consulting firm Election Hive and on record as "the campaign spokesperson" for Gov. Spencer Cox, is UWHA's registered agent and has been described as its executive director. Steve Waldrip — Cox's own Senior Advisor for Housing Strategy — sits on UWHA's board while holding that state role at the same time.</p>
+        <span class="source">Source: Utah Legislature appropriations records; Fox 13 (7/29/2025); UWHA's own board listing</span>
+      </div>
+    </div>
+
+    <div class="tier tier2">
+      <div class="tier-label"><span class="tier-dot"></span>Tier 2 — Where the money actually went</div>
+      <div class="beat">
+        <h3>UWHA's own financial reports</h3>
+        <p>UWHA paid at least $75,000 to Honey Communications — Matt Lusty's second firm — for its "Demand More Supply" ad campaign. When UWHA's own leadership was asked to name a single house built as a result of the campaign, the answer was a pause and "that's a great question."</p>
+        <span class="source">Source: UWHA financial disclosures; Fox 13 (7/29/2025)</span>
+      </div>
+      <div class="beat">
+        <h3>A second, separate payment to the same firm</h3>
+        <p>A completely different filer, "Utahns for Balanced Government," paid Honey Communications $8,950 in October 2024 — a single payment, but one piece of a much larger operation this filer was running that same year.</p>
+        <span class="source">Source: disclosures.utah.gov, DEX filing data</span>
+      </div>
+    </div>
+
+    <div class="tier tier3">
+      <div class="tier-label"><span class="tier-dot"></span>Tier 3 — The full ledger of Utahns for Balanced Government</div>
+      <div class="beat">
+        <h3>A committee registered where PAC searches don't look</h3>
+        <p>Utahns for Balanced Government is registered as a <strong>Political Issues Committee (PIC)</strong> — a different category than a PAC under Utah law, and one that doesn't appear in a standard PAC-only search or directory browse. It files real reports under this category. Its full 2023–2026 ledger, pulled directly from the state's DEX filing system, shows $360,000 in contributions and $370,350 in expenditures.</p>
+        <span class="source">Source: disclosures.utah.gov DEX filing exports, Utahns for Balanced Government</span>
+      </div>
+      <div class="ledger-box">
+        <h4>Contributions received — $360,000</h4>
+        <div class="ledger-row"><span class="ledger-date">9/3/24</span><span class="ledger-name">Spring Canyon Capital LLC <span class="tag">Doers Network tie</span></span><span class="ledger-amt amt-in">+$10,000</span></div>
+        <div class="ledger-row"><span class="ledger-date">9/4/24</span><span class="ledger-name">Utah House Republican Election Committee</span><span class="ledger-amt amt-in">+$50,000</span></div>
+        <div class="ledger-row"><span class="ledger-date">9/4/24</span><span class="ledger-name">Utah Bankers Association</span><span class="ledger-amt amt-in">+$100,000</span></div>
+        <div class="ledger-row"><span class="ledger-date">9/5/24</span><span class="ledger-name">Utah Republican Senate Campaign Committee</span><span class="ledger-amt amt-in">+$50,000</span></div>
+        <div class="ledger-row"><span class="ledger-date">9/10/24</span><span class="ledger-name">Utah House Republican Election Committee</span><span class="ledger-amt amt-in">+$50,000</span></div>
+        <div class="ledger-row"><span class="ledger-date">3/24/25</span><span class="ledger-name">Gershon Barnett <span class="tag">Individual, Monsey NY</span></span><span class="ledger-amt amt-in">+$100,000</span></div>
+        <div class="ledger-total"><span>Total in</span><span>$360,000</span></div>
+      </div>
+      <div class="ledger-box">
+        <h4>Expenditures — $370,350</h4>
+        <div class="ledger-row"><span class="ledger-date">8/28/23</span><span class="ledger-name">24NINE <span class="tag">"Constituent Services"</span></span><span class="ledger-amt amt-out">−$10,000</span></div>
+        <div class="ledger-row"><span class="ledger-date">9/6/24</span><span class="ledger-name">WPA Intelligence Holdings <span class="tag">national GOP pollster</span></span><span class="ledger-amt amt-out">−$32,500</span></div>
+        <div class="ledger-row"><span class="ledger-date">10/8/24</span><span class="ledger-name">Honey Communications</span><span class="ledger-amt amt-out">−$8,950</span></div>
+        <div class="ledger-row"><span class="ledger-date">10/8/24</span><span class="ledger-name">Northbound Strategy</span><span class="ledger-amt amt-out">−$87,000</span></div>
+        <div class="ledger-row"><span class="ledger-date">10/17/24</span><span class="ledger-name">Utah Bankers Association <span class="tag">full refund</span></span><span class="ledger-amt amt-out">−$100,000</span></div>
+        <div class="ledger-row"><span class="ledger-date">10/17/24</span><span class="ledger-name">Spring Canyon Capital LLC <span class="tag">full refund</span></span><span class="ledger-amt amt-out">−$10,000</span></div>
+        <div class="ledger-row"><span class="ledger-date">4/3/25</span><span class="ledger-name">Irish Elk LLC <span class="tag">Kyle Palmer's firm</span></span><span class="ledger-amt amt-out">−$25,000</span></div>
+        <div class="ledger-row"><span class="ledger-date">6/8/26</span><span class="ledger-name">DCI Group AZ LLC <span class="tag">national PR firm</span></span><span class="ledger-amt amt-out">−$89,811</span></div>
+        <div class="ledger-row"><span class="ledger-date">various</span><span class="ledger-name">McCauley &amp; Associates <span class="tag">recurring, small</span></span><span class="ledger-amt amt-out">−$7,089</span></div>
+        <div class="ledger-total"><span>Total out</span><span>$370,350</span></div>
+      </div>
+      <div class="beat">
+        <h3>The treasurer who controls the money coming in also got money going out</h3>
+        <p>Kyle Palmer is Treasurer of UHREC — the House GOP PAC that gave this committee $100,000 — and holds the same treasurer role at four other Utah PACs simultaneously. On 4/3/2025, this same committee paid $25,000 directly to Irish Elk LLC, Palmer's own consulting company. That's not money flowing through Palmer's PAC infrastructure — it's a direct personal payment to him from the committee his own PAC helped fund.</p>
+        <span class="source">Source: disclosures.utah.gov DEX filing exports; Utah PAC officer registrations</span>
+      </div>
+      <div class="beat">
+        <h3>Two large donors got their money back, same day</h3>
+        <p>On 10/17/2024, the committee returned $100,000 in full to the Utah Bankers Association and $10,000 in full to Spring Canyon Capital LLC — both labeled "Return of a Contribution." The filing doesn't say why. It could reflect a donor's own request, a compliance concern, or a change of plans — the record doesn't specify, and neither should any characterization of it until it does.</p>
+        <span class="source">Source: disclosures.utah.gov DEX filing exports</span>
+      </div>
+      <div class="beat">
+        <h3>The committee's own leaders are also its paid vendors</h3>
+        <p>The committee's official officer filing lists Executive Director Marty Carpenter's email at the domain "24nine.com" — and the very first expenditure in the ledger is $10,000 paid to 24NINE on 8/28/2023, labeled "Constituent Services." Separately, the filing lists Mike McCauley as the committee's Treasurer — and "McCauley & Associates," the recurring small-dollar vendor throughout the ledger, has drawn roughly $7,000 across seven payments since 2024. Treasurers charging their own committees compliance fees isn't unusual on its own, but between this, the Executive Director's own firm, and the direct payment to Kyle Palmer above, the pattern is the same three times over: money moving from the committee back to the people who run it.</p>
+        <span class="source">Source: disclosures.utah.gov PIC officer filing; DEX filing exports</span>
+      </div>
+    </div>
+
+    <div class="tier tier4">
+      <div class="tier-label"><span class="tier-dot"></span>Tier 4 — Who actually built it</div>
+      <div class="beat">
+        <h3>A Washington DC Super PAC attorney's name, again</h3>
+        <p>The person who filed Utahns for Balanced Government's paperwork in 2018 was Matthew T. Sanderson of Caplin & Drysdale — a national Super PAC attorney who is also the incorporator of five other Utah political entities: All In For Utah Foundation, All In For Utah PAC, the Utah Doers Network, the Pioneer Trail Foundation, and a federal Defending Utah Values Super PAC. The committee's registered agent is Marty Carpenter — former campaign manager to Gov. Gary Herbert — alongside directors Brad Taylor and Tyler Carpenter. Carpenter originally formed the group in 2018 to oppose a ballot measure, funded almost entirely by Herbert's own PAC; it sat dormant for roughly six years before this 2024 reactivation.</p>
+        <span class="source">Source: Utah Division of Corporations, Articles of Incorporation; Salt Lake Tribune (10/30/2018)</span>
+      </div>
+      <div class="beat">
+        <h3>Closing the loop</h3>
+        <p>Derek Brown — the sitting Attorney General — was also a UWHA director, starting the same month he opened his AG campaign. Gov. Cox's own campaign is Election Hive's single largest client, paying it more than $244,000 across two single-day payments. A tip about one nonprofit and three names connects outward into the same donor and PAC network that funds the Governor, the Attorney General, and House and Senate leadership all at once.</p>
+        <span class="source">Source: Utah campaign finance disclosures; UWHA board records</span>
+      </div>
+    </div>
+
+    <div class="profiles">
+      <h2 class="profiles-title">A closer look at who's involved</h2>
+      <p class="profiles-sub">Every person in this story sits inside a wider network of PACs, state jobs, and campaign money. Here's the fuller picture, one person at a time.</p>
+
+      <div class="diagram-box">
+        <div class="diagram-caption">How everyone connects back to Cox</div>
+        <div class="mermaid">
+flowchart TD
+    COX["🏛️ Gov. Spencer Cox"]
+    COX -->|"largest vendor payment:<br/>$127K + $117K"| LUSTY["Matt Lusty<br/>Election Hive founder,<br/>campaign spokesperson"]
+    COX -->|"appointed housing adviser"| WALDRIP["Steve Waldrip<br/>Senior Housing Adviser"]
+    LUSTY -.co-founded UWHA with.-> WALDRIP
+    WALDRIP -.board seat.-> UWHA["UWHA<br/>$2M nonprofit"]
+    LUSTY -.registered agent.-> UWHA
+    UWHA -.director, Nov 2023.-> BROWN["Derek Brown<br/>Attorney General"]
+    PALMER["Kyle Palmer<br/>Treasurer, 5 PACs"] -->|"controls UHREC"| UHREC["UHREC<br/>House GOP PAC"]
+    UHREC -->|"$100,000"| UBG["Utahns for<br/>Balanced Government"]
+    UBG -->|"$8,950"| HONEY["Honey Communications<br/>Lusty's firm"]
+    UBG -->|"$25,000"| PALMERLLC["Irish Elk LLC<br/>Palmer's own firm"]
+    LUSTY -.owns.-> HONEY
+    PALMER -.owns.-> PALMERLLC
+
+    classDef cox fill:#f4e6c8,stroke:#4a3018,stroke-width:2.5px,color:#1c1c1a
+    classDef person fill:#faf7ef,stroke:#7d2c3f,stroke-width:2px,color:#1c1c1a
+    classDef org fill:#f0ecdf,stroke:#c76b1f,stroke-width:2px,color:#1c1c1a
+    class COX cox
+    class LUSTY,WALDRIP,BROWN,PALMER person
+    class UWHA,UHREC,UBG,HONEY,PALMERLLC org
+        </div>
+      </div>
+
+      <div class="profile-block">
+        <div class="profile-head">
+          <span class="profile-name">Spencer Cox</span>
+          <span class="profile-role">Governor of Utah</span>
+        </div>
+        <p>Utah's sitting Governor. Election Hive — Matt Lusty's firm — is Cox's single largest documented campaign vendor, paid $127,000+ in a single day (1/3/2024) and $117,000+ in a single day (1/15/2025). Cox has also received $82,500+ from Lincoln Hill Partners PAC (2022-2025) and $97,500+ directly from three energy companies (PacifiCorp, Chevron, EnergySolutions) between 2018 and 2026.</p>
+        <div class="profile-jobs">
+          <span class="profile-jobs-label">Documented network connections</span>
+          <ul>
+            <li>Waldrip, his own Senior Advisor for Housing Strategy, co-founded UWHA</li>
+            <li>Lusty is on record calling himself "the campaign spokesperson" for Cox</li>
+          </ul>
+        </div>
+        <span class="profile-source">Source: Utah campaign finance disclosures; Utah News Dispatch (3/11/2025)</span>
+      </div>
+
+      <div class="profile-block">
+        <div class="profile-head">
+          <span class="profile-name">Matt Lusty</span>
+          <span class="profile-role">Election Hive founder</span>
+        </div>
+        <p>Founded Election Hive in 2018 and still runs it today. Before going independent, he served as Deputy Chief of Staff for the Utah House of Representatives (Jan-Nov 2019) under then-newly-elected Speaker Brad Wilson — who is now also an Election Hive client. Lusty co-founded a second firm, Honey Communications, in 2024. He is UWHA's registered agent and, per Fox 13, its executive director.</p>
+        <div class="profile-jobs">
+          <span class="profile-jobs-label">Current and past roles</span>
+          <ul>
+            <li>Founder and current operator, Election Hive LLC (2018-present)</li>
+            <li>Co-founder and Managing Partner, Honey Communications / HONEY.inc (2024-present)</li>
+            <li>Deputy Chief of Staff, Utah House of Representatives (2019)</li>
+            <li>Registered agent and named executive director, Utah Workforce Housing Advocacy</li>
+          </ul>
+        </div>
+        <span class="profile-source">Source: Fox 13 (7/29/2025); Lusty's own LinkedIn profile; Utah DCC filings</span>
+      </div>
+
+      <div class="profile-block">
+        <div class="profile-head">
+          <span class="profile-name">Steve Waldrip</span>
+          <span class="profile-role">Cox's housing adviser</span>
+        </div>
+        <p>Has held Gov. Cox's Senior Advisor for Housing Strategy and Innovation role since December 2023 — and, as of July 2026, also heads a brand-new state Division of Housing and Community Development overseeing a $100 million infrastructure fund. He holds an Executive Board Member seat on UWHA at the same time, a role UWHA's own press materials publicly paired with his state title.</p>
+        <div class="profile-jobs">
+          <span class="profile-jobs-label">Current and past roles</span>
+          <ul>
+            <li>Senior Advisor for Housing Strategy and Innovation, Office of Gov. Spencer Cox (Dec 2023-present)</li>
+            <li>Director, Division of Housing and Community Development (July 2026-present)</li>
+            <li>Executive Board Member, Utah Workforce Housing Advocacy</li>
+            <li>Former Utah state legislator</li>
+          </ul>
+        </div>
+        <span class="profile-source">Source: Utah Policy (1/28/2025); Utah News Dispatch (2/12/2025); Times-Independent (3/5/2024)</span>
+      </div>
+
+      <div class="profile-block">
+        <div class="profile-head">
+          <span class="profile-name">Derek Brown</span>
+          <span class="profile-role">Utah Attorney General</span>
+        </div>
+        <p>Won the AG race in November 2024, took office January 2025. Was a UWHA director starting November 20, 2023 — the same month he opened his AG exploratory committee. Election Hive is his campaign's regular vendor: his own campaign paid it $127,680 across the 2024 cycle and $68,212 in 2025.</p>
+        <div class="profile-jobs">
+          <span class="profile-jobs-label">Documented network connections</span>
+          <ul>
+            <li>Director, Utah Workforce Housing Advocacy (Nov 2023-, current status unconfirmed)</li>
+            <li>His campaign is a regular Election Hive client, same firm run by UWHA's registered agent</li>
+          </ul>
+        </div>
+        <span class="profile-source">Source: Utah campaign finance disclosures; Utah Division of Corporations</span>
+      </div>
+
+      <div class="profile-block">
+        <div class="profile-head">
+          <span class="profile-name">Kyle Palmer</span>
+          <span class="profile-role">Multi-PAC treasurer, personal payee</span>
+        </div>
+        <p>Simultaneously holds Treasurer or officer roles on at least five Utah PACs — including UHREC, the House GOP PAC that gave Utahns for Balanced Government $100,000. He operates through his own company, Irish Elk LLC, which has drawn over $207,000 in fees from just four of those PACs since 2022 — and, separately, a direct $25,000 payment from Utahns for Balanced Government itself in April 2025.</p>
+        <div class="profile-jobs">
+          <span class="profile-jobs-label">Current and past roles</span>
+          <ul>
+            <li>Treasurer/CFO, UHREC (Utah House Republican Election Committee) — sole signature authority over disbursements</li>
+            <li>Treasurer, Northern Utah Legislative PAC (NUPAC)</li>
+            <li>Treasurer/CFO, House Speaker Leadership PAC</li>
+            <li>Treasurer/CFO, Utah County Legislative PAC (UCL PAC)</li>
+            <li>Director, Utah Governor's Office of Economic Opportunity (July 2021-January 2024)</li>
+            <li>Sole owner/manager, Irish Elk LLC</li>
+          </ul>
+        </div>
+        <span class="profile-source">Source: Official PAC registrations and DEX filings, disclosures.utah.gov</span>
+      </div>
+
+      <div class="profile-block">
+        <div class="profile-head">
+          <span class="profile-name">Matthew T. Sanderson</span>
+          <span class="profile-role">Washington DC Super PAC attorney</span>
+        </div>
+        <p>An attorney at Caplin & Drysdale, Chtd. in Washington DC, where he heads the Political Law Group. Filed the Articles of Incorporation for Utahns for Balanced Government in 2018. Career highlights include serving as General Counsel to Rand Paul's 2016 presidential campaign, outside counsel to Rick Perry's 2012 campaign, counsel to Mitt Romney's Commonwealth PACs, and finance counsel to John McCain's 2008 campaign. He is the incorporator of six documented Utah political entities in total.</p>
+
+        <div class="sanderson-cards-label">His six Utah entities</div>
+        <p class="sanderson-cards-hint">Tap a card to see who actually runs each one.</p>
+        <div class="sanderson-cards">
+
+          <div class="flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <div>
+                  <div class="flip-card-tag">2018 · Political Issues Committee</div>
+                  <div class="flip-card-title">Utahns for Balanced Government</div>
+                </div>
+                <div class="flip-hint">Tap to flip →</div>
+              </div>
+              <div class="flip-card-back">
+                <div class="flip-card-back-title">Run by</div>
+                <p>Marty Carpenter (Executive Director, Herbert's former campaign manager), Brad Taylor (Advisor), Tyler Carpenter (Secretary), Wesley Smith (Director), Mike McCauley (Treasurer).</p>
+                <p>$360,000 in, $370,350 out (2023-2026) — including $150K from the House and Senate GOP PACs, a $25,000 payment to Kyle Palmer's own firm, two full refunds the same day, and payments to both the Executive Director's and Treasurer's own firms.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <div>
+                  <div class="flip-card-tag">2025 · Nonprofit</div>
+                  <div class="flip-card-title">All In For Utah Foundation</div>
+                </div>
+                <div class="flip-hint">Tap to flip →</div>
+              </div>
+              <div class="flip-card-back">
+                <div class="flip-card-back-title">Run by</div>
+                <p>Directors Luke Johnson, Owen Fuller, and Tiffany Yen-Louie — same Cottonwood Heights address cluster as Fuller's other entities.</p>
+                <p>Injected $50,000 into All In For Utah PAC the day it formed; the PAC then sat on the cash through the primary rather than spending it.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <div>
+                  <div class="flip-card-tag">2026 · State PAC</div>
+                  <div class="flip-card-title">All In For Utah PAC</div>
+                </div>
+                <div class="flip-hint">Tap to flip →</div>
+              </div>
+              <div class="flip-card-back">
+                <div class="flip-card-back-title">Run by</div>
+                <p>Owen Fuller (Chair) and Dan Hemmert (Treasurer) — a former state senator turned lobbyist.</p>
+                <p>This is the filing that directly connects Fuller's Cox-circle network to Hemmert's separate Election Hive/Lincoln Hill Partners network.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <div>
+                  <div class="flip-card-tag">2026 · 501(c)(4)</div>
+                  <div class="flip-card-title">Utah Doers Network</div>
+                </div>
+                <div class="flip-hint">Tap to flip →</div>
+              </div>
+              <div class="flip-card-back">
+                <div class="flip-card-back-title">Run by</div>
+                <p>A 22-member board weighted heavily with sitting officials and party officers — including a Utah County board chaired by a sitting state senator's own wife.</p>
+                <p>Incorporated after roughly $70,000 had already gone out the door to legislative candidates under the "Doers Network" name — the paperwork caught up to the money, not the other way around.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="flip-card flip-card-outlier">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <div>
+                  <div class="flip-card-tag">2025 · Nonprofit</div>
+                  <div class="flip-card-title">Pioneer Trail Foundation</div>
+                </div>
+                <div class="flip-hint">Tap to flip →</div>
+              </div>
+              <div class="flip-card-back">
+                <div class="flip-card-back-title">Run by</div>
+                <p><strong>Nobody named.</strong> No officers or directors appear anywhere on the filing — Sanderson himself is the only person listed, period.</p>
+                <p>The one entity in this whole group with no publicly accountable person running it. Tied to a taxpayer-funded downtown Salt Lake City walking-trail project.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <div>
+                  <div class="flip-card-tag">2026 · Federal Super PAC</div>
+                  <div class="flip-card-title">Defending Utah Values Federal Super PAC</div>
+                </div>
+                <div class="flip-hint">Tap to flip →</div>
+              </div>
+              <div class="flip-card-back">
+                <div class="flip-card-back-title">Run by</div>
+                <p>The federal sister committee to the state-level Defending Utah Values PAC, per the group's own website — Owen Fuller-led, per press coverage.</p>
+                <p>Paid Election Hive $38,000 directly for 2026 primary ad buys — the same firm run by Matt Lusty, at the center of this entire piece.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <span class="profile-source">Source: Utah Division of Corporations, Articles of Incorporation filings; FEC disbursement reports (docquery.fec.gov); disclosures.utah.gov DEX filings; defendingutahvalues.com</span>
+      </div>
+    </div>
+  </div>
+
+    <div class="caution">
+      <h3>A note on how to read this</h3>
+      <ul>
+        <li>Being registered as a Political Issues Committee is itself lawful — it's a real, filed category under Utah law, not a loophole. What's newsworthy is how much money moved through it and to whom, not the registration type itself.</li>
+        <li>Sanderson is a national attorney with many clients. His role as incorporator across six Utah entities is a real, documented pattern — not evidence that he personally directs any of these organizations.</li>
+        <li>The reasons behind the two full-refund transactions (Utah Bankers Association, Spring Canyon Capital) are not stated in the public filing. Don't assume a motive the record doesn't show.</li>
+        <li>The $25,000 payment to Irish Elk LLC is a documented transaction between the committee and Kyle Palmer's company — it is not, on its own, evidence of what the payment was for beyond the "Other" purpose code on the filing.</li>
+      </ul>
+    </div>
+
+  <footer>
+    Read the full investigations on <a href="https://webercountyhive.substack.com" target="_blank" rel="noopener">The Weber County Hive Substack →</a>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      document.querySelectorAll('.flip-card').forEach(function (card) {
+        card.addEventListener('click', function () {
+          card.classList.toggle('flipped');
+        });
+      });
+    });
+  </script>
+</body>
+</html>
