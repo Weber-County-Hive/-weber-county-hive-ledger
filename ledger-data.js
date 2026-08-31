@@ -22,4 +22,11 @@ const LEDGER_ENTRIES = [
     summary: "Chris Roybal's Utah Forward PAC, Adams Leadership PAC, and a century-old realtors' association all funded Gage Froerer's campaigns while he voted to advance the West Weber Inland Port — plus a paid consultant who was simultaneously the county's own economic development director, and a separate housing authority paying Froerer's own family business.",
     url: "west-weber-pac-chain.html"
   },
+  {
+    tag: "Case 04",
+    title: "The Housing Authority Loop",
+    dek: "A commissioner, his wife, and the board that pays his family's companies",
+    summary: "Gage Froerer sits as a trustee of the Weber Housing Authority. So does his wife, Gloria — a fact stated openly and dismissed at his 2019 appointment. The authority has paid his family's real estate companies $19,623, operates out of the same building as his own commissioner office, and doesn't appear on either of his last two disclosure forms.",
+    url: "weber-housing-authority.html"
+  },
 ];
