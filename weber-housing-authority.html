@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Housing Authority Loop | The Ledger | The Weber County Hive</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Source+Serif+4:ital,wght@0,400;1,400&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f4f0e6;
+    --paper-card:#faf7ef;
+    --paper-card-2:#f0ecdf;
+    --ink:#1c1c1a;
+    --ink-dim:#5b5850;
+    --ink-dimmer:#8c8878;
+    --rust:#c0572e;
+    --amber:#d9a441;
+    --border:#ddd6c4;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--paper);color:var(--ink);font-family:'Source Serif 4', serif;line-height:1.65;font-size:17px;}
+  a{color:var(--rust);}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px;}
+
+  header{
+    background:linear-gradient(160deg, #4a3018 0%, #241608 100%);
+    padding:64px 24px 50px;
+    border-bottom:4px solid var(--amber);
+  }
+  .header-inner{max-width:760px;margin:0 auto;}
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px; letter-spacing:3px;
+    color:#c9a06a; text-transform:uppercase;
+    margin-bottom:12px;
+  }
+  h1{
+    font-family:'Playfair Display', serif;
+    font-weight:800;
+    font-size:clamp(2.1rem, 5vw, 3.2rem);
+    color:#f4e6c8;
+    line-height:1.1;
+    max-width:660px;
+  }
+  .dek{
+    font-family:'Inter',sans-serif;
+    font-size:18px;
+    color:#d9c9a8;
+    margin-top:18px;
+    max-width:600px;
+    line-height:1.5;
+  }
+
+  .stat-row{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1px;
+    background:var(--border);
+    border:1px solid var(--border);
+    margin:44px 0;
+  }
+  .stat{background:var(--paper-card);padding:22px 16px;text-align:center;}
+  .stat .n{font-family:'Playfair Display',serif;font-weight:800;font-size:26px;color:var(--rust);}
+  .stat .l{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-dim);margin-top:6px;}
+
+  section{padding:10px 0 40px;}
+  h2{
+    font-family:'Playfair Display',serif;
+    font-weight:700;
+    font-size:25px;
+    border-bottom:2px solid var(--amber);
+    padding-bottom:10px;
+    margin-bottom:18px;
+    color:var(--ink);
+  }
+  p{margin-bottom:15px;}
+  ul{margin:0 0 15px 20px;}
+  li{margin-bottom:8px;}
+
+  .pull{
+    background:var(--paper-card-2);
+    border-left:4px solid var(--rust);
+    padding:18px 22px;
+    margin:20px 0;
+    font-style:italic;
+    color:var(--ink-dim);
+  }
+  .callout{
+    background:var(--paper-card);
+    border:1px solid var(--border);
+    padding:18px 22px;
+    margin:20px 0;
+    font-family:'Inter',sans-serif;
+    font-size:14.5px;
+    color:var(--ink-dim);
+  }
+  .callout strong{color:var(--ink);}
+
+  table.data{width:100%;border-collapse:collapse;margin:18px 0;font-family:'Inter',sans-serif;font-size:14.5px;}
+  table.data th{text-align:left;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-dim);border-bottom:2px solid var(--ink);padding:6px 10px 8px;}
+  table.data td{padding:9px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+  table.data tr:nth-child(even){background:var(--paper-card);}
+
+  .timeline{border-left:2px solid var(--border);margin:20px 0 20px 6px;padding-left:22px;}
+  .timeline .item{margin-bottom:18px;position:relative;}
+  .timeline .item::before{content:"";position:absolute;left:-27px;top:6px;width:9px;height:9px;border-radius:50%;background:var(--amber);}
+  .timeline .date{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--rust);letter-spacing:.03em;}
+
+  footer{background:#241608;color:#d9c9a8;padding:38px 24px 48px;margin-top:10px;}
+  footer .wrap{font-family:'Inter',sans-serif;}
+  footer .name{font-family:'Playfair Display',serif;font-weight:700;font-size:19px;color:#f4e6c8;}
+  footer .sub{font-size:13.5px;color:#a9977a;margin-top:8px;max-width:520px;line-height:1.6;}
+  footer a{color:var(--amber);text-decoration:none;font-family:'IBM Plex Mono',monospace;font-size:12.5px;}
+
+  @media(max-width:600px){
+    header{padding:44px 18px 34px;}
+    .stat-row{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="eyebrow">The Ledger · Case 04</div>
+    <h1>The Housing Authority Loop</h1>
+    <p class="dek">A Weber County commissioner sits as trustee of the housing authority his own county funds and administers — alongside his wife, also a trustee — while the authority pays his family's real estate companies out of the same office building he works in.</p>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="stat-row">
+    <div class="stat"><div class="n">$19,623</div><div class="l">Paid to Froerer entities, 2023-2025</div></div>
+    <div class="stat"><div class="n">2</div><div class="l">Froerers on the same board</div></div>
+    <div class="stat"><div class="n">1</div><div class="l">Shared office building</div></div>
+  </div>
+
+  <section>
+    <h2>The appointment, on the record</h2>
+    <p>Weber County Commissioner Gage Froerer sits as a trustee of the Weber Housing Authority. His wife, Gloria Froerer, also sits as a trustee of the same authority, and separately directs its affiliated nonprofit, Friends of the Weber Housing Authority.</p>
+    <p>This wasn't discovered later — it was stated openly at the time of Froerer's appointment. Weber County Commission minutes from Sept. 17, 2019 (a meeting Froerer did not attend) record Commission Chair Scott Jenkins explaining the appointment to his colleagues:</p>
+    <div class="pull">Jenkins told the commission he and Commissioner Harvey asked Froerer to serve on the board because "it is in his portfolio," and stated there was no conflict in his wife also serving on it. Commissioner Harvey agreed. No further analysis or vote on the question is recorded in the minutes.</div>
+  </section>
+
+  <section>
+    <h2>What the authority paid his companies</h2>
+    <p>Weber County warrant reports from January 2023 through December 2025, reviewed individually, document <strong>$19,623 in total payments</strong> from the Weber Housing Authority to two Froerer family entities — RESCOM INC and Froerer Real Estate and Property Management — each categorized in the county's own records as "Weber Housing Auth Housing Payments."</p>
+  </section>
+
+  <section>
+    <h2>One building, three connections</h2>
+    <p>The Weber Housing Authority's own office is at 2380 Washington Blvd., Suite #112, Ogden — the same building that houses Froerer's Weber County Commissioner office, and the same building that housed Highlander NP Housing, a now-dissolved nonprofit Froerer directed.</p>
+    <p>On Dec. 23, 2025, the Weber County Commission approved a consent-agenda item funding construction on the Housing Authority's office space in that same building. Commissioner Harvey moved, Froerer seconded, and all three commissioners voted in favor.</p>
+  </section>
+
+  <section>
+    <h2>Who processes the money</h2>
+    <p>An interlocal agreement between the county and the authority establishes that Weber County itself provides all administrative and financial processing for the Weber Housing Authority. The same county government Froerer serves on as commissioner processes the payments the authority — where he and his wife both sit as trustees — makes to his family's businesses.</p>
+    <div class="callout"><strong>Also on the record:</strong> on Aug. 26, 2025, the commission approved a consent-agenda memorandum of understanding between the Sheriff's Office, the Housing Authority, and Weber Human Services on a supportive-housing program. Harvey moved, Froerer seconded and voted aye.</div>
+  </section>
+
+  <section>
+    <h2>The disclosure gap</h2>
+    <p>Froerer's own annual conflict-of-interest disclosure forms — filed with Weber County in January 2025 and January 2026 — list his board memberships on the Weber Basin Water Conservancy District and Central Weber Sewer District. Neither form lists the Weber Housing Authority trusteeship, despite it being active and despite the authority paying his family's companies during the exact period both forms cover.</p>
+    <p>This is the third confirmed board-seat omission on Froerer's recurring disclosure forms, following the same pattern already documented with his Military Installation Development Authority and Little Mountain Service Area roles elsewhere in this investigation.</p>
+  </section>
+
+  <section>
+    <h2>Timeline</h2>
+    <div class="timeline">
+      <div class="item"><span class="date">Oct. 1, 2008</span><br>Gloria Froerer's first documented Weber County Housing Authority appointment (one term, through Dec. 31, 2009).</div>
+      <div class="item"><span class="date">Sept. 17, 2019</span><br>Commission minutes record Gage Froerer's appointment to the board, with the spousal overlap named and dismissed in the same meeting.</div>
+      <div class="item"><span class="date">2023-2025</span><br>Weber County warrant reports document $19,623 in authority payments to RESCOM INC and Froerer Real Estate and Property Management.</div>
+      <div class="item"><span class="date">Jan. 24, 2025</span><br>Froerer's annual disclosure form filed — Weber Housing Authority not listed.</div>
+      <div class="item"><span class="date">Aug. 26, 2025</span><br>Froerer votes on a Housing Authority-related interagency agreement.</div>
+      <div class="item"><span class="date">Dec. 23, 2025</span><br>Commission approves funding for construction on the authority's office, in the building Froerer's own office sits in; Froerer seconds and votes aye.</div>
+      <div class="item"><span class="date">Jan. 13, 2026</span><br>Froerer's next annual disclosure form filed — Weber Housing Authority again not listed.</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Sources</h2>
+    <p>Weber County Commission meeting minutes (Sept. 17, 2019; Dec. 23, 2025; Aug. 26, 2025). Weber County warrant reports, Jan. 2023-Dec. 2025. Gage Froerer's Weber County conflict-of-interest disclosure forms, filed Jan. 24, 2025 and Jan. 13, 2026. Corporate filings for RESCOM INC, Friends of the Weber Housing Authority, and Gage Froerer &amp; Associates, Inc. (Utah Division of Corporations). Weber County/Weber Housing Authority interlocal agreement.</p>
+  </section>
+
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="name">The Weber County Hive · The Ledger</div>
+    <div class="sub">Following the money and the seats behind it — built exclusively from public meeting minutes, warrant reports, and disclosure filings.</div>
+    <div style="margin-top:14px;"><a href="index.html">← Back to The Ledger</a></div>
+  </div>
+</footer>
+
+</body>
+</html>
