@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Payment That Disappeared | The Ledger | The Weber County Hive</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f4f0e6;
+    --paper-card:#faf7ef;
+    --paper-card-2:#f0ecdf;
+    --ink:#1c1c1a;
+    --ink-dim:#5b5850;
+    --ink-dimmer:#8c8878;
+    --rust:#c0572e;
+    --amber:#d9a441;
+    --bronze:#4a3018;
+    --bronze-2:#c76b1f;
+    --wine:#7d2c3f;
+    --border:#ddd3c2;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Source Serif 4', serif;
+    font-size:18px;
+    line-height:1.65;
+  }
+
+  a{ color:var(--rust); }
+  a:focus-visible, button:focus-visible{ outline:3px solid var(--rust); outline-offset:2px; }
+
+  .wrap{ max-width:760px; margin:0 auto; padding:0 24px; }
+
+  h1,h2,h3{ font-family:'Playfair Display', serif; font-weight:800; line-height:1.15; color:var(--ink); }
+  .mono{ font-family:'IBM Plex Mono', monospace; }
+
+  /* ---------- HEADER BAND ---------- */
+  .header-band{
+    background:linear-gradient(135deg, var(--bronze), var(--bronze-2));
+    color:#f4ead9;
+    padding:36px 0 40px;
+  }
+  .site-line{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    letter-spacing:.03em;
+    color:#e9d6b8;
+    margin-bottom:28px;
+  }
+  .site-line a{ color:#f4ead9; text-decoration:none; border-bottom:1px solid rgba(244,234,217,.4); }
+  .site-line a:hover{ border-color:#f4ead9; }
+  .case-tag{
+    display:inline-block;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    letter-spacing:.06em;
+    background:rgba(244,234,217,.14);
+    border:1px solid rgba(244,234,217,.35);
+    padding:4px 11px;
+    border-radius:3px;
+    margin-bottom:18px;
+  }
+  .header-band h1{
+    color:#fbf3e4;
+    font-size:2.5rem;
+    margin:0 0 16px;
+    max-width:15ch;
+  }
+  .dek{
+    font-family:'Source Serif 4', serif;
+    font-style:italic;
+    font-size:1.22rem;
+    color:#f0ddbe;
+    max-width:46ch;
+    margin:0;
+    line-height:1.5;
+  }
+
+  /* ---------- BODY ---------- */
+  main{ padding:52px 0 80px; }
+  section{ margin-bottom:52px; }
+  section > h2{
+    font-size:1.55rem;
+    margin:0 0 20px;
+    padding-bottom:12px;
+    border-bottom:2px solid var(--ink);
+  }
+  p{ margin:0 0 18px; }
+  .lede{ font-size:1.14rem; }
+  .pull-quote{
+    font-family:'Playfair Display', serif;
+    font-weight:800;
+    font-style:italic;
+    font-size:1.7rem;
+    line-height:1.3;
+    color:var(--wine);
+    text-align:center;
+    max-width:26ch;
+    margin:30px auto;
+    padding:20px 0;
+    border-top:2px solid var(--wine);
+    border-bottom:2px solid var(--wine);
+  }
+
+  /* stat row */
+  .stat-row{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:16px;
+    margin:28px 0 8px;
+  }
+  .stat{
+    background:var(--paper-card);
+    border:1px solid var(--border);
+    border-radius:4px;
+    padding:18px 16px;
+  }
+  .stat .num{
+    font-family:'IBM Plex Mono', monospace;
+    font-weight:500;
+    font-size:1.5rem;
+    color:var(--amber);
+    display:block;
+  }
+  .stat .label{
+    font-family:'Inter', sans-serif;
+    font-size:.83rem;
+    color:var(--ink-dim);
+    line-height:1.35;
+  }
+
+  /* comparison cards */
+  .compare{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+    margin:22px 0;
+  }
+  .compare .card{
+    background:var(--paper-card);
+    border:1px solid var(--border);
+    border-radius:6px;
+    padding:20px 22px;
+  }
+  .compare .card.missing{
+    background:#fbeee7;
+    border-color:#e3b8a1;
+  }
+  .compare h3{
+    font-size:1.02rem;
+    margin:0 0 4px;
+  }
+  .compare .date{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:.78rem;
+    color:var(--ink-dimmer);
+    display:block;
+    margin-bottom:14px;
+  }
+  .compare ul{ margin:0; padding-left:20px; }
+  .compare li{ margin-bottom:8px; font-size:.97rem; }
+  .compare .flag{
+    font-family:'Inter', sans-serif;
+    font-weight:600;
+    font-size:.82rem;
+    color:var(--wine);
+    margin-top:12px;
+  }
+
+  /* chain diagram */
+  .chain{
+    background:var(--paper-card-2);
+    border:1px solid var(--border);
+    border-radius:6px;
+    padding:26px 24px;
+    margin:24px 0;
+  }
+  .chain-step{
+    display:flex;
+    align-items:baseline;
+    gap:14px;
+    padding:10px 0;
+  }
+  .chain-step:not(:last-child){ border-bottom:1px dashed var(--border); }
+  .chain-step .who{
+    font-family:'Inter', sans-serif;
+    font-weight:600;
+    min-width:190px;
+  }
+  .chain-step .what{ color:var(--ink-dim); font-size:.98rem; }
+  .chain-arrow{
+    font-family:'IBM Plex Mono', monospace;
+    color:var(--bronze-2);
+    text-align:center;
+    padding:2px 0;
+    font-size:.85rem;
+  }
+
+  /* mermaid diagram box */
+  .diagram-box{
+    background:var(--paper-card);
+    border:1px solid var(--border);
+    border-radius:6px;
+    padding:22px;
+    margin:22px 0;
+    overflow-x:auto;
+  }
+  .diagram-box .mermaid{
+    display:flex;
+    justify-content:center;
+    min-width:640px;
+  }
+  .diagram-note{
+    font-family:'Inter', sans-serif;
+    font-size:.82rem;
+    color:var(--ink-dimmer);
+    text-align:center;
+    margin:14px 0 0 !important;
+    padding-top:14px;
+    border-top:1px dashed var(--border);
+  }
+
+  /* record cards */
+  .record{
+    background:var(--paper-card);
+    border-left:4px solid var(--amber);
+    border-radius:0 6px 6px 0;
+    padding:16px 20px;
+    margin:0 0 14px;
+  }
+  .record .source{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:.76rem;
+    color:var(--ink-dimmer);
+    display:block;
+    margin-top:8px;
+  }
+
+  /* two-column roster */
+  .roster{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+    margin:22px 0;
+  }
+  .roster .card{
+    background:var(--paper-card);
+    border:1px solid var(--border);
+    border-radius:6px;
+    padding:20px 22px;
+  }
+  .roster h3{ font-size:1rem; margin:0 0 12px; }
+  .roster ul{ margin:0; padding-left:0; list-style:none; }
+  .roster li{
+    font-size:.96rem;
+    padding:8px 0;
+    border-bottom:1px solid var(--border);
+  }
+  .roster li:last-child{ border-bottom:none; }
+  .roster li .role{
+    display:block;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:.74rem;
+    color:var(--ink-dimmer);
+    margin-top:2px;
+  }
+  .roster.state .card{ border-color:#c9a24a; background:#fbf6e8; }
+
+  blockquote{
+    margin:22px 0;
+    padding:4px 0 4px 20px;
+    border-left:3px solid var(--rust);
+    font-style:italic;
+    color:var(--ink-dim);
+  }
+
+  .caveat{
+    background:#f0ecdf;
+    border:1px solid var(--border);
+    border-radius:4px;
+    padding:14px 18px;
+    font-size:.94rem;
+    color:var(--ink-dim);
+    margin:18px 0;
+  }
+  .caveat strong{ color:var(--ink); }
+
+  footer{
+    background:var(--paper-card-2);
+    border-top:1px solid var(--border);
+    padding:44px 0 60px;
+  }
+  footer h2{ font-size:1.2rem; margin:0 0 16px; }
+  .source-list{ font-size:.92rem; color:var(--ink-dim); }
+  .source-list li{ margin-bottom:6px; }
+  .nav-row{
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:12px;
+    margin-top:30px;
+    padding-top:24px;
+    border-top:1px solid var(--border);
+    font-family:'Inter', sans-serif;
+    font-size:.92rem;
+  }
+
+  @media (max-width:640px){
+    .header-band h1{ font-size:1.85rem; }
+    .stat-row{ grid-template-columns:1fr; }
+    .compare{ grid-template-columns:1fr; }
+    .roster{ grid-template-columns:1fr; }
+    .chain-step{ flex-direction:column; gap:2px; }
+    .chain-step .who{ min-width:0; }
+  }
+
+  /* ---------- CAST OF CHARACTERS (flip cards) ---------- */
+  .cast{
+    background:var(--paper-card-2);
+    border-bottom:1px solid var(--border);
+    padding:44px 0 52px;
+  }
+  .cast h2{
+    font-size:1.5rem;
+    margin:0 0 6px;
+  }
+  .cast .cast-sub{
+    font-family:'Inter', sans-serif;
+    font-size:.94rem;
+    color:var(--ink-dim);
+    margin:0 0 26px;
+    max-width:58ch;
+  }
+  .cast-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:18px;
+  }
+  .flip-card{
+    perspective:1200px;
+    height:225px;
+  }
+  .flip-card-inner{
+    position:relative;
+    width:100%;
+    height:100%;
+    text-align:left;
+    transition:transform .5s cubic-bezier(.4,.2,.2,1);
+    transform-style:preserve-3d;
+    cursor:pointer;
+    border:none;
+    background:none;
+    padding:0;
+    font:inherit;
+    color:inherit;
+    display:block;
+  }
+  .flip-card.is-flipped .flip-card-inner{ transform:rotateY(180deg); }
+  .flip-face{
+    position:absolute;
+    inset:0;
+    -webkit-backface-visibility:hidden;
+    backface-visibility:hidden;
+    border-radius:6px;
+    padding:16px 18px;
+    display:flex;
+    flex-direction:column;
+  }
+  .flip-front{
+    background:linear-gradient(135deg, var(--bronze), var(--bronze-2));
+    color:#f4ead9;
+    justify-content:space-between;
+  }
+  .flip-front .name{
+    font-family:'Playfair Display', serif;
+    font-weight:800;
+    font-size:1.14rem;
+    line-height:1.2;
+  }
+  .flip-front .role{
+    font-family:'Inter', sans-serif;
+    font-size:.85rem;
+    color:#f0ddbe;
+    line-height:1.4;
+  }
+  .flip-front .tap-hint{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:.72rem;
+    color:#e9d6b8;
+    opacity:.85;
+  }
+  .flip-back{
+    background:var(--paper-card);
+    border:1px solid var(--border);
+    transform:rotateY(180deg);
+    justify-content:flex-start;
+    overflow-y:auto;
+    scrollbar-width:thin;
+    scrollbar-color:var(--bronze-2) var(--paper-card);
+  }
+  .flip-back::-webkit-scrollbar{ width:6px; }
+  .flip-back::-webkit-scrollbar-track{ background:var(--paper-card); }
+  .flip-back::-webkit-scrollbar-thumb{ background:var(--bronze-2); border-radius:3px; }
+  .flip-back p{
+    margin:0;
+    font-size:.88rem;
+    line-height:1.48;
+    color:var(--ink-dim);
+  }
+  .flip-back .back-name{
+    font-family:'Inter', sans-serif;
+    font-weight:600;
+    font-size:.8rem;
+    color:var(--ink);
+    display:block;
+    margin-bottom:5px;
+  }
+
+  /* the wide card that spans the bottom row */
+  .flip-card.wide-card{
+    grid-column:1 / -1;
+    height:150px;
+  }
+  .wide-card .flip-front{
+    flex-direction:row;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+  }
+  .wide-card .flip-front .name{ font-size:1.3rem; }
+  .wide-card .flip-back{
+    flex-direction:row;
+    align-items:center;
+    gap:24px;
+    padding:20px 32px;
+  }
+  .wide-card .flip-back .back-name{
+    flex:0 0 auto;
+    min-width:130px;
+    margin-bottom:0;
+    font-size:.95rem;
+    border-right:1px solid var(--border);
+    padding-right:20px;
+  }
+  .wide-card .flip-back p{ flex:1 1 auto; }
+
+  @media (max-width:820px){
+    .cast-grid{ grid-template-columns:repeat(2, 1fr); }
+  }
+  @media (max-width:640px){
+    .wide-card .flip-front,
+    .wide-card .flip-back{ flex-direction:column; align-items:flex-start; text-align:left; }
+    .wide-card .flip-back .back-name{ border-right:none; padding-right:0; margin-bottom:6px; }
+    .flip-card.wide-card{ height:225px; }
+  }
+  @media (max-width:520px){
+    .cast-grid{ grid-template-columns:1fr; }
+    .flip-card{ height:210px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header-band">
+  <div class="wrap">
+    <div class="site-line">
+      <a href="index.html">← The Ledger</a>
+      <a href="https://weber-county-hive.github.io/-weber-county-hive-index/">The Weber County Hive</a>
+    </div>
+    <span class="case-tag">CASE 05</span>
+    <h1>The Payment That Disappeared</h1>
+    <p class="dek">A $62,500 check to a company managed by MIDA's own director appears in one official report on a taxpayer-funded housing nonprofit and is absent from the next — and the state's own filings show that nonprofit's registered leadership doesn't match the board it shows the public.</p>
+  </div>
+</div>
+
+<div class="cast">
+  <div class="wrap">
+    <h2>Who's who</h2>
+    <p class="cast-sub">A handful of names — and one company — come up throughout this story. Tap or click a card to flip it — here's who they are and what they've done in Utah politics before this piece even starts.</p>
+    <div class="cast-grid">
+
+      <div class="flip-card">
+        <button class="flip-card-inner" type="button" aria-pressed="false">
+          <div class="flip-face flip-front">
+            <div><span class="name">Matt Lusty</span><br><span class="role">Founder, Election Hive</span></div>
+            <span class="tap-hint">tap to flip</span>
+          </div>
+          <div class="flip-face flip-back">
+            <span class="back-name">Matt Lusty</span>
+            <p>Founder of Election Hive, the campaign consulting firm behind many of Utah's top Republican campaigns, including Gov. Cox's. Registered agent and an Officer of UWHA. Has run election campaigns for Cox and other Utah Republicans for nearly a decade.</p>
+          </div>
+        </button>
+      </div>
+
+      <div class="flip-card">
+        <button class="flip-card-inner" type="button" aria-pressed="false">
+          <div class="flip-face flip-front">
+            <div><span class="name">Steve Waldrip</span><br><span class="role">Gov. Cox's housing adviser</span></div>
+            <span class="tap-hint">tap to flip</span>
+          </div>
+          <div class="flip-face flip-back">
+            <span class="back-name">Steve Waldrip</span>
+            <p>Former state representative (House District 8, 2019-2022). Now Gov. Cox's Senior Advisor for Housing Strategy and Innovation. A Director of UWHA and a Director of Defending Utah Values PAC, part of Cox's inner circle. Election Hive was his own campaign manager as far back as 2018.</p>
+          </div>
+        </button>
+      </div>
+
+      <div class="flip-card">
+        <button class="flip-card-inner" type="button" aria-pressed="false">
+          <div class="flip-face flip-front">
+            <div><span class="name">Derek Brown</span><br><span class="role">Utah Attorney General</span></div>
+            <span class="tap-hint">tap to flip</span>
+          </div>
+          <div class="flip-face flip-back">
+            <span class="back-name">Derek Brown</span>
+            <p>Utah's sitting Attorney General, elected 2024. Was a Director of UWHA at its founding in 2023 and still is, per the state's own filing — even though he no longer appears on UWHA's public website.</p>
+          </div>
+        </button>
+      </div>
+
+      <div class="flip-card">
+        <button class="flip-card-inner" type="button" aria-pressed="false">
+          <div class="flip-face flip-front">
+            <div><span class="name">Heather Groom</span><br><span class="role">UWHA Director</span></div>
+            <span class="tap-hint">tap to flip</span>
+          </div>
+          <div class="flip-face flip-back">
+            <span class="back-name">Heather Groom</span>
+            <p>Former deputy campaign manager for Gov. Gary Herbert; appointed by Herbert to the State School Board in 2013. A registered Director of UWHA with the state — a formal role that doesn't appear anywhere on UWHA's own public materials.</p>
+          </div>
+        </button>
+      </div>
+
+      <div class="flip-card">
+        <button class="flip-card-inner" type="button" aria-pressed="false">
+          <div class="flip-face flip-front">
+            <div><span class="name">Who is BizDevOps Consulting?</span><br><span class="role">The vendor at the center of this piece</span></div>
+            <span class="tap-hint">tap to flip</span>
+          </div>
+          <div class="flip-face flip-back">
+            <span class="back-name">BizDevOps Consulting, LLC</span>
+            <p>A company formed February 27, 2024 — after the Legislature had already approved UWHA's first $1 million. Its only registered principal is RHRD, LLC, which is managed by Daniel Hemmert. UWHA paid it $62,500 in October and November 2024. That payment is reported in UWHA's interim filing and does not appear in its final report.</p>
+          </div>
+        </button>
+      </div>
+
+      <div class="flip-card">
+        <button class="flip-card-inner" type="button" aria-pressed="false">
+          <div class="flip-face flip-front">
+            <div><span class="name">Craig Weston</span><br><span class="role">UWHA's public executive director</span></div>
+            <span class="tap-hint">tap to flip</span>
+          </div>
+          <div class="flip-face flip-back">
+            <span class="back-name">Craig Weston</span>
+            <p>Moab-area developer behind the Kane Creek Preservation and Development project. Described in early coverage as UWHA's executive director and originally requested $2.5 million from the Legislature on the nonprofit's behalf. Doesn't appear in UWHA's own state Officer/Director filing.</p>
+          </div>
+        </button>
+      </div>
+
+      <div class="flip-card wide-card">
+        <button class="flip-card-inner" type="button" aria-pressed="false">
+          <div class="flip-face flip-front">
+            <div><span class="name">Daniel Hemmert</span><br><span class="role">Executive Director, MIDA</span></div>
+            <span class="tap-hint">tap to flip</span>
+          </div>
+          <div class="flip-face flip-back">
+            <span class="back-name">Daniel Hemmert</span>
+            <p>Former state senator; later Gov. Cox's GOEO director, then a private lobbyist for developers. Now Executive Director of the Military Installation Development Authority (MIDA). A Manager of RHRD, LLC — the company at the end of the chain behind the $62,500 BizDevOps Consulting payment, which was reported in UWHA's interim filing and doesn't appear in its final one.</p>
+          </div>
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<main class="wrap">
+
+  <section>
+    <p class="lede">In January 2025, Utah Workforce Housing Advocacy (UWHA) — a nonprofit built around a $2 million legislative appropriation — filed an interim spending report with the state. It showed two checks, totaling $62,500, paid to a company called BizDevOps Consulting, LLC. Five months later, UWHA's year-end final report to the same state office covered the same money, the same period, the same account. The two BizDevOps checks were gone.</p>
+    <p>Tracing the company those checks went to leads to a registered agent that is, in turn, managed by <strong>Daniel Hemmert</strong> — now the Executive Director of the Military Installation Development Authority (MIDA), a state land-use authority. The entity chain behind that payment was founded in 2014, a decade before UWHA existed, using Hemmert's own long-standing business vehicle.</p>
+    <p>Separately, UWHA's own filing with the Utah Division of Corporations shows a set of officers and directors that largely doesn't match the "board" the nonprofit lists on its own website.</p>
+  </section>
+
+  <section>
+    <div class="stat-row">
+      <div class="stat"><span class="num">$62,500</span><span class="label">paid to BizDevOps Consulting, then omitted from UWHA's final report</span></div>
+      <div class="stat"><span class="num">2014</span><span class="label">the year the receiving entity chain was founded — by Hemmert himself</span></div>
+      <div class="stat"><span class="num">$865,688</span><span class="label">UWHA's own final-report total, which the omission reconciles to exactly</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Two reports, one missing vendor</h2>
+    <p>UWHA reports its spending from the state appropriation to the Governor's Office of Economic Opportunity twice a cycle: a mid-campaign interim report and a year-end final report. Both are supposed to cover the same money. They don't agree.</p>
+
+    <p class="pull-quote">The two BizDevOps checks were gone.</p>
+
+    <div class="compare">
+      <div class="card">
+        <h3>Interim report</h3>
+        <span class="date">Submitted January 24, 2025 — covers 7/1/24 through 1/13/25</span>
+        <ul>
+          <li>Check #4007 — <strong>$50,000</strong> to BizDevOps Consulting, LLC (10/25/24), labeled "Consulting"</li>
+          <li>Check #4013 — <strong>$12,500</strong> to BizDevOps Consulting, LLC (11/29/24)</li>
+        </ul>
+      </div>
+      <div class="card missing">
+        <h3>Final report</h3>
+        <span class="date">Submitted June 26, 2025 — covers 7/1/24 through 6/26/25</span>
+        <ul>
+          <li>No check numbered 4007</li>
+          <li>No check numbered 4013</li>
+          <li>No mention of BizDevOps Consulting anywhere in the itemized budget</li>
+        </ul>
+        <span class="flag">Both checks, and the vendor, are simply absent.</span>
+      </div>
+    </div>
+
+    <div class="caveat"><strong>The arithmetic checks out.</strong> Add up every check listed in the interim report, including the two BizDevOps payments, and the total comes to $928,187.98. Subtract the $62,500 BizDevOps paid, and the result is $865,687.98 — the exact total UWHA's own final report gives for its spending. The missing checks account for the entire gap between the two totals.</div>
+  </section>
+
+  <section>
+    <h2>Where the $62,500 went</h2>
+    <p>BizDevOps Consulting, LLC was formed on February 27, 2024 — after the Legislature had already approved UWHA's first $1 million. Its own filing with the state lists a single principal: not a person, but another company.</p>
+
+    <div class="chain">
+      <div class="chain-step">
+        <span class="who">BizDevOps Consulting, LLC</span>
+        <span class="what">Formed 2/27/2024. Registered agent and sole Manager: RHRD, LLC.</span>
+      </div>
+      <div class="chain-arrow">↓ registered agent / sole manager</div>
+      <div class="chain-step">
+        <span class="who">RHRD, LLC</span>
+        <span class="what">Formed 3/31/2014. Managers: Daniel Hemmert and Ryan Fish. Registered agent and Member: FISHCO, LLC.</span>
+      </div>
+      <div class="chain-arrow">↑ founded by, using his own entity as registered agent</div>
+      <div class="chain-step">
+        <span class="who">Daniel Hemmert</span>
+        <span class="what">Organizer of RHRD, LLC in 2014, using HEMMCO, LLC — his own company — as its original registered agent and Manager. Now Executive Director of MIDA.</span>
+      </div>
+    </div>
+
+    <p>RHRD's 2014 founding certificate — stamped received by the Utah Division of Corporations on March 31 of that year — lists Daniel Hemmert as the organizer and HEMMCO, LLC as both the registered agent and the original Manager. HEMMCO is Hemmert's own entity, independently documented elsewhere in Utah campaign-finance filings as his registered agent and sole Manager. The second founding Manager, FISHCO, LLC, belongs to Ryan Fish, who remains a Manager today alongside Hemmert, per RHRD's most recent amendment, filed with the state on June 3, 2026.</p>
+
+    <p>RHRD LLC is Hemmert's own decade-plus business vehicle, not a company formed for this one transaction. It sits, alone, as the only registered principal of the company that received $62,500 from UWHA — a payment that appeared in the interim report and did not appear in the final one.</p>
+  </section>
+
+  <section>
+    <h2>Two different rosters at UWHA</h2>
+    <p>UWHA's own website lists a six-person board and a six-person "Policy Board" — twelve names, mostly real estate developers and lenders. That's a different set of people than the state's own corporate filing lists as UWHA's Officer and Directors.</p>
+
+    <div class="roster">
+      <div class="card">
+        <h3>UWHA's public "board"</h3>
+        <ul>
+          <li>Steve Waldrip<span class="role">Real estate / Cox housing adviser</span></li>
+          <li>Greg Miller<span class="role">Real estate</span></li>
+          <li>Craig Weston<span class="role">Real estate developer</span></li>
+          <li>Shaleane Gee<span class="role">—</span></li>
+          <li>Thayne Shaffer<span class="role">Credit union CEO</span></li>
+          <li>Ari Bruening<span class="role">Envision Utah CEO</span></li>
+        </ul>
+      </div>
+      <div class="card state">
+        <h3>UWHA's registered Officer/Directors, per the state</h3>
+        <ul>
+          <li>Matt Lusty<span class="role">Officer — also registered agent</span></li>
+          <li>Heather Groom<span class="role">Director</span></li>
+          <li>Steve Waldrip<span class="role">Director</span></li>
+          <li>Derek Brown<span class="role">Director</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <p>Only Waldrip appears on both lists. Matt Lusty — the Election Hive founder who's publicly described elsewhere as UWHA's executive director — isn't on the public board at all, because his actual legal role with the state is Officer, a different category. Heather Groom, a former deputy campaign manager to Gov. Gary Herbert, has a formal state-registered director role that appears nowhere in UWHA's own public materials. And Derek Brown, now Utah's Attorney General, is still listed as a Director in the state's own filing — no resignation is reflected in that record, even though he's absent from the website UWHA shows the public.</p>
+
+    <blockquote>Whether UWHA's public board has any actual legal authority over the organization, or functions as an advisory layer separate from the four people the state recognizes as running it, is not answered by either filing on its own.</blockquote>
+  </section>
+
+  <section>
+    <h2>How it connects</h2>
+    <p>Two threads run through this piece: the money, and who's actually on file as running the nonprofit that paid it. Here's both, in one picture.</p>
+    <div class="diagram-box">
+      <div class="mermaid">
+flowchart TD
+    UWHA["Utah Workforce Housing Advocacy<br/>$2M taxpayer-funded nonprofit"]
+    BIZDEV["BizDevOps Consulting, LLC<br/>formed 2/27/2024"]
+    RHRD["RHRD, LLC<br/>formed 2014"]
+    HEMMCO["HEMMCO, LLC<br/>Hemmert's own entity"]
+    FISHCO["FISHCO, LLC<br/>Fish's own entity"]
+    HEMMERT["Daniel Hemmert<br/>MIDA Executive Director"]
+    FISH["Ryan Fish"]
+    LUSTY["Matt Lusty<br/>Officer / registered agent"]
+    WALDRIP["Steve Waldrip<br/>Director"]
+    GROOM["Heather Groom<br/>Director"]
+    BROWN["Derek Brown<br/>Director / Attorney General"]
+    WESTON["Craig Weston<br/>public-facing executive director"]
+
+    UWHA -->|"$62,500, Oct-Nov 2024<br/>reported, then absent from the final report"| BIZDEV
+    BIZDEV -->|"registered agent /<br/>sole Manager"| RHRD
+    RHRD -->|"original registered agent<br/>and Manager"| HEMMCO
+    HEMMCO -.->|"own entity of"| HEMMERT
+    RHRD -->|"Manager"| HEMMERT
+    RHRD -->|"registered agent / Member"| FISHCO
+    FISHCO -.->|"own entity of"| FISH
+    RHRD -->|"Manager"| FISH
+
+    UWHA -->|"Officer"| LUSTY
+    UWHA -->|"Director"| WALDRIP
+    UWHA -->|"Director"| GROOM
+    UWHA -->|"Director"| BROWN
+    UWHA -.->|"public website only,<br/>not the state filing"| WESTON
+
+    classDef highlight fill:#f4e6c8,stroke:#4a3018,stroke-width:2.5px,color:#1c1c1a
+    classDef org fill:#f0ecdf,stroke:#c76b1f,stroke-width:2px,color:#1c1c1a
+    classDef person fill:#faf7ef,stroke:#7d2c3f,stroke-width:2px,color:#1c1c1a
+    class UWHA highlight
+    class BIZDEV,RHRD,HEMMCO,FISHCO org
+    class HEMMERT,FISH,LUSTY,WALDRIP,GROOM,BROWN,WESTON person
+      </div>
+      <p class="diagram-note">Solid arrows are direct financial or legal relationships (payments, registered-agent/Manager roles). Dashed arrows show ownership or a public-facing role not reflected in the state's own filing.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>What isn't established here</h2>
+    <div class="record">
+      This piece documents two things directly, from primary records: the disappearance of the BizDevOps payment between two official reports, and the mismatch between UWHA's public board and its state-registered Officer/Directors. It does not establish why either happened — no explanation for the omission, and no confirmation of what authority, if any, UWHA's public-facing board holds. Both are open questions.
+      <span class="source">Utah Division of Corporations and Commercial Code, Business Entity Search; UWHA interim and year-end reports filed with the Governor's Office of Economic Opportunity</span>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <h2>Sources</h2>
+    <ul class="source-list">
+      <li>Utah Workforce Housing Advocacy, mid-campaign interim report to GOEO (submitted 1/24/2025), obtained via public records request</li>
+      <li>Utah Workforce Housing Advocacy, year-end final report to GOEO, Contract #250632475 (submitted 6/26/2025)</li>
+      <li>Utah Division of Corporations and Commercial Code, Business Entity Search: Utah Workforce Housing Advocacy (#13696184-0140), BizDevOps Consulting, LLC (#13777366-0160), RHRD, LLC (#8996224-0160), including RHRD's original 2014 Certificate of Organization and its June 2026 Amendment to Certificate of Organization (Filing #2606031031218B)</li>
+      <li>Utah Workforce Housing Advocacy, "About" page, board and policy board listing</li>
+    </ul>
+
+    <div class="nav-row">
+      <a href="follow-the-money-uwha.html">← Case 02: Follow the Money — UWHA, Election Hive, and the PAC That Isn't a PAC</a>
+      <a href="index.html">The Ledger, full docket →</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.flip-card-inner').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var card = btn.closest('.flip-card');
+      var flipped = card.classList.toggle('is-flipped');
+      btn.setAttribute('aria-pressed', flipped ? 'true' : 'false');
+    });
+  });
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.1/mermaid.min.js"></script>
+<script>
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'base',
+    themeVariables: {
+      fontFamily: 'Inter, sans-serif',
+      fontSize: '14px',
+      primaryColor: '#f0ecdf',
+      primaryBorderColor: '#c76b1f',
+      primaryTextColor: '#1c1c1a',
+      lineColor: '#8c8878',
+      edgeLabelBackground: '#f4f0e6'
+    },
+    flowchart: { curve: 'basis' }
+  });
+</script>
+</body>
+</html>
