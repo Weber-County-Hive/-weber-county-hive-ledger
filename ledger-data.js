@@ -29,4 +29,11 @@ const LEDGER_ENTRIES = [
     summary: "Gage Froerer sits as a trustee of the Weber Housing Authority. So does his wife, Gloria — a fact stated openly and dismissed at his 2019 appointment. The authority has paid his family's real estate companies $19,623, operates out of the same building as his own commissioner office, and doesn't appear on either of his last two disclosure forms.",
     url: "weber-housing-authority.html"
   },
+  {
+    tag: "Case 05",
+    title: "The Payment That Disappeared",
+    dek: "A $62,500 check to a company managed by MIDA's own director appears in one report and is missing from the next",
+    summary: "Utah Workforce Housing Advocacy's interim report to the state shows two checks, $62,500 total, paid to BizDevOps Consulting, LLC — a company whose only registered principal is managed by Daniel Hemmert, now MIDA's Executive Director. UWHA's year-end final report, covering the same money and the same period, includes neither check. Separately, the nonprofit's own state corporate filing lists a set of officers and directors that largely doesn't match the board shown on its public website.",
+    url: "the-payment-that-disappeared.html"
+  },
 ];
