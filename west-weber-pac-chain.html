@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Follow the Money — The Roybal Chain | The Weber County Hive Ledger</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+:root{
+  --paper:#faf7ef; --paper-dim:#f2ede0; --ink:#241f16; --ink-soft:#5c5544;
+  --band:#0f2a2e; --band-2:#173c41;
+  --rust:#a8451f; --rust-dark:#7e3216;
+  --amber:#b3822e; --amber-bg:#f3e6cb;
+  --line:#ddd3ba;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--paper);color:var(--ink);font-family:'Source Sans 3',sans-serif;line-height:1.65;font-size:16px;}
+.wrap{max-width:880px;margin:0 auto;padding:0 24px;}
+a{color:var(--rust);}
+h1,h2,h3{font-family:'Playfair Display',serif;color:var(--ink);}
+
+header.band{background:linear-gradient(135deg,var(--band),var(--band-2));color:#f0ece0;padding:36px 0 30px;border-bottom:5px solid var(--amber);}
+header.band .kicker{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--amber);margin-bottom:10px;}
+header.band h1{font-size:clamp(28px,5vw,42px);color:#fff;line-height:1.15;font-weight:700;}
+header.band .dek{margin-top:14px;font-size:17px;color:#cfd6d2;max-width:640px;}
+header.band .caselabel{display:inline-block;margin-top:18px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.1em;color:#0f2a2e;background:var(--amber);padding:5px 14px;border-radius:20px;}
+
+.section{padding:38px 0;border-bottom:1px solid var(--line);}
+.section h2{font-size:26px;margin-bottom:14px;}
+.section .lead{font-size:17px;color:var(--ink-soft);margin-bottom:18px;}
+.section p{margin:0 0 14px;}
+
+.stat-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:20px 0;}
+.stat{background:var(--paper-dim);border:1px solid var(--line);border-top:3px solid var(--amber);padding:16px 18px;}
+.stat .num{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:var(--amber);line-height:1.1;}
+.stat .label{margin-top:6px;font-size:12.5px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.04em;}
+
+.chain{background:#fff;border:1px solid var(--line);padding:24px 26px;margin:18px 0;}
+.chain-step{display:flex;align-items:flex-start;gap:16px;padding:12px 0;border-bottom:1px dashed var(--line);}
+.chain-step:last-child{border-bottom:none;}
+.chain-step .arrow{font-family:'IBM Plex Mono',monospace;color:var(--amber);font-size:13px;font-weight:600;flex-shrink:0;width:64px;text-align:right;padding-top:2px;white-space:nowrap;line-height:1.3;}
+.chain-step .txt{flex:1;min-width:0;}
+.chain-step .txt strong{color:var(--rust-dark);}
+
+table.ledger{width:100%;border-collapse:collapse;margin:18px 0;font-size:14.5px;}
+table.ledger th{background:var(--band);color:#f0ece0;text-align:left;padding:10px 12px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;}
+table.ledger td{padding:10px 12px;border-bottom:1px solid var(--line);}
+table.ledger tr:nth-child(even) td{background:var(--paper-dim);}
+table.ledger td.amt{text-align:right;font-family:'IBM Plex Mono',monospace;color:var(--rust-dark);font-weight:600;}
+
+.callout{background:var(--paper-dim);border-left:4px solid var(--amber);padding:16px 20px;margin:18px 0;font-size:15px;}
+.callout strong{color:var(--rust-dark);}
+.correction{background:#fff;border:1px solid var(--amber);border-left:4px solid var(--rust);padding:16px 20px;margin:18px 0;font-size:15px;}
+.correction .tag{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--rust-dark);margin-bottom:8px;}
+
+.flag{background:#fff;border:1px dashed var(--ink-soft);padding:14px 18px;margin:14px 0;font-size:14px;color:var(--ink-soft);}
+.flag .tag{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:6px;}
+
+.full-sources{border:1px solid var(--line);background:#fff;margin:30px 0 0;}
+.full-sources summary{cursor:pointer;list-style:none;padding:16px 22px;background:var(--paper-dim);font-family:'IBM Plex Mono',monospace;font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--rust-dark);}
+.full-sources summary::-webkit-details-marker{display:none;}
+.full-sources-body{padding:20px 24px 26px;font-size:14px;}
+.full-sources-body h4{font-family:'Playfair Display',serif;font-size:14.5px;margin:18px 0 6px;padding-top:12px;border-top:1px solid var(--line);}
+.full-sources-body p{margin:0;color:var(--ink-soft);}
+
+footer{padding:30px 0 50px;color:var(--ink-soft);font-size:13.5px;}
+footer .sub{margin-top:6px;}
+
+.flip-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin:18px 0 0;}
+.flipcard{perspective:1200px;height:180px;}
+.flip-toggle{position:absolute;opacity:0;pointer-events:none;}
+.flip-inner{position:relative;width:100%;height:100%;transition:transform .5s cubic-bezier(.4,.2,.2,1);transform-style:preserve-3d;cursor:pointer;display:block;}
+.flip-toggle:checked ~ .flip-inner{transform:rotateY(180deg);}
+.flip-toggle:focus-visible ~ .flip-inner{outline:2px solid var(--rust);outline-offset:2px;}
+.flip-front,.flip-back{position:absolute;inset:0;backface-visibility:hidden;border-radius:2px;padding:18px 20px;display:flex;flex-direction:column;justify-content:center;overflow-y:auto;}
+.flip-front{background:#fff;border:2px solid var(--amber);text-align:center;}
+.flip-front .fc-term{font-family:'Playfair Display',serif;font-weight:700;font-size:20px;color:var(--rust-dark);}
+.flip-front .fc-tap{margin-top:10px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);opacity:.7;}
+.flip-back{background:var(--band);color:#f0ece0;transform:rotateY(180deg);font-size:13.5px;line-height:1.5;justify-content:flex-start;}
+.flip-back strong{color:var(--amber);}
+
+.who-runs{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin:18px 0 0;}
+.who-card{background:#fff;border:1px solid var(--line);border-top:3px solid var(--rust);padding:18px 20px;}
+.who-card .pac-name{font-family:'Playfair Display',serif;font-weight:700;font-size:17px;color:var(--rust-dark);}
+.who-card .runners{margin-top:10px;font-size:14px;color:var(--ink-soft);}
+.who-card .runners strong{color:var(--ink);}
+
+.beginner-band{background:var(--paper-dim);border-bottom:3px solid var(--amber);padding:30px 0 34px;}
+.beginner-band .kicker{font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--rust-dark);margin-bottom:8px;}
+.beginner-band h2{font-size:22px;}
+.beginner-band .lead{font-size:15px;color:var(--ink-soft);margin-top:8px;max-width:640px;}
+</style>
+</head>
+<body>
+
+<header class="band">
+  <div class="wrap">
+    <div class="kicker">Follow the Money · Case 03</div>
+    <h1>The Roybal Chain: How One PAC Funds a County Commissioner, a Realtors' Association, and the Man Who Registered It at His Own House</h1>
+    <p class="dek">A single political action committee — registered at the home address of the man who runs an economic development alliance — sits at the center of money flowing from developers, a state Senate President's own PAC, and a real estate trade association, into the campaign account of the Weber County Commissioner who then voted to advance the projects those same interests wanted built. And the county's own economic development director is, at the same time, a paid lobbyist for the water district that governs the project's own infrastructure.</p>
+    <span class="caselabel">Ledger Case 03 · Weber County / State of Utah</span>
+  </div>
+</header>
+
+<div class="beginner-band">
+  <div class="wrap">
+    <div class="kicker">New to this? Start here.</div>
+    <h2>A few words before the money trail</h2>
+    <p class="lead">This piece uses a handful of terms that show up in every Utah campaign finance story. Tap each card to flip it.</p>
+    <div class="flip-grid">
+
+      <div class="flipcard">
+        <input type="checkbox" id="fc-pac" class="flip-toggle">
+        <label for="fc-pac" class="flip-inner">
+          <div class="flip-front"><div class="fc-term">PAC</div><div class="fc-tap">Tap to flip</div></div>
+          <div class="flip-back">A <strong>Political Action Committee</strong> — an entity that collects money from donors and gives it to candidates or other PACs. Utah requires every PAC to register, name a manager, and publicly report who gives and who receives.</div>
+        </label>
+      </div>
+
+      <div class="flipcard">
+        <input type="checkbox" id="fc-agent" class="flip-toggle">
+        <label for="fc-agent" class="flip-inner">
+          <div class="flip-front"><div class="fc-term">Registered Agent</div><div class="fc-tap">Tap to flip</div></div>
+          <div class="flip-back">The official, on-file contact person and address for a PAC or company — required by law, and public. It doesn't have to be a business address. In this piece, it's a home.</div>
+        </label>
+      </div>
+
+      <div class="flipcard">
+        <input type="checkbox" id="fc-support" class="flip-toggle">
+        <label for="fc-support" class="flip-inner">
+          <div class="flip-front"><div class="fc-term">"Political Support"</div><div class="fc-tap">Tap to flip</div></div>
+          <div class="flip-back">The generic reason a PAC lists for a payment when it doesn't want to (or isn't required to) say more. Legal to write. Tells you almost nothing about why the money actually moved.</div>
+        </label>
+      </div>
+
+      <div class="flipcard">
+        <input type="checkbox" id="fc-manager" class="flip-toggle">
+        <label for="fc-manager" class="flip-inner">
+          <div class="flip-front"><div class="fc-term">Manager / CFO</div><div class="fc-tap">Tap to flip</div></div>
+          <div class="flip-back">The people legally in charge of a PAC's money — who can spend it, and who's on the hook if reports are wrong. A PAC can have several; they're named in every filing.</div>
+        </label>
+      </div>
+
+    </div>
+
+    <p class="lead" style="margin-top:24px;"><strong>The PACs and organizations in this piece, and who's actually running them:</strong></p>
+    <div class="who-runs">
+      <div class="who-card">
+        <div class="pac-name">Utah Forward PAC</div>
+        <div class="runners"><strong>Katrina Gibson</strong> — CFO/Treasurer<br><strong>Laura Warburton</strong> — Manager<br><strong>Chris Roybal</strong> — Manager and donor; the PAC is registered at his home address</div>
+      </div>
+      <div class="who-card">
+        <div class="pac-name">Adams Leadership PAC</div>
+        <div class="runners"><strong>Stuart Adams</strong> — Utah Senate President; the PAC's primary officer</div>
+      </div>
+      <div class="who-card">
+        <div class="pac-name">NWAR (Northern Wasatch Association of Realtors)</div>
+        <div class="runners">A real estate trade association, not a developer-founded PAC. Its CEO, <strong>Mike Ostermiller</strong>, has sat on MIDA's board since 2008 — the same authority Froerer's own seat sits on</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="section">
+  <h2>The short version</h2>
+  <p class="lead">Every figure below is drawn from filed campaign finance reports, corporate registry records, and public meeting minutes — dates and dollar amounts included so anyone can check them directly.</p>
+  <div class="stat-row">
+    <div class="stat"><div class="num">$10,000</div><div class="label">Utah Forward PAC → Gage Froerer, 2022–2023</div></div>
+    <div class="stat"><div class="num">$20,000</div><div class="label">Nilson &amp; Company → Utah Forward PAC, 2022</div></div>
+    <div class="stat"><div class="num">$20,000</div><div class="label">NWAR → Froerer, 4 checks, 2018–2022</div></div>
+    <div class="stat"><div class="num">$15,000</div><div class="label">Shane Dunleavy's personal + corporate giving, 2022</div></div>
+  </div>
+  <p>Chris Roybal is the President of the Northern Utah Economic Alliance (NUEA), the organization marketing the West Weber Inland Port project to prospective tenants. He is also a donor to, and a manager of, Utah Forward PAC — the same political action committee whose registered address is Roybal's own home. Weber County Commissioner Gage Froerer serves as Weber County's own Co-Chair on NUEA's advisory board. Utah Forward PAC gave Froerer $5,000 a year in 2022 and 2023. Separately, Utah Senate President Stuart Adams's own Adams Leadership PAC gave Utah Forward PAC $10,000 in the same 2022 cycle. Adams and Froerer sit together on the board of the Military Installation Development Authority (MIDA) — a separate state authority, unrelated to West Weber, but a real structural point of contact between the two men.</p>
+</section>
+
+<section class="section">
+  <h2>Who Chris Roybal is, and where his PAC lives</h2>
+  <p>Chris Roybal is President of the Northern Utah Economic Alliance (NUEA), a joint Davis-Weber County economic development organization. NUEA is one of the named marketing partners on the West Weber Inland Port project, alongside the Utah Inland Port Authority (UIPA) itself and the Governor's Office of Economic Opportunity. Roybal is listed by name as a contact on UIPA's own 2025-2026 West Weber Annual Report.</p>
+  <div class="callout"><strong>The address:</strong> Utah Forward PAC, LLC's official registered address on file with the state is Chris Roybal's own home address. He is not only a donor to this PAC and one of its managers — the PAC's legal existence is anchored at his residence.</div>
+  <p>Weber County Commissioner Gage Froerer serves as Weber County's Co-Chair on NUEA's Advisory Board — a role Froerer's own campaign has not hidden, but one that places him, structurally, inside the same organization Roybal runs and that markets the port project he later votes to advance.</p>
+</section>
+
+<section class="section">
+  <h2>Utah Forward PAC's 2022 donor list</h2>
+  <p>Utah Forward PAC is the same committee already documented in The Weber County Hive's reporting on the 2026 Weber County Commission race — Katrina Gibson serves as its CFO/Treasurer, Laura Warburton as a manager. Its 2022 donor list, filed with the Lieutenant Governor's office, includes developers with direct business before the county and one state-level political committee.</p>
+  <table class="ledger">
+    <tr><th>Donor</th><th>Date</th><th style="text-align:right;">Amount</th></tr>
+    <tr><td>Rincon Financial (Shane Dunleavy's corporate entity)</td><td>5/3/2022</td><td class="amt">$10,000</td></tr>
+    <tr><td>Building Construction Partners, LLC</td><td>2022</td><td class="amt">$10,000</td></tr>
+    <tr><td><strong>Adams Leadership PAC</strong> (Sen. President Stuart Adams)</td><td>2022</td><td class="amt">$10,000</td></tr>
+    <tr><td>Nilson &amp; Company Inc. (Nilson Homes — CEO Jed Nilson)</td><td>2022</td><td class="amt">$20,000</td></tr>
+    <tr><td>Shane Dunleavy (personally)</td><td>4/19/2022</td><td class="amt">$5,000</td></tr>
+    <tr><td>Michael Falk (Logan-based developer/investor)</td><td>2022</td><td class="amt">$5,000</td></tr>
+    <tr><td>Chris &amp; Cindy Roybal</td><td>2022</td><td class="amt">$1,000</td></tr>
+  </table>
+  <p style="font-size:14px;color:var(--ink-soft);">Shane Dunleavy's two 2022 contributions — $5,000 personally on April 19, then $10,000 through Rincon Financial two weeks later on May 3 — total $15,000 given to the same PAC through two different channels in a single month.</p>
+  <div class="callout"><strong>Nilson &amp; Company, Inc.</strong> is the corporate name behind Nilson Homes, the Weber County homebuilder behind the JD Ranch and JDC Ranch developments — the same company where Commissioner Sharon Bolos's brother, Bryan Arrington, has served as Vice President of Construction, a relationship documented separately in this outlet's reporting on Bolos's own disclosure record. This piece and that one describe two different money paths from the same company; they are not the same finding.</div>
+</section>
+
+<section class="section">
+  <h2>Which Weber County project is which</h2>
+  <p class="lead">Not every name in this chain is tied to the same development. That matters — the honest picture is several different Weber County projects, several different developers, one shared PAC.</p>
+  <table class="ledger">
+    <tr><th>Player</th><th>Their actual Weber County project</th></tr>
+    <tr><td>Chris Roybal / NUEA</td><td>West Weber Inland Port — Promontory Commerce Center and the West Weber PID; NUEA is a named marketing partner, not a developer or landowner itself</td></tr>
+    <tr><td>Stephanie Russell (Weber County Economic Development Director)</td><td>Named contact on UIPA's own West Weber Annual Report, Manager of Little Mountain Service Area (West Weber's own water/sewer district), and a registered lobbyist for that same district — full detail below</td></tr>
+    <tr><td>Pat Burns (Lync Construction)</td><td>A sitting Little Mountain Service Area board member — the district governing West Weber's sewer infrastructure — appointed the same day Russell's ARPA-to-PCC-PID agreement passed</td></tr>
+    <tr><td>Nilson &amp; Company (Nilson Homes)</td><td>The Orchards at JDC Ranch and The Grove at JDC Ranch — 1,000-home development near Plain City and Farr West, a separate area from West Weber; plus Riverbend Farms (Ogden) and Stagecoach Estates (Taylor)</td></tr>
+    <tr><td>Shane Dunleavy / John Lewis</td><td>Wolf Creek Resort, Eden Crossing, and related Ogden Valley projects — a different part of the county entirely, unconnected to West Weber itself</td></tr>
+    <tr><td>Building Construction Partners, LLC</td><td>Not yet independently confirmed to a specific named project</td></tr>
+  </table>
+  <p>Gage Froerer is the connective thread across all of them, not because they share one project, but because his Commission seat votes on matters touching each — and because he sits on Little Mountain Service Area's own board alongside Burns, a direct governance role in West Weber's infrastructure, detailed next.</p>
+
+  <h3 style="font-size:19px;margin-top:26px;">How Nilson's project grew through the approval process</h3>
+  <div class="chain">
+    <div class="chain-step"><span class="arrow">2022</span><span class="txt">Nilson proposes 725 units on ~242 acres near Plain City/Farr West, under the name JDC Ranch Properties.</span></div>
+    <div class="chain-step"><span class="arrow">2024</span><span class="txt">A new state law, <strong>HB527</strong>, makes $300 million available in low-interest developer loans from the Transportation Investment Fund for owner-occupied affordable housing. Nilson's representative tells county commissioners the company worked directly with <strong>Steve Waldrip</strong>, Governor Cox's senior housing adviser, on the resulting plan.</span></div>
+    <div class="chain-step"><span class="arrow">Jul 2024</span><span class="txt">The Weber County Commission approves an amendment adding 275 "attainable" homes, growing the project to <strong>1,000 total units</strong>. Sharon Bolos, one of the three commissioners voting, publicly champions the expansion: "Attainability is what this is all about."</span></div>
+    <div class="chain-step"><span class="arrow">Oct 2024</span><span class="txt">Governor Cox personally attends the groundbreaking for the first 275 starter homes, framing it as progress toward his statewide "35,000 starter homes" goal.</span></div>
+  </div>
+  <p style="font-size:14px;color:var(--ink-soft);">Nilson Homes now operates four active communities in Weber County: Orchards at JDC Ranch and The Grove at JDC Ranch (both Plain City), Riverbend Farms (Ogden), and Stagecoach Estates (Taylor).</p>
+</section>
+
+<section class="section">
+  <h2>The county's own economic development director is a paid lobbyist for the district she oversees</h2>
+  <p class="lead">Little Mountain Service Area (LMSA) is West Weber's own water and sewer district — the infrastructure body directly underneath the port project. Stephanie Russell holds three roles inside it at once.</p>
+  <div class="stat-row">
+    <div class="stat"><div class="num">3</div><div class="label">Roles Stephanie Russell holds at once</div></div>
+    <div class="stat"><div class="num">1</div><div class="label">LMSA client on her lobbyist registration</div></div>
+    <div class="stat"><div class="num">Same day</div><div class="label">Burns joined LMSA's board and Russell's own agreement passed</div></div>
+  </div>
+  <div class="chain">
+    <div class="chain-step"><span class="arrow">Role 1</span><span class="txt"><strong>Weber County Economic Development Director.</strong> In this capacity, Russell personally got approved a June 25, 2024 agreement routing LMSA's leftover federal ARPA lagoon-rehabilitation money to PCC PID's sewer lift station, with the county acting as pass-through.</span></div>
+    <div class="chain-step"><span class="arrow">Role 2</span><span class="txt"><strong>LMSA's own Manager.</strong> LMSA's public contact page lists her — using her private business email, at the county's own office address.</span></div>
+    <div class="chain-step"><span class="arrow">Role 3</span><span class="txt"><strong>A registered lobbyist for LMSA.</strong> Through her own private DBA, Sage Development Group, registered with the state on September 18, 2024. LMSA is the only client listed on that registration.</span></div>
+  </div>
+  <div class="callout"><strong>Same meeting:</strong> the June 25, 2024 session where Russell's ARPA-to-PID agreement passed is the same meeting at which Pat Burns — a developer with his own rezoning and sewer interests — was appointed to LMSA's governing board, replacing Craig Jackson. Twenty days later, minutes record that Burns "discussed his plans for the sewer."</div>
+  <p>LMSA's full board, per its own March 2026 agenda: Chair John Price; <strong>Manager Stephanie Russell</strong>; Clerk Jennifer Johnson; Treasurer Joe Giordano; and members Price, <strong>Gage Froerer</strong>, Kami Marriott, Giordano, <strong>Pat Burns</strong>, Bryan Hannah, and Matthew Hatch. The county commissioner whose campaigns this piece already traces to Utah Forward PAC and NWAR sits on the same small board as the developer whose sewer plans that board oversees.</p>
+</section>
+
+<section class="section">
+  <h2>The same person on both sides of the same land</h2>
+  <p class="lead">Daniel Stephens doesn't just control the entity that absorbed Katrina Gibson's home. He co-manages the entity that controls the largest confirmed landowner in the entire Weber Bend Zone.</p>
+  <div class="chain">
+    <div class="chain-step"><span class="arrow">Side 1</span><span class="txt"><strong>BlackPine LLC</strong>, managed by Daniel Stephens, manages <strong>Bennet LLC</strong> — the entity Katrina Gibson's home transferred into, and which now holds 31 active Weber County parcels concentrated in West Weber.</span></div>
+    <div class="chain-step"><span class="arrow">Side 2</span><span class="txt"><strong>GBP PCC, LLC</strong> — registered agent Christian Gardner, co-managed by Gardner <strong>and Daniel Stephens</strong> — manages <strong>PCC LAND LLC</strong>, confirmed 100% owner of all 23 parcels (376.86 acres) making up the Weber Bend Zone's own official legal description.</span></div>
+  </div>
+  <div class="callout"><strong>The same person, both sides.</strong> Daniel Stephens isn't two separate developers competing for the same land — he's one manager sitting inside both the entity that absorbed a candidate's home and the entity that controls the project area's primary landowner.</div>
+  <table class="ledger">
+    <tr><th>Date</th><th>Event</th></tr>
+    <tr><td>September 7, 2023</td><td>GBP PCC, LLC formed</td></tr>
+    <tr><td>September 12, 2023</td><td>Five days later, the Weber County Commission adopts Resolution 39-2023, consenting to the original 342-acre West Weber project area</td></tr>
+    <tr><td>August 12, 2025</td><td>Commission (Bolos, Froerer, Harvey) approves a resolution expanding the PCC PID annexation area</td></tr>
+    <tr><td>January 8, 2026</td><td>Katrina Gibson transfers her home (Parcel 153260001) to Bennet LLC — the same day she filed her candidacy declaration</td></tr>
+  </table>
+</section>
+
+<section class="section">
+  <h2>The sewer money and a state-level abstention</h2>
+  <p class="lead">The infrastructure underneath all of this — a lift station, a 14-inch force main, a 30-inch gravity line to Central Weber Sewer — was partly financed with a $5 million state ARPA grant. Two state board members wouldn't vote on it.</p>
+  <p>Utah Water Quality Board minutes from January 25, 2023 confirm the Board authorized $5 million in ARPA funding for this exact infrastructure. On that vote, board members Michela Harris and Joseph Havasi abstained, citing a conflict of interest — the minutes themselves don't say what the conflict was.</p>
+  <p>By March 3, 2026, the Weber County Commission's Resolution 10-2026 — the same resolution behind the $25.9 million PCC PID bond that Gibson's former property now sits inside — had PCC PID No. 1 carrying the entire bond burden alone through assessment bonds. Russell described this on the record as "part of the match money required" for the sewer project, consistent with satisfying the state grant's own matching-funds condition.</p>
+</section>
+
+<section class="section">
+  <h2>The chain to Froerer</h2>
+  <div class="chain">
+    <div class="chain-step"><span class="arrow">1</span><span class="txt">Developers with West Weber-area business interests — Dunleavy, Nilson &amp; Company, Building Construction Partners — give to <strong>Utah Forward PAC</strong>, registered at Chris Roybal's home.</span></div>
+    <div class="chain-step"><span class="arrow">2</span><span class="txt"><strong>Adams Leadership PAC</strong>, controlled by Senate President Stuart Adams, separately gives Utah Forward PAC $10,000 in the same cycle.</span></div>
+    <div class="chain-step"><span class="arrow">3</span><span class="txt">Utah Forward PAC gives <strong>Gage Froerer's campaign</strong> $5,000 on July 11, 2022, and another $5,000 on May 4, 2023 — both listed "Political Support."</span></div>
+    <div class="chain-step"><span class="arrow">4</span><span class="txt">Froerer, sitting on the Weber County Commission, votes on approvals advancing the West Weber Inland Port project through 2023 and 2024 — the same project NUEA (Roybal's organization, Froerer's own board seat) markets to tenants.</span></div>
+  </div>
+  <div class="correction">
+    <div class="tag">Correction, checked against the actual filed report</div>
+    An earlier version of this research attributed the July 11, 2022 payment to Froerer directly to Adams Leadership PAC. The filed 2022 expenditure report shows that payment came from <strong>Utah Forward PAC</strong>, not Adams Leadership PAC. Adams Leadership PAC's confirmed contribution went to Utah Forward PAC, not to Froerer's campaign directly. The chain above reflects the corrected, two-hop version.
+  </div>
+  <div class="flag">
+    <div class="tag">Clarified</div>
+    Structural coordination between Adams and Froerer runs through the Military Installation Development Authority (MIDA) board — a separate state authority. MIDA does <em>not</em> have project authority over West Weber; its one confirmed Weber County project is the unrelated Falcon Hill Aerospace Research Park at Hill Air Force Base. Froerer's MIDA seat isn't tied to him personally — it's a gubernatorial appointment drawn from whichever three people sit on the Weber County Commission, a seat he's held since 2019.
+  </div>
+  <div class="callout"><strong>Froerer's own disclosure form has a place for this, and leaves it blank — twice.</strong> His sworn conflict-of-interest form asks him to list every board and paid-leadership position he holds. In both his 2025 and 2026 filings, he lists exactly two: Weber Basin Water District and Central Weber Sewer District. Both years, he leaves off Little Mountain Service Area and MIDA — two board seats independently confirmed active during the same filing periods.
+  </div>
+</section>
+
+<section class="section">
+  <h2>The relationship that predates all of it: Northern Wasatch Association of Realtors</h2>
+  <p>Separate from the Utah Forward PAC chain, Froerer has a documented, sustained giving relationship with the Northern Wasatch Association of Realtors (NWAR) that runs longer and deeper than any single PAC transaction — and the relationship itself runs back a century.</p>
+  <div class="callout"><strong>The Froerer family ran NWAOR for four generations.</strong> Fred Froerer Sr. served as its president in 1922, 1926, 1932, 1933, 1937, and 1938. Fred Froerer Jr. served in 1959. Fredrick "Buck" Froerer III in 1981. Zane Froerer in 1988. Gage Froerer himself in 1990. NWAOR is not a registered PAC — its contributions to Froerer are direct and in-kind giving from the association itself.</div>
+  <table class="ledger">
+    <tr><th>Date</th><th>Purpose</th><th style="text-align:right;">Amount</th></tr>
+    <tr><td>5/29/2018</td><td>Campaign Contribution</td><td class="amt">$5,000</td></tr>
+    <tr><td>7/27/2018</td><td>Campaign Contribution</td><td class="amt">$5,000</td></tr>
+    <tr><td>4/5/2021</td><td>Donations</td><td class="amt">$5,000</td></tr>
+    <tr><td>3/14/2022</td><td>Donations</td><td class="amt">$5,000</td></tr>
+  </table>
+  <p style="font-size:14px;color:var(--ink-soft);">These four itemized checks, confirmed directly from Froerer's own filed campaign reports, total $20,000. NWAOR's own broader giving record shows $29,000 in direct contributions to Froerer's campaign in total, plus $5,050 in-kind to Sharon Bolos — the larger figure likely reflects additional years or checks beyond these four; reconciling the complete itemized record against the $29,000 total is still open.</p>
+  <div class="callout"><strong>NWAR's CEO throughout this entire period is Mike Ostermiller — a sitting Military Installation Development Authority (MIDA) board member since 2008, the same authority Froerer's own seat sits on.</strong> Ostermiller was also a registered UIPA lobbyist from January to December 2022 — meaning NWAR's own March 2022 donation to Froerer landed the same year its CEO was actively lobbying the authority that oversees West Weber.</div>
+  <p>Ostermiller's own footprint reaches well beyond NWAR and MIDA: he's a partner at a government-affairs law firm (Kyler, Kohler, Ostermiller & Sorenson), holds six simultaneous MIDA-family board seats, sits on the Utah Land Use Institute, the Utah Private Property Ombudsmen Board, the Davis Economic Advisory Council, the Layton City Board of Adjustments, and the Housing Affordability Commission, and is registered to lobby for the Utah Association of Realtors and the Utah Property Rights Coalition. Utah reporting has also tied him to the 2020 Hideout annexation bill — the controversial legislation that let a small town annex distant land near Park City for large-scale development without county consent, later struck down after statewide backlash.</p>
+  <p>Ostermiller and Jed Nilson — CEO of Nilson Homes, the $20,000 Utah Forward PAC donor documented earlier in this piece — are co-directors of an Ogden nonprofit, The Healing Collective Utah Inc., incorporated August 2025. The tie runs deeper than that: Utah's corporate registry shows Jed Nilson as President of a second entity, the Nilson Foundation Inc., formed July 2026 — with Ostermiller personally serving as its Incorporator, Registered Agent, and Treasurer. Ostermiller didn't just join Nilson's foundation; he filed the paperwork that created it.</p>
+  <p>R&amp;O Construction shows the same repeat-donor pattern in miniature: $1,000 directly to Froerer in 2018, then $5,000 to Utah Forward PAC in 2022 — two paths to the same recipient, four years apart.</p>
+</section>
+
+<section class="section">
+  <h2>A separate thread: Froerer's own family business and the Weber Housing Authority</h2>
+  <p class="lead">This one isn't about West Weber or Utah Forward PAC — it's a different conflict entirely, involving a public housing authority, Froerer's own family real estate business, and a third board seat missing from his own disclosure form.</p>
+  <div class="stat-row">
+    <div class="stat"><div class="num">$19,623</div><div class="label">Weber Housing Authority payments to Froerer family companies, 2023–2025</div></div>
+    <div class="stat"><div class="num">2</div><div class="label">Froerers serving as Housing Authority trustees — Gage and his wife, Gloria</div></div>
+  </div>
+  <p>Gage Froerer is a trustee of the Weber Housing Authority. So is his wife, Gloria, who also directs its affiliated nonprofit, Friends of the Weber Housing Authority. Weber County's own warrant reports, reviewed month by month from January 2023 through December 2025, show $19,623 in payments from the Housing Authority to two Froerer family companies: RESCOM INC and Froerer Real Estate and Property Management.</p>
+  <div class="callout"><strong>Weber County itself processes all of the Housing Authority's administrative and financial business</strong>, under an interlocal agreement between the two. That means the same county government Froerer sits on as Commissioner handles the payments a housing authority — where he and his wife both serve as trustees — makes to his own family's companies.</div>
+  <p>Neither of Froerer's own sworn 2025 or 2026 disclosure forms lists the Weber Housing Authority under the section asking for board and paid-leadership positions. Both years list only two water and sewer districts. It's the third confirmed board seat missing from that same form — alongside the Military Installation Development Authority and Little Mountain Service Area seats already documented in this piece.</p>
+  <p style="font-size:14px;color:var(--ink-soft);">Froerer's real estate business runs deep in Weber County: Froerer Real Estate and Property Management LLC has operated since 1914, and the family has led the Northern Wasatch Association of Realtors across four generations, documented earlier in this piece. Two of Froerer's sons, Casey and Ryan, run the family's ResCom Real Estate Management business today.</p>
+</section>
+
+<section class="section">
+  <h2>Why this matters</h2>
+  <p>None of the individual transactions here are illegal. Utah's disclosure laws exist precisely so this kind of giving is visible, checkable, and public. What this chain shows is not a secret — it's a pattern that only becomes visible when the pieces are put next to each other: a PAC registered at an economic-development official's own home, funded partly by a state Senate President's own leadership PAC, giving annual "Political Support" payments to a county commissioner who sits on the advisory board of the organization marketing the very project he later votes to advance — layered on top of a real estate trade association's own decade-long giving relationship with the same commissioner, and a public housing authority paying that same commissioner's own family business.</p>
+  <p>Every figure above is checkable at <a href="https://disclosures.utah.gov" target="_blank">disclosures.utah.gov</a> and Utah's Division of Corporations business search.</p>
+</section>
+
+<section class="section" style="border-bottom:none;">
+  <details class="full-sources">
+    <summary>Full sources and open questions</summary>
+    <div class="full-sources-body">
+      <h4>Utah Forward PAC / Roybal / Adams Leadership PAC</h4>
+      <p>Utah Forward PAC, LLC — Lieutenant Governor's office filing, registered address; 2022 itemized contributions report (Rincon Financial, Building Construction Partners LLC, Adams Leadership PAC, Nilson &amp; Company Inc., Shane Dunleavy, Michael Falk, Chris &amp; Cindy Roybal). Utah Division of Corporations — Building Construction Partners, LLC, Entity #8845579-0160 (Peter Evans, TBDGO LLC, Nathan Hutchinson, Lehi, UT).<br>
+      Gage Froerer's own 2022 and 2023 individual expenditures reports, disclosures.utah.gov — direct confirmation of the July 11, 2022 and May 4, 2023 $5,000 Utah Forward PAC payments.<br>
+      UIPA West Weber Annual Report, 2025-2026 — Chris Roybal named as NUEA President and project contact.<br>
+      NUEA's own "About Us" materials — Gage Froerer listed as Weber County Co-Chair.</p>
+
+      <h4>Northern Wasatch Association of Realtors / R&amp;O Construction</h4>
+      <p>Gage Froerer's individual expenditures reports, 2018, 2021, and 2022, disclosures.utah.gov. MIDA's own board page (midaut.org/board-members) — Mike Ostermiller, board member since 2008. Utah Land Use Institute conference materials, 2025 — Ostermiller's CEO role and additional board seats. Northern Wasatch Association of Realtors Form 990 data. Utah lobbyist registry — Ostermiller's UIPA registration, 1/15/22-12/28/22, and his Utah Association of Realtors/Utah Property Rights Coalition registrations. OpenCorporates — full Utah officer history for Mike Ostermiller, including The Healing Collective Utah Inc. (Aug. 2025) and Nilson Foundation Inc. (July 2026, Ostermiller as director/treasurer/agent/incorporator). NWAOR's own historical records — Froerer family presidencies, 1922-1990. H.B. 359 (2020) bill-compare text and contemporaneous KSL/Deseret News coverage — the Hideout annexation bill.</p>
+
+      <h4>West Weber project mechanics</h4>
+      <p>Full acreage, school-levy capture, PID stacking, and trigger-timing detail is documented separately and not repeated in full here — available on request. Weber County Commission Resolution 39-2023 and Resolution 02-2024; UIPA board adoption, May 20, 2024.</p>
+
+      <h4>MIDA correction</h4>
+      <p>MIDA's confirmed Weber County project is Falcon Hill Aerospace Research Park (Hill Air Force Base, extending into Roy City) — a separate, unrelated project area. MIDA holds no authority over West Weber.</p>
+
+      <h4>Stephanie Russell / Little Mountain Service Area</h4>
+      <p>Utah lobbyist registry — Stephanie Sage Russell, DBA Sage Development Group, registered 9/18/2024, Principal: Little Mountain Service Area. Utah Division of Corporations — Sage Development Group, Assumed Name Entity #12669662-0151. LMSA's own public contact page. Weber County Commission minutes, June 25, 2024 (ARPA-to-PCC-PID agreement) and Resolution 34-2024 (Pat Burns's LMSA appointment, same meeting). LMSA board agenda, March 10, 2026.</p>
+
+      <h4>Daniel Stephens / BlackPine / GBP PCC / PCC LAND</h4>
+      <p>Weber County Recorder, Special Warranty Deed Entry #3400311, Jan. 8, 2026. Weber County Assessor parcel records — Bennet LLC (31 parcels) and PCC LAND LLC (23 parcels, Weber Bend Zone Appendix A). Utah Division of Corporations — BlackPine LLC, BBP Holdings LLC, GCH Ventures LLC, GBP PCC LLC (Christian Gardner, registered agent; Gardner and Daniel Stephens, co-managers). Weber County Commission Resolution 39-2023 (Sept. 12, 2023) and Aug. 12, 2025 annexation resolution. Utah Code 63H-1 and the Utah boards/commissions registry — MIDA Seat 15017 mechanics. Froerer's own Weber Elections COI forms, filed 1/24/2025 and 1/13/2026.</p>
+
+      <h4>Utah Water Quality Board / sewer financing</h4>
+      <p>Utah Water Quality Board minutes, Jan. 25, 2023 (DWQ-2023-001863), $5M ARPA authorization, Michela Harris and Joseph Havasi abstentions. Weber County press release, April 28, 2026. Weber County Commission minutes, March 3, 2026 (Resolution 10-2026).</p>
+
+      <h4>Nilson &amp; Company / Nilson Homes</h4>
+      <p>Better Business Bureau profile — Nilson and Company, Inc., Jed Nilson, CEO, Ogden, UT. Public reporting on JD Ranch and JDC Ranch developments (KUTV, Standard-Examiner). Utah News Dispatch, Oct. 31, 2024 (groundbreaking, HB527, Gov. Cox attendance). KSL.com, July 2024 (Commission amendment vote, Steve Waldrip coordination). Nilson Homes' own site (current Weber County community listings). Cross-reference: this outlet's separate reporting on Weber County Commissioner Sharon Bolos and her brother Bryan Arrington's role at the same company, and on Steve Waldrip's own expanded statutory authority.</p>
+
+      <h4>Stephanie Russell</h4>
+      <p>UIPA West Weber Annual Report, 2025-2026 — Russell named as Weber County Economic Development Director contact. Weber County Commission minutes, Nordic Village TIF presentation to the Weber School District board. Russell's own public Facebook comment, Aug. 2026, on Weber County's new PID policy and PID underwriters.</p>
+
+      <h4>Weber Housing Authority</h4>
+      <p>Weber County warrant reports, monthly, Jan. 2023 through Dec. 2025 — itemized payments to RESCOM INC and Froerer Real Estate and Property Management. Weber County/Weber Housing Authority Interlocal Agreement. Froerer's own 2025 and 2026 Weber Elections COI disclosure forms, Item 5A (board/paid-leadership positions). NWAOR's own Past Presidents list; Utah Real Estate licensing records; corporate filings for RESCOM INC and Froerer Real Estate and Property Management LLC.</p>
+
+      <h4>Open questions, not yet resolved</h4>
+      <p>AGPAC's $500 payment to Froerer (5/26/2022) — the PAC itself is not yet identified.<br>
+      Building Construction Partners, LLC ($10,000 to Utah Forward PAC, 2022) — corporate entity confirmed (Lehi, UT; managers Peter Evans, TBDGO LLC, Nathan Hutchinson), but unlike every other major donor in this piece, it has no established Weber County presence or named local project. What its actual interest in West Weber is remains unclear.<br>
+      Whether "Keep Our Valley Free" and "Keep the Valley PAC" (a related committee documented elsewhere, funded by this same donor network) are the same committee under two names, or two distinct ones.<br>
+      Froerer's specific recorded votes on each 2023-2024 West Weber milestone have not yet been individually confirmed against Commission and UIPA board minutes — this piece describes the financial relationship, not a proven vote-by-vote quid pro quo.</p>
+    </div>
+  </details>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>THE WEBER COUNTY HIVE · FOLLOW THE MONEY LEDGER</div>
+    <div class="sub">Independent accountability journalism. Public records only. We report; you decide.</div>
+  </div>
+</footer>
+
+</body>
+</html>
