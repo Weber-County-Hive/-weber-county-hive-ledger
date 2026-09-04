@@ -1,0 +1,1368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Biggest Donors, So Far | The Weber County Hive</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600&family=Roboto+Mono:wght@400;500&display=swap');
+
+  :root{
+    --paper:#f6f3ec;
+    --ink:#1c2431;
+    --ink-soft:#4b5262;
+    --rule:#d9d3c3;
+    --gold:#a8792f;
+    --gold-bar:#c79a4b;
+    --bar-track:#e7e1d1;
+    --red-flag:#8a3b2e;
+    --green-complete:#2e6b3e;
+    --card-back:#1c2431;
+    --card-back-text:#f0ece0;
+  }
+
+  *{box-sizing:border-box;}
+  html{-webkit-font-smoothing:antialiased;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',system-ui,sans-serif;
+    line-height:1.5;
+  }
+
+  .wrap{max-width:1100px;margin:0 auto;padding:0 24px 100px;}
+
+  header.masthead{
+    border-bottom:3px solid var(--ink);
+    padding:44px 0 20px;
+    margin-bottom:6px;
+  }
+  .kicker{
+    font-family:'Roboto Mono',monospace;
+    font-size:12.5px;
+    letter-spacing:.04em;
+    color:var(--gold);
+    margin:0 0 10px;
+  }
+  h1{
+    font-family:'Source Serif 4',Georgia,serif;
+    font-weight:700;
+    font-size:clamp(34px,5.5vw,54px);
+    line-height:1.06;
+    margin:0 0 14px;
+    max-width:15ch;
+  }
+  .dek{
+    font-family:'Source Serif 4',Georgia,serif;
+    font-size:19px;
+    color:var(--ink-soft);
+    max-width:62ch;
+    margin:0 0 6px;
+  }
+
+  .meta-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px 22px;
+    font-family:'Roboto Mono',monospace;
+    font-size:12px;
+    color:var(--ink-soft);
+    padding:16px 0 30px;
+    border-bottom:1px solid var(--rule);
+    margin-bottom:34px;
+  }
+
+  .note{
+    background:#efe9d8;
+    border-left:3px solid var(--gold);
+    padding:16px 20px;
+    font-size:14.5px;
+    color:var(--ink-soft);
+    margin-bottom:44px;
+  }
+  .note strong{color:var(--ink);}
+
+  h2.section{
+    font-family:'Source Serif 4',Georgia,serif;
+    font-size:24px;
+    font-weight:600;
+    margin:0 0 4px;
+  }
+  p.section-sub{
+    color:var(--ink-soft);
+    font-size:14.5px;
+    margin:0 0 30px;
+  }
+
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(240px, 1fr));
+    gap:18px;
+    margin-bottom:60px;
+  }
+
+  .tile{
+    perspective:1400px;
+    height:234px;
+  }
+  .years{
+    font-family:'Roboto Mono',monospace;
+    font-size:10px;
+    color:var(--ink-soft);
+    margin-top:4px;
+  }
+  .tile-inner{
+    position:relative;
+    width:100%;
+    height:100%;
+    transition:transform .55s cubic-bezier(.4,.2,.2,1);
+    transform-style:preserve-3d;
+    cursor:pointer;
+  }
+  .tile.flipped .tile-inner{transform:rotateY(180deg);}
+
+  .face{
+    position:absolute;
+    inset:0;
+    backface-visibility:hidden;
+    border:1px solid var(--rule);
+    padding:18px;
+    display:flex;
+    flex-direction:column;
+  }
+
+  .front{
+    background:#fffdf8;
+  }
+  .rank{
+    font-family:'Roboto Mono',monospace;
+    font-size:12px;
+    color:var(--ink-soft);
+  }
+  .top3 .rank{color:var(--gold);font-weight:600;}
+  .entity-name{
+    font-family:'Source Serif 4',Georgia,serif;
+    font-weight:600;
+    font-size:18px;
+    margin:6px 0 auto;
+    line-height:1.2;
+  }
+  .flag{
+    display:inline-block;
+    font-family:'Roboto Mono',monospace;
+    font-size:10px;
+    color:var(--red-flag);
+    border:1px solid var(--red-flag);
+    padding:1px 5px;
+    border-radius:2px;
+    margin-top:6px;
+    align-self:flex-start;
+  }
+  .flag-complete{
+    display:inline-block;
+    font-family:'Roboto Mono',monospace;
+    font-size:10px;
+    color:var(--green-complete);
+    border:1px solid var(--green-complete);
+    padding:1px 5px;
+    border-radius:2px;
+    margin-top:6px;
+    align-self:flex-start;
+  }
+  .flag-2026{
+    display:inline-block;
+    font-family:'Roboto Mono',monospace;
+    font-size:10px;
+    color:#8a6d1a;
+    background:#f5e6a8;
+    border:1px solid #c7a838;
+    padding:1px 5px;
+    border-radius:2px;
+    margin-top:6px;
+    margin-left:6px;
+    align-self:flex-start;
+  }
+  .amount{
+    font-family:'Roboto Mono',monospace;
+    font-size:23px;
+    font-weight:500;
+    margin-top:10px;
+  }
+  .amount .plus{color:var(--gold);font-size:15px;}
+  .bar-track{
+    height:4px;
+    background:var(--bar-track);
+    width:100%;
+    margin-top:8px;
+  }
+  .bar-fill{height:100%;background:var(--gold-bar);}
+  .flip-hint{
+    font-family:'Roboto Mono',monospace;
+    font-size:10.5px;
+    color:#a6a08e;
+    margin-top:10px;
+  }
+
+  .back{
+    background:var(--card-back);
+    color:var(--card-back-text);
+    transform:rotateY(180deg);
+    justify-content:center;
+    overflow-y:auto;
+  }
+  .back .label{
+    font-family:'Roboto Mono',monospace;
+    font-size:11px;
+    letter-spacing:.03em;
+    color:#c79a4b;
+    margin-bottom:8px;
+  }
+  .back .recipient-name{
+    font-family:'Source Serif 4',Georgia,serif;
+    font-weight:600;
+    font-size:19px;
+    line-height:1.25;
+    margin:0 0 8px;
+  }
+  .back .recipient-amount{
+    font-family:'Roboto Mono',monospace;
+    font-size:22px;
+    margin-bottom:8px;
+  }
+  .back .recipient-note{
+    font-size:12.5px;
+    color:#b9bccb;
+    line-height:1.4;
+  }
+  .back .donor-total{
+    margin-top:10px;
+    font-family:'Roboto Mono',monospace;
+    font-size:10.5px;
+    color:#7f8494;
+    border-top:1px solid #333c50;
+    padding-top:8px;
+  }
+
+  footer{
+    border-top:3px solid var(--ink);
+    padding-top:24px;
+    font-size:13px;
+    color:var(--ink-soft);
+  }
+  footer p{margin:0 0 10px;}
+
+  @media(max-width:480px){
+    .grid{grid-template-columns:1fr 1fr;}
+    .tile{height:214px;}
+  }
+
+  /* ---- Flow charts ---- */
+  h2.section.flow-heading{margin-top:10px;}
+  .flow-card{
+    border:1px solid var(--rule);
+    background:#fffdf8;
+    margin-bottom:22px;
+    padding:20px 22px;
+  }
+  .flow-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    margin-bottom:14px;
+    flex-wrap:wrap;
+    gap:6px 16px;
+  }
+  .flow-head h3{
+    font-family:'Source Serif 4',Georgia,serif;
+    font-size:19px;
+    font-weight:600;
+    margin:0;
+  }
+  .flow-head .flow-total{
+    font-family:'Roboto Mono',monospace;
+    font-size:14px;
+    color:var(--gold);
+  }
+  .flow-row{
+    display:flex;
+    align-items:center;
+    gap:0;
+  }
+  .flow-source{
+    width:110px;
+    flex-shrink:0;
+    background:var(--card-back);
+    color:var(--card-back-text);
+    padding:10px 10px;
+    font-family:'Source Serif 4',Georgia,serif;
+    font-size:13px;
+    font-weight:600;
+    line-height:1.25;
+    text-align:right;
+  }
+  .flow-svg-col{flex:1 1 auto;min-width:40px;}
+  .flow-svg-col svg{display:block;width:100%;}
+  .flow-recipients{width:340px;flex-shrink:0;}
+  .flow-recipient{
+    height:44px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    border-bottom:1px solid var(--rule);
+    padding-left:14px;
+    padding-right:78px;
+    position:relative;
+    min-width:0;
+  }
+  .flow-recipient:last-child{border-bottom:none;}
+  .flow-recipient .rname{
+    display:block;
+    min-width:0;
+    max-width:100%;
+    font-size:13.5px;font-weight:600;color:var(--ink);
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  }
+  .flow-recipient .rmeta{
+    display:block;
+    min-width:0;
+    max-width:100%;
+    font-size:11px;color:var(--ink-soft);
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  }
+  .flow-recipient .ramount{
+    font-family:'Roboto Mono',monospace;
+    font-size:12.5px;
+    color:var(--gold);
+    position:absolute;
+    right:14px;
+    top:50%;
+    transform:translateY(-50%);
+    white-space:nowrap;
+  }
+  .flow-note{font-size:12px;color:#8b8c86;margin-top:12px;}
+
+  @media(max-width:700px){
+    .flow-row{flex-direction:column;align-items:stretch;}
+    .flow-source{width:auto;text-align:left;margin-bottom:8px;}
+    .flow-svg-col{display:none;}
+    .flow-recipients{width:auto;}
+    .flow-recipient .ramount{position:static;transform:none;margin-top:2px;}
+    .flow-recipient{padding-right:14px;height:auto;padding-top:8px;padding-bottom:8px;}
+    .flow-recipient .rname, .flow-recipient .rmeta{white-space:normal;}
+  }
+
+  /* ---- Glossary ---- */
+  .glossary{
+    border:1px solid var(--rule);
+    background:#fffdf8;
+    padding:20px 22px;
+    margin-bottom:36px;
+  }
+  .glossary h2{
+    font-family:'Source Serif 4',Georgia,serif;
+    font-size:19px;
+    font-weight:600;
+    margin:0 0 4px;
+  }
+  .glossary .glossary-sub{
+    font-size:13px;
+    color:var(--ink-soft);
+    margin:0 0 16px;
+  }
+  .glossary-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:4px 28px;
+  }
+  .glossary-item{
+    display:flex;
+    gap:10px;
+    padding:8px 0;
+    border-bottom:1px solid var(--rule);
+  }
+  .glossary-item .abbr{
+    font-family:'Roboto Mono',monospace;
+    font-size:13px;
+    font-weight:500;
+    color:var(--gold);
+    flex-shrink:0;
+    width:78px;
+  }
+  .glossary-item .full{
+    font-size:13px;
+    color:var(--ink);
+    line-height:1.4;
+  }
+  .glossary-item .full b{font-weight:600;}
+  @media(max-width:640px){
+    .glossary-grid{grid-template-columns:1fr;}
+  }
+  .people{
+    border:1px solid var(--rule);
+    background:#fffdf8;
+    padding:20px 22px;
+    margin-bottom:36px;
+  }
+  .people h2{
+    font-family:'Source Serif 4',Georgia,serif;
+    font-size:19px;
+    font-weight:600;
+    margin:0 0 4px;
+  }
+  .people .people-sub{
+    font-size:13px;
+    color:var(--ink-soft);
+    margin:0 0 18px;
+  }
+  .person{
+    padding:14px 0;
+    border-bottom:1px solid var(--rule);
+  }
+  .person:last-child{border-bottom:none;}
+  .person-name{
+    font-family:'Source Serif 4',Georgia,serif;
+    font-weight:600;
+    font-size:16px;
+    color:var(--ink);
+  }
+  .person-role{
+    font-family:'Roboto Mono',monospace;
+    font-size:11px;
+    color:var(--gold);
+    margin-top:2px;
+  }
+  .person-connections{
+    margin:8px 0 0;
+    padding-left:18px;
+  }
+  .person-connections li{
+    font-size:13px;
+    color:var(--ink-soft);
+    line-height:1.5;
+    margin-bottom:3px;
+  }
+  .person-connections b{color:var(--ink);font-weight:600;}
+  .person-note{
+    font-size:12.5px;
+    color:#8a6d1a;
+    margin-top:6px;
+    font-style:italic;
+  }
+  .person-details{margin-top:8px;}
+  .person-details summary{
+    font-family:'Roboto Mono',monospace;
+    font-size:11px;
+    color:var(--ink-soft);
+    cursor:pointer;
+    list-style:none;
+    display:inline-flex;
+    align-items:center;
+    gap:5px;
+  }
+  .person-details summary::-webkit-details-marker{display:none;}
+  .person-details summary::before{
+    content:"▸";
+    font-size:10px;
+    color:var(--gold);
+    transition:transform .15s;
+  }
+  .person-details[open] summary::before{transform:rotate(90deg);}
+  .person-details[open] summary{margin-bottom:8px;}
+  .sources-block{
+    border:1px solid var(--rule);
+    background:#fffdf8;
+    padding:16px 22px;
+    margin:0 0 28px;
+  }
+  .sources-block summary b{
+    font-family:'Source Serif 4',Georgia,serif;
+    font-size:14px;
+    color:var(--ink);
+    font-weight:600;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <p class="kicker">THE WEBER COUNTY HIVE — DONOR LEDGER</p>
+    <h1>The Biggest Donors, So Far</h1>
+    <p class="dek">A running, sourced ranking of the largest single donors documented across this investigation to date. Tap a tile to see who each one gave the most to.</p>
+  </header>
+
+  <div class="glossary">
+    <h2>Start here</h2>
+    <p class="glossary-sub">Who these abbreviations are, in the order they come up on this page</p>
+    <div class="glossary-grid">
+      <div class="glossary-item"><span class="abbr">UHREC</span><span class="full"><b>Utah House Republican Election Committee</b> — the House GOP's official leadership PAC, run by Speaker Mike Schultz and Majority Leader Casey Snider, with Kyle Palmer as Treasurer.</span></div>
+      <div class="glossary-item"><span class="abbr">URSCC</span><span class="full"><b>Utah Republican Senate Campaign Committee</b> — the Senate GOP's official leadership PAC, run by Senate President J. Stuart Adams and Sen. Kirk Cullimore, with Kyle Palmer as Treasurer.</span></div>
+      <div class="glossary-item"><span class="abbr">HSLPAC</span><span class="full"><b>House Speaker Leadership PAC</b> — Speaker Mike Schultz's personal leadership PAC, separate from UHREC, with Kyle Palmer as Treasurer.</span></div>
+      <div class="glossary-item"><span class="abbr">NUPAC</span><span class="full"><b>Northern Utah Legislative PAC</b> — run by Sen. Ann Millner and Rep. Casey Snider, with Kyle Palmer as Treasurer.</span></div>
+      <div class="glossary-item"><span class="abbr">SenDemPAC</span><span class="full"><b>Senate Democratic PAC</b> — the Utah Senate Democratic caucus's official PAC.</span></div>
+      <div class="glossary-item"><span class="abbr">UHDLC</span><span class="full"><b>Utah House Democratic Leadership Council</b> — the House Democratic caucus's leadership PAC.</span></div>
+      <div class="glossary-item"><span class="abbr">UBG</span><span class="full"><b>Utahns for Balanced Government</b> — a political issues committee (PIC), run by Executive Director Marty Carpenter.</span></div>
+      <div class="glossary-item"><span class="abbr">PIC</span><span class="full"><b>Political Issues Committee</b> — a Utah entity type distinct from a PAC; doesn't show up in PAC-only searches.</span></div>
+      <div class="glossary-item"><span class="abbr">Adams Leadership PAC</span><span class="full">Senate President J. Stuart Adams's personal leadership PAC, with Kyle Palmer as Treasurer.</span></div>
+      <div class="glossary-item"><span class="abbr">RPAC</span><span class="full"><b>Realtors Political Action Committee</b> — the National Association of Realtors' political arm; in Utah it files as "Utah Association Of Realtors," chaired by Sonya Smithing.</span></div>
+      <div class="glossary-item"><span class="abbr">AG</span><span class="full"><b>Attorney General</b> — currently Derek Brown.</span></div>
+      <div class="glossary-item"><span class="abbr">Lincoln Hill Partners PAC</span><span class="full"><b>Lincoln Shurtz and Casey Hill's PAC</b> — administratively dissolved 7/2023 but still filing and spending. Not the same entity as Lincoln Hill PAC below.</span></div>
+      <div class="glossary-item"><span class="abbr">Lincoln Hill PAC</span><span class="full"><b>A separate PAC from Lincoln Hill Partners PAC above</b> — despite the nearly identical name, funded heavily by Fides LLC.</span></div>
+      <div class="glossary-item"><span class="abbr">Irish Elk LLC</span><span class="full"><b>Kyle Palmer's consulting LLC</b> — he's Treasurer of UHREC, NUPAC, URSCC, HSLPAC, and Adams Leadership PAC, and all five pay Irish Elk.</span></div>
+      <div class="glossary-item"><span class="abbr">Election Hive</span><span class="full"><b>Matthew Lusty's campaign-management firm</b> — a paid vendor to Cox's campaign and multiple PACs, not a donor giving money out.</span></div>
+    </div>
+  </div>
+
+  <div class="people">
+    <h2>Who these people are</h2>
+    <p class="people-sub">The same handful of names run nearly every PAC on this page. Here's each one, broken out.</p>
+
+    <div class="person">
+      <div class="person-name">Kyle Palmer</div>
+      <div class="person-role">Consultant — owns Irish Elk LLC</div>
+      <details class="person-details">
+        <summary>Show documented connections</summary>
+      <ul class="person-connections">
+        <li><b>Treasurer/CFO:</b> UHREC, URSCC, HSLPAC, NUPAC, Adams Leadership PAC, UCL PAC — six PACs simultaneously</li>
+        <li><b>Irish Elk LLC</b> was paid by all six of those PACs — over $500,000 combined, every payment coded only as "Other" or "Fundraising Fees"</li>
+        <li>Former Director, Governor's Office of Economic Opportunity (2021–2024) — while also serving as NUPAC's treasurer</li>
+        <li>Former partner at Election Hive (2018–2019), before Matthew Lusty took it over solo</li>
+      </ul>
+      <div class="person-note">The single financial nexus this whole page keeps running into — if a PAC's money looks like it disappears into a vendor, check whether that vendor is Irish Elk.</div>
+      </details>
+    </div>
+
+    <div class="person">
+      <div class="person-name">Mike Schultz</div>
+      <div class="person-role">Speaker of the Utah House</div>
+      <details class="person-details">
+        <summary>Show documented connections</summary>
+      <ul class="person-connections">
+        <li><b>UHREC</b> — Primary Officer (the House GOP's official leadership PAC)</li>
+        <li><b>House Speaker Leadership PAC (HSLPAC)</b> — his own personal leadership PAC, separate from UHREC</li>
+        <li>Loaned his own 2024 campaign $50,000 personally</li>
+      </ul>
+      </details>
+    </div>
+
+    <div class="person">
+      <div class="person-name">J. Stuart Adams</div>
+      <div class="person-role">Utah Senate President — also Chair of MIDA (Military Installation Development Authority)</div>
+      <details class="person-details">
+        <summary>Show documented connections</summary>
+      <ul class="person-connections">
+        <li><b>URSCC</b> — Primary Officer 1 (the Senate GOP's official leadership PAC)</li>
+        <li><b>Adams Leadership PAC</b> — his own personal leadership PAC</li>
+        <li>Originally appointed to the MIDA board in 2008 by then-Gov. Jon Huntsman Jr.; has chaired the board since. MIDA's voting board unanimously approved the Stratos Project Area Plan on 4/24/2026 — the same authority Dan Hemmert and Lincoln Shurtz both currently lobby, per their own entries above</li>
+        <li>Public records show <b>Adams Leadership PAC received a $135,000 donation within seven days of that April 2026 MIDA vote</b> — a documented timing fact; no direct link between the vote and the donation has been established beyond the dates themselves</li>
+        <li>Adams Leadership PAC gave <b>$10,000 to Utah Forward PAC</b> in 2022, a local Weber County PAC tied to the Gibson family network documented elsewhere in this investigation</li>
+        <li>Lost his June 2026 Republican primary; reporting at the time noted he could still retain his MIDA oversight role (including the Deer Valley East Village project) despite the loss, since MIDA appointments aren't tied to legislative reelection</li>
+      </ul>
+      </details>
+    </div>
+
+    <div class="person">
+      <div class="person-name">Kirk Cullimore</div>
+      <div class="person-role">Utah Senate Majority Leader</div>
+      <details class="person-details">
+        <summary>Show documented connections</summary>
+      <ul class="person-connections">
+        <li><b>URSCC</b> — Primary Officer 2, alongside Adams</li>
+      </ul>
+      </details>
+    </div>
+
+    <div class="person">
+      <div class="person-name">Ann Millner</div>
+      <div class="person-role">Utah State Senator</div>
+      <details class="person-details">
+        <summary>Show documented connections</summary>
+      <ul class="person-connections">
+        <li><b>NUPAC</b> — Primary Officer 1</li>
+        <li>NUPAC sent <b>$12,500 to her own campaign</b> in 2022, split across two checks the same days as coordinated legislative-funding batches</li>
+      </ul>
+      </details>
+    </div>
+
+    <div class="person">
+      <div class="person-name">Casey Snider</div>
+      <div class="person-role">Utah House Majority Leader</div>
+      <details class="person-details">
+        <summary>Show documented connections</summary>
+      <ul class="person-connections">
+        <li><b>NUPAC</b> — Primary Officer 2, alongside Millner</li>
+        <li><b>UHREC</b> — also an officer here, as Majority Leader</li>
+      </ul>
+      <div class="person-note">The only person on this list who's a named officer of two different PACs at once.</div>
+      </details>
+    </div>
+
+    <div class="person">
+      <div class="person-name">Matthew Lusty</div>
+      <div class="person-role">Owns Election Hive LLC — also a registered lobbyist under a separate business name, "Beekeeper Consulting"</div>
+      <details class="person-details">
+        <summary>Show documented connections</summary>
+      <ul class="person-connections">
+        <li>Campaign-management vendor for Cox's campaign and multiple PACs — paid to process campaign money, not a donor giving money out</li>
+        <li>Election Hive pulled <b>$84,304 from UHREC alone</b> — over 3x what was previously known before a comprehensive multi-year pull</li>
+        <li>Worked alongside Kyle Palmer at Election Hive in 2018–2019, before Palmer left to run PACs directly</li>
+        <li>His own lobbyist registration began 1/17/2023 with a mundane early client mix (Central Wasatch Commission, Turo, a veterinary association) — but by 2025–2026 added <b>American Promise and Election Reformers Network, both focused specifically on election policy/reform</b> — years into already running the firm processing campaign money for Cox, Adams, and other Utah GOP leadership</li>
+      </ul>
+      </details>
+    </div>
+
+    <div class="person">
+      <div class="person-name">Lincoln Shurtz</div>
+      <div class="person-role">Owner and Principal Consultant, Legislative Insight Consulting, LLC — a registered Utah lobbying firm</div>
+      <details class="person-details">
+        <summary>Show documented connections</summary>
+      <ul class="person-connections">
+        <li>Called <b>"One of the Most Influential Lobbyists on Capitol Hill"</b> by the Salt Lake Tribune, per his firm's own site</li>
+        <li><b>Helped create MIDA itself and currently represents it as an active lobbying client</b> (confirmed by the Salt Lake Tribune, 5/19/2026) — a second lobbyist, alongside Dan Hemmert, with a direct hand in both building and now working the authority central to the Stratos data-center story</li>
+        <li>His own firm, <b>Legislative Insight Consulting, both gave Lincoln Hill PAC $42,500 and separately received $16,000 back from it</b> — a closed loop of payments between his firm and a PAC he co-founded</li>
+        <li>Client list includes Aetna, Molina, Intermountain Healthcare, Northrop Grumman, General Motors, and Oracle — firm claims 10 Fortune 100 clients and $20 billion in Utah capital investment represented</li>
+        <li><b>Registered lobbyist for O'Leary Ventures Company — Kevin O'Leary's (Shark Tank) firm — confirmed by the Salt Lake Tribune (5/19/2026) alongside Casey Hill</b></li>
+        <li>Co-founder of <b>Lincoln Hill Partners PAC</b>; also runs his own separate individual PAC ("Lincoln Shurtz"), which funded Derek Brown $5,000 in 2024, the same year Brown was an officer of Lincoln Hill PAC</li>
+        <li><b>His law-and-lobbying firm, Lincoln Hill Partners, formed via a formal merger (10/4/2021) with a firm called Utah Policy Advocates</b>, per the firm's own press release — four named principals: Shurtz, Casey Hill, Chase Everton, and Derek Brown (an attorney, ex-Sidley & Austin DC office)</li>
+        <li><b>Silicon Slopes Commons was his own lobbying client (12/31/2019–1/29/2021)</b> — already tracked elsewhere on this page as a confirmed-complete $55,000 single donation to Slopes PAC, dated 12/1/2021, about 10 months after this lobbying relationship ended</li>
+        <li><b>The Utah Jazz are a current client (since 1/18/2024)</b> — owned by Scott Ryan Smith, who separately and personally donated $80,000 to Lincoln Hill PAC, matching Fides LLC's $80,000 gift 12 days apart</li>
+        <li>Full registration confirms Utah Association of Counties as a long-running client (since 2014) and Creekstone Energy as an actual paying client (since 7/21/2026), not just a company he publicly cheered online</li>
+        <li>Testimonials on his firm's own site come from both Brad Wilson (then-Speaker) and Stuart Adams (Senate President) — both already central figures on this page</li>
+      </ul>
+      <div class="person-note">Two separate "Lincoln"-named PACs (Lincoln Hill Partners PAC and Lincoln Hill PAC) plus his own individual PAC all share overlapping recipients and a Holladay address cluster — treat as one coordinated network, not three unrelated committees.</div>
+      </details>
+    </div>
+
+    <div class="person">
+      <div class="person-name">Casey Hill</div>
+      <div class="person-role">Registered lobbyist — co-founder of Lincoln Hill Partners/PAC alongside Shurtz and Derek Brown</div>
+      <details class="person-details">
+        <summary>Show documented connections</summary>
+      <ul class="person-connections">
+        <li>His own lobbying disclosure lists <b>Election Hive as his own firm from 2019–2024 (67 months)</b> — even though Election Hive's corporate registration names Matthew Lusty as manager. The exact relationship between the two isn't fully resolved, but Hill's own filings tie him directly to Election Hive, not just Lusty</li>
+        <li><b>SVP at EnergySolutions 2012–2019</b>, then EnergySolutions became his continuous lobbying client since 2013 — a direct personal tie to a company already tracked on this page at $270,168</li>
+        <li><b>Registered lobbyist for O'Leary Ventures Company — Kevin O'Leary's (Shark Tank) firm — confirmed by the Salt Lake Tribune (5/19/2026), which also confirms Election Hive manages the campaigns of Adams, Cox, AND Derek Brown simultaneously</b></li>
+        <li><b>Utah Medical Association has been his client since 1/25/2019</b> — this donor was researched earlier in this project ($18,200 total, SenDemPAC as its top recipient) but isn't one of the top-10 companies currently shown on this page</li>
+        <li>60+ lobbying clients on file including Salesforce, Netflix, Lenovo, Snap, Roblox, Expedia Group, Dakota Pacific Real Estate, Plain City, and Qualtrics (since January 2026 — see Scott Ryan Smith below)</li>
+        <li>Controls <b>Gathering Inc.</b>, a signature-gathering company — documented payments totaling $150,000+ in 2024–2025</li>
+      </ul>
+      <div class="person-note">A shared phone line connects Election Hive, Qualtrics, O'Leary Ventures, and other Hill clients as registered lobbying contacts — worth treating as one coordinated office, not separate arrangements.</div>
+      </details>
+    </div>
+
+    <div class="person">
+      <div class="person-name">Derek Brown</div>
+      <div class="person-role">Utah Attorney General — also a Lincoln Hill Partners named principal and Lincoln Hill PAC Director/Officer</div>
+      <details class="person-details">
+        <summary>Show documented connections</summary>
+      <ul class="person-connections">
+        <li>Named as one of four principals in Lincoln Hill Partners' own 10/4/2021 merger press release — <b>an attorney</b> who previously practiced government, regulatory, and administrative law at Sidley & Austin LLP's Washington D.C. office, providing legal services to the firm's clients</li>
+        <li>Co-founded Lincoln Hill PAC (created 4/27/2022) and <b>remained listed as a Director/Officer even after being elected Attorney General</b> — the state's chief law enforcement officer sitting as an officer of one of the most compliance-flagged PACs in this whole investigation</li>
+        <li>His own company, <b>Integrity Strategies LLC, gave Lincoln Hill PAC $10,000</b> using a dissolved Illinois shell entity's address</li>
+        <li><b>Documented 2024–2025 total received from this network: $294,000+</b> — including $114,000+ from Election Hive alone, both years labeled only "Other" or "Campaign Expense"</li>
+      </ul>
+      <div class="person-note">Election-law watchdogs would flag this as a structural conflict: he simultaneously serves as the state's top law-enforcement official and as an officer of the PAC he co-founded.</div>
+      </details>
+    </div>
+
+    <div class="person">
+      <div class="person-name">Chase Everton</div>
+      <div class="person-role">Confirmed as Managing Partner of Utah Policy Advocates before the 2021 merger — one of Lincoln Hill Partners' four named principals</div>
+      <details class="person-details">
+        <summary>Show documented connections</summary>
+      <ul class="person-connections">
+        <li><b>Managing Partner of Utah Policy Advocates, Aug 2017–present</b>, per his own LinkedIn — he ran the OTHER firm in the 2021 merger, not just a hire who joined an existing operation</li>
+        <li><b>Worked alongside Derek Brown at Michael Best Strategies' Salt Lake City office</b>, years before the 2021 merger — an existing professional relationship that predates the current firm structure</li>
+        <li>Career path: Political Director, Utah Republican Party (2014) → Government Relations, 1-800 Contacts (2014–2017) → Managing Partner, Utah Policy Advocates (2017–2021) → Partner, Lincoln Hill Partners (2021–present)</li>
+        <li>Registered lobbying clients include <b>Meta Platforms</b> (since 2017) and the <b>Utah Jazz</b> (since 2024) — Meta's own PAC is separately tracked elsewhere on this page at $270,000</li>
+        <li>Publicly amplifies Meta's own community-investment messaging on LinkedIn, including celebrating the Eagle Mountain data center — the same Eagle Mountain Meta project already documented elsewhere in this investigation's tax-increment research</li>
+      </ul>
+      </details>
+    </div>
+
+    <div class="person">
+      <div class="person-name">Jeff &amp; Greg Hartley</div>
+      <div class="person-role">Jeff owns Sage Government Solutions, a registered Utah lobbying firm</div>
+      <details class="person-details">
+        <summary>Show documented connections</summary>
+      <ul class="person-connections">
+        <li>Co-founded <b>H3 PAC</b> (7/21/2023) and its predecessor, <b>Utahns for Safer Communities</b> — same address, 52 E 300 N, Salt Lake City</li>
+        <li><b>Sage Government Solutions gave H3 PAC $80,700</b> — Jeff's own lobbying firm funding the PAC he co-founded, its single largest source of money</li>
+        <li>Sage's registered clients include Liberty Village Utah, OpenAI, Okta, VMware, and the Utah Inland Port Authority — while also representing private developers seeking UIPA project-area designations</li>
+        <li>Utahns for Safer Communities was seeded with over $125,000 from Speaker Mike Schultz in 2022, then ran 2026 attack ads while reporting $0 in contributions and expenditures that cycle</li>
+      </ul>
+      <div class="person-note">H3 PAC dissolved 7/10/2026 — but moved its remaining balance out to Adams Leadership PAC and back to Utahns for Safer Communities before filing, the same clean-exit pattern seen elsewhere on this page.</div>
+      </details>
+    </div>
+
+    <div class="person">
+      <div class="person-name">Dan Hemmert</div>
+      <div class="person-role">Former State Senator — reported as MIDA Executive Director since 8/1/2026</div>
+      <details class="person-details">
+        <summary>Show documented connections</summary>
+      <ul class="person-connections">
+        <li>Confirmed via his own LinkedIn AND an <b>archived Election Hive bio page (recovered via Wayback Machine after it was taken down)</b>: he served as <b>Executive Director, Utah Governor's Office of Economic Opportunity</b>, Jan 2021–Dec 2022, member of Gov. Cox's cabinet — two independent primary sources now confirm this. Still overlaps in time with Kyle Palmer's separately-documented director role at the same agency; not yet clear if these were the same top position or two distinct titles</li>
+        <li>The Election Hive bio page (electionhive.com/dan-hemmert) that listed him as "a principal at Hemmco" was taken down around the time of his move toward the MIDA appointment — only recoverable now via Wayback Machine archive</li>
+        <li><b>Full HEMMCO lobbyist registration confirms MIDA as a client for 1/19/2023–8/3/2026 — ending just two days after his reported 8/1/2026 MIDA start date</b>, and nearly his ENTIRE client roster (Union Pacific Railroad, Zions Bancorporation, Dakota Pacific Real Estate, Sanofi, Utah Medical Association, Motorola Solutions, Salt Lake City, Salt Lake County, Utah County, and roughly a dozen more) mass-terminates on that exact same date — a clean, single-day exit from his whole lobbying practice timed to the new role</li>
+        <li><b>Lincoln Hill Partners itself is listed as a HEMMCO client</b> (2/1/2023–8/3/2026) — a direct, dated business relationship with the Shurtz/Hill/Brown/Everton firm, not just a parallel network</li>
+        <li><b>Former Managing Director AT Dakota Pacific itself</b> (2012–2015) — years before Dakota Pacific Real Estate became a paying client of his lobbying firm</li>
+        <li><b>Hemmco gave Lincoln Hill PAC $5,000</b> in May 2024 — the same dissolved-but-still-filing PAC tracked elsewhere on this page</li>
+        <li>Controls five active corporate entities (Hemmco, Horizon Partners II, LH Capital, Etna Capital, RHRD) plus a newly formed entity using a third-party registered agent, weeks before the reported MIDA appointment</li>
+      </ul>
+      <div class="person-note">His current LinkedIn still shows no MIDA Executive Director title — listed role is just "Partner, Hemmco LLC." The client-termination timing above is strong circumstantial support for the MIDA move, but confirm against a primary source (MIDA board record) before treating the appointment itself as settled in publication.</div>
+      </details>
+    </div>
+  </div>
+
+  <div class="meta-row">
+    <span>Compiled from <b>primary-source disclosures.utah.gov filings</b></span>
+    <span>Status: <b>in progress, not final</b></span>
+  </div>
+
+  <div class="note">
+    <strong>How to read this list.</strong> Every figure comes from itemized state campaign-finance filings. Some donor totals cover their <em>entire</em> documented giving; others cover only what's been fully pulled so far (marked with a <strong>+</strong>). The recipient shown on the back of each tile is that donor's single largest documented recipient — not necessarily their only one.
+  </div>
+
+  <h2 class="section">Company donors</h2>
+  <p class="section-sub">Ranked by largest confirmed total — tap or click a tile to flip it</p>
+  <div class="grid" id="grid-companies"></div>
+
+  <h2 class="section">PAC donors</h2>
+  <p class="section-sub">PACs giving out money they've pooled from many sources, tracked separately from single-source company giving</p>
+  <div class="grid" id="grid-pacs"></div>
+  <p class="section-sub" id="pac-empty-note" style="display:none;">No PAC donors added yet.</p>
+
+  <h2 class="section">Individual donors</h2>
+  <p class="section-sub">Named individuals giving directly, tracked separately from companies and PACs</p>
+  <div class="grid" id="grid-individuals"></div>
+
+  <h2 class="section flow-heading">Where the money went</h2>
+  <p class="section-sub">Top recipients for each donor, largest first. Line thickness shows relative size within that donor's own giving.</p>
+
+  <h3 style="font-family:'Source Serif 4',Georgia,serif;font-size:18px;margin:0 0 12px;">Company donors</h3>
+  <div id="flows-companies"></div>
+
+  <h3 style="font-family:'Source Serif 4',Georgia,serif;font-size:18px;margin:24px 0 12px;">PAC donors</h3>
+  <div id="flows-pacs"></div>
+
+  <h3 style="font-family:'Source Serif 4',Georgia,serif;font-size:18px;margin:24px 0 12px;">Individual donors</h3>
+  <div id="flows-individuals"></div>
+
+  <div class="sources-block">
+    <details class="person-details">
+      <summary><b>Sources &amp; methodology</b></summary>
+      <ul class="person-connections">
+        <li>Itemized Utah campaign-finance disclosures, disclosures.utah.gov — individual contribution/expenditure searches and full PAC DEX (CSV) exports</li>
+        <li>Utah Division of Corporations business-entity records, opencorporates.com cross-references</li>
+        <li>Utah lobbyist registration records, disclosures.utah.gov — Statements of Organization and filed client/principal reports</li>
+        <li>LinkedIn — individuals' own posted work histories, current roles, and self-reported client lists</li>
+        <li>Lincoln Hill Partners' own 10/4/2021 merger press release</li>
+        <li>Salt Lake Tribune, Threads post, 5/19/2026</li>
+        <li>Wayback Machine (web.archive.org) — an archived Election Hive bio page no longer live on the current site</li>
+        <li>Firms' own public-facing bios and "in the news" pages (Legislative Insight Consulting, Lincoln Hill Partners, Election Hive)</li>
+      </ul>
+      <p class="person-note" style="font-style:normal;">Figures reflect research completed as of publication and will be updated as additional filing years are reviewed. Where a claim rests on inference or an unresolved discrepancy rather than a primary-source document, that's noted directly in the relevant entry above.</p>
+    </details>
+  </div>
+
+  <footer>
+    <p>Compiled by The Weber County Hive from itemized Utah campaign-finance disclosures (disclosures.utah.gov), PAC registration filings, and Utah Division of Corporations records. Figures reflect research completed as of publication and will be updated as additional filing years are reviewed.</p>
+    <p><strong>2026 figures are incomplete.</strong> The 2026 reporting year is not yet over, and many committees have not yet filed all of their periodic reports — a "2026 only" or "2026-2026" figure anywhere on this page reflects what has been filed and disclosed so far, not a final year-end total. Treat every 2026-inclusive number as a floor, not a ceiling, until later reports come in. Any entry with the <span class="flag-2026" style="margin:0;">2026 DATA — SUBJECT TO CHANGE</span> marker includes 2026 activity for this reason.</p>
+    <p>webercountyhive.substack.com</p>
+  </footer>
+
+</div>
+
+<script>
+const companyData = [
+  {name:"Utah Bankers Association", amount:416063, plus:true, flag:"UBG GIFT RETURNED IN FULL",
+    years:"2018-2026 (2025 gap now filled; some earlier-year individual legislator checks not fully tallied)",
+    stillNeed:"hundreds of individual $250-$1,000 legislator checks across 2018-2023 not tallied due to volume/duplication in the source",
+    top:{name:"Utahns for Balanced Government", amount:100000, note:"Returned in full five weeks later (10/17/2024) — reason not stated. Still the single largest recipient, but Cox is now at $35,000 total ($22,500 across 2020-2023, plus $12,500 newly found in 2025). Also notable: a $26,000 payment from Utah Bankers Association to itself (11/18/2025) — almost certainly an internal transfer to its own PAC, not a political gift."}},
+  {name:"PacifiCorp", amount:350850, plus:true,
+    years:"2018-2026 (fully itemized for every recipient, not just Cox)",
+    stillNeed:"Union Pacific Railroad is a SEPARATE company also giving significant money, not yet its own entry (pre-2018 out of scope by decision)",
+    top:{name:"Spencer Cox", amount:102500, note:"Nine checks, 2018-2026. But Cox is far from the whole picture: UHREC got $59,500, URSCC $54,500, Adams Leadership PAC $35,000, House Speaker Leadership PAC $18,500, and Governors Leadership PAC $11,000 — all now fully itemized, not running estimates."}},
+  {name:"EnergySolutions", amount:270168, plus:true,
+    years:"2018-2026 (institutional-level complete)",
+    stillNeed:"individual $200-$2,000 legislator checks for 2018-2021 not fully tallied due to volume",
+    top:{name:"Utah House Republican Election Committee", amount:52500, note:"Includes a single $50,000 check (9/6/2024), six weeks before Cox's Operation Gigawatt launch. Also notable: then-AG Sean Reyes received $22,167.61 across 2018-2021, including one non-round $13,667.61 check (4/2/2021) — verified against his own filed report as a plain, ordinary contribution, not a reimbursement or anything irregular."}},
+  {name:"Larry H. Miller Company", amount:255187, plus:true, flag:"COX/UHREC DISCREPANCY RESOLVED",
+    years:"2018-2026 (complete, all entity-name variants)",
+    stillNeed:"NUPAC's own records claim $50,000 from LHM but this comprehensive pull shows zero — new unresolved conflict, see note",
+    top:{name:"Spencer Cox", amount:103000, note:"TWO separate $50,000 checks (8/26/2025 and 7/20/2026) plus $3,000 (2023) — not the single check previously on file. The earlier Cox/UHREC discrepancy is resolved: both were real, filed under 'The Larry H Miller Company' (with 'The'), a name variant an earlier search missed. New problem: this comprehensive pull shows $0 to NUPAC anywhere 2018-2026, contradicting NUPAC's own claim of $50,000 (five years, $10,000 each) — donor-side and recipient-side now disagree."}},
+  {name:"Torus", amount:151042, complete:true,
+    years:"2022-2025 (complete; 2026 not yet pulled)",
+    stillNeed:"2026 not yet pulled",
+    top:{name:"Spencer Cox", amount:151042, note:"The ONLY recipient this donor has ever given to. Four checks: $50,000 (2022), $1,041.98 (2023), $50,000 (2024), $50,000 (2025). Address changed between the 2024 and 2025 checks (Lehi → South Salt Lake) — worth checking whether that's a real move or a filing inconsistency."}},
+  {name:"Utah Metal Works", amount:123450, complete:true,
+    years:"2018-2026 (complete, all years)",
+    stillNeed:"none — confirmed complete",
+    top:{name:"Spencer Cox", amount:17500, note:"Four checks: $2,500 (2019), $2,500 (2020), $5,000+$2,500 (2025). A consistent bipartisan giver — SenDemPAC ($8,250 total) and Utah House Dem. Leadership Council ($7,500 total) both recur nearly every year. 2025 was the biggest single year ($32,500), including a notable concentration of Derek Brown giving — four separate checks that year alone."}},
+  {name:"Big West Oil", amount:87150, plus:true,
+    years:"2018-2026 (2018-2023 complete; 2024-2026 Cox-only)",
+    stillNeed:"2024-2026 non-Cox recipients not yet pulled — likely to push this higher",
+    top:{name:"Spencer Cox", amount:35000, note:"FIVE checks, 2021-2026, not four — an earlier 2021 check ($2,500) was missing from the prior count. 2018-2020 confirmed to have zero Cox giving, not just unpulled."}},
+  {name:"Silicon Slopes Commons", amount:55000, complete:true,
+    years:"2021 only (confirmed — no other giving exists)",
+    stillNeed:"none — confirmed complete",
+    top:{name:"Slopes PAC", amount:55000, note:"Confirmed as the only donation this donor has ever made — a single gift, 12/1/2021, 80% of that PAC's total funding that cycle."}},
+  {name:"Chevron", amount:27500, plus:true,
+    years:"2023-2026",
+    stillNeed:"pre-2023 not pulled; non-Cox multi-year total not fully summed",
+    top:{name:"Spencer Cox", amount:27500, note:"2023–2025 — matches a 2026 watchdog report's figure exactly."}},
+  {name:"rPlus Energies", amount:20600, plus:true,
+    years:"2026 only",
+    stillNeed:"pre-2026 not pulled",
+    top:{name:"Kirk Cullimore", amount:2000, note:"Single check, 7/17/2026 — the largest of 22 recipients in 2026, spanning both parties (Escamilla, Romero, Dailey-Provost, Kwan among the Democrats)."}},
+];
+
+const pacData = [
+  {name:"RPAC (Utah Association of Realtors)", amount:9017940, plus:true, flag:"REDISTRIBUTES TO EVERY LOCAL BOARD",
+    years:"2019-2026 (complete)",
+    stillNeed:"confirm whether 'UARPAC' ($5,000 from NWAOR) is a separate flow from the $274,946 RPAC sent NWAOR; break out 2025's top recipients individually",
+    runBy:"Chair Sonya Smithing (Realtor) · Vice-Chair Christy Vail (Realtor) · CFO/Treasurer Jason Burr (Accountant) — all share UAR's own Sandy, UT address/phone; affiliated with the National Association of Realtors",
+    top:{name:"Spencer Cox", amount:206000, note:"Combined: Cox for Governor $125,000 + Friends of Spencer Cox $81,000 — RPAC's largest direct candidate spending. By far the largest PAC in this investigation: $9,733,938 in / $9,017,940 out, all years complete. Redistributes huge sums down to every local Realtor board PAC (Salt Lake $862,604, Utah Central $275,993, NWAOR $274,946, and more)."}},
+  {name:"UHREC (Mike Schultz)", amount:2030243, plus:true, flag:"TOP RECIPIENT IS A COX CAMPAIGN DIRECTOR",
+    years:"2018-2026 (complete)",
+    stillNeed:"what specific role/services the $128,838 Coombs payment was for",
+    runBy:"Speaker Mike Schultz and Majority Leader Casey Snider, Primary Officers · Majority Whip Candice Pierucci, Officer · Kyle Palmer, Treasurer/CFO — sole signature authority over disbursements",
+    top:{name:"Chris Coombs", amount:128838, note:"IDENTIFIED: a Director of 'Friends of Spencer Cox' (Cox's own campaign committee), registered at 136 S Main St Ste A200, Salt Lake City — the EXACT SAME ADDRESS as Election Hive LLC (Matthew Lusty). UHREC paid $128,838 to someone simultaneously serving on the Governor's own committee, out of the same office as Cox's campaign vendor. Right Insight ($125,727, an earlier vendor before Irish Elk) and Election Hive ($84,304 — over 3x the previously-known figure) round out the top vendors. All years now complete: $2,265,887 in / $2,030,243 out, 2018-2026."}},
+  {name:"Salt Lake Board of Realtors", amount:1614591, plus:true,
+    years:"2018-2026 (full)",
+    stillNeed:"identify Kelley Wright (consultant or candidate?); research Majority 51 as its own PAC; pull the PAC's own registered officer names",
+    runBy:"CEO Curtis Bullock · President Dawn Stevens (2024) · Rob Ockey, Past President (2024) — also UAR's current Vice President, the same cross-board overlap pattern found at NWAOR",
+    top:{name:"Deseret News Publishing", amount:119965, note:"Advertising vendor, largest recipient overall. Kelley Wright received $83,700 across 2021-2026 in recurring 'Campaign Expense'/'Advertising' payments — pattern suggests a paid consultant, not confirmed. 'Majority 51,' itself a PAC, received $48,793 in transfers."}},
+  {name:"Lincoln Hill Partners PAC", amount:778500, plus:true, flag:"DISSOLVED 7/2023 — STILL FILING",
+    years:"2021-2026 (2021 confirmed as first year of activity)",
+    stillNeed:"inbound donor-side entirely missing",
+    runBy:"Lincoln Shurtz and Casey Hill — network also includes a separate 'Lincoln Shurtz' individual PAC operating in parallel",
+    top:{name:"Spencer Cox", amount:82500, note:"2022–2025 cumulative, including a single $50,000 check (9/24/2024) — the PAC's largest-ever single payment, made over a year after its own dissolution filing. Also notable: NUPAC and UHREC both got their first checks in 2021 ($5,000 each) — three years earlier than previously documented for either relationship."}},
+  {name:"NUPAC", amount:580284, plus:true,
+    years:"2022-2026 (2026 partial)",
+    stillNeed:"pre-2022 not checked; 2026 is partial-year only",
+    runBy:"Sen. Ann Millner and Rep. Casey Snider, Primary Officers · Kyle Palmer, Treasurer — sole signature authority, paid via his own Irish Elk LLC",
+    top:{name:"Irish Elk LLC", amount:88525, note:"Kyle Palmer's own consulting vehicle, 10 payments 2022–2026 — NUPAC's Treasurer paying himself, bigger than any single candidate."}},
+  {name:"Northern Wasatch Association of Realtors", amount:562278, plus:true, flag:"PAID ITS OWN PRESIDENT $23,500",
+    years:"2018-2026 (full)",
+    stillNeed:"confirm whether 'UARPAC' = RPAC (see notes)",
+    runBy:"Rick Southwick and Bob Hill, Realtors, Primary Officers · Kristi Jeppesen, Accountant/CFO · CEO Mike Ostermiller — also a sitting MIDA board member since 2008, and paid $5,000 directly by this PAC in 2023",
+    top:{name:"Consolidated Direct Mail Inc.", amount:82758, note:"Direct-mail vendor, 2022-2025 — the largest recipient by dollar amount, though not a candidate. Far more notable: NWAOR paid its OWN PRESIDENT Mark Shepherd $23,500 (2018-2026) and its own CEO Mike Ostermiller $5,000 (2023) — $28,500 total to its own leadership. Shepherd is also a MIDA board member and the sitting Mayor of Clearfield; his 2025 mayoral campaign disclosures appeared empty despite an active race, unresolved."}},
+  {name:"Lincoln Hill PAC", amount:495965, plus:true, flag:"DISTINCT FROM LINCOLN HILL PARTNERS PAC",
+    years:"2022-2026",
+    stillNeed:"identify the source report for a separate $8,000 Diamante Vista/Fides LLC subtotal that doesn't match any entry in this pull",
+    runBy:"Network coordination with Lincoln Hill Partners PAC and Lincoln Shurtz — see that PAC's own card for the broader 'Lincoln' network pattern",
+    top:{name:"Friends of Spencer Cox", amount:80000, note:"A separate, previously undocumented direct Cox channel from this specific entity — not the same as Lincoln Hill Partners PAC's own $82,500 to Cox. Fides LLC funded this PAC $332,500 across seven checks, 2023-2026 — matching a figure already on file from separate research, a good cross-session consistency check."}},
+  {name:"Forge the Future Project (Meta)", amount:270000, flag:"INDEPENDENT EXPENDITURE, NOT A CONTRIBUTION",
+    years:"single day, 6/11/2026",
+    stillNeed:"confirm any other spending by this PAC beyond 6/11/2026; identify its officers; pull Tami Tran's itemized vendor breakdown (only the total is on file)",
+    runBy:"Not yet identified — this is Meta's own corporate PAC, but its Utah-filing officers haven't been pulled",
+    top:{name:"Tami Tran", amount:152503, note:"State Senate candidate, SD-06 — spent the same day as $98,942.90 on Logan Monson, both six weeks before their 6/23/2026 primaries. Coded as independent expenditures, so neither shows up in the candidates' own filings."}},
+  {name:"Dominion Energy PAC", amount:197500, plus:true, flag:"COX TOTAL NEARLY 2.5X PREVIOUS FIGURE",
+    years:"2018-2026 (individual-legislator checks not yet fully tallied)",
+    stillNeed:"hundreds of $200-800 individual legislator checks across 2018-2026 remain untotaled — no CSV export available for this search, would need manual page-by-page tallying; resolve the 2026 UHREC entry mystery",
+    runBy:"Corynne Arnett, Primary Officer — the only name on record; this is from the dissolution filing signature, not a full Statement of Organization, so other officers (if any) are not yet confirmed",
+    top:{name:"Spencer Cox", amount:147500, note:"SIX checks, 2020-2025, not three — 2020 alone was two separate $25,000 checks. The previously-documented $62,500 (2022-2024) was a real but incomplete subset. Also newly found: $50,000 to Governors Leadership PAC (2018-2019), never previously tracked. This $197,500 figure covers only these two big-ticket recipients — hundreds of smaller individual-legislator checks across 2018-2026 remain untotaled — no CSV export available for this search, only manual page-by-page tallying."}},
+  {name:"H3 PAC", amount:122165, flag:"DISSOLVED 7/10/2026",
+    years:"2023-2025 (dissolved mid-2026)",
+    stillNeed:"trace Sage Government Solutions' own funding origin beyond client revenue; confirm whether the compliance inquiry re: zero-reported attack ads was ever answered",
+    runBy:"Founded by brothers Greg and Jeff Hartley — Jeff also owns Sage Government Solutions LLC, the PAC's largest single funder",
+    top:{name:"House Speaker Leadership PAC", amount:20000, note:"Funded almost entirely by three sources: Sage Government Solutions $80,700 (owned by co-founder Jeff Hartley — funding its own founder's PAC), TSC LLC $32,900, Hartley Consulting $20,000 (administratively dissolved 4 days after its final contribution). Successor to 'Utahns for Safer Communities,' which ran attack ads in 2026 while reporting $0 contributions and $0 expenditures — an unresolved compliance discrepancy."}},
+  {name:"National Association of REALTORS Fund", amount:15000, flag:"INBOUND ONLY — QUARTER NOT YET CLOSED",
+    years:"2026 only",
+    stillNeed:"outbound giving once the current quarter closes; prior years",
+    runBy:"Treasurer Matt Cenedella and VP Helen Devlin — both national NAR staff, Chicago/DC addresses. A separate entity from the Utah RPAC above.",
+    top:{name:"Not yet determined", amount:0, note:"Single $15,000 contribution (8/7/2026) from the National Association of Realtors itself, its own parent org. Outbound giving isn't available yet — the current reporting quarter hasn't closed, so this isn't a data gap on our end."}},
+  {name:"Utah Petroleum Association PAC", amount:13125, plus:true,
+    years:"2024-2026",
+    stillNeed:"full multi-year non-Cox total; page 2 of the 2026 contributor search",
+    runBy:"Chairman Brad Shafer (Marathon Petroleum) · Vice Chairman Chad Calvert (Chevron) · Secretary/Treasurer Rikki Hrenko-Browning (President, Utah Petroleum Association) · Trustees Cameron Cuch and Spencer Kimball",
+    top:{name:"Spencer Cox", amount:13125, note:"2024–2025, across two checks."}},
+];
+
+const individualData = [
+  {name:"Gershon Barnett (individual)", amount:429500,
+    years:"2022-2026 (complete)",
+    stillNeed:"pre-2022 not checked",
+    top:{name:"Spencer Cox", amount:100000, note:"Four checks, not the Utahns for Balanced Government gift — $10,000 (6/5/2024), $15,000+$50,000 (both 10/7/2024, same day), $25,000 (10/21/2025). The $100,000 to Utahns for Balanced Government (3/24/2025) is a separate gift, still standing — not the same $100,000 returned to Utah Bankers Association that year."}}
+];
+
+function renderGrid(containerId, dataset) {
+  const grid = document.getElementById(containerId);
+  if (!dataset.length) return;
+  const max = Math.max(...dataset.map(d => d.amount));
+  dataset.forEach((d, i) => {
+    const pct = Math.max(6, Math.round((d.amount / max) * 100));
+    const tile = document.createElement('div');
+    tile.className = 'tile' + (i < 3 ? ' top3' : '');
+    tile.innerHTML = `
+      <div class="tile-inner">
+        <div class="face front">
+          <div class="rank">No. ${i + 1}</div>
+          <div class="entity-name">${d.name}</div>
+          <div class="amount">$${d.amount.toLocaleString()}${d.plus ? '<span class="plus">+</span>' : ''}</div>
+          <div class="bar-track"><div class="bar-fill" style="width:${pct}%"></div></div>
+          <div class="flip-hint">tap for top recipient →</div>
+        </div>
+        <div class="face back">
+          <div class="label">GAVE THE MOST TO</div>
+          <div class="recipient-name">${d.top.name}</div>
+          <div class="recipient-amount">$${d.top.amount.toLocaleString()}</div>
+          <div class="recipient-note">${d.top.note}</div>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;">
+            ${d.flag ? `<span class="flag">${d.flag}</span>` : ''}
+            ${d.complete ? `<span class="flag-complete">✓ RESEARCH COMPLETE</span>` : ''}
+            ${d.years && d.years.indexOf('2026') !== -1 ? `<span class="flag-2026">2026 DATA — SUBJECT TO CHANGE</span>` : ''}
+          </div>
+          ${d.years ? `<div class="years" style="margin-top:8px;">Years covered: ${d.years}</div>` : ''}
+          ${d.runBy ? `<div class="recipient-note" style="margin-top:8px;"><strong style="color:#c79a4b;">Run by:</strong> ${d.runBy}</div>` : ''}
+          ${d.stillNeed ? `<div class="recipient-note" style="margin-top:8px;"><strong style="color:#e0a458;">Still need:</strong> ${d.stillNeed}</div>` : ''}
+          <div class="donor-total">${d.name}: $${d.amount.toLocaleString()}${d.plus ? '+' : ''} total documented</div>
+        </div>
+      </div>
+    `;
+    tile.addEventListener('click', () => tile.classList.toggle('flipped'));
+    grid.appendChild(tile);
+  });
+}
+
+renderGrid('grid-companies', companyData);
+renderGrid('grid-pacs', pacData);
+renderGrid('grid-individuals', individualData);
+if (!pacData.length) document.getElementById('pac-empty-note').style.display = 'block';
+
+// ---- Flow charts: top recipients per donor ----
+const companyFlows = [
+  {name:"Utah Bankers Association", total:416063, plus:true, flag:"UBG GIFT RETURNED IN FULL", has2026:true,
+    stillNeed:"hundreds of individual $250-$1,000 legislator checks across 2018-2023 not tallied due to volume/duplication in the source",
+    recipients:[
+    {name:"Utahns for Balanced Government", amount:100000, id:"Political issues committee — returned in full"},
+    {name:"UHREC", amount:53500, id:"House GOP leadership PAC (Mike Schultz) — 2020-2023 + 2026 combined"},
+    {name:"Utah Republican Senate Campaign Cmte.", amount:52000, id:"Senate GOP leadership PAC — 2020-2023 + 2025 + 2026 combined"},
+    {name:"Spencer Cox", amount:35000, id:"Governor — 2020-2023 plus 2025, two checks that year"},
+    {name:"House Speaker Leadership PAC", amount:10000, id:"Speaker Mike Schultz's PAC"},
+    {name:"SenDemPAC", amount:14000, id:"Senate Democratic caucus PAC — 2018+2023+2025+2026 combined"},
+    {name:"Northern Utah Legislative PAC (NUPAC)", amount:12500, id:"2018, 2023, and 2025 combined"},
+    {name:"Utah House Dem. Leadership Council", amount:7000, id:"House Democratic leadership PAC — 2018+2023+2025+2026 combined"},
+    {name:"Wilson Leadership PAC", amount:12500, id:"Then-Speaker Brad Wilson's PAC — recurring 2020-2022"},
+    {name:"Utah Republican Party (State)", amount:17500, id:"State GOP party — recurring most years"}
+  ], note:"$416,062.50 confirmed total, 2018-2026 — the largest documented single donor in this investigation. 2025 was fully closed out (9/3/26, $85,840 across 54 entries), including a notable $26,000 payment from the association to itself — an internal transfer, not a political gift. Figure still excludes hundreds of individual $250-$1,000 legislator checks in 2018-2023, too voluminous and name-variant-heavy to hand-tally reliably. The true all-time total is certainly higher."},
+  {name:"PacifiCorp", total:350850, plus:true, has2026:true,
+    stillNeed:"Union Pacific Railroad is a SEPARATE company also giving significant money, not yet its own entry (pre-2018 out of scope by decision)",
+    recipients:[
+    {name:"UHREC", amount:59500, id:"House GOP leadership PAC (Mike Schultz) — fully itemized"},
+    {name:"Spencer Cox", amount:102500, id:"Governor — nine checks, 2018-2026, all years confirmed"},
+    {name:"Utah Republican Senate Campaign Cmte.", amount:54500, id:"Senate GOP leadership PAC — fully itemized"},
+    {name:"Adams Leadership PAC", amount:35000, id:"Senate President's leadership PAC — fully itemized"},
+    {name:"House Speaker Leadership PAC", amount:18500, id:"Speaker's leadership PAC — fully itemized"},
+    {name:"Governors Leadership PAC", amount:11000, id:"Gov. Herbert-era leadership PAC — 2018 and 2020"},
+    {name:"J. Stuart Adams", amount:6000, id:"Senate President — personal checks, separate from his PAC"},
+    {name:"Brad Wilson", amount:5000, id:"then-Speaker of the House"},
+    {name:"Scott Sandall", amount:4000, id:"State Senator"},
+    {name:"Deidre Henderson", amount:3000, id:"Lt. Governor"}
+  ], note:"$350,850 comprehensive total, 2018-2026 — every recipient now fully itemized, not the earlier 'approx.' running sums. Pre-2018 is out of scope by decision, not an open gap. Union Pacific Railroad — a completely separate company, matched only because both names contain 'Pacific' — also gives significant money and is not reflected here. Dozens of individual $250-$2,000 legislator checks below the top 10 shown here account for the remainder of the total."},
+  {name:"EnergySolutions", total:270168, plus:true, has2026:true,
+    stillNeed:"individual $200-$2,000 legislator checks for 2018-2021 not fully tallied due to volume",
+    recipients:[
+    {name:"UHREC", amount:52500, id:"House GOP leadership PAC (Mike Schultz), 2022-2026"},
+    {name:"Sean Reyes", amount:22167.61, id:"Then-Attorney General, 2018-2021 — includes one non-round $13,667.61 check, verified as an ordinary contribution"},
+    {name:"Spencer Cox", amount:32500, id:"Governor — 2019 through 2026 combined"},
+    {name:"House Speaker Leadership PAC", amount:20000, id:"Speaker's leadership PAC (2024-2026)"},
+    {name:"Bridger Bolinder", amount:17500, id:"State Rep., HD-29 (2023–2026), House Majority Assistant Whip — retired Jan. 2026"},
+    {name:"Utah Republican Senate Campaign Cmte.", amount:20500, id:"Senate GOP leadership PAC, 2018-2021 combined"},
+    {name:"Derek Brown", amount:10000, id:"Attorney General"},
+    {name:"Hughes Leadership PAC", amount:5000, id:"Then-Speaker Greg Hughes's PAC, single check 2019"},
+    {name:"Mike McKell", amount:5500, id:"State Senator"},
+    {name:"Wilson Leadership PAC", amount:11000, id:"Then-Speaker Brad Wilson's PAC, 2019-2021 combined"}
+  ]},
+  {name:"Larry H. Miller Company", total:255187, flag:"COX/UHREC DISCREPANCY RESOLVED", has2026:true,
+    stillNeed:"NUPAC's own records claim $50,000 from LHM but this comprehensive pull shows zero — new unresolved conflict, see note",
+    recipients:[
+    {name:"Spencer Cox", amount:103000, id:"Governor — TWO $50,000 checks (2025, 2026) plus $3,000 (2023)"},
+    {name:"House Speaker Leadership PAC", amount:58000, id:"Speaker Mike Schultz's PAC — recurring almost every year, 2023-2026"},
+    {name:"UHREC", amount:56000, id:"House GOP leadership PAC (Mike Schultz) — across multiple years, resolved discrepancy"},
+    {name:"Salt Lake County Republican Party", amount:30000, id:"County GOP party — unverified triple entry, 2024"},
+    {name:"Wilson Leadership PAC", amount:15000, id:"2022"},
+    {name:"Utah Auto Dealers Assn UCAR PAC", amount:3000, id:"Small recurring checks nearly every year from various LHM dealership entities"},
+    {name:"Ryan Wilcox", amount:5000, id:"State Representative — 2024 and 2025"},
+    {name:"Lincoln Fillmore", amount:4750, id:"State Senator — 2022, 2025, 2026"},
+    {name:"Utah Republican Senate Campaign Cmte.", amount:5000, id:"Senate GOP leadership PAC, 2023"},
+    {name:"Wayne Harper", amount:1500, id:"State Senator, 2024"}
+  ], note:"$255,187 total, 2018-2026, across every LHM entity-name variant — supersedes the earlier $141,830 figure, which missed entries filed under 'The Larry H Miller Company' (with 'The'). That name-variant gap is what caused the earlier Cox/UHREC discrepancy — both checks were always real. Also gave to Rosemary Lesser (D) and Luz Escamilla (D) in past years, the same bipartisan-access pattern documented elsewhere on this page."},
+  {name:"Torus", total:151042, complete:true, has2026:true,
+    stillNeed:"2026 not yet pulled",
+    recipients:[
+    {name:"Spencer Cox", amount:151042, id:"Governor — the only recipient this donor has ever funded. Four checks 2022-2025: $50,000+$1,041.98+$50,000+$50,000"}
+  ]},
+  {name:"Utah Metal Works", total:123450, complete:true, has2026:true,
+    stillNeed:"none — confirmed complete",
+    recipients:[
+    {name:"Spencer Cox", amount:17500, id:"Governor — four checks, 2019, 2020, 2025 (two)"},
+    {name:"Utah Republican Senate Campaign Cmte.", amount:11500, id:"all years combined"},
+    {name:"Adams Leadership PAC", amount:9500, id:"all years combined"},
+    {name:"SenDemPAC", amount:8250, id:"recurring nearly every year 2018-2026"},
+    {name:"UHREC", amount:8000, id:"House GOP leadership PAC (Mike Schultz)"},
+    {name:"Utah House Dem. Leadership Council", amount:7500, id:"recurring nearly every year"},
+    {name:"Derek Brown", amount:7500, id:"Attorney General — four checks, 2023+2025"},
+    {name:"House Speaker Leadership PAC", amount:7500, id:""},
+    {name:"Utah County Legislative PAC", amount:5000, id:"2026, new"},
+    {name:"Mike McKell", amount:3500, id:"State Senator, multi-year"}
+  ], note:"$123,450 comprehensive total, all years 2018-2026 now complete. Consistent bipartisan giver — SenDemPAC and Utah House Dem. Leadership Council both recur nearly every year. 2025 was the single biggest year ($32,500)."},
+  {name:"Big West Oil", total:87150, plus:true, has2026:true,
+    stillNeed:"2024-2026 non-Cox recipients not yet pulled — likely to push this higher",
+    recipients:[
+    {name:"Spencer Cox", amount:35000, id:"Governor — five checks, 2021-2026"},
+    {name:"Utah Republican Senate Campaign Cmte.", amount:30500, id:"Senate GOP leadership PAC — all years 2021-2026 combined"},
+    {name:"UHREC", amount:21500, id:"House GOP leadership PAC (Mike Schultz) — all years 2021-2026 combined"},
+    {name:"Adams Leadership PAC", amount:5000, id:"Senate President's leadership PAC — all years combined"},
+    {name:"House Speaker Leadership PAC", amount:3000, id:"Speaker's leadership PAC"},
+    {name:"J. Stuart Adams", amount:2000, id:"Senate President — individual checks"},
+    {name:"Utah Taxpayers Association PAC", amount:820, id:"Taxpayer-advocacy PAC — all years combined"}
+  ], note:"2018-2023 fully itemized across all recipients ($64,650); 2024-2026 currently Cox-only ($22,500). 2018-2020 confirmed to have zero Cox giving, not just unpulled."},
+  {name:"Silicon Slopes Commons", total:55000, complete:true,
+    stillNeed:"none — confirmed complete",
+    recipients:[
+    {name:"Slopes PAC", amount:55000, id:"Tech-industry PAC — the only donation this donor has ever made, later redistributed to dozens of legislators via Utah Tech Leads"}
+  ]},
+  {name:"Chevron", total:27500, has2026:true,
+    stillNeed:"pre-2023 not pulled; non-Cox multi-year total not fully summed",
+    recipients:[
+    {name:"Spencer Cox", amount:27500, id:"Governor (2023-2025)"},
+    {name:"Utah Petroleum Association PAC", amount:20000, id:"Oil/gas trade-association PAC — approx., multi-year"},
+    {name:"Deidre Henderson", amount:8000, id:"Lieutenant Governor — approx., multi-year"},
+    {name:"Luz Escamilla", amount:2750, id:"State Senator, Senate Minority Leader — approx."},
+    {name:"J. Stuart Adams", amount:3500, id:"Senate President — approx., multi-year"},
+    {name:"Kirk Cullimore", amount:2350, id:"State Senator — approx., multi-year"},
+    {name:"Ronald Winterton", amount:2000, id:"State Senator"},
+    {name:"Lincoln Fillmore", amount:1650, id:"State Senator — approx."},
+    {name:"Wayne Harper", amount:1250, id:"State Senator — approx."},
+    {name:"Adams Leadership PAC", amount:1500, id:"Senate President's leadership PAC"}
+  ], note:"Amounts marked \"approx.\" are running sums across several years, not independently re-verified line by line."},
+  {name:"rPlus Energies", total:20600, has2026:true,
+    stillNeed:"pre-2026 not pulled",
+    recipients:[
+    {name:"Kirk Cullimore", amount:2000, id:"State Senator"},
+    {name:"Carl Albrecht", amount:1000, id:"State Representative"},
+    {name:"Mike McKell", amount:1000, id:"State Senator"},
+    {name:"Wayne Harper", amount:1000, id:"State Senator"},
+    {name:"Colin Jack", amount:1000, id:"State Rep., House Energy Cmte. Chair"},
+    {name:"Scott Sandall", amount:1000, id:"State Senator"},
+    {name:"Lincoln Fillmore", amount:1000, id:"State Senator"},
+    {name:"Luz Escamilla", amount:1000, id:"State Senator, Senate Minority Leader"},
+    {name:"Angela Romero", amount:1000, id:"State Representative"},
+    {name:"Stephanie Gricius", amount:1000, id:"State Representative"}
+  ]},
+];
+
+// ---- PAC donors ----
+const pacFlows = [
+{name:"RPAC (Utah Association of Realtors)", total:9017940, flag:"REDISTRIBUTES TO EVERY LOCAL BOARD", has2026:true,
+    stillNeed:"confirm whether 'UARPAC' ($5,000 from NWAOR) is a separate flow from the $274,946 RPAC sent NWAOR; break out 2025's top recipients individually",
+    runBy:"Chair Sonya Smithing (Realtor) · Vice-Chair Christy Vail (Realtor) · CFO/Treasurer Jason Burr (Accountant) — all share UAR's own Sandy, UT address/phone; affiliated with the National Association of Realtors",
+    fundedBy:[
+      {name:"Individual Utah Realtors (thousands of checks)", amount:9733938, id:"2019-2026 combined, complete — mostly uniform $50/$100/$150 dues-adjacent checks — see the standalone 2026-period breakdown for named individuals"},
+    ],
+    recipients:[
+      {name:"National Association of REALTORS", amount:2285743, id:"National parent org — likely dues/admin remittance, not campaign spending"},
+      {name:"Utah Association of Realtors", amount:981930, id:"Own parent nonprofit — likely admin"},
+      {name:"Salt Lake Board of Realtors PAC", amount:862604, id:"Local board — already on this page as its own PAC"},
+      {name:"Real Strategies", amount:495416, id:"Vendor — largest outside vendor"},
+      {name:"Utah Central Association of Realtors PAC", amount:275993, id:"Local board redistribution"},
+      {name:"Northern Wasatch Association of Realtors PAC", amount:274946, id:"Local board — already on this page as its own PAC"},
+      {name:"Spencer Cox", amount:206000, id:"Governor — combined Cox for Governor $125,000 + Friends of Spencer Cox $81,000"},
+      {name:"Washington County Board of Realtors PAC", amount:182628, id:"Local board redistribution"},
+      {name:"JY Allen Consulting", amount:130000, id:"Vendor"},
+      {name:"Thomas Wright for Governor", amount:100000, id:"2020 GOP gubernatorial primary candidate"}
+    ],
+    note:"$9,733,938 in / $9,017,940 out, 2019-2026, all years complete — by far the largest PAC documented in this investigation, roughly 8x UHREC's total. The real structure: RPAC redistributes huge sums back down to every local Realtor board PAC AND up to its own parent orgs, while also giving directly to candidates. 630+ [DELETED] entries found across the full pull — the same mass-deletion pattern already documented at NWAOR and Salt Lake Board of Realtors. No Kyle Palmer/Irish Elk LLC connection found anywhere here, unlike UHREC/NUPAC — this network appears structurally independent of that self-dealing pattern. Also: Utah House Republican Election Committee $71,000, Adams Leadership PAC $30,000, Utah Republican Senate Campaign Committee $25,000, Derek Brown for Attorney General $25,000, and Consolidated Direct Mail Inc. $123,903 (same vendor NWAOR and Salt Lake Board both used) round out the top recipients."},
+{name:"UHREC (Mike Schultz)", total:2030243, flag:"TOP RECIPIENT IS A COX CAMPAIGN DIRECTOR", has2026:true,
+    stillNeed:"what specific role/services the $128,838 Coombs payment was for",
+    runBy:"Speaker Mike Schultz and Majority Leader Casey Snider, Primary Officers · Majority Whip Candice Pierucci, Officer · Kyle Palmer, Treasurer/CFO — sole signature authority over disbursements",
+    fundedBy:[
+      {name:"EnergySolutions", amount:52500, id:"Company — includes a single $50,000 check, 9/6/2024"},
+      {name:"Utah Bankers Association", amount:16000, id:"Trade association — already on this page as a company donor"},
+      {name:"HOALiving Holdings LLC", amount:15000, id:"Draper LLC, run by Michael Johnson — likely HOA management/services"},
+      {name:"Big West Oil", amount:14000, id:"Company — approx., multi-year"},
+      {name:"Gershon Barnett", amount:8000, id:"Individual, Monsey NY"},
+      {name:"Utah Metal Works", amount:7500, id:"Company"},
+      {name:"PMI US Corporate Services", amount:7500, id:"Philip Morris International's US lobbying arm"},
+      {name:"Dominion Energy PAC", amount:6000, id:"Disputed 2026 entry — see that PAC's own card"},
+      {name:"Larry H. Miller Company", amount:6000, id:"Company — a disputed $15,000 2026 entry also exists, unresolved"},
+      {name:"Utah Petroleum Association PAC", amount:4500, id:"PAC — approx., multi-year"}
+    ],
+    recipients:[
+      {name:"Chris Coombs", amount:128838, id:"Director, Friends of Spencer Cox — same 136 S Main St Ste A200 address as Election Hive LLC"},
+      {name:"Right Insight", amount:125727, id:"Vendor — the consulting firm UHREC used before Irish Elk took over"},
+      {name:"Utahns for Balanced Government", amount:100000, id:"Political issues committee — already on this page's cross-references"},
+      {name:"Election Hive", amount:84304, id:"Political consulting firm (Matthew Lusty) — over 3x the previously-known figure"},
+      {name:"Irish Elk LLC", amount:74450, id:"Kyle Palmer's own consulting vehicle — UHREC's Treasurer paying himself"},
+      {name:"Committee to Elect Anthony Loubet", amount:66000, id:"State legislative candidate"},
+      {name:"Jill Koford", amount:60000, id:"State Senate candidate"},
+      {name:"Matt MacPherson", amount:70000, id:"State Representative, HB 82 sponsor"},
+      {name:"GH4 Consulting", amount:45391, id:"Vendor"},
+      {name:"Little America Hotel", amount:43475, id:"Fundraiser venue & catering — vendor, not a candidate"}
+    ],
+    note:"$2,265,887 in / $2,030,243 out, 2018-2026, all years complete — supersedes the earlier $1,075,290.64 (2023-2026 only) figure, nearly doubling the known total. Top recipient Chris Coombs is a Director of Friends of Spencer Cox, sharing Election Hive LLC's exact office address — a direct link between a UHREC vendor payment and Cox's own campaign committee. Election Hive's real total ($84,304) is over 3x what was previously documented from a partial pull."},
+{name:"Salt Lake Board of Realtors", total:1614591, has2026:true,
+    stillNeed:"identify Kelley Wright; research Majority 51 as its own PAC; pull the PAC's own registered officer names",
+    runBy:"CEO Curtis Bullock · President Dawn Stevens (2024) · Rob Ockey, Past President (2024) — also UAR's current Vice President",
+    fundedBy:[
+      {name:"Utah Association of REALTORS", amount:1130456, id:"State parent org — already on this page as its own PAC (RPAC)"},
+      {name:"National Association of Realtors", amount:481850, id:"National parent org — already on this page as its own PAC (NAR Fund)"}
+    ],
+    recipients:[
+      {name:"Deseret News Publishing", amount:119965, id:"Advertising vendor, largest recipient overall"},
+      {name:"Roost Company", amount:104295, id:"Vendor"},
+      {name:"Kelley Wright", amount:83700, id:"Recurring 2021-2026, purposes 'Campaign Expense'/'Advertising'/'Political Support' — reads as a consultant, not confirmed"},
+      {name:"Real Strategies", amount:81065, id:"Vendor"},
+      {name:"Access Marketing Services", amount:54500, id:"Vendor"},
+      {name:"Majority 51", amount:48793, id:"PAC-to-PAC transfer — appears Salt Lake City-focused (Erin Mendenhall's name shows up in its own spending), not independently researched"},
+      {name:"Consolidated Direct Mail", amount:23000, id:"Vendor — same one NWAOR also used"},
+      {name:"Wilson For Mayor", amount:6000, id:"2022-2024, purpose 'Political Support'/'Donations' — not yet identified"}
+    ],
+    note:"$1,620,964 in / $1,614,591 out, 2018-2026 — the second-largest PAC donor documented in this investigation, behind only UHREC. 98 [DELETED] entries found, the same mass-deletion pattern already documented at UAR PAC and NWAOR — a third Realtor-affiliated PAC showing it."},
+{name:"Lincoln Hill Partners PAC", total:778500, flag:"DISSOLVED 7/2023 — STILL FILING", has2026:true,
+    stillNeed:"inbound donor-side entirely missing",
+    runBy:"Lincoln Shurtz and Casey Hill — network also includes a separate 'Lincoln Shurtz' individual PAC operating in parallel with overlapping recipients",
+    recipients:[
+      {name:"House Speaker Leadership PAC", amount:52000, id:"Speaker Mike Schultz's PAC — 2023-2025 cumulative, escalating every year"},
+      {name:"Spencer Cox", amount:82500, id:"Governor, 2022-2025 cumulative — includes a single $50,000 check (9/24/2024) made over a year after the PAC's own dissolution"},
+      {name:"Derek Brown", amount:30000, id:"Attorney General — also a Lincoln Hill PAC officer, 2024-2025 cumulative"},
+      {name:"Northern Utah Legislative PAC", amount:25000, id:"PAC — already on this page as its own donor; 2021 check ($5,000) is three years earlier than previously known"},
+      {name:"J. Stuart Adams", amount:9000, id:"Senate President, 2025"},
+      {name:"UHREC", amount:5000, id:"House GOP leadership PAC — 2021, first confirmed check, earlier than any other year on file"},
+      {name:"Jim Dunnigan", amount:7500, id:"State Representative, 2025"},
+      {name:"Scott Sandall", amount:7500, id:"State Senator, UFAIR board chair, 2025"},
+      {name:"Kirk Cullimore", amount:6500, id:"State Senator, 2025"},
+      {name:"Keven Stratton", amount:5000, id:"State Senator, 2025"}
+    ],
+    note:"2021 confirmed as the PAC's actual first year of activity ($23,500), extending the total from $36,250 (2022) to $347,200 (2024) to $200,000+ (2025), despite the PAC's own July 2023 dissolution filing — a standing, unresolved compliance question. Both NUPAC and UHREC got their earliest checks in 2021, three years earlier than previously documented. A related but separate 'Lincoln Shurtz' individual PAC (~$14,000-32,000/year) and 'Lincoln Fillmore' committee pass-through activity exist alongside this and are not included in the total above."},
+{name:"NUPAC", total:580284, has2026:true,
+    stillNeed:"pre-2022 not checked; 2026 is partial-year only",
+    runBy:"Sen. Ann Millner and Rep. Casey Snider, Primary Officers · Kyle Palmer, Treasurer — sole signature authority, paid via his own Irish Elk LLC",
+    fundedBy:[
+      {name:"Lincoln Hill Partners PAC", amount:20000, id:"PAC — cumulative 2024-2026, already on this page as its own donor"},
+      {name:"Larry H. Miller Company", amount:50000, id:"Company — five straight years, $10,000 each, already on this page as a company donor"},
+      {name:"National Shooting Sports Foundation", amount:10000, id:"National firearms-industry trade association, Newtown CT"},
+      {name:"J. Steven Price", amount:10000, id:"Individual, Salt Lake City"},
+      {name:"Gold Cross Services", amount:10000, id:"Private ambulance/EMS provider"},
+      {name:"Adams Leadership PAC", amount:5000, id:"Senate President's leadership PAC — same-day round-trip back to Adams's own campaign"},
+      {name:"AFCU Development Fund", amount:5000, id:"America First Credit Union's development-fund entity"},
+      {name:"SelectHealth", amount:5000, id:"Intermountain-affiliated health insurer"},
+      {name:"EnergySolutions", amount:5000, id:"Company — already on this page as a company donor"},
+      {name:"Durbano Metals", amount:5000, id:"Company — $12,500 total giving documented, not one of the top-10 companies tracked as its own entry"}
+    ],
+    recipients:[
+      {name:"Irish Elk LLC", amount:88525, id:"Kyle Palmer's own consulting vehicle — NUPAC's Treasurer paying himself"},
+      {name:"Todd Weiler", amount:30000, id:"State Senator, single 2024 total"},
+      {name:"Jake Sawyer", amount:21000, id:"State House candidate/legislator, 2024-2026"},
+      {name:"Ann Millner", amount:12500, id:"State Senator — NUPAC's own Primary Officer, self-funded 2022"},
+      {name:"Jill Koford", amount:5000, id:"State Senate candidate — succeeded Millner's own seat"},
+      {name:"Committee to Elect Stuart Adams", amount:1000, id:"Senate President — same-day round-trip with Adams Leadership PAC"}
+    ],
+    note:"Total reflects $580,284 in confirmed expenditures, 2022-2026 (2026 partial). Deletion pattern: 27 of 29 deleted entries across five years fall in the same 'September 30th' report, every year 2022-2025."},
+{name:"Northern Wasatch Association of Realtors", total:562278, has2026:true,
+    stillNeed:"confirm whether 'UARPAC' = RPAC (see notes)",
+    runBy:"Rick Southwick and Bob Hill, Realtors, Primary Officers · Kristi Jeppesen, Accountant/CFO · CEO Mike Ostermiller — also a sitting MIDA board member since 2008, and paid $5,000 directly by this PAC in 2023",
+    fundedBy:[
+      {name:"Utah Association of REALTORS", amount:360603, id:"State parent org — already on this page as its own PAC (RPAC)"},
+      {name:"National Association of REALTORS", amount:151807, id:"National parent org — funds this PAC exclusively alongside the state association; no individual or corporate donors found"}
+    ],
+    recipients:[
+      {name:"Consolidated Direct Mail Inc.", amount:82758, id:"Direct-mail vendor, 2022-2025 — not a candidate"},
+      {name:"Access LLC / Access Media", amount:26500, id:"Vendor — $7,500 explicitly tagged 'Gage Froerer Campaign Digital Ads,' 2018"},
+      {name:"Mark Shepherd", amount:23500, id:"NWAOR's OWN PRESIDENT — real estate broker, MIDA board member, sitting Mayor of Clearfield since 2025"},
+      {name:"Gage Froerer", amount:20000, id:"State Representative — four direct checks; true total incl. digital-ad spending on his behalf runs at least $28,793"},
+      {name:"Steve Hiatt", amount:15000, id:"Paid every year since 2020 — reads as NWAOR's own government-affairs consultant/lobbyist"},
+      {name:"Jim Harvey", amount:13500, id:"Weber County Commissioner"},
+      {name:"NUPAC", amount:12500, id:"PAC-to-PAC transfer — confirmed same entity as Northern Utah Legislative PAC below (no other PAC by that name exists)"},
+      {name:"Lacy Richards", amount:11500, id:"Former West Haven City Council — later hired by Nilson Homes as Director of Land Entitlement & Government Relations"},
+      {name:"Scott Freitag", amount:11152, id:"2019, including a $3,690 mailer-reimbursement line"},
+      {name:"Sharon Bolos", amount:10510, id:"Recurring recipient, 2021-2026"}
+    ],
+    note:"$512,410 in / $562,278 out, 2018-2026. NWAOR paid its own President Mark Shepherd $23,500 and its own CEO Mike Ostermiller $5,000 directly — $28,500 total to its own leadership, the same self-dealing structure as Irish Elk LLC at NUPAC/UHREC. 38 [DELETED] entries found across these filings, the same mass-deletion pattern already documented at UAR PAC and Salt Lake Board of Realtors."},
+{name:"Lincoln Hill PAC", total:495965, plus:true, flag:"DISTINCT FROM LINCOLN HILL PARTNERS PAC", has2026:true,
+    stillNeed:"identify the source report for a separate $8,000 Diamante Vista/Fides LLC subtotal that doesn't match any entry in this pull",
+    runBy:"Network coordination with Lincoln Hill Partners PAC and Lincoln Shurtz — see that PAC's own card for the broader 'Lincoln' network pattern",
+    fundedBy:[
+      {name:"Fides LLC", amount:332500, id:"5150 S Alvera Dr, Holladay — seven checks, 2023-2026, matches a figure already on file from separate research"},
+      {name:"Scott Ryan Smith", amount:80000, id:"S. Ryan Smith — Qualtrics co-founder, Utah Jazz/Utah Mammoth owner, a billionaire. Donated 12 days after an identical $80,000 from Fides LLC (Lincoln Shurtz) — a matching-contribution pattern"},
+      {name:"EnergySolutions", amount:45000, id:"already on this page as a company donor"},
+      {name:"Legislative Insight Consulting", amount:42500, id:"vendor/consulting firm"},
+      {name:"Red Hill Public Strategies LLC", amount:20000, id:"out-of-state consulting firm, Scarborough ME"},
+      {name:"Koda Resources", amount:19500, id:"Denver CO"}
+    ],
+    recipients:[
+      {name:"Friends of Spencer Cox", amount:80000, id:"Governor — separate direct channel from Lincoln Hill Partners PAC's own $82,500 to Cox"},
+      {name:"House Speaker Leadership PAC", amount:50000, id:"Speaker Mike Schultz's PAC"},
+      {name:"Lux Events Inc", amount:18008, id:"vendor"},
+      {name:"Legislative Insight Consulting", amount:16000, id:"vendor — also a funder, see above"},
+      {name:"Committee to Elect Stuart Adams", amount:16000, id:"Senate President"},
+      {name:"Derek Brown for Attorney General", amount:15100, id:""},
+      {name:"NCSL - Leadership Fund Harper", amount:15000, id:"Sen. Wayne Harper"},
+      {name:"Utah Republican Senate Campaign Cmte.", amount:13250, id:""},
+      {name:"Committee to Elect Jon Hawkins", amount:11000, id:""},
+      {name:"NUPAC", amount:10000, id:"already on this page as its own PAC"}
+    ],
+    note:"$627,000 in / $495,965.46 out, 2022-2026 — a distinct entity from Lincoln Hill Partners PAC, previously only fragmentarily tracked at $13,500 (2026 only). 16 [DELETED] entries found. Fides LLC's $332,500 total here matches a figure already independently on file from separate research — a strong cross-session consistency check."},
+{name:"Forge the Future Project (Meta)", total:270000, flag:"INDEPENDENT EXPENDITURE, NOT A CONTRIBUTION", has2026:true,
+    stillNeed:"confirm any other spending by this PAC beyond 6/11/2026; identify its officers; pull Tami Tran's itemized vendor breakdown",
+    runBy:"Not yet identified — this is Meta's own corporate PAC, but its Utah-filing officers haven't been pulled",
+    fundedBy:[
+      {name:"Forge the Future Project (national parent)", amount:270000, id:"Fremont, CA — a single contribution, same day as every dollar went back out"}
+    ],
+    recipients:[
+      {name:"Tami Tran", amount:152503, id:"State Senate candidate, SD-06"},
+      {name:"Logan Monson", amount:98943, id:"State Representative, HD-69 — itemized: FP1 Strategies $69,942 digital ads/texting + $4,780.50 phone calls, two $3,360.20 mailers, Tunnl LLC $17,500 data"}
+    ],
+    note:"$270,000 deployed in a single day (6/11/2026, received and spent same-day) — six weeks before both candidates' 6/23/2026 primaries. Confirmed pure pass-through: the entire $270,000 came in from the national parent entity that exact same day, then went straight back out. Coded entirely as independent expenditures by the PAC's own vendors, so NONE of this appears in either candidate's own campaign filings. Both won their primaries."},
+{name:"Dominion Energy PAC", total:197500, flag:"COX TOTAL NEARLY 2.5X PREVIOUS FIGURE", has2026:true, runBy:"Corynne Arnett, Primary Officer — the only name on record; this is from the dissolution filing signature, not a full Statement of Organization, so other officers (if any) are not yet confirmed",
+    stillNeed:"hundreds of $200-800 individual legislator checks across 2018-2026 remain untotaled — no CSV export available for this search, would need manual page-by-page tallying; resolve the 2026 UHREC entry mystery",
+    fundedBy:[
+      {name:"Dominion Energy Inc.", amount:316850, id:"Parent company — confirmed inbound 2018-2022 alone; 2023-2026 not yet totaled from this pull"}
+    ], recipients:[
+    {name:"Spencer Cox", amount:147500, id:"Governor — six checks, 2020-2025, not three"},
+    {name:"Governors Leadership PAC", amount:50000, id:"Newly found — two $25,000 checks, 2018 and 2019, never previously tracked"},
+    {name:"Utah Republican Senate Campaign Cmte.", amount:7000, id:"Senate GOP leadership PAC — recurring most years 2019-2024"},
+    {name:"UHREC", amount:8500, id:"House GOP leadership PAC (Mike Schultz) — incl. disputed 2026 entry"},
+    {name:"J. Stuart Adams", amount:1750, id:"Senate President"},
+    {name:"Mike Schultz", amount:750, id:"Speaker of the House"},
+    {name:"Brad Wilson", amount:750, id:"then-Speaker of the House"},
+    {name:"Carl Albrecht", amount:750, id:"State Representative"},
+    {name:"Evan Vickers", amount:750, id:"State Senator, Majority Leader"},
+    {name:"Ann Millner", amount:750, id:"State Senator"}
+  ], note:"$197,500 shown here covers only Cox and Governors Leadership PAC — the two big-ticket items reliably countable from a text-pasted search. Hundreds of smaller individual-legislator checks across 2018-2026 remain untotaled — no CSV export available for this search, only manual page-by-page tallying; the true full outbound figure is certainly larger. PAC's status page shows Closed since 2024 — the 2026 UHREC entry is still unresolved."},
+{name:"H3 PAC", total:122165, flag:"DISSOLVED 7/10/2026", has2026:true,
+    stillNeed:"trace Sage Government Solutions' own funding origin beyond client revenue; confirm whether the compliance inquiry re: zero-reported attack ads was ever answered",
+    runBy:"Founded by brothers Greg and Jeff Hartley — Jeff also owns Sage Government Solutions LLC, the PAC's largest single funder",
+    fundedBy:[
+      {name:"Sage Government Solutions", amount:80700, id:"Lobbying firm owned by H3 PAC co-founder Jeff Hartley — funding his own PAC"},
+      {name:"TSC LLC", amount:32900, id:"Not independently identified"},
+      {name:"Hartley Consulting", amount:20000, id:"Administratively dissolved 4 days after its final contribution"},
+      {name:"Leslie Carpenter", amount:800, id:"Individual"}
+    ],
+    recipients:[
+      {name:"House Speaker Leadership PAC", amount:20000, id:"Speaker Mike Schultz's PAC"},
+      {name:"Cullimore for Senate", amount:15000, id:"State Senator"},
+      {name:"Adams Leadership PAC", amount:15000, id:"Senate President's PAC"},
+      {name:"Utah Republican Senate Committee", amount:7500, id:"Senate GOP committee"},
+      {name:"Utah State Republican Party", amount:6100, id:"State party"},
+      {name:"Utah House Republican Election Committee", amount:6000, id:"House GOP leadership PAC (Mike Schultz)"},
+      {name:"Committee to Elect Karianne (Lisonbee)", amount:3000, id:"State Representative"},
+      {name:"Elect Bridger Bolinder", amount:2000, id:"Former State Rep., HD-29"},
+      {name:"Committee to Elect Casey Snider", amount:2000, id:"House Majority Leader — also a named NUPAC officer"},
+      {name:"Committee to Elect Jefferson Moss", amount:2000, id:"State Representative"}
+    ],
+    note:"$134,400 in / $122,165 out, 2023-2025. Successor to 'Utahns for Safer Communities,' seeded by $125,000+ from Speaker Mike Schultz in 2022, which ran 2026 attack ads in the HD-44 and HD-9 races while reporting $0 in both contributions and expenditures that cycle — an unresolved compliance discrepancy. H3 PAC itself dissolved 7/10/2026, moving its remaining balance out (including $5,000 to Adams Leadership PAC and $2,235 back to Utahns for Safer Communities) before filing. Funded almost entirely by its own co-founder's lobbying firm."},
+{name:"National Association of REALTORS Fund", total:15000, has2026:true,
+    stillNeed:"outbound giving once the current quarter closes; prior years",
+    runBy:"Treasurer Matt Cenedella and VP Helen Devlin — both national NAR staff, Chicago/DC addresses. A separate entity from the Utah RPAC above.",
+    fundedBy:[
+      {name:"National Association of Realtors", amount:15000, id:"Parent organization — single check, 8/7/2026"}
+    ],
+    note:"Only one contribution on record so far ($15,000 from its own parent org). Outbound giving isn't available yet because the current reporting quarter hasn't closed — not a research gap, just a timing one."},
+{name:"Utah Petroleum Association PAC", total:13125, has2026:true, runBy:"Chairman Brad Shafer (Marathon Petroleum) · Vice Chairman Chad Calvert (Chevron) · Secretary/Treasurer Rikki Hrenko-Browning (President, Utah Petroleum Association) · Trustees Cameron Cuch and Spencer Kimball",
+    stillNeed:"full multi-year non-Cox total; page 2 of the 2026 contributor search",
+    fundedBy:[
+      {name:"Utah Petroleum Association", amount:71850, id:"Parent trade association — internal transfers, 2023-2025"},
+      {name:"Chevron", amount:10000, id:"Direct check, 1/8/2026 — already on this page as a company donor"},
+      {name:"Utah Petroleum Marketers & Retailers", amount:100, id:"Cross-entity gift, 2025"}
+    ], recipients:[
+    {name:"Spencer Cox", amount:13125, id:"Governor (2024-2025)"},
+    {name:"JR Bird", amount:5000, id:"State legislative candidate — farmer, former mayor, rural Utah"},
+    {name:"UHREC", amount:4500, id:"House GOP leadership PAC (Mike Schultz)"},
+    {name:"Utah Republican Senate Campaign Cmte.", amount:4000, id:"Senate GOP leadership PAC"},
+    {name:"J. Stuart Adams", amount:1500, id:"Senate President"},
+    {name:"Luz Escamilla", amount:900, id:"State Senator, Senate Minority Leader"},
+    {name:"Carl Albrecht", amount:900, id:"State Representative"},
+    {name:"Walter Brooks", amount:800, id:"State Representative"},
+    {name:"Val Peterson", amount:700, id:"State Representative"},
+    {name:"Colin Jack", amount:700, id:"State Representative"}
+  ]},
+];
+
+const individualFlows = [
+  {name:"Gershon Barnett (individual)", total:429500, has2026:true,
+    stillNeed:"pre-2022 not checked",
+    recipients:[
+    {name:"Spencer Cox", amount:100000, id:"Governor — four checks, 2024-2025"},
+    {name:"Utahns for Balanced Government", amount:100000, id:"Political issues committee, 2025 — a separate gift, still standing"},
+    {name:"Utah Republican Senate Campaign Cmte.", amount:41000, id:"all years combined"},
+    {name:"Adams Leadership PAC", amount:39000, id:"all years combined"},
+    {name:"House Speaker Leadership PAC", amount:31000, id:"all years combined"},
+    {name:"Kirk Cullimore", amount:26500, id:"State Senator — 2022, 2024, 2025"},
+    {name:"J. Stuart Adams", amount:25000, id:"personal check, 2026, separate from his PAC"},
+    {name:"Derek Brown", amount:20000, id:"Attorney General"},
+    {name:"UHREC", amount:16000, id:"House GOP leadership PAC (Mike Schultz)"},
+    {name:"Deidre Henderson", amount:10000, id:"Lt. Governor, 2025"}
+  ], note:"$429,500 total, 2022-2026, all years now confirmed — supersedes the earlier $128,000 (2025-2026 only) figure. Filed under many name variants (Gershon Barnett, Gershon & Ayala Barnett, Gershon Gary Barnett), all same Monsey, NY address."}
+];
+
+function buildFlowRow(sourceName, rows, reverse) {
+  const maxR = Math.max(...rows.map(r => r.amount));
+  const rowH = 44;
+  const H = rows.length * rowH;
+  let curves = '';
+  rows.forEach((r, i) => {
+    const y1 = H / 2, y2 = i * rowH + rowH / 2;
+    const w = 0.75 + 3.5 * (r.amount / maxR);
+    const d = reverse
+      ? `M 100,${y1} C 60,${y1} 40,${y2} 0,${y2}`
+      : `M 0,${y1} C 40,${y1} 60,${y2} 100,${y2}`;
+    curves += `<path d="${d}" stroke="#c79a4b" stroke-width="${w}" fill="none" opacity="0.55"/>`;
+  });
+  const sourceBox = `<div class="flow-source" style="height:${H}px;display:flex;align-items:center;justify-content:${reverse ? 'flex-start' : 'flex-end'};">${sourceName}</div>`;
+  const svgBox = `<div class="flow-svg-col"><svg viewBox="0 0 100 ${H}" preserveAspectRatio="none" height="${H}">${curves}</svg></div>`;
+  const listBox = `
+    <div class="flow-recipients" style="${reverse ? 'padding-left:10px;' : ''}">
+      ${rows.map((r, i) => `
+        <div class="flow-recipient">
+          <span class="rname">${i + 1}. ${r.name}</span>
+          <span class="rmeta">${r.id}</span>
+          <span class="ramount">$${r.amount.toLocaleString()}</span>
+        </div>
+      `).join('')}
+    </div>`;
+  return reverse
+    ? `<div class="flow-row">${listBox}${svgBox}${sourceBox}</div>`
+    : `<div class="flow-row">${sourceBox}${svgBox}${listBox}</div>`;
+}
+
+function renderFlows(containerId, dataset) {
+  const flowsEl = document.getElementById(containerId);
+  dataset.forEach(f => {
+  const rows = (f.recipients || []).slice(0, 10);
+  const hasRecipients = rows.length > 0;
+
+  const card = document.createElement('div');
+  card.className = 'flow-card';
+  card.innerHTML = `
+    <div class="flow-head">
+      <h3>${f.name}</h3>
+      <span class="flow-total">$${f.total.toLocaleString()} documented</span>
+    </div>
+    ${f.complete ? `<span class="flag-complete" style="margin-bottom:10px;">✓ RESEARCH COMPLETE</span>` : ''}
+    ${f.has2026 ? `<span class="flag-2026" style="margin-bottom:10px;">2026 DATA — SUBJECT TO CHANGE</span>` : ''}
+    ${f.runBy ? `<p class="flow-note" style="margin-top:-8px;margin-bottom:14px;"><strong style="color:var(--gold);">Run by:</strong> ${f.runBy}</p>` : ''}
+    ${f.fundedBy ? `
+      <p class="flow-note" style="margin:0 0 6px;font-weight:600;color:var(--ink);">Funded by</p>
+      ${buildFlowRow(f.name, f.fundedBy.slice(0, 10), true)}
+    ` : ''}
+    ${hasRecipients ? `
+      <p class="flow-note" style="margin:20px 0 6px;font-weight:600;color:var(--ink);">Gave to</p>
+      ${buildFlowRow(f.name, rows, false)}
+    ` : `<p class="flow-note" style="margin-top:16px;font-style:italic;">Outbound giving not yet pulled from disclosures.utah.gov — this entry currently shows inbound money only.</p>`}
+    ${f.note ? `<p class="flow-note">${f.note}</p>` : ''}
+    ${f.stillNeed ? `<p class="flow-note" style="color:#a8792f;font-weight:600;">Still need: <span style="font-weight:400;color:var(--ink-soft);">${f.stillNeed}</span></p>` : ''}
+    `;
+    flowsEl.appendChild(card);
+  });
+}
+
+renderFlows('flows-companies', companyFlows);
+renderFlows('flows-pacs', pacFlows);
+renderFlows('flows-individuals', individualFlows);
+</script>
+</body>
+</html>
