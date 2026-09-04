@@ -50,6 +50,64 @@
 
   .wrap{max-width:900px;margin:0 auto;padding:52px 24px 100px;}
 
+  /* ---- Search + filter controls ---- */
+  .controls{margin-bottom:32px;}
+  .search-row{
+    display:flex;
+    gap:10px;
+    margin-bottom:14px;
+  }
+  #search-input{
+    flex:1;
+    font-family:'Inter', sans-serif;
+    font-size:0.95rem;
+    padding:11px 14px;
+    border:1px solid var(--border);
+    border-radius:4px;
+    background:var(--paper-card);
+    color:var(--ink);
+  }
+  #search-input:focus{outline:2px solid var(--amber); outline-offset:-1px;}
+  #sort-select{
+    font-family:'Inter', sans-serif;
+    font-size:0.85rem;
+    padding:11px 12px;
+    border:1px solid var(--border);
+    border-radius:4px;
+    background:var(--paper-card);
+    color:var(--ink-dim);
+  }
+  .tag-cloud{
+    display:flex;
+    flex-wrap:wrap;
+    gap:7px;
+  }
+  .tag-chip{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10.5px;
+    letter-spacing:0.5px;
+    color:var(--ink-dim);
+    background:var(--paper-card-2);
+    border:1px solid var(--border);
+    padding:4px 10px;
+    border-radius:12px;
+    cursor:pointer;
+    user-select:none;
+    transition:background .12s,color .12s,border-color .12s;
+  }
+  .tag-chip:hover{border-color:var(--amber);}
+  .tag-chip.active{
+    background:var(--rust);
+    border-color:var(--rust);
+    color:#fdf3ea;
+  }
+  .results-count{
+    font-family:'Inter', sans-serif;
+    font-size:0.8rem;
+    color:var(--ink-dimmer);
+    margin-top:12px;
+  }
+
   .docket-grid{display:grid; gap:20px;}
 
   .card{
@@ -60,6 +118,14 @@
     transition:transform 0.15s ease, box-shadow 0.15s ease;
   }
   .card:hover{transform:translateY(-2px); box-shadow:0 8px 22px rgba(28,24,20,0.1);}
+  .card-top-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:12px;
+  }
   .case-tag{
     display:inline-block;
     font-family:'IBM Plex Mono', monospace;
@@ -70,7 +136,11 @@
     border:1px solid var(--border);
     padding:3px 10px;
     border-radius:3px;
-    margin-bottom:12px;
+  }
+  .card-date{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    color:var(--ink-dimmer);
   }
   .card h2{
     font-family:'Playfair Display', serif;
@@ -85,7 +155,22 @@
     font-size:0.98rem;
     margin-bottom:14px;
   }
-  .card p.summary{color:var(--ink-dim); font-size:0.95rem; margin-bottom:18px;}
+  .card p.summary{color:var(--ink-dim); font-size:0.95rem; margin-bottom:16px;}
+  .card-tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+    margin-bottom:16px;
+  }
+  .card-tags span{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10px;
+    color:var(--ink-dimmer);
+    background:var(--paper-card-2);
+    border:1px solid var(--border);
+    padding:2px 8px;
+    border-radius:10px;
+  }
   .card a.open-link{
     font-family:'Inter', sans-serif;
     font-size:0.86rem; font-weight:600;
@@ -124,6 +209,19 @@
   </header>
 
   <div class="wrap">
+    <div class="controls">
+      <div class="search-row">
+        <input id="search-input" type="text" placeholder="Search by title, summary, or tag…" autocomplete="off">
+        <select id="sort-select">
+          <option value="newest">Newest first</option>
+          <option value="oldest">Oldest first</option>
+          <option value="title">Title (A–Z)</option>
+        </select>
+      </div>
+      <div class="tag-cloud" id="tag-cloud"></div>
+      <div class="results-count" id="results-count"></div>
+    </div>
+
     <div class="docket-grid" id="ledger-grid"></div>
   </div>
 
@@ -134,24 +232,109 @@
 <script src="ledger-data.js"></script>
 <script>
 const grid = document.getElementById('ledger-grid');
-LEDGER_ENTRIES.forEach(e => {
-  const card = document.createElement('div');
-  card.className = 'card';
-  card.innerHTML = `
-    <span class="case-tag">${e.tag}</span>
-    <h2>${e.title}</h2>
-    <div class="dek">${e.dek}</div>
-    <p class="summary">${e.summary}</p>
-    <a class="open-link" href="${e.url}">Open the visualization →</a>
-  `;
-  grid.appendChild(card);
-});
-if (LEDGER_ENTRIES.length < 3) {
-  const ph = document.createElement('div');
-  ph.className = 'placeholder';
-  ph.textContent = 'More money-flow pieces will be added here as they\'re published.';
-  grid.appendChild(ph);
+const tagCloud = document.getElementById('tag-cloud');
+const searchInput = document.getElementById('search-input');
+const sortSelect = document.getElementById('sort-select');
+const resultsCount = document.getElementById('results-count');
+
+let activeTag = null;
+
+// Build the full tag set across all entries (entries without tags simply contribute none)
+const allTags = Array.from(new Set(
+  LEDGER_ENTRIES.flatMap(e => e.tags || [])
+)).sort();
+
+function renderTagCloud() {
+  tagCloud.innerHTML = '';
+  allTags.forEach(tag => {
+    const chip = document.createElement('span');
+    chip.className = 'tag-chip' + (activeTag === tag ? ' active' : '');
+    chip.textContent = tag;
+    chip.addEventListener('click', () => {
+      activeTag = activeTag === tag ? null : tag;
+      renderTagCloud();
+      renderGrid();
+    });
+    tagCloud.appendChild(chip);
+  });
 }
+
+function formatDate(d) {
+  if (!d) return '';
+  const dt = new Date(d + 'T00:00:00');
+  if (isNaN(dt)) return d;
+  return dt.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+}
+
+function matchesSearch(entry, q) {
+  if (!q) return true;
+  const hay = [entry.title, entry.dek, entry.summary, ...(entry.tags || [])]
+    .join(' ')
+    .toLowerCase();
+  return hay.includes(q);
+}
+
+function sortEntries(list) {
+  const mode = sortSelect.value;
+  const withDate = list.filter(e => e.date);
+  const withoutDate = list.filter(e => !e.date);
+  if (mode === 'title') {
+    return [...list].sort((a, b) => a.title.localeCompare(b.title));
+  }
+  withDate.sort((a, b) => mode === 'oldest'
+    ? new Date(a.date) - new Date(b.date)
+    : new Date(b.date) - new Date(a.date));
+  // Undated entries (older pieces published before dates were tracked) sort to the end
+  return [...withDate, ...withoutDate];
+}
+
+function renderGrid() {
+  const q = searchInput.value.trim().toLowerCase();
+  let filtered = LEDGER_ENTRIES.filter(e => matchesSearch(e, q));
+  if (activeTag) {
+    filtered = filtered.filter(e => (e.tags || []).includes(activeTag));
+  }
+  filtered = sortEntries(filtered);
+
+  grid.innerHTML = '';
+  filtered.forEach(e => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    const tagsHtml = (e.tags || []).slice(0, 8).map(t => `<span>${t}</span>`).join('');
+    card.innerHTML = `
+      <div class="card-top-row">
+        <span class="case-tag">${e.tag}</span>
+        ${e.date ? `<span class="card-date">${formatDate(e.date)}</span>` : ''}
+      </div>
+      <h2>${e.title}</h2>
+      <div class="dek">${e.dek}</div>
+      <p class="summary">${e.summary}</p>
+      ${tagsHtml ? `<div class="card-tags">${tagsHtml}</div>` : ''}
+      <a class="open-link" href="${e.url}">Open the visualization →</a>
+    `;
+    grid.appendChild(card);
+  });
+
+  resultsCount.textContent = `${filtered.length} of ${LEDGER_ENTRIES.length} piece${LEDGER_ENTRIES.length === 1 ? '' : 's'} shown`;
+
+  if (LEDGER_ENTRIES.length < 3 && filtered.length === LEDGER_ENTRIES.length) {
+    const ph = document.createElement('div');
+    ph.className = 'placeholder';
+    ph.textContent = 'More money-flow pieces will be added here as they\'re published.';
+    grid.appendChild(ph);
+  } else if (filtered.length === 0) {
+    const ph = document.createElement('div');
+    ph.className = 'placeholder';
+    ph.textContent = 'No pieces match that search or tag. Try clearing the filter.';
+    grid.appendChild(ph);
+  }
+}
+
+searchInput.addEventListener('input', renderGrid);
+sortSelect.addEventListener('change', renderGrid);
+
+renderTagCloud();
+renderGrid();
 </script>
 </body>
 </html>
