@@ -104,7 +104,7 @@
 
   .tile{
     perspective:1400px;
-    height:234px;
+    height:440px;
   }
   .years{
     font-family:'Roboto Mono',monospace;
@@ -254,7 +254,7 @@
 
   @media(max-width:480px){
     .grid{grid-template-columns:1fr 1fr;}
-    .tile{height:214px;}
+    .tile{height:420px;}
   }
 
   /* ---- Flow charts ---- */
@@ -290,28 +290,27 @@
     gap:0;
   }
   .flow-source{
-    width:110px;
+    width:150px;
     flex-shrink:0;
     background:var(--card-back);
     color:var(--card-back-text);
-    padding:10px 10px;
+    padding:14px 12px;
     font-family:'Source Serif 4',Georgia,serif;
-    font-size:13px;
+    font-size:14.5px;
     font-weight:600;
-    line-height:1.25;
+    line-height:1.3;
     text-align:right;
   }
   .flow-svg-col{flex:1 1 auto;min-width:40px;}
   .flow-svg-col svg{display:block;width:100%;}
   .flow-recipients{width:340px;flex-shrink:0;}
   .flow-recipient{
-    height:44px;
+    height:auto;
     display:flex;
     flex-direction:column;
     justify-content:center;
     border-bottom:1px solid var(--rule);
-    padding-left:14px;
-    padding-right:78px;
+    padding:8px 14px;
     position:relative;
     min-width:0;
   }
@@ -321,23 +320,21 @@
     min-width:0;
     max-width:100%;
     font-size:13.5px;font-weight:600;color:var(--ink);
-    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+    white-space:normal;overflow-wrap:break-word;
   }
   .flow-recipient .rmeta{
     display:block;
     min-width:0;
     max-width:100%;
     font-size:11px;color:var(--ink-soft);
-    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+    white-space:normal;overflow-wrap:break-word;
   }
   .flow-recipient .ramount{
     font-family:'Roboto Mono',monospace;
     font-size:12.5px;
     color:var(--gold);
-    position:absolute;
-    right:14px;
-    top:50%;
-    transform:translateY(-50%);
+    display:block;
+    margin-top:2px;
     white-space:nowrap;
   }
   .flow-note{font-size:12px;color:#8b8c86;margin-top:12px;}
@@ -347,9 +344,6 @@
     .flow-source{width:auto;text-align:left;margin-bottom:8px;}
     .flow-svg-col{display:none;}
     .flow-recipients{width:auto;}
-    .flow-recipient .ramount{position:static;transform:none;margin-top:2px;}
-    .flow-recipient{padding-right:14px;height:auto;padding-top:8px;padding-bottom:8px;}
-    .flow-recipient .rname, .flow-recipient .rmeta{white-space:normal;}
   }
 
   /* ---- Glossary ---- */
@@ -520,12 +514,29 @@
 
   <div class="sources-block">
     <details class="person-details">
+      <summary><b>Conclusion &amp; questions readers should ask</b></summary>
+      <p class="person-note" style="font-style:normal;">This page documents the energy sector's giving separately — 8 companies and PACs (PacifiCorp, EnergySolutions, Torus, Big West Oil, Chevron, rPlus Energies, Dominion Energy PAC, Utah Petroleum Association PAC), heavily concentrated on Gov. Cox and Utah's legislative leadership committees. Cox is the top documented recipient across nearly every entity on this page. Several donors here (PacifiCorp, EnergySolutions, Big West Oil) show an escalating giving pattern in years leading up to and following Cox's "Operation Gigawatt" nuclear/energy initiative. Big West Oil's pattern is notably different from the others — heavy Cox/leadership giving with almost no individual-legislator checks, a real behavioral contrast worth noting on its own.</p>
+      <p class="person-note" style="font-style:normal;font-weight:600;color:var(--ink);margin-top:14px;margin-bottom:6px;">Questions worth asking, based on what's documented here:</p>
+      <ul class="person-connections">
+        <li>What is the relationship, if any, between the timing of these companies' larger checks and specific energy-policy legislation or state initiatives during the same period?</li>
+        <li>Why does giving from this sector concentrate so heavily on the Governor and legislative leadership PACs rather than spreading across individual legislators, compared to other industries?</li>
+        <li>What explains Big West Oil's shift away from individual-legislator giving in 2024-2026, when its 2018-2023 pattern looked more like its peers?</li>
+        <li>Multiple entities on this page (Dominion Energy PAC, in particular) show contributions attributed to them even in years after formal dissolution — what governs how a dissolved entity's name can still appear as a contributor?</li>
+      </ul>
+      <p class="person-note" style="font-style:normal;margin-top:10px;">These are open questions the public record raises, not conclusions this page draws. Readers should look at the primary sources linked throughout and decide for themselves what the documented facts mean.</p>
+    </details>
+  </div>
+
+  <div class="sources-block">
+    <details class="person-details">
       <summary><b>Sources &amp; methodology</b></summary>
       <ul class="person-connections">
         <li>Itemized Utah campaign-finance disclosures, disclosures.utah.gov — individual contribution/expenditure searches and full PAC DEX (CSV) exports</li>
         <li>Utah Division of Corporations business-entity records</li>
+        <li>Nonprofit Form 990 filings via ProPublica's Nonprofit Explorer</li>
+        <li>Utah's boards and commissions registry, boards.utah.gov</li>
       </ul>
-      <p class="person-note" style="font-style:normal;">Figures reflect research completed as of publication and will be updated as additional filing years are reviewed. This page shares its source data with the full donor ledger page — see that page's own Sources section for the complete list of source types used across this investigation.</p>
+      <p class="person-note" style="font-style:normal;">Figures reflect research completed as of publication and will be updated as additional filing years are reviewed. This page shares its source data with the full donor ledger page, which has a longer list of source types used across the whole investigation — sworn disclosure forms, statute text, meeting minutes, and more. This page describes what the record shows without asserting legal conclusions about intent or wrongdoing.</p>
     </details>
   </div>
 
@@ -542,19 +553,19 @@ const companyData = [
   {name:"PacifiCorp", amount:350850, plus:true,
     years:"2018-2026 (fully itemized for every recipient, not just Cox)",
     stillNeed:"Union Pacific Railroad is a SEPARATE company also giving significant money, not yet its own entry (pre-2018 out of scope by decision)",
-    top:{name:"Spencer Cox", amount:102500, note:"Nine checks, 2018-2026. But Cox is far from the whole picture: UHREC got $59,500, URSCC $54,500, Adams Leadership PAC $35,000, House Speaker Leadership PAC $18,500, and Governors Leadership PAC $11,000 — all now fully itemized, not running estimates."}},
+    top:{name:"Spencer Cox", amount:102500, note:"Nine checks, 2018-2026. But Cox is far from the whole picture: UHREC got $59,500, URSCC $54,500, Adams Leadership PAC $35,000, House Speaker Leadership PAC…"}},
   {name:"EnergySolutions", amount:270168, plus:true,
     years:"2018-2026 (institutional-level complete)",
     stillNeed:"individual $200-$2,000 legislator checks for 2018-2021 not fully tallied due to volume",
-    top:{name:"Utah House Republican Election Committee", amount:52500, note:"Includes a single $50,000 check (9/6/2024), six weeks before Cox's Operation Gigawatt launch. Also notable: then-AG Sean Reyes received $22,167.61 across 2018-2021, including one non-round $13,667.61 check (4/2/2021) — verified against his own filed report as a plain, ordinary contribution, not a reimbursement or anything irregular."}},
+    top:{name:"Utah House Republican Election Committee", amount:52500, note:"Includes a single $50,000 check (9/6/2024), six weeks before Cox's Operation Gigawatt launch."}},
   {name:"Torus", amount:151042, complete:true,
     years:"2022-2025 (complete; 2026 not yet pulled)",
     stillNeed:"2026 not yet pulled",
-    top:{name:"Spencer Cox", amount:151042, note:"The ONLY recipient this donor has ever given to. Four checks: $50,000 (2022), $1,041.98 (2023), $50,000 (2024), $50,000 (2025). Address changed between the 2024 and 2025 checks (Lehi → South Salt Lake) — worth checking whether that's a real move or a filing inconsistency."}},
+    top:{name:"Spencer Cox", amount:151042, note:"The ONLY recipient this donor has ever given to."}},
   {name:"Big West Oil", amount:87150, plus:true,
     years:"2018-2026 (2018-2023 complete; 2024-2026 Cox-only)",
     stillNeed:"2024-2026 non-Cox recipients not yet pulled — likely to push this higher",
-    top:{name:"Spencer Cox", amount:35000, note:"FIVE checks, 2021-2026, not four — an earlier 2021 check ($2,500) was missing from the prior count. 2018-2020 confirmed to have zero Cox giving, not just unpulled."}},
+    top:{name:"Spencer Cox", amount:35000, note:"FIVE checks, 2021-2026, not four — an earlier 2021 check ($2,500) was missing from the prior count."}},
   {name:"Chevron", amount:27500, plus:true,
     years:"2023-2026",
     stillNeed:"pre-2023 not pulled; non-Cox multi-year total not fully summed",
@@ -570,7 +581,7 @@ const pacData = [
     years:"2018-2026 (individual-legislator checks not yet fully tallied)",
     stillNeed:"hundreds of $200-800 individual legislator checks across 2018-2026 remain untotaled — no CSV export available for this search, would need manual page-by-page tallying; resolve the 2026 UHREC entry mystery",
     runBy:"Corynne Arnett, Primary Officer — the only name on record; this is from the dissolution filing signature, not a full Statement of Organization, so other officers (if any) are not yet confirmed",
-    top:{name:"Spencer Cox", amount:147500, note:"SIX checks, 2020-2025, not three — 2020 alone was two separate $25,000 checks. The previously-documented $62,500 (2022-2024) was a real but incomplete subset. Also newly found: $50,000 to Governors Leadership PAC (2018-2019), never previously tracked. This $197,500 figure covers only these two big-ticket recipients — hundreds of smaller individual-legislator checks across 2018-2026 remain untotaled — no CSV export available for this search, only manual page-by-page tallying."}},
+    top:{name:"Spencer Cox", amount:147500, note:"SIX checks, 2020-2025, not three — 2020 alone was two separate $25,000 checks."}},
   {name:"Utah Petroleum Association PAC", amount:13125, plus:true,
     years:"2024-2026",
     stillNeed:"full multi-year non-Cox total; page 2 of the 2026 contributor search",
@@ -608,9 +619,6 @@ function renderGrid(containerId, dataset) {
             ${d.complete ? `<span class="flag-complete">✓ RESEARCH COMPLETE</span>` : ''}
             ${d.years && d.years.indexOf('2026') !== -1 ? `<span class="flag-2026">2026 DATA — SUBJECT TO CHANGE</span>` : ''}
           </div>
-          ${d.years ? `<div class="years" style="margin-top:8px;">Years covered: ${d.years}</div>` : ''}
-          ${d.runBy ? `<div class="recipient-note" style="margin-top:8px;"><strong style="color:#c79a4b;">Run by:</strong> ${d.runBy}</div>` : ''}
-          ${d.stillNeed ? `<div class="recipient-note" style="margin-top:8px;"><strong style="color:#e0a458;">Still need:</strong> ${d.stillNeed}</div>` : ''}
           <div class="donor-total">${d.name}: $${d.amount.toLocaleString()}${d.plus ? '+' : ''} total documented</div>
         </div>
       </div>
@@ -788,7 +796,7 @@ function buildFlowRow(sourceName, rows, reverse) {
       : `M 0,${y1} C 40,${y1} 60,${y2} 100,${y2}`;
     curves += `<path d="${d}" stroke="#c79a4b" stroke-width="${w}" fill="none" opacity="0.55"/>`;
   });
-  const sourceBox = `<div class="flow-source" style="height:${H}px;display:flex;align-items:center;justify-content:${reverse ? 'flex-start' : 'flex-end'};">${sourceName}</div>`;
+  const sourceBox = `<div class="flow-source" style="min-height:${H}px;display:flex;align-items:center;justify-content:${reverse ? 'flex-start' : 'flex-end'};">${sourceName}</div>`;
   const svgBox = `<div class="flow-svg-col"><svg viewBox="0 0 100 ${H}" preserveAspectRatio="none" height="${H}">${curves}</svg></div>`;
   const listBox = `
     <div class="flow-recipients" style="${reverse ? 'padding-left:10px;' : ''}">

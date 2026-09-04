@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Real Estate Money — The Weber County Hive</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600&family=Roboto+Mono:wght@400;500&display=swap');
+
+  :root{
+    --paper:#f6f3ec;
+    --ink:#1c2431;
+    --ink-soft:#4b5262;
+    --rule:#d9d3c3;
+    --gold:#a8792f;
+    --gold-bar:#c79a4b;
+    --bar-track:#e7e1d1;
+    --red-flag:#8a3b2e;
+    --green-complete:#2e6b3e;
+    --card-back:#1c2431;
+    --card-back-text:#f0ece0;
+  }
+
+  *{box-sizing:border-box;}
+  html{-webkit-font-smoothing:antialiased;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',system-ui,sans-serif;
+    line-height:1.5;
+  }
+
+  .wrap{max-width:1100px;margin:0 auto;padding:0 24px 100px;}
+
+  header.masthead{
+    border-bottom:3px solid var(--ink);
+    padding:44px 0 20px;
+    margin-bottom:6px;
+  }
+  .kicker{
+    font-family:'Roboto Mono',monospace;
+    font-size:12.5px;
+    letter-spacing:.04em;
+    color:var(--gold);
+    margin:0 0 10px;
+  }
+  h1{
+    font-family:'Source Serif 4',Georgia,serif;
+    font-weight:700;
+    font-size:clamp(34px,5.5vw,54px);
+    line-height:1.06;
+    margin:0 0 14px;
+    max-width:15ch;
+  }
+  .dek{
+    font-family:'Source Serif 4',Georgia,serif;
+    font-size:19px;
+    color:var(--ink-soft);
+    max-width:62ch;
+    margin:0 0 6px;
+  }
+
+  .meta-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px 22px;
+    font-family:'Roboto Mono',monospace;
+    font-size:12px;
+    color:var(--ink-soft);
+    padding:16px 0 30px;
+    border-bottom:1px solid var(--rule);
+    margin-bottom:34px;
+  }
+
+  .note{
+    background:#efe9d8;
+    border-left:3px solid var(--gold);
+    padding:16px 20px;
+    font-size:14.5px;
+    color:var(--ink-soft);
+    margin-bottom:44px;
+  }
+  .note strong{color:var(--ink);}
+
+  h2.section{
+    font-family:'Source Serif 4',Georgia,serif;
+    font-size:24px;
+    font-weight:600;
+    margin:0 0 4px;
+  }
+  p.section-sub{
+    color:var(--ink-soft);
+    font-size:14.5px;
+    margin:0 0 30px;
+  }
+
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(240px, 1fr));
+    gap:18px;
+    margin-bottom:60px;
+  }
+
+  .tile{
+    perspective:1400px;
+    height:440px;
+  }
+  .years{
+    font-family:'Roboto Mono',monospace;
+    font-size:10px;
+    color:var(--ink-soft);
+    margin-top:4px;
+  }
+  .tile-inner{
+    position:relative;
+    width:100%;
+    height:100%;
+    transition:transform .55s cubic-bezier(.4,.2,.2,1);
+    transform-style:preserve-3d;
+    cursor:pointer;
+  }
+  .tile.flipped .tile-inner{transform:rotateY(180deg);}
+
+  .face{
+    position:absolute;
+    inset:0;
+    backface-visibility:hidden;
+    border:1px solid var(--rule);
+    padding:18px;
+    display:flex;
+    flex-direction:column;
+  }
+
+  .front{
+    background:#fffdf8;
+  }
+  .rank{
+    font-family:'Roboto Mono',monospace;
+    font-size:12px;
+    color:var(--ink-soft);
+  }
+  .top3 .rank{color:var(--gold);font-weight:600;}
+  .entity-name{
+    font-family:'Source Serif 4',Georgia,serif;
+    font-weight:600;
+    font-size:18px;
+    margin:6px 0 auto;
+    line-height:1.2;
+  }
+  .flag{
+    display:inline-block;
+    font-family:'Roboto Mono',monospace;
+    font-size:10px;
+    color:var(--red-flag);
+    border:1px solid var(--red-flag);
+    padding:1px 5px;
+    border-radius:2px;
+    margin-top:6px;
+    align-self:flex-start;
+  }
+  .flag-complete{
+    display:inline-block;
+    font-family:'Roboto Mono',monospace;
+    font-size:10px;
+    color:var(--green-complete);
+    border:1px solid var(--green-complete);
+    padding:1px 5px;
+    border-radius:2px;
+    margin-top:6px;
+    align-self:flex-start;
+  }
+  .flag-2026{
+    display:inline-block;
+    font-family:'Roboto Mono',monospace;
+    font-size:10px;
+    color:#8a6d1a;
+    background:#f5e6a8;
+    border:1px solid #c7a838;
+    padding:1px 5px;
+    border-radius:2px;
+    margin-top:6px;
+    margin-left:6px;
+    align-self:flex-start;
+  }
+  .amount{
+    font-family:'Roboto Mono',monospace;
+    font-size:23px;
+    font-weight:500;
+    margin-top:10px;
+  }
+  .amount .plus{color:var(--gold);font-size:15px;}
+  .bar-track{
+    height:4px;
+    background:var(--bar-track);
+    width:100%;
+    margin-top:8px;
+  }
+  .bar-fill{height:100%;background:var(--gold-bar);}
+  .flip-hint{
+    font-family:'Roboto Mono',monospace;
+    font-size:10.5px;
+    color:#a6a08e;
+    margin-top:10px;
+  }
+
+  .back{
+    background:var(--card-back);
+    color:var(--card-back-text);
+    transform:rotateY(180deg);
+    justify-content:center;
+    overflow-y:auto;
+  }
+  .back .label{
+    font-family:'Roboto Mono',monospace;
+    font-size:11px;
+    letter-spacing:.03em;
+    color:#c79a4b;
+    margin-bottom:8px;
+  }
+  .back .recipient-name{
+    font-family:'Source Serif 4',Georgia,serif;
+    font-weight:600;
+    font-size:19px;
+    line-height:1.25;
+    margin:0 0 8px;
+  }
+  .back .recipient-amount{
+    font-family:'Roboto Mono',monospace;
+    font-size:22px;
+    margin-bottom:8px;
+  }
+  .back .recipient-note{
+    font-size:12.5px;
+    color:#b9bccb;
+    line-height:1.4;
+  }
+  .back .donor-total{
+    margin-top:10px;
+    font-family:'Roboto Mono',monospace;
+    font-size:10.5px;
+    color:#7f8494;
+    border-top:1px solid #333c50;
+    padding-top:8px;
+  }
+
+  footer{
+    border-top:3px solid var(--ink);
+    padding-top:24px;
+    font-size:13px;
+    color:var(--ink-soft);
+  }
+  footer p{margin:0 0 10px;}
+
+  @media(max-width:480px){
+    .grid{grid-template-columns:1fr 1fr;}
+    .tile{height:420px;}
+  }
+
+  /* ---- Flow charts ---- */
+  h2.section.flow-heading{margin-top:10px;}
+  .flow-card{
+    border:1px solid var(--rule);
+    background:#fffdf8;
+    margin-bottom:22px;
+    padding:20px 22px;
+  }
+  .flow-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    margin-bottom:14px;
+    flex-wrap:wrap;
+    gap:6px 16px;
+  }
+  .flow-head h3{
+    font-family:'Source Serif 4',Georgia,serif;
+    font-size:19px;
+    font-weight:600;
+    margin:0;
+  }
+  .flow-head .flow-total{
+    font-family:'Roboto Mono',monospace;
+    font-size:14px;
+    color:var(--gold);
+  }
+  .flow-row{
+    display:flex;
+    align-items:center;
+    gap:0;
+  }
+  .flow-source{
+    width:150px;
+    flex-shrink:0;
+    background:var(--card-back);
+    color:var(--card-back-text);
+    padding:14px 12px;
+    font-family:'Source Serif 4',Georgia,serif;
+    font-size:14.5px;
+    font-weight:600;
+    line-height:1.3;
+    text-align:right;
+  }
+  .flow-svg-col{flex:1 1 auto;min-width:40px;}
+  .flow-svg-col svg{display:block;width:100%;}
+  .flow-recipients{width:340px;flex-shrink:0;}
+  .flow-recipient{
+    height:auto;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    border-bottom:1px solid var(--rule);
+    padding:8px 14px;
+    position:relative;
+    min-width:0;
+  }
+  .flow-recipient:last-child{border-bottom:none;}
+  .flow-recipient .rname{
+    display:block;
+    min-width:0;
+    max-width:100%;
+    font-size:13.5px;font-weight:600;color:var(--ink);
+    white-space:normal;overflow-wrap:break-word;
+  }
+  .flow-recipient .rmeta{
+    display:block;
+    min-width:0;
+    max-width:100%;
+    font-size:11px;color:var(--ink-soft);
+    white-space:normal;overflow-wrap:break-word;
+  }
+  .flow-recipient .ramount{
+    font-family:'Roboto Mono',monospace;
+    font-size:12.5px;
+    color:var(--gold);
+    display:block;
+    margin-top:2px;
+    white-space:nowrap;
+  }
+  .flow-note{font-size:12px;color:#8b8c86;margin-top:12px;}
+
+  @media(max-width:700px){
+    .flow-row{flex-direction:column;align-items:stretch;}
+    .flow-source{width:auto;text-align:left;margin-bottom:8px;}
+    .flow-svg-col{display:none;}
+    .flow-recipients{width:auto;}
+  }
+
+  /* ---- Glossary ---- */
+  .glossary{
+    border:1px solid var(--rule);
+    background:#fffdf8;
+    padding:20px 22px;
+    margin-bottom:36px;
+  }
+  .glossary h2{
+    font-family:'Source Serif 4',Georgia,serif;
+    font-size:19px;
+    font-weight:600;
+    margin:0 0 4px;
+  }
+  .glossary .glossary-sub{
+    font-size:13px;
+    color:var(--ink-soft);
+    margin:0 0 16px;
+  }
+  .glossary-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:4px 28px;
+  }
+  .glossary-item{
+    display:flex;
+    gap:10px;
+    padding:8px 0;
+    border-bottom:1px solid var(--rule);
+  }
+  .glossary-item .abbr{
+    font-family:'Roboto Mono',monospace;
+    font-size:13px;
+    font-weight:500;
+    color:var(--gold);
+    flex-shrink:0;
+    width:78px;
+  }
+  .glossary-item .full{
+    font-size:13px;
+    color:var(--ink);
+    line-height:1.4;
+  }
+  .glossary-item .full b{font-weight:600;}
+  @media(max-width:640px){
+    .glossary-grid{grid-template-columns:1fr;}
+  }
+  .people{
+    border:1px solid var(--rule);
+    background:#fffdf8;
+    padding:20px 22px;
+    margin-bottom:36px;
+  }
+  .people h2{
+    font-family:'Source Serif 4',Georgia,serif;
+    font-size:19px;
+    font-weight:600;
+    margin:0 0 4px;
+  }
+  .people .people-sub{
+    font-size:13px;
+    color:var(--ink-soft);
+    margin:0 0 18px;
+  }
+  .person{
+    padding:14px 0;
+    border-bottom:1px solid var(--rule);
+  }
+  .person:last-child{border-bottom:none;}
+  .person-name{
+    font-family:'Source Serif 4',Georgia,serif;
+    font-weight:600;
+    font-size:16px;
+    color:var(--ink);
+  }
+  .person-role{
+    font-family:'Roboto Mono',monospace;
+    font-size:11px;
+    color:var(--gold);
+    margin-top:2px;
+  }
+  .person-connections{
+    margin:8px 0 0;
+    padding-left:18px;
+  }
+  .person-connections li{
+    font-size:13px;
+    color:var(--ink-soft);
+    line-height:1.5;
+    margin-bottom:3px;
+  }
+  .person-connections b{color:var(--ink);font-weight:600;}
+  .person-note{
+    font-size:12.5px;
+    color:#8a6d1a;
+    margin-top:6px;
+    font-style:italic;
+  }
+  .person-details{margin-top:8px;}
+  .person-details summary{
+    font-family:'Roboto Mono',monospace;
+    font-size:11px;
+    color:var(--ink-soft);
+    cursor:pointer;
+    list-style:none;
+    display:inline-flex;
+    align-items:center;
+    gap:5px;
+  }
+  .person-details summary::-webkit-details-marker{display:none;}
+  .person-details summary::before{
+    content:"▸";
+    font-size:10px;
+    color:var(--gold);
+    transition:transform .15s;
+  }
+  .person-details[open] summary::before{transform:rotate(90deg);}
+  .person-details[open] summary{margin-bottom:8px;}
+  .sources-block{
+    border:1px solid var(--rule);
+    background:#fffdf8;
+    padding:16px 22px;
+    margin:0 0 28px;
+  }
+  .sources-block summary b{
+    font-family:'Source Serif 4',Georgia,serif;
+    font-size:14px;
+    color:var(--ink);
+    font-weight:600;
+  }
+</style>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <p class="kicker">THE WEBER COUNTY HIVE — DONOR LEDGER — REAL ESTATE</p>
+    <h1>Real Estate Money</h1>
+    <p class="dek">The real estate industry's slice of the full donor ledger — Realtor association PACs, ranked by documented giving. <a href="biggest-donors-flip.html" style="color:var(--gold);">See the full donor ledger and "Who these people are" →</a></p>
+  </header>
+
+  <div class="meta-row">
+    <span>Compiled from <b>primary-source disclosures.utah.gov filings</b></span>
+    <span>Status: <b>in progress, not final</b></span>
+  </div>
+
+  <div class="note">
+    <strong>How to read this list.</strong> Every figure comes from itemized state campaign-finance filings. The recipient shown on the back of each tile is that donor's single largest documented recipient — not necessarily their only one. Recipients are split below into confirmed current-or-former officeholders (shown as a money-flow visualization) and everyone else — PACs, vendors, consultants, and candidates not currently in office (shown as a plain list). This page is a filtered slice of the full donor ledger — the PACs and lobbyists who move this money across every industry are documented once, on the main ledger page, not repeated here.
+  </div>
+
+  <div class="people">
+    <h2>Who these people are</h2>
+    <p class="people-sub">The same handful of names run nearly every real-estate-industry PAC on this page. Here's each one, broken out.</p>
+
+    <div class="person">
+      <div class="person-name">Mike Ostermiller</div>
+      <div class="person-role">CEO, Northern Wasatch Association of Realtors — also a MIDA board member since 2008</div>
+      <details class="person-details">
+        <summary>Show documented connections</summary>
+      <ul class="person-connections">
+        <li>Paid $246,720 total by NWAOR (2023 Form 990) — separately paid $5,000 directly by NWAOR's own PAC in 2023, on top of his salary</li>
+        <li>Registered Utah lobbyist since 2012 for NWAOR, Utah Association of Realtors, and Utah Property Rights Coalition — paid by his own association as staff, then paid again by that same association as its hired lobbyist</li>
+        <li>MIDA board seat is a direct Governor appointment under the "interested in military efforts" category — not an unexplained loophole, a deliberate choice of who fills that discretionary seat</li>
+        <li>Co-director with Nilson Homes CEO Jed Nilson of two nonprofits (The Healing Collective Utah Inc., Nilson Foundation Inc.), independent of any PAC money on this page</li>
+      </ul>
+      <div class="person-note">Full profile, including the KKOS lobbying-partner tension with his own sworn disclosure form, is in the site's Unelected Power series.</div>
+      </details>
+    </div>
+
+    <div class="person">
+      <div class="person-name">Chris Kyler</div>
+      <div class="person-role">CEO, Utah Association of Realtors — Ostermiller's lobbying partner through KKOS Lawyers</div>
+      <details class="person-details">
+        <summary>Show documented connections</summary>
+      <ul class="person-connections">
+        <li>$908,507 total compensation, 2024 (UAR's own Form 990) — the largest single-person compensation figure found anywhere in this investigation</li>
+        <li>Registers jointly with Ostermiller through KKOS for the same 90+ clients since 2012, with matching begin/end dates — Blue Castle Holdings (nuclear), Utah Inland Port Authority, Intermountain Power Agency, SITLA</li>
+        <li>Both named co-defendants (along with NWAOR) in a 2013 lawsuit, dismissed on statute-of-limitations grounds before reaching the merits — a documented direct link between the two men</li>
+      </ul>
+      </details>
+    </div>
+
+    <div class="person">
+      <div class="person-name">Mike Schultz</div>
+      <div class="person-role">Speaker of the Utah House — also President of Northern Wasatch HBA PAC (home builders, not the Realtors' PAC)</div>
+      <details class="person-details">
+        <summary>Show documented connections</summary>
+      <ul class="person-connections">
+        <li>Listed as Primary Officer (President/Home Builder) alongside CEO Paul Ray on Northern Wasatch HBA PAC's own filing — has decision-making authority over the PAC, per that filing</li>
+        <li>NWHBA sits structurally outside the rest of his PAC network — its Treasurer is Rick Draper, a banker, not Kyle Palmer (who treasures HSLPAC, UHREC, NUPAC, and UCL PAC), and it files from a different address than those four</li>
+        <li>Its 2026 Primary Report shows 12 itemized contributions, $50-$100 each, $2,650 total raised and zero expenditures — these are member businesses paying standard NWHBA membership dues rather than each independently choosing to give, though that pooled dues money still funds a PAC he directs</li>
+        <li>Separately received $2,000 from Utah Association of Realtors' own personal-account giving in 2026 (two checks) — a direct RPAC-adjacent donor relationship distinct from the HBA PAC role</li>
+        <li>His own official bio lists his profession as "Agriculture," not real estate or homebuilding, despite this PAC role and his business background</li>
+      </ul>
+      </details>
+    </div>
+
+    <div class="person">
+      <div class="person-name">Mark Shepherd</div>
+      <div class="person-role">NWAOR's own President — sitting Mayor of Clearfield, also a MIDA board member</div>
+      <details class="person-details">
+        <summary>Show documented connections</summary>
+      <ul class="person-connections">
+        <li>Received $23,500 directly from NWAOR (2018-2026) while serving as the association's own elected President — paid by the organization he leads</li>
+        <li>Sits on the MIDA board in one of the three Governor seats tied to holding local elected office near an active project area</li>
+        <li>His own sworn 2025 financial disclosure (a separate filing from campaign finance reports) shows $5,000+ in consulting income from Lotus Company, an Ogden developer that repeatedly receives state tax-exempt bond allocations — a direct personal financial tie worth its own look</li>
+        <li>His 2025 mayoral campaign finance disclosures — a different filing than the one above — appeared empty despite an active race; unresolved</li>
+      </ul>
+      </details>
+    </div>
+
+    <div class="person">
+      <div class="person-name">J. Stuart Adams</div>
+      <div class="person-role">Senate President — also a partner in his own family real estate/development business, The Adams Company</div>
+      <details class="person-details">
+        <summary>Show documented connections</summary>
+      <ul class="person-connections">
+        <li>Holds Director and President roles at The Adams Company Real Estate/Operations (Kaysville) — his own stated profession on official bios is "a partner in The Adams Company, a Real Estate, Construction and Development Firm"</li>
+        <li>Personally an officer or manager at 18+ related entities per his own MIDA disclosure and a full corporate-registry search — Terra Parkway, Terra Med, Terra Springs, Terra Basin, Roy Medical Center, Crossroads Development, Terraventure Reserve, and several more, clustered at two addresses in Kaysville and Layton</li>
+        <li>Also a director of Ascent Academies of Utah, a public charter school network — a materially different category (public education) from the rest of his real-estate holdings, not yet checked against any charter-school legislation he's voted on or sponsored</li>
+        <li>Former President, Northern Wasatch Home Builders Association — the same trade association whose PAC Mike Schultz now leads — and a past Builder of the Year honoree</li>
+        <li>Separate from any of this: his political fundraising (Adams Leadership PAC, URSCC) is tracked on the site's main donor ledger, not repeated here</li>
+      </ul>
+      </details>
+    </div>
+
+    <div class="person">
+      <div class="person-name">Jed Nilson</div>
+      <div class="person-role">CEO, Nilson Homes — personally gave RPAC $5,210, on top of his company's broader political giving</div>
+      <details class="person-details">
+        <summary>Show documented connections</summary>
+      <ul class="person-connections">
+        <li>Personally gave RPAC $5,210 (5/1/2026) as part of a coordinated wave of 80+ donor checks the same day</li>
+        <li>Nilson & Company Inc. (Nilson Homes) separately gave $20,000 to Utah Forward PAC (2022) — the same PAC already documented funding Gage Froerer's campaigns</li>
+        <li>Co-director with Mike Ostermiller of two nonprofits — The Healing Collective Utah Inc. and the Nilson Foundation Inc. — a direct personal tie to NWAOR's CEO outside of any PAC or campaign account</li>
+        <li>The Nilson Foundation's own fundraising flyer claimed "501(c)(3) NONPROFIT" tax-deductible status 10 days after incorporating — confirmed false against the IRS's own Tax Exempt Organization Search, a separate documented issue under Utah's H.B. 43</li>
+      </ul>
+      </details>
+    </div>
+
+    <div class="person">
+      <div class="person-name">Gage Froerer</div>
+      <div class="person-role">Outgoing Weber County Commissioner — MIDA board colleague of Ostermiller, and a family real estate business of his own</div>
+      <details class="person-details">
+        <summary>Show documented connections</summary>
+      <ul class="person-connections">
+        <li>NWAOR gave his campaigns $20,000 across four itemized $5,000 checks (2018-2022) — figures elsewhere put the total as high as $29,000, not yet fully reconciled to one number</li>
+        <li>Sits on the MIDA board alongside Ostermiller — same board, same period, both confirmed by their own sworn disclosure forms</li>
+        <li>Froerer family runs NWAOR's presidency across four generations dating to 1922 — the association he's received campaign money from is one his own family has led for a century</li>
+        <li>The Weber Housing Authority, where he and his wife both serve as trustees, paid his family's own real estate companies (RESCOM Inc. and Froerer Real Estate and Property Management) $19,623 combined, 2023-2025</li>
+        <li>Separately documented: an undisclosed ownership chain through Nordic Valley Land Associates/J&G Investment Partnership tied to a $0-consideration land transfer into the Nordic Village PID he voted to create — a distinct real-estate holding from anything on this page's donor money</li>
+      </ul>
+      </details>
+    </div>
+  </div>
+
+  <h2 class="section">PAC donors</h2>
+  <p class="section-sub">Ranked by largest confirmed total — tap or click a tile to flip it</p>
+  <div class="grid" id="grid-pacs"></div>
+
+  <h2 class="section flow-heading">Where the money went</h2>
+  <p class="section-sub">Top recipients for each donor, largest first. Line thickness shows relative size within that donor's own giving.</p>
+
+  <h3 style="font-family:'Source Serif 4',Georgia,serif;font-size:18px;margin:0 0 12px;">PAC donors</h3>
+  <div id="flows-pacs"></div>
+
+  <div class="sources-block">
+    <details class="person-details">
+      <summary><b>Conclusion &amp; questions readers should ask</b></summary>
+      <p class="person-note" style="font-style:normal;">This page documents the real estate industry's giving separately — five PACs (RPAC, Salt Lake Board of Realtors, NWAOR, National Association of REALTORS Fund, Northern Wasatch HBA PAC) plus a "Who these people are" section covering seven individuals whose roles connect repeatedly across this network: the same two men (Mike Ostermiller, Chris Kyler) run the two largest local Realtor associations and lobby jointly through the same firm; several officials (Mark Shepherd, Gage Froerer, J. Stuart Adams) hold both a real-estate-industry leadership role and a public office or board seat at the same time; and one PAC's own president (Shepherd) and CEO (Ostermiller) are both paid directly by the association they lead. Salt Lake Board of Realtors is a notable outlier — its recipient list has zero confirmed current-or-former officeholders, entirely vendors and consultants.</p>
+      <p class="person-note" style="font-style:normal;font-weight:600;color:var(--ink);margin-top:14px;margin-bottom:6px;">Questions worth asking, based on what's documented here:</p>
+      <ul class="person-connections">
+        <li>When the same two people run both of the state's two largest local Realtor associations and lobby jointly for the same 90+ clients, what does that concentration mean for how the industry's political and legislative interests get represented?</li>
+        <li>When a trade association's own elected president or CEO is paid directly by that same association's PAC, what governs whether that reflects fair compensation versus a closed financial loop?</li>
+        <li>What obligations, if any, exist for an official who sits on a state land-use authority board (like MIDA) while also holding a leadership role in an industry association that lobbies that same authority?</li>
+        <li>Why does one of the largest PACs on this page (Salt Lake Board of Realtors) show no documented giving to any current or former officeholder at all — is that a genuine difference in strategy, or a gap in what's been researched so far?</li>
+        <li>What is the actual nature of the consulting relationship between a sitting mayor (Shepherd) and a developer (Lotus Company) that repeatedly receives state tax-exempt bond allocations?</li>
+      </ul>
+      <p class="person-note" style="font-style:normal;margin-top:10px;">These are open questions the public record raises, not conclusions this page draws. Readers should look at the primary sources linked throughout and decide for themselves what the documented facts mean.</p>
+    </details>
+  </div>
+
+  <div class="sources-block">
+    <details class="person-details">
+      <summary><b>Sources &amp; methodology</b></summary>
+      <ul class="person-connections">
+        <li>Itemized Utah campaign-finance disclosures, disclosures.utah.gov — individual contribution/expenditure searches and full PAC DEX (CSV) exports</li>
+        <li>Utah lobbyist registration records, disclosures.utah.gov and lobbyist.utah.gov</li>
+        <li>Sworn Conflict of Interest / Annual Financial Disclosure forms filed directly by officeholders, disclosures.utah.gov</li>
+        <li>Utah Secretary of State / Division of Corporations filings, cross-referenced for vendor/entity identification</li>
+        <li>Utah's boards and commissions registry, boards.utah.gov</li>
+        <li>Nonprofit Form 990 filings via ProPublica's Nonprofit Explorer</li>
+        <li>Better Business Bureau business profiles</li>
+        <li>Wikipedia and contemporaneous news archives — biographical and historical confirmation</li>
+      </ul>
+      <p class="person-note" style="font-style:normal;">Figures reflect research completed as of publication and will be updated as additional filing years are reviewed. This page shares its source data with the full donor ledger page, which has a longer list of source types used across the whole investigation. Recipient-level research here is at an earlier stage than the Energy page for some entries — several vendor and consultant names (Kelley Wright, Majority 51, Roost Company, Scott Freitag) are not yet independently identified. This page describes what the record shows without asserting legal conclusions about intent or wrongdoing.</p>
+    </details>
+  </div>
+
+  <footer>
+    <p>Compiled by The Weber County Hive from itemized Utah campaign-finance disclosures (disclosures.utah.gov), PAC registration filings, and Utah Division of Corporations records. Figures reflect research completed as of publication and will be updated as additional filing years are reviewed. Part of a series — see the <a href="biggest-donors-flip.html">full donor ledger</a>.</p>
+    <p><strong>2026 figures are incomplete.</strong> The 2026 reporting year is not yet over, and many committees have not yet filed all of their periodic reports — a "2026 only" or "2026-2026" figure anywhere on this page reflects what has been filed and disclosed so far, not a final year-end total.</p>
+    <p>webercountyhive.substack.com</p>
+  </footer>
+
+</div>
+
+<script>
+const companyData = [
+];
+
+const pacData = [
+  {name:"RPAC (Utah Association of Realtors)", amount:9017940, plus:true, flag:"REDISTRIBUTES TO EVERY LOCAL BOARD",
+    years:"2019-2026 (complete)",
+    stillNeed:"confirm whether 'UARPAC' ($5,000 from NWAOR) is a separate flow from the $274,946 RPAC sent NWAOR; break out 2025's top recipients individually",
+    runBy:"Chair Sonya Smithing (Realtor) · Vice-Chair Christy Vail (Realtor) · CFO/Treasurer Jason Burr (Accountant) — all share UAR's own Sandy, UT address/phone; affiliated with the National Association of Realtors",
+    top:{name:"Spencer Cox", amount:206000, note:"RPAC's largest direct candidate check — split between Cox for Governor and Friends of Spencer Cox."}},
+  {name:"Salt Lake Board of Realtors", amount:1614591, plus:true,
+    years:"2018-2026 (full)",
+    stillNeed:"identify Kelley Wright (consultant or candidate?); research Majority 51 as its own PAC; pull the PAC's own registered officer names",
+    runBy:"CEO Curtis Bullock · President Dawn Stevens (2024) · Rob Ockey, Past President (2024) — also UAR's current Vice President, the same cross-board overlap pattern found at NWAOR",
+    top:{name:"Deseret News Publishing", amount:119965, note:"Advertising vendor, largest recipient overall."}},
+  {name:"Northern Wasatch Association of Realtors", amount:562278, plus:true, flag:"PAID ITS OWN PRESIDENT $23,500",
+    years:"2018-2026 (full)",
+    stillNeed:"confirm whether 'UARPAC' = RPAC (see notes)",
+    runBy:"Rick Southwick and Bob Hill, Realtors, Primary Officers · Kristi Jeppesen, Accountant/CFO · CEO Mike Ostermiller — also a sitting MIDA board member since 2008 (a direct Governor appointment, the \"interested in military efforts\" seat), paid $5,000 directly by this PAC in 2023, and registered lobbyist since 2012 for NWAOR itself, Utah Association of Realtors, and Utah Property Rights Coalition. His lobbying partner Chris Kyler, UAR's CEO, made $908,507 in 2024 — both men are paid by their association as staff, then paid again by that same association as its own hired lobbyist.",
+    top:{name:"Consolidated Direct Mail Inc.", amount:82758, note:"Largest recipient, but the real story: NWAOR paid its own President Mark Shepherd $23,500 and its own CEO Mike Ostermiller $5,000"}},
+  {name:"National Association of REALTORS Fund", amount:15000,
+    years:"2026 only",
+    stillNeed:"outbound giving once the current quarter closes; prior years",
+    runBy:"Treasurer Matt Cenedella and VP Helen Devlin — both national NAR staff, Chicago/DC addresses. A separate entity from the Utah RPAC above.",
+    top:{name:"Not yet determined", amount:0, note:"Single $15,000 inbound check from its own parent org (8/7/2026). Outbound giving isn't available yet — the reporting quarter hasn't closed."}},
+  {name:"Northern Wasatch HBA PAC", amount:2650, complete:true,
+    years:"2026 only (Primary Report)",
+    flag:"OUTSIDE THE PALMER NETWORK",
+    runBy:"CEO Paul Ray · President Mike Schultz (Speaker of the House) · Treasurer Rick Draper, a banker — NOT Kyle Palmer, who treasures every other Schultz-linked PAC on this page's parent site",
+    top:{name:"12 members' dues payments", amount:1100, note:"Membership dues, not independent choices — but pooled dues still fund a PAC with real decision power."}},
+];
+
+const individualData = [
+];
+
+function renderGrid(containerId, dataset) {
+  const grid = document.getElementById(containerId);
+  if (!dataset.length) return;
+  const max = Math.max(...dataset.map(d => d.amount));
+  dataset.forEach((d, i) => {
+    const pct = Math.max(6, Math.round((d.amount / max) * 100));
+    const tile = document.createElement('div');
+    tile.className = 'tile' + (i < 3 ? ' top3' : '');
+    tile.innerHTML = `
+      <div class="tile-inner">
+        <div class="face front">
+          <div class="rank">No. ${i + 1}</div>
+          <div class="entity-name">${d.name}</div>
+          <div class="amount">$${d.amount.toLocaleString()}${d.plus ? '<span class="plus">+</span>' : ''}</div>
+          <div class="bar-track"><div class="bar-fill" style="width:${pct}%"></div></div>
+          <div class="flip-hint">tap for top recipient →</div>
+        </div>
+        <div class="face back">
+          <div class="label">GAVE THE MOST TO</div>
+          <div class="recipient-name">${d.top.name}</div>
+          <div class="recipient-amount">$${d.top.amount.toLocaleString()}</div>
+          <div class="recipient-note">${d.top.note}</div>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;">
+            ${d.flag ? `<span class="flag">${d.flag}</span>` : ''}
+            ${d.complete ? `<span class="flag-complete">✓ RESEARCH COMPLETE</span>` : ''}
+            ${d.years && d.years.indexOf('2026') !== -1 ? `<span class="flag-2026">2026 DATA — SUBJECT TO CHANGE</span>` : ''}
+          </div>
+          <div class="donor-total">${d.name}: $${d.amount.toLocaleString()}${d.plus ? '+' : ''} total documented</div>
+        </div>
+      </div>
+    `;
+    tile.addEventListener('click', () => tile.classList.toggle('flipped'));
+    grid.appendChild(tile);
+  });
+}
+
+renderGrid('grid-companies', companyData);
+renderGrid('grid-pacs', pacData);
+renderGrid('grid-individuals', individualData);
+if (!pacData.length) document.getElementById('pac-empty-note').style.display = 'block';
+
+if (!pacData.length) document.getElementById('pac-empty-note') && (document.getElementById('pac-empty-note').style.display = 'block');
+
+const companyFlows = [
+];
+
+const pacFlows = [
+{name:"RPAC (Utah Association of Realtors)", total:9017940, flag:"REDISTRIBUTES TO EVERY LOCAL BOARD", has2026:true,
+    stillNeed:"confirm whether 'UARPAC' ($5,000 from NWAOR) is a separate flow from the $274,946 RPAC sent NWAOR; break out 2025's top recipients individually",
+    runBy:"Chair Sonya Smithing (Realtor) · Vice-Chair Christy Vail (Realtor) · CFO/Treasurer Jason Burr (Accountant) — all share UAR's own Sandy, UT address/phone; affiliated with the National Association of Realtors",
+    fundedBy:[
+      {name:"Individual Utah Realtors (thousands of checks)", amount:9733938, id:"2019-2026 combined, complete — mostly uniform $50/$100/$150 dues-adjacent checks — see the standalone 2026-period breakdown for named individuals"},
+    ],
+    recipients:[
+    {name:"Spencer Cox", amount:206000, id:"Governor — combined Cox for Governor $125,000 + Friends of Spencer Cox $81,000"},
+    {name:"Derek Brown for Attorney General", amount:25000, id:"Attorney General"},
+  ],
+    otherRecipients:[
+      {name:"National Association of REALTORS", amount:2285743, id:"National parent org — likely dues/admin remittance, not campaign spending"},
+      {name:"Utah Association of Realtors", amount:981930, id:"Own parent nonprofit — likely admin"},
+      {name:"Salt Lake Board of Realtors PAC", amount:862604, id:"Local board — already on this page as its own PAC"},
+      {name:"Real Strategies", amount:495416, id:"Vendor — largest outside vendor"},
+      {name:"Utah Central Association of Realtors PAC", amount:275993, id:"Local board redistribution"},
+      {name:"Northern Wasatch Association of Realtors PAC", amount:274946, id:"Local board — already on this page as its own PAC"},
+      {name:"Washington County Board of Realtors PAC", amount:182628, id:"Local board redistribution"},
+      {name:"JY Allen Consulting", amount:130000, id:"Vendor"},
+      {name:"Thomas Wright for Governor", amount:100000, id:"2020 GOP gubernatorial primary candidate — did NOT win, not an officeholder"},
+      {name:"Consolidated Direct Mail Inc.", amount:123903, id:"Vendor — same one NWAOR and Salt Lake Board also used"},
+      {name:"Utah House Republican Election Committee", amount:71000, id:"House GOP leadership PAC"},
+      {name:"Adams Leadership PAC", amount:30000, id:"Senate President's leadership PAC"},
+      {name:"Utah Republican Senate Campaign Committee", amount:25000, id:"Senate GOP leadership PAC"},
+    ],
+    note:"$9,733,938 in / $9,017,940 out, 2019-2026, all years complete — by far the largest PAC documented in this investigation, roughly 8x UHREC's total. The real structure: RPAC redistributes huge sums back down to every local Realtor board PAC AND up to its own parent orgs, while also giving directly to candidates. 630+ [DELETED] entries found across the full pull — the same mass-deletion pattern already documented at NWAOR and Salt Lake Board of Realtors. No Kyle Palmer/Irish Elk LLC connection found anywhere here, unlike UHREC/NUPAC — this network shows no equivalent pattern of PAC officers being paid by the PAC they run. Also: Utah House Republican Election Committee $71,000, Adams Leadership PAC $30,000, Utah Republican Senate Campaign Committee $25,000, Derek Brown for Attorney General $25,000, and Consolidated Direct Mail Inc. $123,903 (same vendor NWAOR and Salt Lake Board both used) round out the top recipients."},
+{name:"Salt Lake Board of Realtors", total:1614591, has2026:true,
+    stillNeed:"identify Kelley Wright; research Majority 51 as its own PAC; pull the PAC's own registered officer names",
+    runBy:"CEO Curtis Bullock · President Dawn Stevens (2024) · Rob Ockey, Past President (2024) — also UAR's current Vice President",
+    fundedBy:[
+      {name:"Utah Association of REALTORS", amount:1130456, id:"State parent org — already on this page as its own PAC (RPAC)"},
+      {name:"National Association of Realtors", amount:481850, id:"National parent org — already on this page as its own PAC (NAR Fund)"}
+    ],
+    recipients:[
+
+  ],
+    otherRecipients:[
+      {name:"Deseret News Publishing", amount:119965, id:"Advertising vendor, largest recipient overall"},
+      {name:"Roost Company", amount:104295, id:"Vendor — flagged elsewhere in this investigation as a phantom entity with no business registration, needs its own check"},
+      {name:"Kelley Wright", amount:83700, id:"Recurring 2021-2026, 'Campaign Expense'/'Advertising'/'Political Support' — reads as a consultant, identity not confirmed"},
+      {name:"Real Strategies", amount:81065, id:"Vendor"},
+      {name:"Access Marketing Services", amount:54500, id:"Vendor"},
+      {name:"Majority 51", amount:48793, id:"PAC-to-PAC transfer — appears Salt Lake City-focused, not independently researched"},
+      {name:"Consolidated Direct Mail", amount:23000, id:"Vendor — same one NWAOR also used"},
+      {name:"Wilson For Mayor", amount:6000, id:"2022-2024 — a mayoral candidate committee, not yet confirmed whether Wilson won office"},
+    ],
+    note:"$1,620,964 in / $1,614,591 out, 2018-2026 — the second-largest PAC donor documented in this investigation, behind only UHREC. 98 [DELETED] entries found, the same mass-deletion pattern already documented at UAR PAC and NWAOR — a third Realtor-affiliated PAC showing it."},
+{name:"Northern Wasatch Association of Realtors", total:562278, has2026:true,
+    stillNeed:"confirm whether 'UARPAC' = RPAC (see notes)",
+    runBy:"Rick Southwick and Bob Hill, Realtors, Primary Officers · Kristi Jeppesen, Accountant/CFO · CEO Mike Ostermiller — also a sitting MIDA board member since 2008 (a direct Governor appointment, the \"interested in military efforts\" seat), paid $5,000 directly by this PAC in 2023, and registered lobbyist since 2012 for NWAOR itself, Utah Association of Realtors, and Utah Property Rights Coalition. His lobbying partner Chris Kyler, UAR's CEO, made $908,507 in 2024 — both men are paid by their association as staff, then paid again by that same association as its own hired lobbyist.",
+    fundedBy:[
+      {name:"Utah Association of REALTORS", amount:360603, id:"State parent org — already on this page as its own PAC (RPAC)"},
+      {name:"National Association of REALTORS", amount:151807, id:"National parent org — funds this PAC exclusively alongside the state association; no individual or corporate donors found"}
+    ],
+    recipients:[
+    {name:"Mark Shepherd", amount:23500, id:"NWAOR's own President — sitting Mayor of Clearfield since 2025, also a MIDA board member"},
+    {name:"Gage Froerer", amount:20000, id:"Former state representative and Weber County Commissioner — four direct checks; true total incl. digital-ad spending on his behalf runs at least $28,793"},
+    {name:"Jim Harvey", amount:13500, id:"Weber County Commissioner"},
+    {name:"Lacy Richards", amount:11500, id:"Former West Haven City Council — later hired by Nilson Homes as Director of Land Entitlement & Government Relations"},
+    {name:"Sharon Bolos", amount:10510, id:"Weber County Commission, Seat B incumbent — recurring recipient, 2021-2026"},
+  ],
+    otherRecipients:[
+      {name:"Consolidated Direct Mail Inc.", amount:82758, id:"Direct-mail vendor, 2022-2025 — not a candidate"},
+      {name:"Access LLC / Access Media", amount:26500, id:"Vendor — $7,500 explicitly tagged 'Gage Froerer Campaign Digital Ads,' 2018"},
+      {name:"Steve Hiatt", amount:15000, id:"Paid every year since 2020 — reads as NWAOR's own government-affairs consultant/lobbyist, not an officeholder"},
+      {name:"NUPAC", amount:12500, id:"PAC-to-PAC transfer — Northern Utah Legislative PAC"},
+      {name:"Scott Freitag", amount:11152, id:"2019, including a $3,690 mailer-reimbursement line — not confirmed as an officeholder"},
+    ],
+    note:"$512,410 in / $562,278 out, 2018-2026. NWAOR paid its own President Mark Shepherd $23,500 and its own CEO Mike Ostermiller $5,000 directly — $28,500 total to its own leadership, the same pattern of PAC officers being paid by the PAC they run already documented at NUPAC/UHREC via Irish Elk LLC. 38 [DELETED] entries found across these filings, the same mass-deletion pattern already documented at UAR PAC and Salt Lake Board of Realtors. Ostermiller and Kyler operate as a lobbying team through KKOS Lawyers, registering jointly for the same 90+ clients since 2012 including Blue Castle Holdings (nuclear), Utah Inland Port Authority, and Intermountain Power Agency — separate from any PAC money on this page."},
+{name:"National Association of REALTORS Fund", total:15000, has2026:true,
+    stillNeed:"outbound giving once the current quarter closes; prior years",
+    runBy:"Treasurer Matt Cenedella and VP Helen Devlin — both national NAR staff, Chicago/DC addresses. A separate entity from the Utah RPAC above.",
+    fundedBy:[
+      {name:"National Association of Realtors", amount:15000, id:"Parent organization — single check, 8/7/2026"}
+    ],
+    note:"Only one contribution on record so far ($15,000 from its own parent org). Outbound giving isn't available yet because the current reporting quarter hasn't closed — not a research gap, just a timing one."},
+{name:"Northern Wasatch HBA PAC", total:2650, complete:true, flag:"OUTSIDE THE PALMER NETWORK",
+    runBy:"CEO Paul Ray (Primary Officer 1) · President Mike Schultz, occupation \"Home Builder\" (Primary Officer 2, Speaker of the Utah House) · Treasurer Rick Draper, a banker — NOT Kyle Palmer, who treasures HSLPAC, UHREC, NUPAC, and UCL PAC. Files from a different address (5728 S 1475 E, South Ogden) than those four (1123 E Fairfield, Layton).",
+    fundedBy:[
+      {name:"12 member businesses (dues)", amount:1100, id:"Electrical, cabinetry, landscaping, mortgage, banking, glass, flooring, decks, homebuilding — average $92 each, all $50 or $100"}
+    ],
+    note:"$2,650 raised YTD as of the 2026 Primary Report, $0 spent — no outbound recipients to show. These are member businesses' standard NWHBA membership dues rather than each business independently choosing to donate. That distinction doesn't make the money inert: pooled dues still fund a PAC directed by the Speaker of the House and the industry's own leadership, and however it's collected, that money still carries the potential to shape the same decisions any other PAC contribution would. An earlier working figure of '20 contributions added, 3 deleted' does not match this report and has been corrected."},
+];
+
+const individualFlows = [
+];
+
+function buildFlowRow(sourceName, rows, reverse) {
+  const maxR = Math.max(...rows.map(r => r.amount));
+  const rowH = 44;
+  const H = rows.length * rowH;
+  let curves = '';
+  rows.forEach((r, i) => {
+    const y1 = H / 2, y2 = i * rowH + rowH / 2;
+    const w = 0.75 + 3.5 * (r.amount / maxR);
+    const d = reverse
+      ? `M 100,${y1} C 60,${y1} 40,${y2} 0,${y2}`
+      : `M 0,${y1} C 40,${y1} 60,${y2} 100,${y2}`;
+    curves += `<path d="${d}" stroke="#c79a4b" stroke-width="${w}" fill="none" opacity="0.55"/>`;
+  });
+  const sourceBox = `<div class="flow-source" style="min-height:${H}px;display:flex;align-items:center;justify-content:${reverse ? 'flex-start' : 'flex-end'};">${sourceName}</div>`;
+  const svgBox = `<div class="flow-svg-col"><svg viewBox="0 0 100 ${H}" preserveAspectRatio="none" height="${H}">${curves}</svg></div>`;
+  const listBox = `
+    <div class="flow-recipients" style="${reverse ? 'padding-left:10px;' : ''}">
+      ${rows.map((r, i) => `
+        <div class="flow-recipient">
+          <span class="rname">${i + 1}. ${r.name}</span>
+          <span class="rmeta">${r.id}</span>
+          <span class="ramount">$${r.amount.toLocaleString()}</span>
+        </div>
+      `).join('')}
+    </div>`;
+  return reverse
+    ? `<div class="flow-row">${listBox}${svgBox}${sourceBox}</div>`
+    : `<div class="flow-row">${sourceBox}${svgBox}${listBox}</div>`;
+}
+
+function renderFlows(containerId, dataset) {
+  const flowsEl = document.getElementById(containerId);
+  dataset.forEach(f => {
+  const rows = (f.recipients || []).slice(0, 15);
+  const hasRecipients = rows.length > 0;
+
+  const card = document.createElement('div');
+  card.className = 'flow-card';
+  card.innerHTML = `
+    <div class="flow-head">
+      <h3>${f.name}</h3>
+      <span class="flow-total">$${f.total.toLocaleString()} documented</span>
+    </div>
+    ${f.complete ? `<span class="flag-complete" style="margin-bottom:10px;">✓ RESEARCH COMPLETE</span>` : ''}
+    ${f.has2026 ? `<span class="flag-2026" style="margin-bottom:10px;">2026 DATA — SUBJECT TO CHANGE</span>` : ''}
+    ${f.runBy ? `<p class="flow-note" style="margin-top:-8px;margin-bottom:14px;"><strong style="color:var(--gold);">Run by:</strong> ${f.runBy}</p>` : ''}
+    ${f.fundedBy ? `
+      <p class="flow-note" style="margin:0 0 6px;font-weight:600;color:var(--ink);">Funded by</p>
+      ${buildFlowRow(f.name, f.fundedBy.slice(0, 15), true)}
+    ` : ''}
+    ${hasRecipients ? `
+      <p class="flow-note" style="margin:20px 0 6px;font-weight:600;color:var(--ink);">Gave to — officeholders (current or former)</p>
+      ${buildFlowRow(f.name, rows, false)}
+    ` : `<p class="flow-note" style="margin-top:16px;font-style:italic;">${f.otherRecipients && f.otherRecipients.length ? 'No confirmed current-or-former officeholders in this PAC\'s recipient list — see below.' : 'Outbound giving not yet pulled from disclosures.utah.gov — this entry currently shows inbound money only.'}</p>`}
+    ${f.otherRecipients && f.otherRecipients.length ? `
+      <p class="flow-note" style="margin:16px 0 4px;font-weight:600;color:var(--ink);">Also gave to — PACs, vendors, and candidates not currently in office</p>
+      <ul class="person-connections" style="margin-top:4px;">
+        ${f.otherRecipients.map(r => `<li>${r.name} — $${r.amount.toLocaleString()}${r.id ? ` <span style="color:var(--ink-soft);">— ${r.id}</span>` : ''}</li>`).join('')}
+      </ul>
+    ` : ''}
+    ${f.note ? `<p class="flow-note">${f.note}</p>` : ''}
+    ${f.stillNeed ? `<p class="flow-note" style="color:#a8792f;font-weight:600;">Still need: <span style="font-weight:400;color:var(--ink-soft);">${f.stillNeed}</span></p>` : ''}
+    `;
+    flowsEl.appendChild(card);
+  });
+}
+
+renderFlows('flows-companies', companyFlows);
+renderFlows('flows-pacs', pacFlows);
+renderFlows('flows-individuals', individualFlows);
+
+</script>
+</body>
+</html>

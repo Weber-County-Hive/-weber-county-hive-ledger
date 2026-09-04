@@ -61,4 +61,32 @@ const LEDGER_ENTRIES = [
       "lobbying"
     ]
   },
+  {
+    tag: "Case 07",
+    title: "Energy Money",
+    dek: "The energy sector's slice of the donor ledger — utilities, oil, and energy PACs, ranked by documented giving.",
+    summary: "PacifiCorp, EnergySolutions, Torus, Big West Oil, Chevron, rPlus Energies, Dominion Energy PAC, and Utah Petroleum Association PAC — eight energy-sector donors, split out from the full donor ledger, with each donor's officeholder recipients separated from PACs, committees, and non-officeholders.",
+    url: "energy.html",
+    date: "2026-09-04",
+    tags: [
+      "PacifiCorp", "EnergySolutions", "Torus", "Big West Oil", "Chevron",
+      "rPlus Energies", "Dominion Energy PAC", "Utah Petroleum Association PAC",
+      "Spencer Cox", "Operation Gigawatt", "energy policy", "nuclear",
+      "campaign finance", "donor ledger"
+    ]
+  },
+  {
+    tag: "Case 08",
+    title: "Real Estate Money",
+    dek: "The real estate industry's slice of the donor ledger — Realtor association PACs and the people who run them.",
+    summary: "RPAC, Salt Lake Board of Realtors, NWAOR, National Association of REALTORS Fund, and Northern Wasatch HBA PAC — five real-estate-industry PACs, split out from the full donor ledger, plus a \"Who these people are\" section on Mike Ostermiller, Chris Kyler, Mike Schultz, Mark Shepherd, J. Stuart Adams, Jed Nilson, and Gage Froerer.",
+    url: "realestate.html",
+    date: "2026-09-04",
+    tags: [
+      "RPAC", "Salt Lake Board of Realtors", "NWAOR", "Northern Wasatch HBA PAC",
+      "National Association of REALTORS Fund", "Mike Ostermiller", "Chris Kyler",
+      "Mike Schultz", "Mark Shepherd", "J. Stuart Adams", "Jed Nilson",
+      "Gage Froerer", "MIDA", "KKOS Lawyers", "campaign finance", "donor ledger"
+    ]
+  },
 ];
