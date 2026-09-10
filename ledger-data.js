@@ -64,13 +64,14 @@ const LEDGER_ENTRIES = [
   {
     tag: "Case 07",
     title: "Energy Money",
-    dek: "The energy sector's slice of the donor ledger — utilities, oil, and energy PACs, ranked by documented giving.",
-    summary: "PacifiCorp, EnergySolutions, Torus, Big West Oil, Chevron, rPlus Energies, Dominion Energy PAC, and Utah Petroleum Association PAC — eight energy-sector donors, split out from the full donor ledger, with each donor's officeholder recipients separated from PACs, committees, and non-officeholders.",
+    dek: "The energy sector's slice of the donor ledger — utilities, oil, rail, and energy PACs, ranked by documented giving.",
+    summary: "PacifiCorp, Union Pacific Railroad, EnergySolutions, Torus, Big West Oil, Chevron, rPlus Energies, Edison Electric Institute, Dominion Energy PAC, and Utah Petroleum Association PAC — ten energy-sector donors, split out from the full donor ledger, with each donor's officeholder recipients separated from PACs, committees, and non-officeholders.",
     url: "energy.html",
     date: "2026-09-04",
     tags: [
-      "PacifiCorp", "EnergySolutions", "Torus", "Big West Oil", "Chevron",
-      "rPlus Energies", "Dominion Energy PAC", "Utah Petroleum Association PAC",
+      "PacifiCorp", "Union Pacific Railroad", "EnergySolutions", "Torus",
+      "Big West Oil", "Chevron", "rPlus Energies", "Edison Electric Institute",
+      "Dominion Energy PAC", "Utah Petroleum Association PAC",
       "Spencer Cox", "Operation Gigawatt", "energy policy", "nuclear",
       "campaign finance", "donor ledger"
     ]
@@ -87,6 +88,46 @@ const LEDGER_ENTRIES = [
       "National Association of REALTORS Fund", "Mike Ostermiller", "Chris Kyler",
       "Mike Schultz", "Mark Shepherd", "J. Stuart Adams", "Jed Nilson",
       "Gage Froerer", "MIDA", "KKOS Lawyers", "campaign finance", "donor ledger"
+    ]
+  },
+  {
+    tag: "Case 09",
+    title: "Everything Else",
+    dek: "The major donors that don't fit a single industry bucket — an auto/real-estate conglomerate, a banking trade association, a metal recycler, two more PACs, and the largest individual donor in this whole investigation.",
+    summary: "Larry H. Miller Company, Utah Bankers Association, Utah Metal Works, Utah Chamber PAC, Zions Bancorporation PAC, and Gershon Barnett — six donors split out from the full donor ledger because they don't fit any single industry. Includes a corrected Utah Bankers Association total (a full DEX export found roughly $225,000 more than an earlier manual estimate), Utah Chamber PAC's sudden $60,000 single-day push after years of dormancy, and Zions Bancorporation PAC giving the Utah Democratic Party four times what it gave the Republican Party.",
+    url: "everythingelse.html",
+    date: "2026-09-10",
+    tags: [
+      "Larry H. Miller Company", "Utah Bankers Association", "Utah Metal Works",
+      "Utah Chamber PAC", "Zions Bancorporation PAC", "Gershon Barnett",
+      "Utahns for Balanced Government", "Spencer Cox", "campaign finance",
+      "donor ledger"
+    ]
+  },
+  {
+    tag: "Case 10",
+    title: "Tech Money",
+    dek: "The tech sector's slice of the donor ledger — telecom, semiconductors, national tech PACs, and Utah's own tech-industry trade groups.",
+    summary: "Meta's Forge the Future Project ($270,000 to two candidates in a single day), Lumen Technologies, Micron Technology, Dell Technologies PAC, and the full Silicon Slopes Commons → Slopes PAC → Utah Tech Leads money chain — eight tech-sector donors split out from the full donor ledger. Includes an unresolved conflict between two research passes over whether \"Utah Tech PAC\" was ever active.",
+    url: "tech.html",
+    date: "2026-09-10",
+    tags: [
+      "Meta", "Forge the Future Project", "Lumen Technologies", "Micron Technology",
+      "IM Flash Technologies", "Dell Technologies PAC", "Silicon Slopes Commons",
+      "Slopes PAC", "Utah Tech Leads", "Utah Tech PAC", "Tami Tran", "Logan Monson",
+      "Spencer Cox", "campaign finance", "donor ledger"
+    ]
+  },
+  {
+    tag: "Case 11",
+    title: "Money By Industry",
+    dek: "The full donor ledger, split by industry — Real Estate, Energy, Everything Else, and Tech, each its own page.",
+    summary: "An index tying together every industry-specific donor ledger page built so far — 29 donors and PACs researched and organized by sector, with a running total for each industry. Numbers are marked as a floor, not a final count, since most entities are still partially researched.",
+    url: "industries.html",
+    date: "2026-09-10",
+    tags: [
+      "Real Estate", "Energy", "Everything Else", "Tech", "campaign finance",
+      "donor ledger"
     ]
   },
 ];
