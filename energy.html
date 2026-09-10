@@ -257,6 +257,59 @@
     .tile{height:420px;}
   }
 
+  /* ---- Grand summary banner ---- */
+  .grand-summary{
+    background:var(--card-back);
+    color:var(--card-back-text);
+    padding:32px 28px;
+    margin-bottom:44px;
+    border:1px solid var(--rule);
+  }
+  .grand-summary .gs-label{
+    font-family:'Roboto Mono',monospace;
+    font-size:12px;
+    letter-spacing:.04em;
+    color:#c79a4b;
+    margin:0 0 6px;
+  }
+  .grand-summary .gs-total{
+    font-family:'Roboto Mono',monospace;
+    font-weight:500;
+    font-size:clamp(34px,6vw,52px);
+    line-height:1;
+    margin:0 0 6px;
+  }
+  .grand-summary .gs-sub{
+    font-size:13.5px;
+    color:#b9bccb;
+    margin:0 0 26px;
+    max-width:60ch;
+  }
+  .gs-top5{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(150px, 1fr));
+    gap:16px 20px;
+    border-top:1px solid #333c50;
+    padding-top:22px;
+  }
+  .gs-top5-item .gs-rank{
+    font-family:'Roboto Mono',monospace;
+    font-size:11px;
+    color:#7f8494;
+  }
+  .gs-top5-item .gs-name{
+    font-family:'Source Serif 4',Georgia,serif;
+    font-weight:600;
+    font-size:15px;
+    line-height:1.25;
+    margin:3px 0 5px;
+  }
+  .gs-top5-item .gs-amount{
+    font-family:'Roboto Mono',monospace;
+    font-size:16.5px;
+    color:#c79a4b;
+  }
+
   /* ---- Flow charts ---- */
   h2.section.flow-heading{margin-top:10px;}
   .flow-card{
@@ -490,6 +543,8 @@
     <span>Status: <b>in progress, not final</b></span>
   </div>
 
+  <div class="grand-summary" id="grand-summary"></div>
+
   <div class="note">
     <strong>How to read this list.</strong> Every figure comes from itemized state campaign-finance filings. Some donor totals cover their <em>entire</em> documented giving; others cover only what's been fully pulled so far (marked with a <strong>+</strong>). The recipient shown on the back of each tile is that donor's single largest documented recipient — not necessarily their only one. This page is a filtered slice of the full donor ledger — the PACs and lobbyists who move this money across every industry are documented once, on the main ledger page, not repeated here.
   </div>
@@ -515,13 +570,14 @@
   <div class="sources-block">
     <details class="person-details">
       <summary><b>Conclusion &amp; questions readers should ask</b></summary>
-      <p class="person-note" style="font-style:normal;">This page documents the energy sector's giving separately — 8 companies and PACs (PacifiCorp, EnergySolutions, Torus, Big West Oil, Chevron, rPlus Energies, Dominion Energy PAC, Utah Petroleum Association PAC), heavily concentrated on Gov. Cox and Utah's legislative leadership committees. Cox is the top documented recipient across nearly every entity on this page. Several donors here (PacifiCorp, EnergySolutions, Big West Oil) show an escalating giving pattern in years leading up to and following Cox's "Operation Gigawatt" nuclear/energy initiative. Big West Oil's pattern is notably different from the others — heavy Cox/leadership giving with almost no individual-legislator checks, a real behavioral contrast worth noting on its own.</p>
+      <p class="person-note" style="font-style:normal;">This page documents the energy sector's giving separately — 10 companies and PACs (PacifiCorp, Union Pacific Railroad, EnergySolutions, Torus, Big West Oil, Chevron, rPlus Energies, Edison Electric Institute, Dominion Energy PAC, Utah Petroleum Association PAC), heavily concentrated on Gov. Cox and Utah's legislative leadership committees. Cox is the top documented recipient across nearly every entity on this page. Several donors here (PacifiCorp, EnergySolutions, Big West Oil) show an escalating giving pattern in years leading up to and following Cox's "Operation Gigawatt" nuclear/energy initiative. Big West Oil's pattern is notably different from the others — heavy Cox/leadership giving with almost no individual-legislator checks, a real behavioral contrast worth noting on its own. Union Pacific Railroad — a completely different industry (rail, not energy) — is included here because its giving pattern overlaps so heavily with PacifiCorp's own donor-legislator list that the two are best read side by side.</p>
       <p class="person-note" style="font-style:normal;font-weight:600;color:var(--ink);margin-top:14px;margin-bottom:6px;">Questions worth asking, based on what's documented here:</p>
       <ul class="person-connections">
         <li>What is the relationship, if any, between the timing of these companies' larger checks and specific energy-policy legislation or state initiatives during the same period?</li>
         <li>Why does giving from this sector concentrate so heavily on the Governor and legislative leadership PACs rather than spreading across individual legislators, compared to other industries?</li>
         <li>What explains Big West Oil's shift away from individual-legislator giving in 2024-2026, when its 2018-2023 pattern looked more like its peers?</li>
         <li>Multiple entities on this page (Dominion Energy PAC, in particular) show contributions attributed to them even in years after formal dissolution — what governs how a dissolved entity's name can still appear as a contributor?</li>
+        <li>A recurring group of legislators (Ronald Winterton, Joel Ferry, Evan Vickers, Darlene Pierucci, Todd Weiler, Jim Dunnigan, Logan Wilde, and others) take checks from both PacifiCorp and Union Pacific in the same years — what, if anything, connects the two industries' interest in the same legislators?</li>
       </ul>
       <p class="person-note" style="font-style:normal;margin-top:10px;">These are open questions the public record raises, not conclusions this page draws. Readers should look at the primary sources linked throughout and decide for themselves what the documented facts mean.</p>
     </details>
@@ -550,14 +606,18 @@
 
 <script>
 const companyData = [
-  {name:"PacifiCorp", amount:350850, plus:true,
+  {name:"PacifiCorp", amount:438650, plus:true,
     years:"2018-2026 (fully itemized for every recipient, not just Cox)",
-    stillNeed:"Union Pacific Railroad is a SEPARATE company also giving significant money, not yet its own entry (pre-2018 out of scope by decision)",
-    top:{name:"Spencer Cox", amount:102500, note:"Nine checks, 2018-2026. But Cox is far from the whole picture: UHREC got $59,500, URSCC $54,500, Adams Leadership PAC $35,000, House Speaker Leadership PAC…"}},
+    stillNeed:"Pacific Minerals Inc. and the federal PAC (FEC C00082800) not yet checked; pre-2018 out of scope by decision",
+    top:{name:"Spencer Cox", amount:102500, note:"Nine checks, 2018-2026. Beyond Cox: UHREC $65,500, URSCC $58,500, Adams Leadership PAC $25,000 (confirmed via the PAC's own DEX export), House Speaker Leadership PAC $18,500…"}},
   {name:"EnergySolutions", amount:270168, plus:true,
     years:"2018-2026 (institutional-level complete)",
     stillNeed:"individual $200-$2,000 legislator checks for 2018-2021 not fully tallied due to volume",
     top:{name:"Utah House Republican Election Committee", amount:52500, note:"Includes a single $50,000 check (9/6/2024), six weeks before Cox's Operation Gigawatt launch."}},
+  {name:"Union Pacific Railroad", amount:27000, plus:true,
+    years:"2018-2021 pulled (2022-2026 not yet pulled)",
+    stillNeed:"2022-2026 not yet pulled; a different industry than the rest of this page (rail, not energy), included for its heavy donor-legislator overlap with PacifiCorp",
+    top:{name:"Spencer Cox", amount:5000, note:"Two checks in 2021 alone ($3,000 + $2,000). At least seven legislators (Winterton, Ferry, Vickers, Pierucci, Weiler, Dunnigan, Wilde) also took PacifiCorp checks the same years."}},
   {name:"Torus", amount:151042, complete:true,
     years:"2022-2025 (complete; 2026 not yet pulled)",
     stillNeed:"2026 not yet pulled",
@@ -574,6 +634,10 @@ const companyData = [
     years:"2026 only",
     stillNeed:"pre-2026 not pulled",
     top:{name:"Kirk Cullimore", amount:2000, note:"Single check, 7/17/2026 — the largest of 22 recipients in 2026, spanning both parties (Escamilla, Romero, Dailey-Provost, Kwan among the Democrats)."}},
+  {name:"Edison Electric Institute", amount:12500, complete:true,
+    years:"2018-2026, all years checked",
+    stillNeed:"none — fully closed out",
+    top:{name:"Spencer Cox", amount:12500, note:"The ONLY recipient found — $10,000 (2020) + $2,500 (2024). PacifiCorp's own national trade association, giving on a separate track from the company itself."}},
 ];
 
 const pacData = [
@@ -633,30 +697,72 @@ renderGrid('grid-pacs', pacData);
 renderGrid('grid-individuals', individualData);
 if (!pacData.length) document.getElementById('pac-empty-note').style.display = 'block';
 
-if (!pacData.length) document.getElementById('pac-empty-note').style.display = 'block';
+function renderSummary() {
+  const allDonors = [...companyData, ...pacData];
+  const grandTotal = allDonors.reduce((sum, d) => sum + d.amount, 0);
+  const anyPlus = allDonors.some(d => d.plus);
+
+  const byRecipient = {};
+  [...companyFlows, ...pacFlows].forEach(f => {
+    (f.recipients || []).forEach(r => { byRecipient[r.name] = (byRecipient[r.name] || 0) + r.amount; });
+    (f.otherRecipients || []).forEach(r => { byRecipient[r.name] = (byRecipient[r.name] || 0) + r.amount; });
+  });
+  const top5 = Object.entries(byRecipient).sort((a, b) => b[1] - a[1]).slice(0, 5);
+
+  const el = document.getElementById('grand-summary');
+  el.innerHTML = `
+    <p class="gs-label">TOTAL ENERGY-SECTOR MONEY DOCUMENTED ON THIS PAGE</p>
+    <p class="gs-total">$${grandTotal.toLocaleString()}${anyPlus ? '<span class="plus" style="color:#c79a4b;">+</span>' : ''}</p>
+    <p class="gs-sub">Combined giving from every company and PAC below, ${companyData.length + pacData.length} donors, 2018-2026. This is a floor, not a ceiling — several donors are still marked "+" for pulls in progress.</p>
+    <div class="gs-top5">
+      ${top5.map(([name, amt], i) => `
+        <div class="gs-top5-item">
+          <div class="gs-rank">TOP RECIPIENT No. ${i + 1}</div>
+          <div class="gs-name">${name}</div>
+          <div class="gs-amount">$${amt.toLocaleString()}</div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
 
 const companyFlows = [
-{name:"PacifiCorp", total:350850, plus:true, has2026:true,
-    stillNeed:"Union Pacific Railroad is a SEPARATE company also giving significant money, not yet its own entry (pre-2018 out of scope by decision)",
+{name:"PacifiCorp", total:438650, plus:true, has2026:true,
+    stillNeed:"Pacific Minerals Inc. and the federal PAC (FEC C00082800) not yet checked; pre-2018 out of scope by decision",
     recipients:[
     {name:"Spencer Cox", amount:102500, id:"Governor — nine checks, 2018-2026, all years confirmed"},
-    {name:"J. Stuart Adams", amount:6000, id:"Senate President — personal checks, separate from his PAC"},
-    {name:"Brad Wilson", amount:5000, id:"then-Speaker of the House"},
-    {name:"Scott Sandall", amount:4000, id:"State Senator"},
-    {name:"Deidre Henderson", amount:3000, id:"Lt. Governor"},
-    {name:"Mike McKell", amount:2500, id:"State Senator"},
-    {name:"Casey Snider", amount:2000, id:"State Senator/Majority Leader"},
-    {name:"Lincoln Fillmore", amount:2000, id:"State Senator"},
-    {name:"Daniel McCay", amount:2000, id:"State Senator"},
-    {name:"Carl Albrecht", amount:2000, id:"State Representative"},
+    {name:"J. Stuart Adams", amount:17000, id:"Senate President — personal checks, separate from his PAC"},
+    {name:"Brad Wilson", amount:18500, id:"then-Speaker of the House"},
+    {name:"Scott Sandall", amount:4500, id:"State Senator"},
+    {name:"Mike McKell", amount:4500, id:"State Senator"},
+    {name:"Deidre Henderson", amount:8000, id:"Lt. Governor"},
+    {name:"Daniel Hemmert", amount:4000, id:"MIDA Executive Director"},
+    {name:"Daniel McCay", amount:3500, id:"State Senator"},
+    {name:"Karen Mayne", amount:3250, id:"State Senator"},
+    {name:"Casey Snider", amount:3000, id:"State Senator/Majority Leader"},
   ],
     otherRecipients:[
-      {name:"UHREC", amount:59500, id:"House GOP leadership PAC (Mike Schultz) — fully itemized"},
-      {name:"Utah Republican Senate Campaign Cmte.", amount:54500, id:"Senate GOP leadership PAC — fully itemized"},
-      {name:"Adams Leadership PAC", amount:35000, id:"Senate President's leadership PAC — fully itemized"},
+      {name:"UHREC", amount:65500, id:"House GOP leadership PAC (Mike Schultz) — fully itemized"},
+      {name:"Utah Republican Senate Campaign Cmte.", amount:58500, id:"Senate GOP leadership PAC — fully itemized"},
+      {name:"Adams Leadership PAC", amount:25000, id:"Senate President's leadership PAC — CONFIRMED via the PAC's own DEX export"},
       {name:"House Speaker Leadership PAC", amount:18500, id:"Speaker's leadership PAC — fully itemized"},
       {name:"Governors Leadership PAC", amount:11000, id:"Gov. Herbert-era leadership PAC — 2018 and 2020"},
-    ], note:"$350,850 comprehensive total, 2018-2026 — every recipient now fully itemized, not the earlier 'approx.' running sums. Pre-2018 is out of scope by decision, not an open gap. Union Pacific Railroad — a completely separate company, matched only because both names contain 'Pacific' — also gives significant money and is not reflected here. Dozens of individual $250-$2,000 legislator checks below the top 10 shown here account for the remainder of the total."},
+    ], note:"$438,650 comprehensive total, 2018-2026 — fully itemized line-by-line across every year and recipient, cross-checked against Adams Leadership PAC's own primary-source DEX export. Pre-2018 is out of scope by decision, not an open gap. Dozens of individual $250-$2,000 legislator checks below the top 10 shown here account for the remainder of the total."},
+{name:"Union Pacific Railroad", total:27000, plus:true,
+    stillNeed:"2022-2026 not yet pulled; a different industry (rail) than the rest of this page, included for its heavy legislator overlap with PacifiCorp",
+    recipients:[
+    {name:"Spencer Cox", amount:5000, id:"Governor — two checks in 2021 ($3,000 + $2,000)"},
+    {name:"Wayne Harper", amount:1000, id:"State Senator — also a PacifiCorp donee the same year"},
+    {name:"Ann Millner", amount:1750, id:"State Senator — three checks across 2019 and 2021"},
+    {name:"Jacob Anderegg", amount:1750, id:"State Representative — three checks across 2019-2020"},
+    {name:"Evan Vickers", amount:1250, id:"State Senator — also a PacifiCorp donee most years"},
+    {name:"Jim Dunnigan", amount:1000, id:"State Representative — also a PacifiCorp donee the same year"},
+    {name:"Luz Escamilla", amount:750, id:"State Senator, Senate Minority Leader"},
+  ],
+    otherRecipients:[
+      {name:"Utah Republican Party (State)", amount:5000, id:"largest single check found, direct to the state party, 2018"},
+      {name:"Utah House Democratic Leadership Council", amount:750, id:"one of the only Democratic-side recipients found in either utility's ledger"},
+    ], note:"At least seven names (Ronald Winterton, Joel Ferry, Evan Vickers, Darlene Pierucci, Todd Weiler, Jim Dunnigan, Logan Wilde) took checks from Union Pacific AND PacifiCorp in the same years — a recurring cross-industry donor-overlap pattern worth its own line in any published piece."},
 {name:"EnergySolutions", total:270168, plus:true, has2026:true,
     stillNeed:"individual $200-$2,000 legislator checks for 2018-2021 not fully tallied due to volume",
     recipients:[
@@ -731,7 +837,12 @@ const companyFlows = [
     {name:"Chris Wilson", amount:1000, id:"State Senator"},
     {name:"Todd Weiler", amount:800, id:"State Senator"},
     {name:"Derrin Owens", amount:800, id:"State Senator — HB 494 sponsor, Lincoln Hill water-bill network"},
-  ]}
+  ]},
+{name:"Edison Electric Institute", total:12500, complete:true, has2026:true,
+    stillNeed:"none — fully closed out, all years checked",
+    recipients:[
+    {name:"Spencer Cox", amount:12500, id:"Governor — the only recipient found. $10,000 (2020) + $2,500 (2024)"}
+  ], note:"PacifiCorp's own national trade association — a separate giving channel from the company itself, worth noting alongside PacifiCorp's own Cox total."},
 ];
 
 const pacFlows = [
@@ -847,6 +958,7 @@ function renderFlows(containerId, dataset) {
 renderFlows('flows-companies', companyFlows);
 renderFlows('flows-pacs', pacFlows);
 renderFlows('flows-individuals', individualFlows);
+renderSummary();
 
 </script>
 </body>
