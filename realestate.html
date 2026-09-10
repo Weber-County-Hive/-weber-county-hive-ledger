@@ -257,6 +257,59 @@
     .tile{height:420px;}
   }
 
+  /* ---- Grand summary banner ---- */
+  .grand-summary{
+    background:var(--card-back);
+    color:var(--card-back-text);
+    padding:32px 28px;
+    margin-bottom:44px;
+    border:1px solid var(--rule);
+  }
+  .grand-summary .gs-label{
+    font-family:'Roboto Mono',monospace;
+    font-size:12px;
+    letter-spacing:.04em;
+    color:#c79a4b;
+    margin:0 0 6px;
+  }
+  .grand-summary .gs-total{
+    font-family:'Roboto Mono',monospace;
+    font-weight:500;
+    font-size:clamp(34px,6vw,52px);
+    line-height:1;
+    margin:0 0 6px;
+  }
+  .grand-summary .gs-sub{
+    font-size:13.5px;
+    color:#b9bccb;
+    margin:0 0 26px;
+    max-width:60ch;
+  }
+  .gs-top5{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(150px, 1fr));
+    gap:16px 20px;
+    border-top:1px solid #333c50;
+    padding-top:22px;
+  }
+  .gs-top5-item .gs-rank{
+    font-family:'Roboto Mono',monospace;
+    font-size:11px;
+    color:#7f8494;
+  }
+  .gs-top5-item .gs-name{
+    font-family:'Source Serif 4',Georgia,serif;
+    font-weight:600;
+    font-size:15px;
+    line-height:1.25;
+    margin:3px 0 5px;
+  }
+  .gs-top5-item .gs-amount{
+    font-family:'Roboto Mono',monospace;
+    font-size:16.5px;
+    color:#c79a4b;
+  }
+
   /* ---- Flow charts ---- */
   h2.section.flow-heading{margin-top:10px;}
   .flow-card{
@@ -490,6 +543,8 @@
     <span>Status: <b>in progress, not final</b></span>
   </div>
 
+  <div class="grand-summary" id="grand-summary"></div>
+
   <div class="note">
     <strong>How to read this list.</strong> Every figure comes from itemized state campaign-finance filings. The recipient shown on the back of each tile is that donor's single largest documented recipient — not necessarily their only one. Recipients are split below into confirmed current-or-former officeholders (shown as a money-flow visualization) and everyone else — PACs, vendors, consultants, and candidates not currently in office (shown as a plain list). This page is a filtered slice of the full donor ledger — the PACs and lobbyists who move this money across every industry are documented once, on the main ledger page, not repeated here.
   </div>
@@ -658,7 +713,7 @@ const companyData = [
 const pacData = [
   {name:"RPAC (Utah Association of Realtors)", amount:9017940, plus:true, flag:"REDISTRIBUTES TO EVERY LOCAL BOARD",
     years:"2019-2026 (complete)",
-    stillNeed:"confirm whether 'UARPAC' ($5,000 from NWAOR) is a separate flow from the $274,946 RPAC sent NWAOR; break out 2025's top recipients individually",
+    stillNeed:"confirm whether \"UARPAC\" ($5,000 from NWAOR) is a separate flow from the $274,946 RPAC sent NWAOR; break out 2025's top recipients individually",
     runBy:"Chair Sonya Smithing (Realtor) · Vice-Chair Christy Vail (Realtor) · CFO/Treasurer Jason Burr (Accountant) — all share UAR's own Sandy, UT address/phone; affiliated with the National Association of Realtors",
     top:{name:"Spencer Cox", amount:206000, note:"RPAC's largest direct candidate check — split between Cox for Governor and Friends of Spencer Cox."}},
   {name:"Salt Lake Board of Realtors", amount:1614591, plus:true,
@@ -668,7 +723,7 @@ const pacData = [
     top:{name:"Deseret News Publishing", amount:119965, note:"Advertising vendor, largest recipient overall."}},
   {name:"Northern Wasatch Association of Realtors", amount:562278, plus:true, flag:"PAID ITS OWN PRESIDENT $23,500",
     years:"2018-2026 (full)",
-    stillNeed:"confirm whether 'UARPAC' = RPAC (see notes)",
+    stillNeed:"confirm whether \"UARPAC\" = RPAC (see notes)",
     runBy:"Rick Southwick and Bob Hill, Realtors, Primary Officers · Kristi Jeppesen, Accountant/CFO · CEO Mike Ostermiller — also a sitting MIDA board member since 2008 (a direct Governor appointment, the \"interested in military efforts\" seat), paid $5,000 directly by this PAC in 2023, and registered lobbyist since 2012 for NWAOR itself, Utah Association of Realtors, and Utah Property Rights Coalition. His lobbying partner Chris Kyler, UAR's CEO, made $908,507 in 2024 — both men are paid by their association as staff, then paid again by that same association as its own hired lobbyist.",
     top:{name:"Consolidated Direct Mail Inc.", amount:82758, note:"Largest recipient, but the real story: NWAOR paid its own President Mark Shepherd $23,500 and its own CEO Mike Ostermiller $5,000"}},
   {name:"National Association of REALTORS Fund", amount:15000,
@@ -725,16 +780,43 @@ function renderGrid(containerId, dataset) {
 renderGrid('grid-companies', companyData);
 renderGrid('grid-pacs', pacData);
 renderGrid('grid-individuals', individualData);
-if (!pacData.length) document.getElementById('pac-empty-note').style.display = 'block';
-
 if (!pacData.length) document.getElementById('pac-empty-note') && (document.getElementById('pac-empty-note').style.display = 'block');
+
+function renderSummary() {
+  const allDonors = [...companyData, ...pacData, ...individualData];
+  const grandTotal = allDonors.reduce((sum, d) => sum + d.amount, 0);
+  const anyPlus = allDonors.some(d => d.plus);
+
+  const byRecipient = {};
+  [...companyFlows, ...pacFlows, ...individualFlows].forEach(f => {
+    (f.recipients || []).forEach(r => { byRecipient[r.name] = (byRecipient[r.name] || 0) + r.amount; });
+    (f.otherRecipients || []).forEach(r => { byRecipient[r.name] = (byRecipient[r.name] || 0) + r.amount; });
+  });
+  const top10 = Object.entries(byRecipient).sort((a, b) => b[1] - a[1]).slice(0, 10);
+
+  const el = document.getElementById('grand-summary');
+  el.innerHTML = `
+    <p class="gs-label">TOTAL REAL-ESTATE-SECTOR MONEY DOCUMENTED ON THIS PAGE</p>
+    <p class="gs-total">$${grandTotal.toLocaleString()}${anyPlus ? '<span class="plus" style="color:#c79a4b;">+</span>' : ''}</p>
+    <p class="gs-sub">Combined giving from every donor below, ${companyData.length + pacData.length + individualData.length} donors, 2018-2026. This is a floor, not a ceiling — several donors are still marked "+" for pulls in progress.</p>
+    <div class="gs-top5">
+      ${top10.map(([name, amt], i) => `
+        <div class="gs-top5-item">
+          <div class="gs-rank">TOP RECIPIENT No. ${i + 1}</div>
+          <div class="gs-name">${name}</div>
+          <div class="gs-amount">$${amt.toLocaleString()}</div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
 
 const companyFlows = [
 ];
 
 const pacFlows = [
 {name:"RPAC (Utah Association of Realtors)", total:9017940, flag:"REDISTRIBUTES TO EVERY LOCAL BOARD", has2026:true,
-    stillNeed:"confirm whether 'UARPAC' ($5,000 from NWAOR) is a separate flow from the $274,946 RPAC sent NWAOR; break out 2025's top recipients individually",
+    stillNeed:"confirm whether \"UARPAC\" ($5,000 from NWAOR) is a separate flow from the $274,946 RPAC sent NWAOR; break out 2025's top recipients individually",
     runBy:"Chair Sonya Smithing (Realtor) · Vice-Chair Christy Vail (Realtor) · CFO/Treasurer Jason Burr (Accountant) — all share UAR's own Sandy, UT address/phone; affiliated with the National Association of Realtors",
     fundedBy:[
       {name:"Individual Utah Realtors (thousands of checks)", amount:9733938, id:"2019-2026 combined, complete — mostly uniform $50/$100/$150 dues-adjacent checks — see the standalone 2026-period breakdown for named individuals"},
@@ -744,20 +826,20 @@ const pacFlows = [
     {name:"Derek Brown for Attorney General", amount:25000, id:"Attorney General"},
   ],
     otherRecipients:[
-      {name:"National Association of REALTORS", amount:2285743, id:"National parent org — likely dues/admin remittance, not campaign spending"},
-      {name:"Utah Association of Realtors", amount:981930, id:"Own parent nonprofit — likely admin"},
-      {name:"Salt Lake Board of Realtors PAC", amount:862604, id:"Local board — already on this page as its own PAC"},
-      {name:"Real Strategies", amount:495416, id:"Vendor — largest outside vendor"},
-      {name:"Utah Central Association of Realtors PAC", amount:275993, id:"Local board redistribution"},
-      {name:"Northern Wasatch Association of Realtors PAC", amount:274946, id:"Local board — already on this page as its own PAC"},
-      {name:"Washington County Board of Realtors PAC", amount:182628, id:"Local board redistribution"},
-      {name:"JY Allen Consulting", amount:130000, id:"Vendor"},
-      {name:"Thomas Wright for Governor", amount:100000, id:"2020 GOP gubernatorial primary candidate — did NOT win, not an officeholder"},
-      {name:"Consolidated Direct Mail Inc.", amount:123903, id:"Vendor — same one NWAOR and Salt Lake Board also used"},
-      {name:"Utah House Republican Election Committee", amount:71000, id:"House GOP leadership PAC"},
-      {name:"Adams Leadership PAC", amount:30000, id:"Senate President's leadership PAC"},
-      {name:"Utah Republican Senate Campaign Committee", amount:25000, id:"Senate GOP leadership PAC"},
-    ],
+    {name:"National Association of REALTORS", amount:2285743, id:"National parent org — likely dues/admin remittance, not campaign spending"},
+    {name:"Utah Association of Realtors", amount:981930, id:"Own parent nonprofit — likely admin"},
+    {name:"Salt Lake Board of Realtors PAC", amount:862604, id:"Local board — already on this page as its own PAC"},
+    {name:"Real Strategies", amount:495416, id:"Vendor — largest outside vendor"},
+    {name:"Utah Central Association of Realtors PAC", amount:275993, id:"Local board redistribution"},
+    {name:"Northern Wasatch Association of Realtors PAC", amount:274946, id:"Local board — already on this page as its own PAC"},
+    {name:"Washington County Board of Realtors PAC", amount:182628, id:"Local board redistribution"},
+    {name:"JY Allen Consulting", amount:130000, id:"Vendor"},
+    {name:"Consolidated Direct Mail Inc.", amount:123903, id:"Vendor — same one NWAOR and Salt Lake Board also used"},
+    {name:"Thomas Wright for Governor", amount:100000, id:"2020 GOP gubernatorial primary candidate — did NOT win, not an officeholder"},
+    {name:"Utah House Republican Election Committee", amount:71000, id:"House GOP leadership PAC"},
+    {name:"Adams Leadership PAC", amount:30000, id:"Senate President's leadership PAC"},
+    {name:"Utah Republican Senate Campaign Committee", amount:25000, id:"Senate GOP leadership PAC"},
+  ],
     note:"$9,733,938 in / $9,017,940 out, 2019-2026, all years complete — by far the largest PAC documented in this investigation, roughly 8x UHREC's total. The real structure: RPAC redistributes huge sums back down to every local Realtor board PAC AND up to its own parent orgs, while also giving directly to candidates. 630+ [DELETED] entries found across the full pull — the same mass-deletion pattern already documented at NWAOR and Salt Lake Board of Realtors. No Kyle Palmer/Irish Elk LLC connection found anywhere here, unlike UHREC/NUPAC — this network shows no equivalent pattern of PAC officers being paid by the PAC they run. Also: Utah House Republican Election Committee $71,000, Adams Leadership PAC $30,000, Utah Republican Senate Campaign Committee $25,000, Derek Brown for Attorney General $25,000, and Consolidated Direct Mail Inc. $123,903 (same vendor NWAOR and Salt Lake Board both used) round out the top recipients."},
 {name:"Salt Lake Board of Realtors", total:1614591, has2026:true,
     stillNeed:"identify Kelley Wright; research Majority 51 as its own PAC; pull the PAC's own registered officer names",
@@ -770,18 +852,18 @@ const pacFlows = [
 
   ],
     otherRecipients:[
-      {name:"Deseret News Publishing", amount:119965, id:"Advertising vendor, largest recipient overall"},
-      {name:"Roost Company", amount:104295, id:"Vendor — flagged elsewhere in this investigation as a phantom entity with no business registration, needs its own check"},
-      {name:"Kelley Wright", amount:83700, id:"Recurring 2021-2026, 'Campaign Expense'/'Advertising'/'Political Support' — reads as a consultant, identity not confirmed"},
-      {name:"Real Strategies", amount:81065, id:"Vendor"},
-      {name:"Access Marketing Services", amount:54500, id:"Vendor"},
-      {name:"Majority 51", amount:48793, id:"PAC-to-PAC transfer — appears Salt Lake City-focused, not independently researched"},
-      {name:"Consolidated Direct Mail", amount:23000, id:"Vendor — same one NWAOR also used"},
-      {name:"Wilson For Mayor", amount:6000, id:"2022-2024 — a mayoral candidate committee, not yet confirmed whether Wilson won office"},
-    ],
+    {name:"Deseret News Publishing", amount:119965, id:"Advertising vendor, largest recipient overall"},
+    {name:"Roost Company", amount:104295, id:"Vendor — flagged elsewhere in this investigation as a phantom entity with no business registration, needs its own check"},
+    {name:"Kelley Wright", amount:83700, id:"Recurring 2021-2026, 'Campaign Expense'/'Advertising'/'Political Support' — reads as a consultant, identity not confirmed"},
+    {name:"Real Strategies", amount:81065, id:"Vendor"},
+    {name:"Access Marketing Services", amount:54500, id:"Vendor"},
+    {name:"Majority 51", amount:48793, id:"PAC-to-PAC transfer — appears Salt Lake City-focused, not independently researched"},
+    {name:"Consolidated Direct Mail", amount:23000, id:"Vendor — same one NWAOR also used"},
+    {name:"Wilson For Mayor", amount:6000, id:"2022-2024 — a mayoral candidate committee, not yet confirmed whether Wilson won office"},
+  ],
     note:"$1,620,964 in / $1,614,591 out, 2018-2026 — the second-largest PAC donor documented in this investigation, behind only UHREC. 98 [DELETED] entries found, the same mass-deletion pattern already documented at UAR PAC and NWAOR — a third Realtor-affiliated PAC showing it."},
 {name:"Northern Wasatch Association of Realtors", total:562278, has2026:true,
-    stillNeed:"confirm whether 'UARPAC' = RPAC (see notes)",
+    stillNeed:"confirm whether \"UARPAC\" = RPAC (see notes)",
     runBy:"Rick Southwick and Bob Hill, Realtors, Primary Officers · Kristi Jeppesen, Accountant/CFO · CEO Mike Ostermiller — also a sitting MIDA board member since 2008 (a direct Governor appointment, the \"interested in military efforts\" seat), paid $5,000 directly by this PAC in 2023, and registered lobbyist since 2012 for NWAOR itself, Utah Association of Realtors, and Utah Property Rights Coalition. His lobbying partner Chris Kyler, UAR's CEO, made $908,507 in 2024 — both men are paid by their association as staff, then paid again by that same association as its own hired lobbyist.",
     fundedBy:[
       {name:"Utah Association of REALTORS", amount:360603, id:"State parent org — already on this page as its own PAC (RPAC)"},
@@ -795,12 +877,12 @@ const pacFlows = [
     {name:"Sharon Bolos", amount:10510, id:"Weber County Commission, Seat B incumbent — recurring recipient, 2021-2026"},
   ],
     otherRecipients:[
-      {name:"Consolidated Direct Mail Inc.", amount:82758, id:"Direct-mail vendor, 2022-2025 — not a candidate"},
-      {name:"Access LLC / Access Media", amount:26500, id:"Vendor — $7,500 explicitly tagged 'Gage Froerer Campaign Digital Ads,' 2018"},
-      {name:"Steve Hiatt", amount:15000, id:"Paid every year since 2020 — reads as NWAOR's own government-affairs consultant/lobbyist, not an officeholder"},
-      {name:"NUPAC", amount:12500, id:"PAC-to-PAC transfer — Northern Utah Legislative PAC"},
-      {name:"Scott Freitag", amount:11152, id:"2019, including a $3,690 mailer-reimbursement line — not confirmed as an officeholder"},
-    ],
+    {name:"Consolidated Direct Mail Inc.", amount:82758, id:"Direct-mail vendor, 2022-2025 — not a candidate"},
+    {name:"Access LLC / Access Media", amount:26500, id:"Vendor — $7,500 explicitly tagged 'Gage Froerer Campaign Digital Ads,' 2018"},
+    {name:"Steve Hiatt", amount:15000, id:"Paid every year since 2020 — reads as NWAOR's own government-affairs consultant/lobbyist, not an officeholder"},
+    {name:"NUPAC", amount:12500, id:"PAC-to-PAC transfer — Northern Utah Legislative PAC"},
+    {name:"Scott Freitag", amount:11152, id:"2019, including a $3,690 mailer-reimbursement line — not confirmed as an officeholder"},
+  ],
     note:"$512,410 in / $562,278 out, 2018-2026. NWAOR paid its own President Mark Shepherd $23,500 and its own CEO Mike Ostermiller $5,000 directly — $28,500 total to its own leadership, the same pattern of PAC officers being paid by the PAC they run already documented at NUPAC/UHREC via Irish Elk LLC. 38 [DELETED] entries found across these filings, the same mass-deletion pattern already documented at UAR PAC and Salt Lake Board of Realtors. Ostermiller and Kyler operate as a lobbying team through KKOS Lawyers, registering jointly for the same 90+ clients since 2012 including Blue Castle Holdings (nuclear), Utah Inland Port Authority, and Intermountain Power Agency — separate from any PAC money on this page."},
 {name:"National Association of REALTORS Fund", total:15000, has2026:true,
     stillNeed:"outbound giving once the current quarter closes; prior years",
@@ -890,6 +972,7 @@ function renderFlows(containerId, dataset) {
 renderFlows('flows-companies', companyFlows);
 renderFlows('flows-pacs', pacFlows);
 renderFlows('flows-individuals', individualFlows);
+renderSummary();
 
 </script>
 </body>
