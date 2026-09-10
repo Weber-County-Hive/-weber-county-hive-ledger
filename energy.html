@@ -310,6 +310,70 @@
     color:#c79a4b;
   }
 
+  /* ---- PAC key (who runs each recipient PAC) ---- */
+  .pac-key{
+    border:1px solid var(--rule);
+    background:#fffdf8;
+    margin-bottom:44px;
+  }
+  .pac-key .pac-key-head{
+    padding:18px 22px 4px;
+  }
+  .pac-key .pac-key-head h2{
+    font-family:'Source Serif 4',Georgia,serif;
+    font-size:20px;
+    font-weight:600;
+    margin:0 0 4px;
+  }
+  .pac-key .pac-key-head p{
+    font-size:13px;
+    color:var(--ink-soft);
+    margin:0 0 14px;
+  }
+  .pac-key-row{
+    display:flex;
+    align-items:flex-start;
+    gap:20px;
+    padding:16px 22px;
+    border-top:1px solid var(--rule);
+  }
+  .pac-key-row .pk-name{
+    flex:0 0 220px;
+    font-family:'Source Serif 4',Georgia,serif;
+    font-weight:600;
+    font-size:15.5px;
+    color:var(--ink);
+    line-height:1.3;
+  }
+  .pac-key-row .pk-name .pk-abbr{
+    display:block;
+    font-family:'Roboto Mono',monospace;
+    font-size:10.5px;
+    font-weight:500;
+    color:var(--gold);
+    margin-top:2px;
+  }
+  .pac-key-row .pk-desc{
+    flex:1 1 auto;
+    font-size:13.5px;
+    color:var(--ink-soft);
+    line-height:1.55;
+  }
+  .pac-key-row .pk-desc b{color:var(--ink);font-weight:600;}
+  .pac-key-note{
+    padding:16px 22px 20px;
+    border-top:1px solid var(--rule);
+    background:#efe9d8;
+    font-size:13px;
+    color:var(--ink-soft);
+    line-height:1.5;
+  }
+  .pac-key-note b{color:var(--ink);}
+  @media(max-width:640px){
+    .pac-key-row{flex-direction:column;gap:4px;}
+    .pac-key-row .pk-name{flex:none;}
+  }
+
   /* ---- Flow charts ---- */
   h2.section.flow-heading{margin-top:10px;}
   .flow-card{
@@ -544,6 +608,47 @@
   </div>
 
   <div class="grand-summary" id="grand-summary"></div>
+
+  <div class="pac-key">
+    <div class="pac-key-head">
+      <h2>Who these PACs are</h2>
+      <p>Every leadership and industry PAC that appears as a recipient on this page — what it is and who runs it, per each PAC's own official state filing.</p>
+    </div>
+    <div class="pac-key-row">
+      <div class="pk-name">UHREC<span class="pk-abbr">Utah House Republican Election Committee</span></div>
+      <div class="pk-desc">The Utah House Republican caucus's official leadership PAC. Per its Statement of Organization: <b>Mike Schultz</b> (Speaker of the House) and <b>Casey Snider</b> (Majority Leader) are Primary Officers; <b>Candice Pierucci</b> (Majority Whip) is an Officer. <b>Kyle Palmer</b> is CFO/Treasurer, with sole signature authority over disbursements.</div>
+    </div>
+    <div class="pac-key-row">
+      <div class="pk-name">URSCC<span class="pk-abbr">Utah Republican Senate Campaign Committee</span></div>
+      <div class="pk-desc">The Utah Senate Republican caucus's official leadership PAC. Per its Statement of Organization: <b>J. Stuart Adams</b> (Senate President) and <b>Kirk Cullimore</b> (State Senator) are Primary Officers. <b>Kyle Palmer</b> is CFO/Treasurer — the same treasurer who runs UHREC.</div>
+    </div>
+    <div class="pac-key-row">
+      <div class="pk-name">Adams Leadership PAC</div>
+      <div class="pk-desc">Senate President <b>J. Stuart Adams'</b> personal leadership PAC — separate from URSCC, the caucus-wide committee he also co-leads. Filed from Lehi, UT.</div>
+    </div>
+    <div class="pac-key-row">
+      <div class="pk-name">House Speaker Leadership PAC</div>
+      <div class="pk-desc">Speaker <b>Mike Schultz's</b> personal leadership PAC — separate from UHREC, the caucus-wide committee he also co-leads. Director: Mike Schultz; Chief of Staff: Abby Osborne; CFO/Treasurer: <b>Kyle Palmer</b>.</div>
+    </div>
+    <div class="pac-key-row">
+      <div class="pk-name">Governors Leadership PAC</div>
+      <div class="pk-desc">A gubernatorial leadership PAC, active in this dataset in 2018 and 2020. Current officer/leadership structure not yet independently confirmed in this research.</div>
+    </div>
+    <div class="pac-key-row">
+      <div class="pk-name">Dominion Energy PAC</div>
+      <div class="pk-desc"><b>Corynne Arnett</b>, Primary Officer — the only name on record, from the PAC's dissolution filing signature (not a full Statement of Organization, so other officers, if any, aren't confirmed). Funded by parent company Dominion Energy Inc.</div>
+    </div>
+    <div class="pac-key-row">
+      <div class="pk-name">Utah Petroleum Association PAC</div>
+      <div class="pk-desc">Chairman <b>Brad Shafer</b> (Marathon Petroleum); Vice Chairman <b>Chad Calvert</b> (Chevron); Secretary/Treasurer <b>Rikki Hrenko-Browning</b> (President, Utah Petroleum Association); Trustees Cameron Cuch and Spencer Kimball. Funded largely by the trade association itself and member oil companies.</div>
+    </div>
+    <div class="pac-key-note">
+      <b>Worth noting:</b> Kyle Palmer serves as CFO/Treasurer of four separate PACs appearing on this page at once — UHREC, URSCC, Adams Leadership PAC, and House Speaker Leadership PAC — giving him disbursement authority across every major Republican legislative leadership committee in the state simultaneously. This is his registered role per each PAC's own official filing, not an inference.
+    </div>
+    <div class="pac-key-note">
+      <b>Why totals on this page are hard to fully trace:</b> most donors here give through more than one channel at once — a direct check to an individual legislator, plus separate checks to one or more of these leadership PACs, which then redistribute their own pooled money to many of the same legislators. A single donor's real influence on a specific recipient can arrive by both paths simultaneously, and those paths don't always show up connected in a single disclosures.utah.gov search. The totals on this page count each donor's own outbound giving once; they do not attempt to trace money a second time after it passes through a PAC.
+    </div>
+  </div>
 
   <div class="note">
     <strong>How to read this list.</strong> Every figure comes from itemized state campaign-finance filings. Some donor totals cover their <em>entire</em> documented giving; others cover only what's been fully pulled so far (marked with a <strong>+</strong>). The recipient shown on the back of each tile is that donor's single largest documented recipient — not necessarily their only one. This page is a filtered slice of the full donor ledger — the PACs and lobbyists who move this money across every industry are documented once, on the main ledger page, not repeated here.
