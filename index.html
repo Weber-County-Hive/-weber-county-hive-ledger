@@ -54,11 +54,12 @@
   .controls{margin-bottom:32px;}
   .search-row{
     display:flex;
+    flex-wrap:wrap;
     gap:10px;
     margin-bottom:14px;
   }
   #search-input{
-    flex:1;
+    flex:1 1 220px;
     font-family:'Inter', sans-serif;
     font-size:0.95rem;
     padding:11px 14px;
@@ -68,7 +69,7 @@
     color:var(--ink);
   }
   #search-input:focus{outline:2px solid var(--amber); outline-offset:-1px;}
-  #sort-select{
+  #tag-select, #sort-select{
     font-family:'Inter', sans-serif;
     font-size:0.85rem;
     padding:11px 12px;
@@ -76,31 +77,10 @@
     border-radius:4px;
     background:var(--paper-card);
     color:var(--ink-dim);
+    flex:0 1 auto;
+    max-width:220px;
   }
-  .tag-cloud{
-    display:flex;
-    flex-wrap:wrap;
-    gap:7px;
-  }
-  .tag-chip{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:10.5px;
-    letter-spacing:0.5px;
-    color:var(--ink-dim);
-    background:var(--paper-card-2);
-    border:1px solid var(--border);
-    padding:4px 10px;
-    border-radius:12px;
-    cursor:pointer;
-    user-select:none;
-    transition:background .12s,color .12s,border-color .12s;
-  }
-  .tag-chip:hover{border-color:var(--amber);}
-  .tag-chip.active{
-    background:var(--rust);
-    border-color:var(--rust);
-    color:#fdf3ea;
-  }
+  #tag-select:focus, #sort-select:focus{outline:2px solid var(--amber); outline-offset:-1px;}
   .results-count{
     font-family:'Inter', sans-serif;
     font-size:0.8rem;
@@ -137,16 +117,58 @@
     padding:3px 10px;
     border-radius:3px;
   }
+  .card-dates{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+  }
   .card-date{
     font-family:'IBM Plex Mono', monospace;
     font-size:11px;
     color:var(--ink-dimmer);
+  }
+  .card-updated{
+    display:inline-flex;
+    align-items:center;
+    gap:5px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10.5px;
+    color:#8a6d1a;
+    background:#f5e6a8;
+    border:1px solid #c7a838;
+    padding:2px 9px;
+    border-radius:10px;
   }
   .card h2{
     font-family:'Playfair Display', serif;
     font-size:1.55rem;
     color:var(--ink);
     margin-bottom:8px;
+  }
+  .card-total{
+    display:inline-flex;
+    align-items:baseline;
+    gap:6px;
+    font-family:'IBM Plex Mono', monospace;
+    font-weight:500;
+    font-size:1.5rem;
+    color:var(--rust);
+    background:linear-gradient(160deg, #fdf0e6 0%, #f7e4d3 100%);
+    border:1px solid #e8c9a8;
+    padding:6px 14px;
+    border-radius:5px;
+    margin-bottom:14px;
+  }
+  .card-total .ct-plus{font-size:1.1rem; color:var(--amber);}
+  .card-total .ct-label{
+    font-family:'Inter', sans-serif;
+    font-weight:600;
+    font-size:0.65rem;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    color:var(--ink-dimmer);
+    margin-left:4px;
   }
   .card .dek{
     font-family:'Source Serif 4', serif;
@@ -212,13 +234,15 @@
     <div class="controls">
       <div class="search-row">
         <input id="search-input" type="text" placeholder="Search by title, summary, or tag…" autocomplete="off">
+        <select id="tag-select">
+          <option value="">All tags</option>
+        </select>
         <select id="sort-select">
           <option value="newest">Newest first</option>
           <option value="oldest">Oldest first</option>
           <option value="title">Title (A–Z)</option>
         </select>
       </div>
-      <div class="tag-cloud" id="tag-cloud"></div>
       <div class="results-count" id="results-count"></div>
     </div>
 
@@ -232,30 +256,22 @@
 <script src="ledger-data.js"></script>
 <script>
 const grid = document.getElementById('ledger-grid');
-const tagCloud = document.getElementById('tag-cloud');
+const tagSelect = document.getElementById('tag-select');
 const searchInput = document.getElementById('search-input');
 const sortSelect = document.getElementById('sort-select');
 const resultsCount = document.getElementById('results-count');
-
-let activeTag = null;
 
 // Build the full tag set across all entries (entries without tags simply contribute none)
 const allTags = Array.from(new Set(
   LEDGER_ENTRIES.flatMap(e => e.tags || [])
 )).sort();
 
-function renderTagCloud() {
-  tagCloud.innerHTML = '';
+function renderTagSelect() {
   allTags.forEach(tag => {
-    const chip = document.createElement('span');
-    chip.className = 'tag-chip' + (activeTag === tag ? ' active' : '');
-    chip.textContent = tag;
-    chip.addEventListener('click', () => {
-      activeTag = activeTag === tag ? null : tag;
-      renderTagCloud();
-      renderGrid();
-    });
-    tagCloud.appendChild(chip);
+    const opt = document.createElement('option');
+    opt.value = tag;
+    opt.textContent = tag;
+    tagSelect.appendChild(opt);
   });
 }
 
@@ -276,14 +292,17 @@ function matchesSearch(entry, q) {
 
 function sortEntries(list) {
   const mode = sortSelect.value;
-  const withDate = list.filter(e => e.date);
-  const withoutDate = list.filter(e => !e.date);
+  // "Newest"/"oldest" sort by whichever is more recent for that entry —
+  // its update date if it has one, otherwise its original publish date.
+  const effectiveDate = e => e.updated || e.date;
+  const withDate = list.filter(e => effectiveDate(e));
+  const withoutDate = list.filter(e => !effectiveDate(e));
   if (mode === 'title') {
     return [...list].sort((a, b) => a.title.localeCompare(b.title));
   }
   withDate.sort((a, b) => mode === 'oldest'
-    ? new Date(a.date) - new Date(b.date)
-    : new Date(b.date) - new Date(a.date));
+    ? new Date(effectiveDate(a)) - new Date(effectiveDate(b))
+    : new Date(effectiveDate(b)) - new Date(effectiveDate(a)));
   // Undated entries (older pieces published before dates were tracked) sort to the end
   return [...withDate, ...withoutDate];
 }
@@ -291,6 +310,7 @@ function sortEntries(list) {
 function renderGrid() {
   const q = searchInput.value.trim().toLowerCase();
   let filtered = LEDGER_ENTRIES.filter(e => matchesSearch(e, q));
+  const activeTag = tagSelect.value;
   if (activeTag) {
     filtered = filtered.filter(e => (e.tags || []).includes(activeTag));
   }
@@ -304,10 +324,14 @@ function renderGrid() {
     card.innerHTML = `
       <div class="card-top-row">
         <span class="case-tag">${e.tag}</span>
-        ${e.date ? `<span class="card-date">${formatDate(e.date)}</span>` : ''}
+        <div class="card-dates">
+          ${e.date ? `<span class="card-date">Published ${formatDate(e.date)}</span>` : ''}
+          ${e.updated ? `<span class="card-updated">↻ Updated ${formatDate(e.updated)}</span>` : ''}
+        </div>
       </div>
       <h2>${e.title}</h2>
       <div class="dek">${e.dek}</div>
+      ${e.total ? `<div class="card-total">$${e.total.toLocaleString()}${e.totalPlus ? '<span class="ct-plus">+</span>' : ''}<span class="ct-label">documented</span></div>` : ''}
       <p class="summary">${e.summary}</p>
       ${tagsHtml ? `<div class="card-tags">${tagsHtml}</div>` : ''}
       <a class="open-link" href="${e.url}">Open the visualization →</a>
@@ -332,8 +356,9 @@ function renderGrid() {
 
 searchInput.addEventListener('input', renderGrid);
 sortSelect.addEventListener('change', renderGrid);
+tagSelect.addEventListener('change', renderGrid);
 
-renderTagCloud();
+renderTagSelect();
 renderGrid();
 </script>
 </body>
