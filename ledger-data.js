@@ -19,17 +19,18 @@ const LEDGER_ENTRIES = [
   {
     tag: "Case 02",
     title: "Follow the Money — UWHA, Election Hive, and the PAC That Isn't a PAC",
-    dek: "A tip about one nonprofit leads to a Super PAC attorney, a self-dealing treasurer, and $730,000 in political money",
+    dek: "A tip about one nonprofit leads to a Super PAC attorney, a treasurer whose own firm was paid, and a committee that took in $360,000 and spent $370,350",
     summary: "How a public tip about Utah Workforce Housing Advocacy traces through a Political Issues Committee that moved $360,000 in and $370,350 out — including a $25,000 payment to a PAC treasurer's own firm and two same-day contribution refunds.",
+    updated: "2026-09-30",
     url: "follow-the-money-uwha.html",
-    total: 730000,
-    tags: ["UWHA", "Election Hive", "PIC", "self-dealing", "nonprofit"]
+    tags: ["UWHA", "Election Hive", "PIC", "treasurer payments", "nonprofit"]
   },
   {
     tag: "Case 03",
     title: "The Roybal Chain: How One PAC Funds a County Commissioner, a Realtors' Association, and the Man Who Registered It at His Own House",
     dek: "A PAC registered at a lobbyist's home, a Senate President's own leadership PAC, and a real estate trade association all lead to the same Weber County Commissioner",
     summary: "Chris Roybal's Utah Forward PAC, Adams Leadership PAC, and a century-old realtors' association all funded Gage Froerer's campaigns while he voted to advance the West Weber Inland Port — plus a paid consultant who was simultaneously the county's own economic development director, and a separate housing authority paying Froerer's own family business.",
+    updated: "2026-09-30",
     url: "west-weber-pac-chain.html",
     tags: ["Gage Froerer", "Utah Forward PAC", "Adams Leadership PAC", "Weber County Commission", "inland port", "real estate"]
   },
@@ -47,6 +48,7 @@ const LEDGER_ENTRIES = [
     title: "The Payment That Disappeared",
     dek: "A $62,500 check to a company managed by MIDA's own director appears in one report and is missing from the next",
     summary: "Utah Workforce Housing Advocacy's interim report to the state shows two checks, $62,500 total, paid to BizDevOps Consulting, LLC — a company whose only registered principal is managed by Daniel Hemmert, now MIDA's Executive Director. UWHA's year-end final report, covering the same money and the same period, includes neither check. Separately, the nonprofit's own state corporate filing lists a set of officers and directors that largely doesn't match the board shown on its public website.",
+    updated: "2026-09-30",
     url: "the-payment-that-disappeared.html",
     total: 62500,
     tags: ["UWHA", "MIDA", "Dan Hemmert", "BizDevOps Consulting", "nonprofit", "disappearing filing"]
@@ -58,6 +60,7 @@ const LEDGER_ENTRIES = [
     summary: "Every company, PAC, and individual documented as a major Utah political donor across this investigation, ranked and flippable to see who each one gave the most to — plus a \"Who these people are\" breakdown of the lobbyists and officials who run the network.",
     url: "biggest-donors-flip.html",
     date: "2026-09-04",
+    updated: "2026-09-30",
     tags: [
       "UHREC", "URSCC", "NUPAC", "HSLPAC", "Adams Leadership PAC",
       "Lincoln Hill Partners", "Lincoln Hill PAC", "Irish Elk LLC",
@@ -72,13 +75,13 @@ const LEDGER_ENTRIES = [
   {
     tag: "Case 07",
     title: "Energy Money",
-    dek: "The energy sector's slice of the donor ledger — utilities, oil, rail, and energy PACs, ranked by documented giving.",
-    summary: "PacifiCorp, Union Pacific Railroad, EnergySolutions, Torus, Big West Oil, Chevron, rPlus Energies, Edison Electric Institute, Dominion Energy PAC, and Utah Petroleum Association PAC — ten energy-sector donors, split out from the full donor ledger, with each donor's officeholder recipients separated from PACs, committees, and non-officeholders.",
+    dek: "The energy sector's slice of the donor ledger — utilities, oil, rail and energy PACs, with year-by-year giving and who runs each PAC.",
+    summary: "PacifiCorp, Union Pacific Railroad, EnergySolutions, Torus, Big West Oil, Chevron, rPlus Energies, Edison Electric Institute, Dominion Energy PAC and Utah Petroleum Association PAC. Each card shows giving by year, the largest recipients, and the officers on each PAC's state registration. Updated 9/30/26 with complete Union Pacific and Torus records and the Utah Petroleum Association PAC's full export.",
     url: "energy.html",
-    total: 1245235,
+    total: 1580871,
     totalPlus: true,
     date: "2026-09-04",
-    updated: "2026-09-10",
+    updated: "2026-09-30",
     tags: [
       "PacifiCorp", "Union Pacific Railroad", "EnergySolutions", "Torus",
       "Big West Oil", "Chevron", "rPlus Energies", "Edison Electric Institute",
@@ -91,14 +94,14 @@ const LEDGER_ENTRIES = [
     tag: "Case 08",
     title: "Real Estate Money",
     dek: "The real estate industry's slice of the donor ledger — Realtor association PACs and the people who run them.",
-    summary: "RPAC, Salt Lake Board of Realtors, NWAOR, National Association of REALTORS Fund, and Northern Wasatch HBA PAC — five real-estate-industry PACs, split out from the full donor ledger, plus a \"Who these people are\" section on Mike Ostermiller, Chris Kyler, Mike Schultz, Mark Shepherd, J. Stuart Adams, Jed Nilson, and Gage Froerer.",
+    summary: "RPAC, Salt Lake Board of Realtors, NWAOR, National Association of REALTORS Fund, Tooele County Board of Realtors, Utah Valley Home Builders Association PAC, Southern Utah Home Builders Association PAC, Salt Lake Home Builders Association PAC, and Northern Wasatch HBA PAC — nine real-estate-industry PACs, split out from the full donor ledger, plus a \"Who these people are\" section on Mike Ostermiller, Chris Kyler, Mike Schultz, Mark Shepherd, J. Stuart Adams, Jed Nilson, and Gage Froerer.",
     url: "realestate.html",
-    total: 11212459,
+    total: 10854052,
     totalPlus: true,
     date: "2026-09-04",
-    updated: "2026-09-10",
+    updated: "2026-09-30",
     tags: [
-      "RPAC", "Salt Lake Board of Realtors", "NWAOR", "Northern Wasatch HBA PAC",
+      "RPAC", "Salt Lake Board of Realtors", "NWAOR", "Northern Wasatch HBA PAC", "Tooele County Board of Realtors", "Southern Utah Home Builders", "Salt Lake Home Builders",
       "National Association of REALTORS Fund", "Mike Ostermiller", "Chris Kyler",
       "Mike Schultz", "Mark Shepherd", "J. Stuart Adams", "Jed Nilson",
       "Gage Froerer", "MIDA", "KKOS Lawyers", "campaign finance", "donor ledger"
@@ -107,28 +110,30 @@ const LEDGER_ENTRIES = [
   {
     tag: "Case 09",
     title: "Everything Else",
-    dek: "The major donors that don't fit a single industry bucket — an auto/real-estate conglomerate, a banking trade association, a metal recycler, two more PACs, and the largest individual donor in this whole investigation.",
-    summary: "Larry H. Miller Company, Utah Bankers Association, Utah Metal Works, Utah Chamber PAC, Zions Bancorporation PAC, and Gershon Barnett — six donors split out from the full donor ledger because they don't fit any single industry. Includes a corrected Utah Bankers Association total (a full DEX export found roughly $225,000 more than an earlier manual estimate), Utah Chamber PAC's sudden $60,000 single-day push after years of dormancy, and Zions Bancorporation PAC giving the Utah Democratic Party four times what it gave the Republican Party.",
+    dek: "The major donors that don't fit one industry — a banking trade group, a bank's employee PAC, a metal recycler, the Chamber's PAC, the tourism industry's PAC, the Utah PACs of Boeing and The Home Depot, an auto and real-estate company, a New York donor, and the committee two of them funded.",
+    summary: "Larry H. Miller Company, Utah Bankers Association, Utah Metal Works, Utah Chamber PAC, Tourism Works PAC, The Boeing Company PAC, The Home Depot PAC, Zions Bancorporation PAC, Gershon Barnett, Utahns for Balanced Government and Beacon Metals. Includes who runs each PAC, the $100,000 the committee returned to the Bankers Association, and Zions Bancorporation PAC giving the Utah Democratic Party four times what it gave the Republican Party.",
     url: "everythingelse.html",
-    total: 1608944,
+    total: 2335011,
     totalPlus: true,
     date: "2026-09-10",
+    updated: "2026-09-30",
     tags: [
       "Larry H. Miller Company", "Utah Bankers Association", "Utah Metal Works",
-      "Utah Chamber PAC", "Zions Bancorporation PAC", "Gershon Barnett",
-      "Utahns for Balanced Government", "Spencer Cox", "campaign finance",
+      "Utah Chamber PAC", "Tourism Works PAC", "Boeing PAC", "Home Depot PAC", "Zions Bancorporation PAC", "Gershon Barnett",
+      "Utahns for Balanced Government", "Marty Carpenter", "Beacon Metals", "Spencer Cox", "campaign finance",
       "donor ledger"
     ]
   },
   {
     tag: "Case 10",
     title: "Tech Money",
-    dek: "The tech sector's slice of the donor ledger — telecom, semiconductors, national tech PACs, and Utah's own tech-industry trade groups.",
-    summary: "Meta's Forge the Future Project ($270,000 to two candidates in a single day), Lumen Technologies, Micron Technology, Dell Technologies PAC, and the full Silicon Slopes Commons → Slopes PAC → Utah Tech Leads money chain — eight tech-sector donors split out from the full donor ledger. Includes an unresolved conflict between two research passes over whether \"Utah Tech PAC\" was ever active.",
+    dek: "The tech sector's slice of the donor ledger — telecom, semiconductors, national tech PACs, and Utah's own tech-industry groups, with who runs each committee.",
+    summary: "Meta's Forge the Future Project ($251,446 spent on two candidates in a single day), Lumen Technologies, Micron Technology, Dell Technologies PAC, Utah Tech PAC, and the Silicon Slopes Commons → Slopes PAC → Utah Tech Leads chain. Updated 9/30/26: Lumen, Micron and Dell are now complete, and Utah Tech PAC's 2017-2018 activity is confirmed from its own exports.",
     url: "tech.html",
-    total: 649501,
+    total: 650510,
     totalPlus: true,
     date: "2026-09-10",
+    updated: "2026-09-30",
     tags: [
       "Meta", "Forge the Future Project", "Lumen Technologies", "Micron Technology",
       "IM Flash Technologies", "Dell Technologies PAC", "Silicon Slopes Commons",
@@ -140,14 +145,26 @@ const LEDGER_ENTRIES = [
     tag: "Case 11",
     title: "Money By Industry",
     dek: "The full donor ledger, split by industry — Real Estate, Energy, Everything Else, and Tech, each its own page.",
-    summary: "An index tying together every industry-specific donor ledger page built so far — 29 donors and PACs researched and organized by sector, with a running total for each industry. Numbers are marked as a floor, not a final count, since most entities are still partially researched.",
+    summary: "An index tying together every industry-specific donor ledger page built so far — 38 donors and PACs researched and organized by sector, with a running total for each industry. Numbers are marked as a floor, not a final count, since most entities are still partially researched.",
     url: "industries.html",
-    total: 14716139,
+    total: 15420444,
     totalPlus: true,
     date: "2026-09-10",
+    updated: "2026-09-30",
     tags: [
       "Real Estate", "Energy", "Everything Else", "Tech", "campaign finance",
       "donor ledger"
     ]
+  },
+  {
+    tag: "Case 12",
+    title: "Deidre Henderson — Money In, Money Out",
+    dek: "Every contribution to and payment from Lt. Gov. Deidre Henderson's campaign committee, 2020-2025, from its own state filings.",
+    summary: "$123,546 in new contributions (plus a $47,234.25 balance carried over from her earlier Senate committee) and $111,032.50 spent across six report periods. Her largest contributor is Friends of Spencer Cox ($20,000), followed by Gershon Barnett ($10,000), Chevron ($8,000) and PacifiCorp ($7,500). Payments include $5,000 to her own chief of staff.",
+    url: "deidre-henderson.html",
+    total: 123546,
+    date: "2026-09-03",
+    updated: "2026-09-30",
+    tags: ["Deidre Henderson", "Lieutenant Governor", "Spencer Cox", "Gershon Barnett", "Chevron", "PacifiCorp", "Dan Hemmert", "campaign finance"]
   },
 ];
