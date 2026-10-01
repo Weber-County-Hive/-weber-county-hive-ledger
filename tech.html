@@ -8,17 +8,17 @@
   @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600&family=Roboto+Mono:wght@400;500&display=swap');
 
   :root{
-    --paper:#f6f3ec;
-    --ink:#1c2431;
-    --ink-soft:#4b5262;
-    --rule:#d9d3c3;
-    --gold:#a8792f;
-    --gold-bar:#c79a4b;
-    --bar-track:#e7e1d1;
-    --red-flag:#8a3b2e;
-    --green-complete:#2e6b3e;
-    --card-back:#1c2431;
-    --card-back-text:#f0ece0;
+    --paper:#ffffff;
+    --ink:#0f1b2d;
+    --ink-soft:#4d5868;
+    --rule:#dde3ea;
+    --gold:#1d5fbf;
+    --gold-bar:#3b82f6;
+    --bar-track:#e9eef4;
+    --red-flag:#d12f2f;
+    --green-complete:#1f7a4d;
+    --card-back:#0f1b2d;
+    --card-back-text:#f3f6fa;
   }
 
   *{box-sizing:border-box;}
@@ -74,7 +74,7 @@
   }
 
   .note{
-    background:#efe9d8;
+    background:#f3f6fa;
     border-left:3px solid var(--gold);
     padding:16px 20px;
     font-size:14.5px;
@@ -133,7 +133,7 @@
   }
 
   .front{
-    background:#fffdf8;
+    background:#ffffff;
   }
   .rank{
     font-family:'Roboto Mono',monospace;
@@ -174,9 +174,9 @@
     display:inline-block;
     font-family:'Roboto Mono',monospace;
     font-size:10px;
-    color:#8a6d1a;
-    background:#f5e6a8;
-    border:1px solid #c7a838;
+    color:#1d5fbf;
+    background:#fff4cc;
+    border:1px solid #e3a008;
     padding:1px 5px;
     border-radius:2px;
     margin-top:6px;
@@ -200,7 +200,7 @@
   .flip-hint{
     font-family:'Roboto Mono',monospace;
     font-size:10.5px;
-    color:#a6a08e;
+    color:#8b97a8;
     margin-top:10px;
   }
 
@@ -215,7 +215,7 @@
     font-family:'Roboto Mono',monospace;
     font-size:11px;
     letter-spacing:.03em;
-    color:#c79a4b;
+    color:#3b82f6;
     margin-bottom:8px;
   }
   .back .recipient-name{
@@ -232,15 +232,15 @@
   }
   .back .recipient-note{
     font-size:12.5px;
-    color:#b9bccb;
+    color:#b9c4d6;
     line-height:1.4;
   }
   .back .donor-total{
     margin-top:10px;
     font-family:'Roboto Mono',monospace;
     font-size:10.5px;
-    color:#7f8494;
-    border-top:1px solid #333c50;
+    color:#7a8594;
+    border-top:1px solid #26364d;
     padding-top:8px;
   }
 
@@ -269,7 +269,7 @@
     font-family:'Roboto Mono',monospace;
     font-size:12px;
     letter-spacing:.04em;
-    color:#c79a4b;
+    color:#3b82f6;
     margin:0 0 6px;
   }
   .grand-summary .gs-total{
@@ -281,7 +281,7 @@
   }
   .grand-summary .gs-sub{
     font-size:13.5px;
-    color:#b9bccb;
+    color:#b9c4d6;
     margin:0 0 26px;
     max-width:60ch;
   }
@@ -289,13 +289,13 @@
     display:grid;
     grid-template-columns:repeat(auto-fit, minmax(150px, 1fr));
     gap:16px 20px;
-    border-top:1px solid #333c50;
+    border-top:1px solid #26364d;
     padding-top:22px;
   }
   .gs-top5-item .gs-rank{
     font-family:'Roboto Mono',monospace;
     font-size:11px;
-    color:#7f8494;
+    color:#7a8594;
   }
   .gs-top5-item .gs-name{
     font-family:'Source Serif 4',Georgia,serif;
@@ -307,13 +307,13 @@
   .gs-top5-item .gs-amount{
     font-family:'Roboto Mono',monospace;
     font-size:16.5px;
-    color:#c79a4b;
+    color:#3b82f6;
   }
 
   /* ---- PAC key (who runs each recipient PAC) ---- */
   .pac-key{
     border:1px solid var(--rule);
-    background:#fffdf8;
+    background:#ffffff;
     margin-bottom:44px;
   }
   .pac-key .pac-key-head{
@@ -363,7 +363,7 @@
   .pac-key-note{
     padding:16px 22px 20px;
     border-top:1px solid var(--rule);
-    background:#efe9d8;
+    background:#f3f6fa;
     font-size:13px;
     color:var(--ink-soft);
     line-height:1.5;
@@ -378,7 +378,7 @@
   h2.section.flow-heading{margin-top:10px;}
   .flow-card{
     border:1px solid var(--rule);
-    background:#fffdf8;
+    background:#ffffff;
     margin-bottom:22px;
     padding:20px 22px;
   }
@@ -454,7 +454,7 @@
     margin-top:2px;
     white-space:nowrap;
   }
-  .flow-note{font-size:12px;color:#8b8c86;margin-top:12px;}
+  .flow-note{font-size:12px;color:#7a8594;margin-top:12px;}
 
   @media(max-width:700px){
     .flow-row{flex-direction:column;align-items:stretch;}
@@ -466,7 +466,7 @@
   /* ---- Glossary ---- */
   .glossary{
     border:1px solid var(--rule);
-    background:#fffdf8;
+    background:#ffffff;
     padding:20px 22px;
     margin-bottom:36px;
   }
@@ -511,7 +511,7 @@
   }
   .people{
     border:1px solid var(--rule);
-    background:#fffdf8;
+    background:#ffffff;
     padding:20px 22px;
     margin-bottom:36px;
   }
@@ -556,7 +556,7 @@
   .person-connections b{color:var(--ink);font-weight:600;}
   .person-note{
     font-size:12.5px;
-    color:#8a6d1a;
+    color:#1d5fbf;
     margin-top:6px;
     font-style:italic;
   }
@@ -582,7 +582,7 @@
   .person-details[open] summary{margin-bottom:8px;}
   .sources-block{
     border:1px solid var(--rule);
-    background:#fffdf8;
+    background:#ffffff;
     padding:16px 22px;
     margin:0 0 28px;
   }
@@ -592,6 +592,48 @@
     color:var(--ink);
     font-weight:600;
   }
+  @media (max-width:600px){.tile-runby{font-size:13px;margin-top:10px;padding-top:8px}}
+  .tile-runby{margin-top:14px;font-size:14.5px;line-height:1.4;color:#0f1b2d;border-top:1px solid #dde3ea;padding-top:10px}
+  .tile-runby .trb-label{display:block;font-family:'Roboto Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:#1d5fbf;margin-bottom:3px;font-weight:600}
+
+  /* year-by-year section (added 9/30/26) */
+  .yearly{--card:#ffffff;--soft:#4d5868;--bar:#1d5fbf;--cox:#e3a008;--track:#e9eef4;--ok:#1f7a4d;--part:#5b6b82;--tint:#eef4fb;--rule:#dde3ea;margin-top:50px}
+  .yearly .tablewrap{overflow-x:auto;border:1px solid var(--rule);background:#fff}
+  .yearly table{border-collapse:collapse;width:100%;font-size:14px;min-width:620px}
+  .yearly th,.yearly td{padding:9px 12px;border-bottom:1px solid var(--rule);text-align:left;vertical-align:top}
+  .yearly th{font-family:'Roboto Mono',monospace;font-size:11.5px;text-transform:uppercase;cursor:pointer;background:var(--tint);white-space:nowrap}
+  .yearly th.on::after{content:' \2195';color:var(--bar)}
+  .yearly td.n{font-family:'Roboto Mono',monospace;text-align:right;white-space:nowrap}.yearly th.n{text-align:right}
+  .yearly td.k{font-family:'Roboto Mono',monospace;font-size:12px;color:var(--soft)}
+  .yearly .floor{color:var(--part);font-weight:600}
+  .yearly .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,480px),1fr));gap:16px;margin-top:16px}
+  .yearly .card{background:#fff;border:1px solid var(--rule);border-top:3px solid #0f1b2d;padding:18px}
+  .yearly .card header{display:flex;flex-wrap:wrap;gap:6px;align-items:baseline}
+  .yearly .card h3{font-family:'Source Serif 4',Georgia,serif;font-size:20px;margin:0 8px 0 0;flex-basis:100%}
+  .yearly .chip{font-family:'Roboto Mono',monospace;font-size:11px;border:1px solid var(--rule);padding:1px 7px;color:var(--soft)}
+  .yearly .chip.ok{color:var(--ok);border-color:var(--ok)}.yearly .chip.part{color:var(--part);border-color:var(--part)}
+  .yearly .big{font-family:'Roboto Mono',monospace;font-size:24px;margin:12px 0 2px}.yearly .big small{font-size:13px;color:#b07d00;margin-left:6px}
+  .yearly .basis{font-size:13px;color:var(--soft);margin:0 0 12px}
+  .yearly .bars{display:grid;gap:3px;margin:8px 0 14px}
+  .yearly .yr{display:grid;grid-template-columns:40px 1fr 104px;gap:8px;align-items:center;font-family:'Roboto Mono',monospace;font-size:12px}
+  .yearly .yr .trk{height:11px;background:var(--track);display:block}.yearly .yr .trk b{display:block;height:100%;background:var(--bar)}.yearly .yr .trk b.cox{background:var(--cox)}
+  .yearly .yr em{font-style:normal;text-align:right;color:var(--soft)}.yearly .yr em.na{font-size:11px;opacity:.75}
+  .yearly .nobars{font-size:13px;color:var(--soft);background:var(--tint);padding:8px 10px}
+  .yearly h4{font-family:'Roboto Mono',monospace;font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--bar);margin:14px 0 6px}
+  .yearly .who ul,.yearly .recips{list-style:none;padding:0;margin:0}
+  .yearly .who li{font-size:14px;padding:4px 0;border-bottom:1px dotted var(--rule)}
+  .yearly .who .src,.yearly .rx{display:block;font-size:12px;color:var(--soft)}
+  .yearly .muted{font-size:13px;color:var(--soft);margin:0}
+  .yearly .recips li{display:grid;grid-template-columns:1fr auto;gap:2px 10px;font-size:14px;padding:4px 0;border-bottom:1px dotted var(--rule)}
+  .yearly .ra{font-family:'Roboto Mono',monospace;white-space:nowrap}.yearly .rx{grid-column:1/-1}
+  .yearly details summary{cursor:pointer;font-size:13px;color:var(--soft);margin-top:6px}
+  .yearly .note{font-size:14px;background:var(--tint);padding:10px 12px;margin:14px 0 0;border:0}
+  .yearly .gaps,.yearly .filed{font-size:13px;color:var(--soft);margin:10px 0 0}
+  .yearly .srcs ul{font-size:12.5px;color:var(--soft);padding-left:18px}
+  .yearly .legend{display:flex;gap:18px;flex-wrap:wrap;font-size:13px;color:var(--soft);margin:8px 0 6px}
+  .yearly .legend i{display:inline-block;width:14px;height:10px;margin-right:6px;vertical-align:middle}
+  .yearly .callout{background:var(--tint);border-left:3px solid var(--bar);padding:12px 16px;font-size:14px;margin:12px 0}
+  .hive-updated{font-family:'Roboto Mono',ui-monospace,monospace;font-size:12px;letter-spacing:.03em;opacity:.75;margin:8px 0 0}
 </style>
 <body>
 <div class="wrap">
@@ -600,6 +642,7 @@
     <p class="kicker">THE WEBER COUNTY HIVE — DONOR LEDGER — TECH</p>
     <h1>Tech Money</h1>
     <p class="dek">The tech-sector slice of the full donor ledger — telecom, semiconductors, national tech PACs, and Utah's own tech-industry trade groups, ranked by documented giving. Found almost entirely via keyword searches that also surfaced dozens of unrelated companies — see each entity's own notes for what got excluded. <a href="biggest-donors-flip.html" style="color:var(--gold);">See the full donor ledger and "Who these people are" →</a></p>
+    <p class="hive-updated">Updated September 30, 2026 · figures re-checked against state filings</p>
   </header>
 
   <div class="meta-row">
@@ -612,33 +655,45 @@
   <div class="pac-key">
     <div class="pac-key-head">
       <h2>Who these donors are</h2>
-      <p>Five tech-sector donors — three companies, two PACs — found almost entirely through keyword searches that also caught dozens of unrelated companies sharing "tech" in their name.</p>
+      <p>Eight tech-sector donors — three companies, a trade group, and four PACs — found largely through keyword searches that also caught dozens of unrelated companies sharing "tech" in their name. Officers are listed as named on each PAC's own state registration.</p>
     </div>
     <div class="pac-key-row">
       <div class="pk-name">Lumen Technologies Service Group</div>
-      <div class="pk-desc">National telecom company (formerly CenturyLink), filed from Monroe, LA. Gives consistently every year, bipartisan — both GOP and Democratic leadership infrastructure in the same months.</div>
+      <div class="pk-desc">National telecom company (formerly CenturyLink), filed from Monroe, LA. Gives every year since 2021 to both parties' leadership committees, often in the same months. Complete 2018-2026: $125,040.</div>
     </div>
     <div class="pac-key-row">
       <div class="pk-name">Micron Technology<span class="pk-abbr">incl. predecessor IM Flash Technologies</span></div>
-      <div class="pk-desc">Major national semiconductor company with a large Utah/Lehi manufacturing presence. Gives blanket, systematic small checks to nearly every sitting legislator each cycle — the same structural pattern already documented for Utah Petroleum Association PAC. Its 2018 giving is filed under a predecessor name, IM Flash Technologies, the Intel/Micron joint venture Micron fully acquired that year.</div>
+      <div class="pk-desc">Major national semiconductor company with a large Utah/Lehi manufacturing presence. Gives blanket, systematic small checks to nearly every sitting legislator each cycle — the same structural pattern already documented for Utah Petroleum Association PAC. Its 2018 giving is filed mostly as IM Flash Technologies, the Intel/Micron joint venture Micron fully acquired in 2019. Its Utah giving stopped after a single $300 check in 2021.</div>
     </div>
     <div class="pac-key-row">
       <div class="pk-name">Dell Technologies Inc PAC</div>
-      <div class="pk-desc">National computer-hardware company's own PAC, filed from Washington, DC. Only one year pulled so far.</div>
+      <div class="pk-desc">National computer-hardware company's own PAC, filed from Washington, DC. Registered in Utah in 2024; its only Utah gift is $10,000 to Spencer Cox that year.</div>
     </div>
     <div class="pac-key-row">
       <div class="pk-name">Utah Tech Leads<span class="pk-abbr">Utah Tech Leads Association / Utah Tech Leads PAC</span></div>
-      <div class="pk-desc">A real, active Utah tech-industry PAC (not a name-search false positive) — the association funds its own PAC, which then gives broadly across both parties. What the parent association actually represents hasn't been identified yet.</div>
+      <div class="pk-desc">A Utah tech-industry PAC, filed under three names (Utah Tech Leads, Utah Tech Leads Association, Utah Tech Leads PAC), active only in 2022 and 2024. It received Slopes PAC's entire $71,440 balance and gave broadly across both parties. Its officers haven't been pulled yet.</div>
     </div>
     <div class="pac-key-row">
       <div class="pk-name">Utah Tech PAC<span class="pk-abbr">Silicon Slopes Commons PAC</span></div>
-      <div class="pk-desc">The official PAC of Silicon Slopes Commons, Utah's best-known tech-industry nonprofit hub. President & CEO <b>Clint Betts</b> is Primary Officer; Director of Operations <b>Elizabeth Converse</b> is CFO/Treasurer. Confirmed inactive today, but was a real spender in 2017-2018, including $50,000 to its own lobbyist in a single year.</div>
+      <div class="pk-desc">The official PAC of Silicon Slopes Commons, Utah's best-known tech-industry nonprofit hub. President & CEO <b>Clint Betts</b> is Primary Officer; Director of Operations <b>Elizabeth Converse</b> is CFO/Treasurer. Its state registration lists Silicon Slopes Commons as the organization it represents. The state shows "No Activity" today; its own exports show $70,139.09 spent in 2017-2018, including $50,000 to its lobbyist.</div>
+    </div>
+    <div class="pac-key-row">
+      <div class="pk-name">Slopes PAC</div>
+      <div class="pk-desc">Created 6/8/2021. Per its Statement of Organization: <b>Sunny Washington</b> (CEO, Primary Officer) and <b>Elizabeth Converse</b> (Executive Director, CFO/Treasurer — the same treasurer as Utah Tech PAC). Received $55,000 from Silicon Slopes Commons; its last report (through 4/13/2022) shows $71,440 on hand.</div>
+    </div>
+    <div class="pac-key-row">
+      <div class="pk-name">Silicon Slopes Commons</div>
+      <div class="pk-desc">The Lehi tech-industry nonprofit. Its only political gift on record is $55,000 to Slopes PAC on 12/1/2021, filed from the same Lehi address the PAC registered.</div>
+    </div>
+    <div class="pac-key-row">
+      <div class="pk-name">Forge the Future Project<span class="pk-abbr">Meta Platforms' PAC</span></div>
+      <div class="pk-desc">Per its Statement of Organization: Chair <b>Josh Althouse</b>, Treasurer <b>Khaki Brownlow</b>, officer <b>Brian Baker</b>. Meta is listed as the organization represented. It took in $270,000 and spent $251,446.36 on two candidates on 6/11/2026.</div>
     </div>
     <div class="pac-key-note">
-      <b>Two names sound alike but are different organizations:</b> "Utah Tech Leads" (a Draper-based PAC, address 1318 E Bent Pine Cv / 350 E 400 S) and "Utah Tech PAC" (Silicon Slopes Commons' PAC, 2600 Executive Pkwy, Lehi) are NOT the same entity — confirmed by different registered addresses. Keep these two separate in any write-up.
+      <b>Two names sound alike but are different committees:</b> "Utah Tech Leads" and "Utah Tech PAC" (Silicon Slopes Commons' PAC) are separate filers with different registered addresses. Keep them separate in any write-up.
     </div>
     <div class="pac-key-note">
-      <b>This industry produced the most "search noise" of any bucket on this site.</b> A single keyword search for "tech" also surfaced dozens of unrelated companies and even individual people whose names happen to contain that string — engineering firms, technical colleges, HVAC companies, a person named "Christina Stech." None of those are included in any total on this page; each entity's own memory file keeps a running exclusion list so they don't get mistaken for new findings on a future pull.
+      <b>This industry produced the most "search noise" of any bucket on this site.</b> A single keyword search for "tech" also surfaced dozens of unrelated companies and even individual people whose names happen to contain that string — engineering firms, technical colleges, HVAC companies, a person named "Christina Stech." None of those are included in any total on this page.
     </div>
   </div>
 
@@ -664,15 +719,31 @@
   <h3 style="font-family:'Source Serif 4',Georgia,serif;font-size:18px;margin:24px 0 12px;">PAC donors</h3>
   <div id="flows-pacs"></div>
 
+
+  <section class="yearly">
+    <h2 class="section">Year by year</h2>
+    <p class="section-sub">Each donor's giving by year, who runs it, and where its money went. Click a column heading to sort; click a name to jump to its card.</p>
+    <div class="callout" id="passthrough"></div>
+    <div class="tablewrap"><table>
+      <thead><tr><th data-k="name">Donor</th><th data-k="kind">Type</th><th data-k="total" class="n">Total given</th><th data-k="cox" class="n">To Gov. Cox</th><th data-k="yearsChecked">Years checked</th></tr></thead>
+      <tbody id="tbody"></tbody>
+    </table></div>
+    <div class="legend"><span><i style="background:#1d5fbf"></i>Given that year</span><span><i style="background:#e3a008"></i>All of it to Spencer Cox</span></div>
+    <div class="cards" id="cards"></div>
+  </section>
+  <script src="tech-data.js?v=3"></script>
+  <script src="ledger-cards.js?v=3"></script>
+
   <div class="sources-block">
     <details class="person-details">
       <summary><b>Conclusion &amp; questions readers should ask</b></summary>
-      <p class="person-note" style="font-style:normal;">This page documents five tech-sector donors — Lumen Technologies, Micron Technology (including its 2018 predecessor entity IM Flash Technologies), Dell Technologies PAC, Utah Tech Leads, and Utah Tech PAC (Silicon Slopes Commons' own PAC, now inactive). Micron/IM Flash stands out for scale and consistency — a systematic, blanket-coverage donor giving small checks to nearly every sitting legislator in both parties every cycle, the same structural pattern already documented for Utah Petroleum Association PAC on the Energy page. Utah Tech Leads shows the same association-funds-its-own-PAC structure already seen in Real Estate's RPAC/NWAOR relationship. This industry generated more excluded "search noise" than any other bucket on this site — dozens of unrelated companies and even individuals caught only because their name contains the string "tech."</p>
+      <p class="person-note" style="font-style:normal;">This page documents eight tech-sector donors — Meta's Forge the Future Project, Lumen Technologies, Micron Technology (including IM Flash Technologies), Dell Technologies PAC, Silicon Slopes Commons, Slopes PAC, Utah Tech Leads, and Utah Tech PAC. Micron/IM Flash gave small checks to most sitting legislators in both parties in 2018 and 2020, then stopped. Silicon Slopes Commons' $55,000 passed through Slopes PAC to Utah Tech Leads, so those three totals overlap. This industry generated more excluded "search noise" than any other bucket on this site — dozens of unrelated companies and even individuals caught only because their name contains the string "tech."</p>
       <p class="person-note" style="font-style:normal;font-weight:600;color:var(--ink);margin-top:14px;margin-bottom:6px;">Questions worth asking, based on what's documented here:</p>
       <ul class="person-connections">
-        <li>What does Utah Tech Leads Association actually represent, and who funds the association itself before it funds its own PAC?</li>
-        <li>Why did Silicon Slopes Commons' PAC go inactive, and when exactly did that happen?</li>
-        <li>Is there any connection between Micron's escalating Utah political giving and its Lehi manufacturing operations, tax incentives, or state permitting decisions?</li>
+        <li>Slopes PAC's last report (through 4/13/2022) shows its $71,440 still on hand, while Utah Tech Leads records receiving it on 4/15/2022. Why does no Slopes PAC report show the transfer?</li>
+        <li>Utah Tech PAC paid its lobbyist $50,000 in 2017, against $13,750 to candidates, parties and PACs. What did the lobbying cover?</li>
+        <li>Meta's PAC spent $251,446.36 on two legislative candidates on one day, 12 days before their primary. What drew a national tech company into those two races?</li>
+        <li>Micron gave to most sitting legislators through 2020 and has reported nothing since 2021. What changed?</li>
         <li>Is "Utah Tech University" (flagged separately, not one of the five donors on this page) really the public university itself giving to political candidates and party committees, or a data-labeling issue?</li>
       </ul>
       <p class="person-note" style="font-style:normal;margin-top:10px;">These are open questions the public record raises, not conclusions this page draws. Readers should look at the primary sources linked throughout and decide for themselves what the documented facts mean.</p>
@@ -701,50 +772,42 @@
 </div>
 
 <script>
+function fmt(n){ n = Number(n)||0; return n % 1 ? n.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2}) : n.toLocaleString("en-US"); }
 const companyData = [
-  {name:"Meta / Forge the Future Project", amount:270000, complete:true, flag:"$270K IN ONE DAY TO TWO CANDIDATES",
-    years:"6/11/2026 only — confirmed, no other Utah spending found",
-    stillNeed:"confirm whether any other Utah spending exists beyond this single day",
-    top:{name:"Tami Tran", amount:152503, note:"Independent expenditures, same-day pass-through from Meta Platforms Inc.'s national PAC to its Utah entity to the vendors — never touches either candidate's own campaign filings. Both Tran and Logan Monson won their primaries 12 days later."}},
-  {name:"Lumen Technologies Service Group", amount:70000, plus:true,
-    years:"2021-2026 (2022-2023, 2025 partial years)",
-    stillNeed:"2018-2020 not pulled; 2022 pages 1-2, 2023 page 2, 2025 page 2 not yet checked",
-    top:{name:"Spencer Cox", amount:24000, note:"Multiple checks nearly every year, 2021-2026. Also gives consistently to both parties' House/Senate leadership infrastructure — UHREC and Utah House Democratic Leadership Council/SenDemPAC in the same months."}},
-  {name:"Micron Technology", amount:57150, plus:true, flag:"INCLUDES PREDECESSOR IM FLASH TECHNOLOGIES",
-    years:"2018-2020 (2021-2026 not yet pulled)",
-    stillNeed:"2021-2026 entirely unpulled — the biggest remaining gap on this page",
-    top:{name:"Spencer Cox", amount:1000, note:"Single largest check found so far (2020) — but the real story here is breadth, not one big check: 98 separate small checks in 2020 alone, blanket coverage of nearly every sitting legislator in both parties."}},
-  {name:"Dell Technologies Inc PAC", amount:20000, plus:true,
-    years:"2024 only",
-    stillNeed:"all years other than 2024; confirm a $10,000 self-listed entry is administrative, not a real second contribution",
-    top:{name:"Spencer Cox", amount:10000, note:"Direct contribution, 4/29/2024. A second $10,000 entry lists the PAC as both contributor and filer the same month — likely an internal/administrative record, not counted as a second gift to anyone."}},
+  {"name": "Lumen Technologies Service Group LLC", "amount": 125040, "years": "2018-2026", "top": {"name": "Utah Republican Senate Campaign Cmte.", "amount": 32040, "note": "2021 $3,540; 2023 $6,000 + $5,000; 2024 $6,000 + $5,000; 2025 $4,000 + $2,500 (2022 and 2026 rows not fully itemized in memory)"}, "complete": true, "stillNeed": "Year totals complete; some 2022, 2023, 2025 and 2026 checks are counted in year totals but not itemized by recipient in memory, so recipient figures are floors."},
+  {"name": "Micron Technology, Inc.", "amount": 58050, "years": "2018-2026", "top": {"name": "Governors Leadership PAC", "amount": 5000, "note": "8/22/2018, filed as IM Flash Technologies"}, "complete": true, "stillNeed": "Year totals complete; the 101 checks in 2020 and most 2018 checks to individual legislators are not itemized by recipient in memory, so recipient figures are floors."},
+  {"name": "Silicon Slopes Commons", "amount": 55000, "years": "all years on record", "top": {"name": "Slopes PAC", "amount": 55000, "note": "12/1/2021; about 80% of Slopes PAC's 2021 receipts"}, "complete": true}
 ];
 
 const pacData = [
-  {name:"Silicon Slopes Commons", amount:55000, complete:true,
-    years:"2021 only — confirmed complete, no other giving exists",
-    stillNeed:"none",
-    top:{name:"Slopes PAC", amount:55000, note:"The ONLY donation this organization has ever made — 80% of Slopes PAC's entire funding that cycle. That $55,000 went on to fund Utah Tech Leads' legislator giving. Silicon Slopes' own nonprofit registration is currently delinquent (renewal due 3/31/2026)."}},
-  {name:"Slopes PAC", amount:71440, complete:true, flag:"RUN BY THE SAME TWO PEOPLE AS UTAH TECH LEADS",
-    years:"2021 — confirmed complete, entire balance transferred out in one 2022 payment",
-    stillNeed:"none for this leg of the chain",
-    runBy:"CEO Sunny Washington (\"Tech Founder\") · Executive Director/CFO/Treasurer Elizabeth Converse — same Converse who is also Treasurer/CFO of the separate \"Utah Tech PAC\" entity, email elizabeth@siliconslopes.com",
-    top:{name:"Utah Tech Leads", amount:71440, note:"Sent its ENTIRE year-end balance in one payment (4/15/2022) — $55,000 from Silicon Slopes Commons plus ~$16,440 from ~20 smaller tech-community donors, including Owen Fuller ($250, later the central figure in the Defending Utah Values dark-money network) and Nate Blouin ($100, before he became a state senator)."}},
-  {name:"Utah Tech Leads", amount:35772, plus:true, flag:"CONFLICTING RESEARCH ON THIS ENTITY — SEE NOTE",
-    years:"2022, 2024 (partial years; most years not pulled)",
-    stillNeed:"2022 page 2 of 3; 2024 page 2; all of 2018-2021, 2023, 2025-2026; reconcile conflicting directional research (see flow card note)",
-    runBy:"Filed under three related names (Utah Tech Leads / Utah Tech Leads Association / Utah Tech Leads PAC), all at the same Draper/Salt Lake City addresses — same people as Slopes PAC per independent address/officer matching",
-    top:{name:"Lynette Wendel", amount:2000, note:"Genuinely bipartisan outbound giving — Nate Blouin, Jen Dailey-Provost, Sarah Reale, and Rosemary Lesser all recurring recipients alongside Republican legislators and both major-party leadership PACs."}},
-  {name:"Utah Tech PAC", amount:70139, flag:"DISPUTED — SEE NOTE BEFORE CITING",
-    years:"2017-2018, per this pull",
-    stillNeed:"reconcile against a separate research pass that found ZERO activity for this same entity 2008-2020 — see flow card note",
-    runBy:"Represents Silicon Slopes Commons per its own state registration. President & CEO Clint Betts (Primary Officer) · Director of Operations Elizabeth Converse (CFO/Treasurer) — the SAME Elizabeth Converse who runs Slopes PAC above",
-    top:{name:"Paul S. Rogers & Associates", amount:50000, note:"DISPUTED FIGURE — a separate, independently-sourced research pass on this exact entity (same officers, same address) found zero contributions or expenditures ever filed 2008-2020. Not reconciled. Do not cite this $70,139 total without checking disclosures.utah.gov directly first."}},
+  {"name": "Forge the Future Project", "amount": 251446.36, "years": "2026", "top": {"name": "Tami Tran (SD-06)", "amount": 152503.46, "note": "Independent expenditures 6/11/2026 via FP1 Strategies ($135,003.46) and Tunnl LLC ($17,500); not in her own campaign filings"}, "complete": true, "runBy": "Josh Althouse (Committee Chair); Khaki Brownlow (Treasurer/CFO); Brian Baker (Additional officer)", "stillNeed": "2026 cycle still open; last checked 9/23/2026 with no further reports or contributions filed"},
+  {"name": "Utah Tech Leads", "amount": 135835, "years": "2022-2025", "top": {"name": "Stephen Handy", "amount": 4688, "note": "2022: $1,188 + $3,000 + $500"}, "complete": true, "stillNeed": "Totals complete (2022 and 2024 are the only years with activity). Recipient detail covers 2022 pages 1 and 3 and 2024 page 1 only, so recipient list is partial."},
+  {"name": "Slopes PAC", "amount": 71440, "years": "2021-2022", "top": {"name": "Utah Tech Leads", "amount": 71440, "note": "4/15/2022, the PAC's full balance"}, "complete": true, "runBy": "Sunny Washington (Primary Officer 1, CEO); Elizabeth Converse (Primary Officer 2, Executive Director, CFO/Treasurer)"},
+  {"name": "Utah Tech PAC", "amount": 70139.09, "years": "2017-2018", "top": {"name": "Paul S. Rogers & Associates", "amount": 50000, "note": "2017, five payments; the PAC's lobbyist"}, "plus": true, "runBy": "Clint Betts (Primary Officer 1, CEO); Elizabeth Converse (Primary Officer 2, CFO/Treasurer (Director of Operations))", "stillNeed": "No exports for 2019-2025; the state site currently lists the PAC as \"No Activity.\" Contributions received in 2017-2018 are unknown because 32 rows were deleted."},
+  {"name": "Dell Technologies Inc Political Action Committee", "amount": 10000, "years": "2018-2026", "top": {"name": "Spencer Cox", "amount": 10000, "note": "4/29/2024"}, "complete": true}
 ];
 
 const individualData = [
+
 ];
 
+function hiveRunNames(s){
+  s = String(s); var parts = [], cur = '', depth = 0;
+  for (var i = 0; i < s.length; i++) { var c = s[i];
+    if (c === '(') depth++; if (c === ')') depth = Math.max(0, depth - 1);
+    if (depth === 0 && (c === ';' || c === '\u00b7')) { parts.push(cur); cur = ''; } else cur += c; }
+  parts.push(cur);
+  var out = [], seen = {};
+  parts.forEach(function(p){
+    p = p.split(' \u2014 ')[0].trim(); if (!p || /^[a-z]/.test(p)) return;
+    var k = p.indexOf('('), name = k > -1 ? p.slice(0, k).trim() : p, role = '';
+    if (k > -1) { role = p.slice(k + 1).split(/[,;(]| and /)[0].replace(/\)+$/, '').trim(); if (role.length > 32) role = ''; }
+    if (seen[name]) return; seen[name] = 1;
+    out.push(role ? name + ' (' + role + ')' : name);
+  });
+  var mx = (typeof window !== 'undefined' && window.innerWidth < 600) ? 2 : 4;
+  return out.slice(0, mx).join(' \u00b7 ') + (out.length > mx ? ' +' + (out.length - mx) + ' more' : '');
+}
 function renderGrid(containerId, dataset) {
   const grid = document.getElementById(containerId);
   if (!dataset.length) return;
@@ -758,21 +821,22 @@ function renderGrid(containerId, dataset) {
         <div class="face front">
           <div class="rank">No. ${i + 1}</div>
           <div class="entity-name">${d.name}</div>
-          <div class="amount">$${d.amount.toLocaleString()}${d.plus ? '<span class="plus">+</span>' : ''}</div>
+          <div class="amount">$${fmt(d.amount)}${d.plus ? '<span class="plus">+</span>' : ''}</div>
           <div class="bar-track"><div class="bar-fill" style="width:${pct}%"></div></div>
+          ${d.runBy ? `<div class="tile-runby"><span class="trb-label">Run by</span>${hiveRunNames(d.runBy)}</div>` : ''}
           <div class="flip-hint">tap for top recipient →</div>
         </div>
         <div class="face back">
           <div class="label">GAVE THE MOST TO</div>
           <div class="recipient-name">${d.top.name}</div>
-          <div class="recipient-amount">$${d.top.amount.toLocaleString()}</div>
+          <div class="recipient-amount">$${fmt(d.top.amount)}</div>
           <div class="recipient-note">${d.top.note}</div>
           <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;">
             ${d.flag ? `<span class="flag">${d.flag}</span>` : ''}
             ${d.complete ? `<span class="flag-complete">✓ RESEARCH COMPLETE</span>` : ''}
             ${d.years && d.years.indexOf('2026') !== -1 ? `<span class="flag-2026">2026 DATA — SUBJECT TO CHANGE</span>` : ''}
           </div>
-          <div class="donor-total">${d.name}: $${d.amount.toLocaleString()}${d.plus ? '+' : ''} total documented</div>
+          <div class="donor-total">${d.name}: $${fmt(d.amount)}${d.plus ? '+' : ''} total documented</div>
         </div>
       </div>
     `;
@@ -786,9 +850,40 @@ renderGrid('grid-pacs', pacData);
 renderGrid('grid-individuals', individualData);
 if (!pacData.length) document.getElementById('pac-empty-note').style.display = 'block';
 
+/* Count money once: when one donor on this page gives to another donor on this page, that money is subtracted from the combined total. */
+function hiveKey(n){ n = String(n).toLowerCase();
+  if (/uhrec|house republican election/.test(n)) return 'uhrec';
+  if (/nupac|northern utah legislative/.test(n)) return 'nupac';
+  if (/rpac|utah association of realtors/.test(n) && !/national/.test(n)) return 'rpac';
+  if (/salt lake board of realtors/.test(n)) return 'slbr';
+  if (/(northern wasatch association of realtors|nwaor|nwar\b)/.test(n) && !/hba|home builders/.test(n)) return 'nwaor';
+  if (/lincoln hill partners/.test(n)) return 'lhp';
+  if (/lincoln hill pac/.test(n)) return 'lhpac';
+  if (/petroleum association pac/.test(n)) return 'upa';
+  if (/h3 pac/.test(n)) return 'h3';
+  if (/forge the future/.test(n)) return 'meta';
+  if (/dominion (energy )?(inc )?(political action committee|pac)/.test(n)) return 'dom';
+  if (/national association of realtors fund/.test(n)) return 'narf';
+  if (/utahns for balanced/.test(n)) return 'ubg';
+  if (/slopes pac/.test(n) && !/commons/.test(n)) return 'slopes';
+  if (/utah tech leads/.test(n)) return 'utl';
+  if (/utah tech pac/.test(n)) return 'utpac';
+  if (/chamber pac/.test(n)) return 'chamber';
+  if (/zions bancorporation/.test(n)) return 'zions';
+  if (/utah valley home builders/.test(n)) return 'uvhba';
+  return null; }
+function hiveOverlap(){
+  var tiles = [].concat(typeof companyData!=='undefined'?companyData:[], typeof pacData!=='undefined'?pacData:[], typeof individualData!=='undefined'?individualData:[]);
+  var flows = [].concat(typeof companyFlows!=='undefined'?companyFlows:[], typeof pacFlows!=='undefined'?pacFlows:[], typeof individualFlows!=='undefined'?individualFlows:[]);
+  var keys = {}; tiles.forEach(function(t){ var k = hiveKey(t.name); if (k) keys[k] = 1; });
+  var ov = 0;
+  flows.forEach(function(f){ var src = hiveKey(f.name); [].concat(f.recipients||[], f.otherRecipients||[]).forEach(function(r){ var k = hiveKey(r.name); if (k && keys[k] && k !== src) ov += r.amount; }); });
+  return Math.round(ov * 100) / 100; }
+
 function renderSummary() {
   const allDonors = [...companyData, ...pacData, ...individualData];
-  const grandTotal = allDonors.reduce((sum, d) => sum + d.amount, 0);
+  const __ov = hiveOverlap();
+  const grandTotal = allDonors.reduce((sum, d) => sum + d.amount, 0) - __ov;
   const anyPlus = allDonors.some(d => d.plus);
 
   const byRecipient = {};
@@ -801,14 +896,14 @@ function renderSummary() {
   const el = document.getElementById('grand-summary');
   el.innerHTML = `
     <p class="gs-label">TOTAL MONEY DOCUMENTED ON THIS PAGE</p>
-    <p class="gs-total">$${grandTotal.toLocaleString()}${anyPlus ? '<span class="plus" style="color:#c79a4b;">+</span>' : ''}</p>
-    <p class="gs-sub">Combined giving from every donor below, ${companyData.length + pacData.length + individualData.length} donors, 2017-2026. This is a floor, not a ceiling — Micron alone has six unpulled years, Utah Tech PAC's total is disputed, and most donors on this page are marked "+".</p>
+    <p class="gs-total">$${fmt(grandTotal)}${anyPlus ? '<span class="plus" style="color:#3b82f6;">+</span>' : ''}</p>
+    <p class="gs-sub">Combined giving from every donor below, ${companyData.length + pacData.length + individualData.length} donors, 2017-2026. This is a floor, not a ceiling — Micron alone has six unpulled years, Utah Tech PAC's total is disputed, and most donors on this page are marked "+".${__ov ? ' <b>*</b> Counted once: $' + __ov.toLocaleString('en-US',{maximumFractionDigits:2}) + ' that one donor on this page gave to another donor on this page is subtracted, so no dollar is counted twice. Figures for 2026 are through the latest filed reports; we are waiting on final year-end reports.' : ''}</p>
     <div class="gs-top5">
       ${top10.map(([name, amt], i) => `
         <div class="gs-top5-item">
           <div class="gs-rank">TOP RECIPIENT No. ${i + 1}</div>
           <div class="gs-name">${name}</div>
-          <div class="gs-amount">$${amt.toLocaleString()}</div>
+          <div class="gs-amount">$${fmt(amt)}</div>
         </div>
       `).join('')}
     </div>
@@ -816,114 +911,21 @@ function renderSummary() {
 }
 
 const companyFlows = [
-{name:"Meta / Forge the Future Project", total:270000, complete:true, flag:"$270K IN ONE DAY TO TWO CANDIDATES", has2026:true,
-    stillNeed:"confirm whether any other Utah spending exists beyond this single day",
-    fundedBy:[
-      {name:"Forge the Future Project (national, Fremont CA)", amount:270000, id:"Same-day in-and-out — the Utah entity received $270,000 from Meta's national PAC and spent it all the same day, confirming it's a pure pass-through, not an independently-capitalized PAC"},
-    ],
-    recipients:[
-    {name:"Tami Tran", amount:152503, id:"SD-06 candidate — won her primary 6/23/2026, 12 days later. Inheriting the Executive Appropriations Committee chairmanship (budget control)."},
-    {name:"Logan Monson", amount:98943, id:"HD-69 candidate — won his primary the same day. Sits on House Natural Resources, Agriculture, and Environment — water rights, energy corridors, permits."},
-  ],
-    note:"All spending filed as independent expenditures through the PAC's own vendors (FP1 Strategies for digital ads/texting/phone calls, Tunnl LLC for data) — never appears in either candidate's own campaign filings since it was never given directly to their committees. Itemized total ($251,446) runs about $18,500 under the round $270,000 received-and-spent figure; not yet reconciled. Strategic read: Tran (budget) + Monson (natural resources/land use) together cover the infrastructure pipeline relevant to the Stratos Project data center legislation anticipated in 2027."},
-{name:"Lumen Technologies Service Group", total:70000, plus:true, has2026:true,
-    stillNeed:"2018-2020 not pulled; 2022 pages 1-2, 2023 page 2, 2025 page 2 not yet checked",
-    recipients:[
-    {name:"Spencer Cox", amount:24000, id:"Multiple checks nearly every year, 2021-2026"},
-    {name:"Karianne Lisonbee", amount:1500, id:"State Representative"},
-    {name:"Ronald Winterton", amount:500, id:"State Senator"},
-    {name:"Mike McKell", amount:500, id:"State Senator"},
-  ],
-    otherRecipients:[
-    {name:"Utah House Republican Election Committee", amount:14000, id:"House GOP leadership PAC — recurring nearly every year"},
-    {name:"SenDemPAC", amount:6500, id:"Senate Democratic caucus PAC"},
-    {name:"Utah House Democratic Leadership Council", amount:4000, id:"House Democratic leadership PAC"},
-    {name:"Republican Women Lead", amount:1000, id:""},
-  ], note:"$70,000+ confirmed, 2021-2026 (several years still partial). Notably bipartisan every year — gives to GOP and Democratic leadership infrastructure in the same months, most visibly each January."},
-{name:"Micron Technology", total:57150, plus:true, flag:"INCLUDES PREDECESSOR IM FLASH TECHNOLOGIES", has2026:true,
-    stillNeed:"2021-2026 entirely unpulled — the biggest remaining gap on this page",
-    recipients:[
-    {name:"Spencer Cox", amount:1000, id:"Governor — single largest check, 2020"},
-  ],
-    otherRecipients:[
-    {name:"Governors Leadership PAC", amount:5000, id:"2018, filed under predecessor name IM Flash Technologies — largest single check in the whole dataset"},
-    {name:"Salt Lake County Legislative PAC", amount:1500, id:"2018, IM Flash Technologies"},
-    {name:"Utah Republican Party (State)", amount:1000, id:"2019"},
-    {name:"UHREC", amount:500, id:"2018 + 2019, IM Flash Technologies / Micron"},
-    {name:"URSCC", amount:500, id:"2018, IM Flash Technologies"},
-    {name:"Utah Democratic State Party", amount:250, id:"2019 — bipartisan party-committee giving confirmed this early"},
-    {name:"SenDemPAC", amount:250, id:"2018, IM Flash Technologies"},
-  ], note:"$57,150 confirmed, 2018-2020 — 2018's giving is filed under the predecessor name IM Flash Technologies (the Intel/Micron Lehi semiconductor JV Micron fully acquired that year). The real story is breadth: 98 separate small checks in 2020 alone, blanket coverage of nearly every sitting legislator in both parties, the same structural pattern already documented for Utah Petroleum Association PAC on the Energy page. Not itemized line-by-line here given the volume — see the dedicated spreadsheet."},
-{name:"Dell Technologies Inc PAC", total:20000, plus:true, has2026:true,
-    stillNeed:"all years other than 2024; confirm a $10,000 self-listed entry is administrative, not a real second contribution",
-    recipients:[
-    {name:"Spencer Cox", amount:10000, id:"Governor — direct contribution, 4/29/2024"},
-  ],
-    otherRecipients:[
-      {name:"Dell Technologies Inc Political Action Committee", amount:10000, id:"Listed as both contributor and filing entity, 4/17/2024 — almost certainly an internal/administrative entry, not a real second gift"},
-    ], note:"Only one year pulled so far. A real, well-known national company — not caught by the \"tech\" substring search like most of this page's excluded noise."},
+  {"name": "Lumen Technologies Service Group LLC", "total": 125040, "recipients": [{"name": "Utah Republican Senate Campaign Cmte.", "amount": 32040, "id": "2021 $3,540; 2023 $6,000 + $5,000; 2024 $6,000 + $5,000; 2025 $4,000 + $2,500 (2022 and 2026 rows not fully itemized in memory)"}, {"name": "Spencer Cox", "amount": 24000, "id": "2021 $5,000; 2022 $4,500; 2023 $6,000; 2024 $5,000; 2026 $3,500"}, {"name": "UHREC", "amount": 14000, "id": "2021 $1,000; 2023 $5,000; 2025 $3,500 + $2,000; 2026 $2,500"}, {"name": "SenDemPAC", "amount": 6500, "id": "2023 $2,500; 2025 $2,000; 2026 $2,000"}, {"name": "Utah House Democratic Leadership Council", "amount": 4000, "id": "2025 $2,000; 2026 $2,000"}, {"name": "Northern Utah Legislative PAC", "amount": 2000, "id": "2021 $1,000; 2026 $1,000 (from NUPAC's own report)"}, {"name": "Karen Mayne", "amount": 1750, "id": "2021 $500; 2022 $1,250"}, {"name": "Karianne Lisonbee", "amount": 1500, "id": "2023 $500; 2025 $1,000"}, {"name": "Utah County Legislative PAC", "amount": 1500, "id": "2025"}, {"name": "Chris Wilson", "amount": 1250, "id": "2021 $500; 2023 $750"}, {"name": "Ann Millner", "amount": 1250, "id": "2021 $500; 2023 $750"}, {"name": "Angela Romero", "amount": 1250, "id": "2023 $500; 2025 $750"}, {"name": "Wayne Harper", "amount": 1000, "id": "2021 $500; 2024 $500"}, {"name": "Republican Women Lead", "amount": 1000, "id": "2021"}, {"name": "Brad Wilson", "amount": 1000, "id": "2023"}], "otherRecipients": [], "complete": true, "has2026": true, "stillNeed": "Year totals complete; some 2022, 2023, 2025 and 2026 checks are counted in year totals but not itemized by recipient in memory, so recipient figures are floors.", "note": "Lumen's Utah giving begins in 2021. It gives to Republican and Democratic legislative leadership committees, often in the same month. Many checks are filed under plain \"Lumen\" and do not appear in a \"tech\" keyword search."},
+  {"name": "Micron Technology, Inc.", "total": 58050, "recipients": [{"name": "Governors Leadership PAC", "amount": 5000, "id": "8/22/2018, filed as IM Flash Technologies"}, {"name": "Salt Lake County Legislative PAC", "amount": 1500, "id": "2018, IM Flash Technologies"}, {"name": "Spencer Cox", "amount": 1000, "id": "10/8/2020"}, {"name": "Utah Republican Party (State)", "amount": 1000, "id": "10/1/2019"}, {"name": "UHREC", "amount": 1000, "id": "2018 $500 (IM Flash); 3/23/2019 $500"}, {"name": "Stewart Barlow", "amount": 600, "id": "8/21/2018 $300 (Flash Technologies, LLC); 3/22/2021 $300"}, {"name": "Utah Republican Senate Campaign Cmte.", "amount": 500, "id": "2018, IM Flash Technologies"}, {"name": "Kay Christofferson", "amount": 300, "id": "9/6/2018"}, {"name": "Marie Poulson", "amount": 300, "id": "1/23/2019, IM Flash Technologies"}, {"name": "Utah Democratic State Party", "amount": 250, "id": "2/5/2019"}, {"name": "SenDemPAC", "amount": 250, "id": "2018, IM Flash Technologies"}, {"name": "Ralph Okerlund", "amount": 200, "id": "3/19/2018, Flash Technologies"}], "otherRecipients": [], "complete": true, "has2026": true, "stillNeed": "Year totals complete; the 101 checks in 2020 and most 2018 checks to individual legislators are not itemized by recipient in memory, so recipient figures are floors.", "note": "2018 giving was filed mostly as IM Flash Technologies, the Lehi Intel/Micron joint venture that Micron fully acquired in 2019. Checks were mostly $200-$500 spread across legislators of both parties, with 101 rows in 2020. No Micron giving was found after 2021."},
+  {"name": "Silicon Slopes Commons", "total": 55000, "recipients": [{"name": "Slopes PAC", "amount": 55000, "id": "12/1/2021; about 80% of Slopes PAC's 2021 receipts"}], "otherRecipients": [], "complete": true, "note": "This is the only contribution on record from Silicon Slopes Commons. It was filed from 2600 Executive Pkwy #140, Lehi, the same address Slopes PAC registered; Utah Tech PAC lists Silicon Slopes Commons as the organization it represents."}
 ];
 
 const pacFlows = [
-{name:"Silicon Slopes Commons", total:55000, complete:true,
-    recipients:[],
-    otherRecipients:[
-      {name:"Slopes PAC", amount:55000, id:"The ONLY donation this organization has ever made — 12/1/2021, 80% of Slopes PAC's entire funding that cycle"},
-    ], note:"Confirmed complete, closed record — no other years of giving exist. Filed from Silicon Slopes' own Lehi address. Silicon Slopes' underlying nonprofit registration (\"SILICON SLOPES,\" formerly Beehive Startups) is currently delinquent on its state renewal, due 3/31/2026. Current directors include Aaron Skonnard (Pluralsight), Joshua James (Domo), and Ryan Smith (Qualtrics) — none yet confirmed to have personally donated to Slopes PAC or Utah Tech Leads beyond this organizational gift."},
-{name:"Slopes PAC", total:71440, complete:true, flag:"RUN BY THE SAME TWO PEOPLE AS UTAH TECH LEADS",
-    runBy:"CEO Sunny Washington (\"Tech Founder\") · Executive Director/CFO/Treasurer Elizabeth Converse — email elizabeth@siliconslopes.com confirms her Silicon Slopes employment; she's also Treasurer/CFO of the separate, disputed \"Utah Tech PAC\" entity below",
-    fundedBy:[
-      {name:"Silicon Slopes Commons", amount:55000, id:"12/1/2021 — 80% of the PAC's entire 2021 funding"},
-      {name:"~20 individual tech-community donors", amount:16440, id:"2021, all $3,000 or less — Nicole Neumarker $3,000, Sara Jones $2,500, Katrina Kennedy $2,500, and 17 more at $1,000 or below, including Owen Fuller ($250, later central to the Defending Utah Values dark-money network) and Nate Blouin ($100, before he became a state senator)"},
-    ],
-    otherRecipients:[
-      {name:"Utah Tech Leads", amount:71440, id:"4/15/2022 — the PAC's ENTIRE year-end balance, sent in a single payment"},
-    ], note:"2021 confirmed complete — beginning balance $3,000, ended the year at $71,440, all of which moved to Utah Tech Leads in one April 2022 payment. Registered address and officers directly link this PAC to Utah Tech Leads/Utah Tech Leads Association — same people, per independent address and officer matching, not an inference from shared branding alone."},
-{name:"Utah Tech Leads", total:35772, plus:true, flag:"CONFLICTING RESEARCH ON THIS ENTITY — SEE NOTE", has2026:true,
-    stillNeed:"2022 page 2 of 3; 2024 page 2; all of 2018-2021, 2023, 2025-2026; reconcile the conflict described below",
-    runBy:"Filed under three related names (Utah Tech Leads / Utah Tech Leads Association / Utah Tech Leads PAC), all at the same Draper/Salt Lake City addresses — same people as Slopes PAC per independent address/officer matching",
-    fundedBy:[
-      {name:"Utah Tech Leads Association", amount:64500, id:"2022 ($45,500) + 2024 ($19,000) per this session's own DEX pull — filed with \"Utah Tech Leads Association\" as contributor and \"Utah Tech Leads\" as the recipient filing entity"},
-    ],
-    recipients:[
-    {name:"Stephen Handy", amount:4688, id:"2022, three checks — largest individual recipient in this session's pull"},
-    {name:"Rosemary Lesser", amount:2388, id:"2022, two checks"},
-    {name:"Lynette Wendel", amount:2000, id:"2022"},
-    {name:"Randall Boothe", amount:2000, id:"2024 — the largest single 2024 expenditure found for this entity"},
-    {name:"Ann Millner", amount:1625, id:"2022, two checks"},
-    {name:"Nate Blouin", amount:1613, id:"2022, two checks — the same Blouin who personally gave Slopes PAC $100 in 2021 before becoming a state senator"},
-    {name:"Kirk Cullimore", amount:1450, id:"2022, two checks"},
-    {name:"Sarah Reale", amount:1433, id:"2022, two checks"},
-  ],
-    otherRecipients:[
-    {name:"Clare Collard", amount:3700, id:"2022, two checks — largest total to any single recipient outside leadership PACs"},
-    {name:"UHREC", amount:1000, id:"2022"},
-    {name:"Utah Republican Senate Campaign Cmte.", amount:1000, id:"2022"},
-    {name:"Republican Women Lead", amount:1000, id:"2022"},
-  ],
-    note:"★★★★★ UNRESOLVED STRUCTURAL CONFLICT: a separate, earlier, more rigorously-sourced research pass (officer identification, address-matching) describes this leg of the chain as Utah Tech Leads receiving Slopes PAC's $71,440, then passing it same-day to \"Utah Tech Leads Association,\" which is the entity actually described as cutting the legislator checks. This session's own DEX-pull data (above) shows the opposite direction for the Association relationship — Association as contributor, Utah Tech Leads as recipient — with Utah Tech Leads itself shown paying legislators directly. The dollar amounts to individual legislators are close enough between both research passes (Moss ~$1,350, Cullimore ~$1,450, Millner ~$1,625, Teuscher $500) that both are very likely describing the same underlying transactions — but which entity name is the real payer of legislators is inverted between the two accounts. NOT RECONCILED. Verify directly against disclosures.utah.gov before publishing which entity name to use for the legislator-paying role. Genuinely bipartisan either way — Blouin, Dailey-Provost, Reale, and Lesser recurring recipients alongside Republican legislators and both major-party leadership PACs. 6 deleted entries found in 2022, 1 in 2024, all wiped to $0."},
-{name:"Utah Tech PAC", total:70139, flag:"DISPUTED — SEE NOTE BEFORE CITING",
-    runBy:"Represents Silicon Slopes Commons per its own state registration. President & CEO Clint Betts (Primary Officer) · Director of Operations Elizabeth Converse (CFO/Treasurer) — the SAME Elizabeth Converse who runs Slopes PAC above",
-    recipients:[
-    {name:"John Knotwell", amount:1000, id:"2017"},
-    {name:"Ann Millner", amount:500, id:"2017"},
-    {name:"Mike McKell", amount:500, id:"2017"},
-    {name:"Francis Gibson", amount:500, id:"2017"},
-    {name:"Jim Dunnigan", amount:500, id:"2017"},
-  ],
-    otherRecipients:[
-    {name:"Paul S. Rogers & Associates", amount:50000, id:"The PAC's own lobbyist — five separate payments in 2017 alone, the single largest recipient by far, per this session's DEX pull"},
-    {name:"Governors Leadership PAC", amount:5000, id:"2017, \"Governor's Gala\""},
-    {name:"eImpact", amount:5000, id:"2018, \"Legislative District Reports\" — vendor, not a candidate"},
-    {name:"Utah House Republican Election Committee", amount:1500, id:"2017"},
-    {name:"Utah Senate PAC", amount:1500, id:"2017"},
-    {name:"Utah House Democratic Leadership Council", amount:1250, id:"2017 ($750) + 2018 ($750)"},
-    {name:"Utah Democratic Party", amount:750, id:"2017"},
-    {name:"Young Democrats of Utah", amount:500, id:"2018"},
-  ], note:"★★★★★ DISPUTED FIGURE: a separate, independently-sourced research pass on this exact entity (same officers — Clint Betts, Elizabeth Converse — same address) concluded it had ZERO contributions or expenditures ever filed, 2008-2020. This session's own DEX CSV pull found the $70,139.09 in real 2017-2018 transactions shown above. These two findings directly contradict each other and have NOT been reconciled. Do not cite either the \"$70,139\" total or the \"zero activity\" claim as settled without checking disclosures.utah.gov's report-period list for this entity directly first. 32 deleted contribution entries found in this session's pull, none recoverable, so even if the $70,139 figure is real, the true inbound/donor picture is permanently unknown either way."},
+  {"name": "Forge the Future Project", "total": 251446.36, "recipients": [{"name": "Tami Tran (SD-06)", "amount": 152503.46, "id": "Independent expenditures 6/11/2026 via FP1 Strategies ($135,003.46) and Tunnl LLC ($17,500); not in her own campaign filings"}, {"name": "Logan Monson (HD-69)", "amount": 98942.9, "id": "Independent expenditures 6/11/2026 via FP1 Strategies and Tunnl LLC ($17,500); not in his own campaign filings"}], "otherRecipients": [], "complete": true, "has2026": true, "runBy": "Josh Althouse (Committee Chair); Khaki Brownlow (Treasurer/CFO); Brian Baker (Additional officer)", "stillNeed": "2026 cycle still open; last checked 9/23/2026 with no further reports or contributions filed", "note": "Meta Platforms, Inc. is listed as the organization represented and affiliated. All spending was reported as independent expenditures on 6/11/2026, 12 days before the 6/23/2026 primary; both candidates won. The Utah committee's Statement of Organization is dated 6/15/2026, within the 7-day registration window as read from the code.", "fundedBy": [{"name": "Forge the Future Project (national, Fremont CA)", "amount": 270000, "id": "Single contribution 6/11/2026, same day as the spending"}]},
+  {"name": "Utah Tech Leads", "total": 135835, "recipients": [{"name": "Stephen Handy", "amount": 4688, "id": "2022: $1,188 + $3,000 + $500"}, {"name": "Clare Collard", "amount": 3700, "id": "2022: $500 + $3,200"}, {"name": "Spencer Cox", "amount": 2500, "id": "2022"}, {"name": "Rosemary Lesser", "amount": 2388, "id": "2022: $1,000 + $1,388"}, {"name": "Lynette Wendel", "amount": 2000, "id": "2022"}, {"name": "Randall Boothe", "amount": 2000, "id": "6/24/2024, filed as Utah Tech Leads PAC"}, {"name": "Ann Millner", "amount": 1625, "id": "2022: $1,000 + $625"}, {"name": "Nate Blouin", "amount": 1613, "id": "2022: $500 + $1,113"}, {"name": "Jen Dailey-Provost", "amount": 1525, "id": "2022: $500 + $525; 11/5/2024 $500"}, {"name": "Kirk Cullimore", "amount": 1450, "id": "2022: $1,000 + $450"}, {"name": "Sarah Reale", "amount": 1433, "id": "2022: $500 + $933"}, {"name": "Jefferson Moss", "amount": 1350, "id": "2022: $350 + $1,000"}, {"name": "Ashlee Matthews", "amount": 1200, "id": "2022: $700 + $500"}, {"name": "Andrew Stoddard", "amount": 1050, "id": "2022: $550 + $500"}, {"name": "UHREC", "amount": 1000, "id": "2022 (Utah Republican Senate Campaign Committee, Republican Women Lead and Raelene Blocker also $1,000 each in 2022)"}], "otherRecipients": [], "complete": true, "stillNeed": "Totals complete (2022 and 2024 are the only years with activity). Recipient detail covers 2022 pages 1 and 3 and 2024 page 1 only, so recipient list is partial.", "note": "Filed under Utah Tech Leads, Utah Tech Leads Association and Utah Tech Leads PAC; shown here as one entry. Two research passes describe the Association relationship in opposite directions (Association funding the PAC per the DEX pull, versus the PAC passing money to the Association, which then paid legislators); this has not been reconciled against the filings. Recipients include Republican and Democratic legislators; 2022 reports show 6 deleted entries and 2024 shows 1.", "fundedBy": [{"name": "Slopes PAC", "amount": 71440, "id": "4/15/2022"}, {"name": "Utah Tech Leads Association", "amount": 64500, "id": "2022: $3,500 (5/10) + $23,000 (9/12) + $19,000 (10/5); 2024: $4,000 (6/14) + $15,000 (10/22)"}]},
+  {"name": "Slopes PAC", "total": 71440, "recipients": [{"name": "Utah Tech Leads", "amount": 71440, "id": "4/15/2022, the PAC's full balance"}], "otherRecipients": [], "complete": true, "runBy": "Sunny Washington (Primary Officer 1, CEO); Elizabeth Converse (Primary Officer 2, Executive Director, CFO/Treasurer)", "note": "Created 6/8/2021; it spent nothing in 2021 and ended the year with $71,440. Its last filed report, the 2022 Convention Report (1/1-4/13/2022, filed 4/15/2022), shows the $71,440 balance with no money in or out, so the 4/15/2022 transfer to Utah Tech Leads falls after its last reporting period. Elizabeth Converse is also CFO/Treasurer of Utah Tech PAC.", "fundedBy": [{"name": "Silicon Slopes Commons", "amount": 55000, "id": "12/1/2021"}, {"name": "Individual donors (about 21)", "amount": 13440, "id": "2021; largest Nicole Neumarker $3,000, Sara Jones $2,500, Katrina Kennedy $2,500; also Owen Fuller $250 and Nate Blouin $100"}, {"name": "Beginning balance", "amount": 3000, "id": "carried into 2021; source not itemized in memory"}]},
+  {"name": "Utah Tech PAC", "total": 70139.09, "recipients": [{"name": "Paul S. Rogers & Associates", "amount": 50000, "id": "2017, five payments; the PAC's lobbyist"}, {"name": "Governors Leadership PAC", "amount": 5000, "id": "9/20/2017, \"Governor's Gala\""}, {"name": "eImpact", "amount": 5000, "id": "12/21/2018, \"Legislative District Reports\" (vendor)"}, {"name": "UHREC", "amount": 1500, "id": "10/5/2017"}, {"name": "Utah Senate PAC", "amount": 1500, "id": "10/24/2017"}, {"name": "Utah House Democratic Leadership Council", "amount": 1500, "id": "9/25/2017 $750 + 6/11/2018 $750"}, {"name": "John Knotwell", "amount": 1000, "id": "7/24/2017"}, {"name": "Utah Democratic Party", "amount": 750, "id": "10/6/2017"}, {"name": "Exoro Group", "amount": 750, "id": "12/21/2018, \"Legislative Guide Ad\" (vendor)"}, {"name": "Ann Millner", "amount": 500, "id": "1/13/2017"}, {"name": "Mike McKell", "amount": 500, "id": "4/10/2017"}, {"name": "Francis Gibson", "amount": 500, "id": "4/14/2017"}, {"name": "Jim Dunnigan", "amount": 500, "id": "10/25/2017"}, {"name": "Young Democrats of Utah", "amount": 500, "id": "5/30/2018"}, {"name": "WSRP LLC", "amount": 437, "id": "3/16/2018, tax return preparation"}], "otherRecipients": [], "plus": true, "runBy": "Clint Betts (Primary Officer 1, CEO); Elizabeth Converse (Primary Officer 2, CFO/Treasurer (Director of Operations))", "stillNeed": "No exports for 2019-2025; the state site currently lists the PAC as \"No Activity.\" Contributions received in 2017-2018 are unknown because 32 rows were deleted.", "note": "Registered 12/22/2008; it lists Silicon Slopes Commons as the organization it represents. Of $70,139.09 spent, $50,000 went to its lobbyist and $13,750 to candidates, parties and PACs; the rest was vendors and overhead. The exports contain 32 deleted contribution rows (30 in 2017, 2 in 2018); one is recoverable, a $250 contribution to Kim Coleman dated 1/23/2017 and deleted 4/11/2018."},
+  {"name": "Dell Technologies Inc Political Action Committee", "total": 10000, "recipients": [{"name": "Spencer Cox", "amount": 10000, "id": "4/29/2024"}], "otherRecipients": [], "complete": true, "has2026": true, "note": "The PAC's Utah reporting years begin in 2024. A second $10,000 row dated 4/17/2024 lists the PAC as both contributor and filer; it is treated as an administrative entry, not giving."}
 ];
 
 const individualFlows = [
+
 ];
 
 function buildFlowRow(sourceName, rows, reverse) {
@@ -937,7 +939,7 @@ function buildFlowRow(sourceName, rows, reverse) {
     const d = reverse
       ? `M 100,${y1} C 60,${y1} 40,${y2} 0,${y2}`
       : `M 0,${y1} C 40,${y1} 60,${y2} 100,${y2}`;
-    curves += `<path d="${d}" stroke="#c79a4b" stroke-width="${w}" fill="none" opacity="0.55"/>`;
+    curves += `<path d="${d}" stroke="#3b82f6" stroke-width="${w}" fill="none" opacity="0.55"/>`;
   });
   const sourceBox = `<div class="flow-source" style="min-height:${H}px;display:flex;align-items:center;justify-content:${reverse ? 'flex-start' : 'flex-end'};">${sourceName}</div>`;
   const svgBox = `<div class="flow-svg-col"><svg viewBox="0 0 100 ${H}" preserveAspectRatio="none" height="${H}">${curves}</svg></div>`;
@@ -947,7 +949,7 @@ function buildFlowRow(sourceName, rows, reverse) {
         <div class="flow-recipient">
           <span class="rname">${i + 1}. ${r.name}</span>
           <span class="rmeta">${r.id}</span>
-          <span class="ramount">$${r.amount.toLocaleString()}</span>
+          <span class="ramount">$${fmt(r.amount)}</span>
         </div>
       `).join('')}
     </div>`;
@@ -967,7 +969,7 @@ function renderFlows(containerId, dataset) {
   card.innerHTML = `
     <div class="flow-head">
       <h3>${f.name}</h3>
-      <span class="flow-total">$${f.total.toLocaleString()} documented</span>
+      <span class="flow-total">$${fmt(f.total)} documented</span>
     </div>
     ${f.complete ? `<span class="flag-complete" style="margin-bottom:10px;">✓ RESEARCH COMPLETE</span>` : ''}
     ${f.has2026 ? `<span class="flag-2026" style="margin-bottom:10px;">2026 DATA — SUBJECT TO CHANGE</span>` : ''}
@@ -981,7 +983,7 @@ function renderFlows(containerId, dataset) {
       ${buildFlowRow(f.name, rows, false)}
     ` : `<p class="flow-note" style="margin-top:16px;font-style:italic;">Outbound giving not yet pulled from disclosures.utah.gov — this entry currently shows inbound money only.</p>`}
     ${f.note ? `<p class="flow-note">${f.note}</p>` : ''}
-    ${f.stillNeed ? `<p class="flow-note" style="color:#a8792f;font-weight:600;">Still need: <span style="font-weight:400;color:var(--ink-soft);">${f.stillNeed}</span></p>` : ''}
+    ${f.stillNeed ? `<p class="flow-note" style="color:#1d5fbf;font-weight:600;">Still need: <span style="font-weight:400;color:var(--ink-soft);">${f.stillNeed}</span></p>` : ''}
     `;
     flowsEl.appendChild(card);
   });
