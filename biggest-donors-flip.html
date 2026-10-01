@@ -478,6 +478,33 @@
   .tile-runby{margin-top:14px;font-size:14.5px;line-height:1.4;color:#0f1b2d;border-top:1px solid #dde3ea;padding-top:10px}
   @media (max-width:600px){.tile-runby{font-size:13px;margin-top:10px;padding-top:8px}}
   .tile-runby .trb-label{display:block;font-family:'Roboto Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:#1d5fbf;margin-bottom:3px;font-weight:600}
+  .co{margin:8px 0 36px;padding:22px 22px 18px;border:1px solid var(--rule);border-top:3px solid var(--ink);background:#f7f9fc}
+  .co h2{font-family:'Source Serif 4',Georgia,serif;font-size:24px;line-height:1.25;margin:0 0 10px;color:var(--ink)}
+  .co p{font-size:17px;line-height:1.55;margin:0 0 14px;color:var(--ink)}
+  .co .co-lab{font-family:'Roboto Mono',ui-monospace,monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);margin:22px 0 8px;font-weight:600}
+  .co-bar{display:flex;height:46px;border-radius:4px;overflow:hidden;border:1px solid var(--ink)}
+  .co-bar .a{background:var(--ink);color:#fff;display:flex;align-items:center;padding-left:12px;font-weight:700;font-size:16px;white-space:nowrap}
+  .co-bar .b{background:repeating-linear-gradient(135deg,#3b82f6 0 6px,#8fb5f2 6px 12px)}
+  .co-key{display:grid;grid-template-columns:auto 1fr auto;gap:8px 10px;align-items:center;margin-top:12px;font-size:16px;color:var(--ink)}
+  .co-key .sw{width:18px;height:18px;border-radius:3px;border:1px solid var(--ink)}
+  .co-key .amt{font-family:'Roboto Mono',ui-monospace,monospace;font-weight:700;text-align:right}
+  .co-key .tot{border-top:2px solid var(--ink);padding-top:6px}
+  .co-flow{display:grid;grid-template-columns:minmax(0,1fr) 34px minmax(0,1fr);gap:0 6px;align-items:center;padding:14px 0;border-bottom:1px solid var(--rule)}
+  .co-flow:last-of-type{border-bottom:0}
+  .co-flow .from,.co-flow .to{font-size:16px;line-height:1.35;color:var(--ink)}
+  .co-flow .from small,.co-flow .to small{display:block;font-size:14px;color:var(--ink-soft)}
+  .co-flow .to b{display:block}
+  .co-flow .arr{font-size:26px;color:#1d5fbf;text-align:center}
+  .co-flow .track{grid-column:1 / -1;margin-top:8px;display:flex;align-items:center;gap:10px}
+  .co-flow .fill{height:14px;background:#3b82f6;border-radius:3px;min-width:4px}
+  .co-flow .money{font-family:'Roboto Mono',ui-monospace,monospace;font-weight:700;font-size:16px;white-space:nowrap;color:var(--ink)}
+  .co-ex{background:#fff;border-left:4px solid #1d5fbf;padding:12px 14px;margin:16px 0}
+  .co-ex p{margin:0 0 8px}.co-ex p:last-child{margin:0}
+  .co details{margin-top:14px}.co summary{cursor:pointer;font-weight:600;font-size:16px;color:#1d5fbf}
+  .co table{width:100%;border-collapse:collapse;font-size:15px;margin-top:10px}
+  .co td,.co th{padding:7px 6px;border-bottom:1px solid var(--rule);text-align:left;vertical-align:top}
+  .co td:last-child,.co th:last-child{text-align:right;font-family:'Roboto Mono',ui-monospace,monospace;white-space:nowrap}
+  @media (max-width:600px){.co{padding:18px 14px 14px}.co h2{font-size:21px}.co p{font-size:16px}.co-bar .a{font-size:14px}.co-flow .from,.co-flow .to{font-size:15px}.co table{font-size:14px}}
 </style>
 </head>
 <body>
@@ -721,6 +748,62 @@
     <strong>How to read this list.</strong> Every figure comes from itemized state campaign-finance filings. Some donor totals cover their <em>entire</em> documented giving; others cover only what's been fully pulled so far (marked with a <strong>+</strong>). The recipient shown on the back of each tile is that donor's single largest documented recipient — not necessarily their only one.
   </div>
 
+  <section class="co" id="counted-once">
+    <h2>Why the total is $17.80 million, not $19.4 million</h2>
+    <p>Some donors on this page gave money to <b>other donors on this page</b>. When that happens, the same dollars show up twice: once when the first donor gives them, and again when the second donor spends them.</p>
+    <p><b>The money did not disappear.</b> Every one of those dollars is still shown on this page, in full, on both donors' tiles and flow lines. We just don't add the same dollars into the combined total two times.</p>
+    <div class="co-ex">
+      <p><b>Example:</b> RPAC gave the Salt Lake Board of Realtors <b>$908,030</b>. The Salt Lake Board then spent that money.</p>
+      <p>That $908,030 is inside RPAC's total (money RPAC gave) <i>and</i> inside the Salt Lake Board's total (money the Board spent). Adding both totals would count it twice, so the combined total counts it once.</p>
+      <p>It works like a paycheck: if your boss pays you $100 and you pay $100 in rent, there's still only $100, not $200.</p>
+    </div>
+    <p class="co-lab">How the combined total adds up</p>
+    <div class="co-bar" role="img" aria-label="All donors added together is $19,425,068. Of that, $17,798,595 is counted once and $1,626,473 is money passed from one donor on this page to another.">
+      <div class="a" style="width:91.6%">$17.80 million</div><div class="b" style="width:8.4%"></div>
+    </div>
+    <div class="co-key">
+      <span class="sw" style="background:var(--ink)"></span><span>Counted once (the page's combined total*)</span><span class="amt">$17,798,595</span>
+      <span class="sw" style="background:repeating-linear-gradient(135deg,#3b82f6 0 4px,#8fb5f2 4px 8px)"></span><span>Passed from one donor on this page to another (still shown on both tiles)</span><span class="amt">$1,626,473</span>
+      <span></span><span class="tot">Every donor's total added together</span><span class="amt tot">$19,425,068</span>
+    </div>
+    <p class="co-lab">Where the $1.63 million went</p>
+    <div class="co-flow">
+      <div class="from"><b>RPAC</b><small>the state Realtors' PAC</small></div>
+      <div class="arr" aria-hidden="true">→</div>
+      <div class="to"><b>Salt Lake Board of Realtors</b><small>local Realtors' PAC</small></div>
+      <div class="track"><div class="fill" style="width:72.0%"></div><span class="money">$908,030</span></div>
+    </div>
+    <div class="co-flow">
+      <div class="from"><b>11 donors</b><small>Bankers, PacifiCorp, EnergySolutions, Larry H. Miller, Big West Oil and others</small></div>
+      <div class="arr" aria-hidden="true">→</div>
+      <div class="to"><b>UHREC</b><small>House GOP leadership PAC</small></div>
+      <div class="track"><div class="fill" style="width:26.9%"></div><span class="money">$338,750</span></div>
+    </div>
+    <div class="co-flow">
+      <div class="from"><b>RPAC</b><small>the state Realtors' PAC</small></div>
+      <div class="arr" aria-hidden="true">→</div>
+      <div class="to"><b>Northern Wasatch Association of Realtors</b><small>local Realtors' PAC</small></div>
+      <div class="track"><div class="fill" style="width:24.3%"></div><span class="money">$306,693</span></div>
+    </div>
+    <div class="co-flow">
+      <div class="from"><b>4 donors</b><small>Lincoln Hill Partners PAC, Bankers, NWAOR, Lincoln Hill PAC</small></div>
+      <div class="arr" aria-hidden="true">→</div>
+      <div class="to"><b>NUPAC</b><small>Northern Utah Legislative PAC</small></div>
+      <div class="track"><div class="fill" style="width:4.4%"></div><span class="money">$55,000</span></div>
+    </div>
+    <div class="co-flow">
+      <div class="from"><b>Chevron</b></div>
+      <div class="arr" aria-hidden="true">→</div>
+      <div class="to"><b>Utah Petroleum Association PAC</b><small>oil industry PAC</small></div>
+      <div class="track"><div class="fill" style="width:1.4%"></div><span class="money">$18,000</span></div>
+    </div>
+    <details>
+      <summary>See all 18 checks counted once</summary>
+      <table><thead><tr><th>From</th><th>To</th><th>Amount</th></tr></thead><tbody><tr><td>RPAC</td><td>Salt Lake Board of Realtors</td><td>$908,030</td></tr><tr><td>RPAC</td><td>Northern Wasatch Association of Realtors</td><td>$306,693</td></tr><tr><td>EnergySolutions</td><td>UHREC</td><td>$73,500</td></tr><tr><td>PacifiCorp</td><td>UHREC</td><td>$65,500</td></tr><tr><td>Utah Bankers Association</td><td>UHREC</td><td>$58,500</td></tr><tr><td>Larry H. Miller Company</td><td>UHREC</td><td>$56,000</td></tr><tr><td>Big West Oil</td><td>UHREC</td><td>$21,500</td></tr><tr><td>Lincoln Hill Partners PAC</td><td>NUPAC</td><td>$20,000</td></tr><tr><td>Chevron</td><td>Utah Petroleum Association PAC</td><td>$18,000</td></tr><tr><td>Gershon Barnett</td><td>UHREC</td><td>$16,000</td></tr><tr><td>Lincoln Hill Partners PAC</td><td>UHREC</td><td>$13,000</td></tr><tr><td>Utah Bankers Association</td><td>NUPAC</td><td>$12,500</td></tr><tr><td>Northern Wasatch Association of Realtors</td><td>NUPAC</td><td>$12,500</td></tr><tr><td>Dominion Energy PAC</td><td>UHREC</td><td>$10,500</td></tr><tr><td>Utah Petroleum Association PAC</td><td>UHREC</td><td>$10,250</td></tr><tr><td>Lincoln Hill PAC</td><td>NUPAC</td><td>$10,000</td></tr><tr><td>Utah Metal Works</td><td>UHREC</td><td>$8,000</td></tr><tr><td>H3 PAC</td><td>UHREC</td><td>$6,000</td></tr><tr><td><b>Total</b></td><td></td><td><b>$1,626,473</b></td></tr></tbody></table>
+    </details>
+    <p style="font-size:14px;color:var(--ink-soft);margin:14px 0 0">* 2026 figures run through the latest filed reports; we are waiting on final year-end reports, so these totals will change.</p>
+  </section>
+
   <h2 class="section">Company donors</h2>
   <p class="section-sub">Ranked by largest confirmed total — tap or click a tile to flip it</p>
   <div class="grid" id="grid-companies"></div>
@@ -749,7 +832,7 @@
   <div class="sources-block">
     <details class="person-details">
       <summary><b>Conclusion &amp; questions readers should ask</b></summary>
-      <p class="person-note" style="font-style:normal;">This page documents about $17.80 million in giving across 23 companies, PACs, and individuals, counted once* ($19.4 million before removing about $1.63 million that one donor on this page gave to another donor on this page, such as RPAC's checks to the Salt Lake Board of Realtors and companies' checks to UHREC), and the people who run the PACs receiving and redistributing that money. A few patterns show up repeatedly across otherwise unrelated donors: the same handful of names (Kyle Palmer, Matthew Lusty, Lincoln Shurtz, Casey Hill, Mike Ostermiller, Chris Kyler) sit as officers, treasurers, or paid vendors across multiple PACs at once; PACs frequently pay their own officers or leadership directly; at least one official in a leadership PAC role (Speaker Schultz) loaned his own campaign a large personal sum; and Utah's largest PACs (RPAC, UHREC, NUPAC) redistribute money down through a dense network of sub-PACs, local boards, and vendors rather than giving directly to candidates. 2026 figures throughout are incomplete, since the reporting year isn't over.</p>
+      <p class="person-note" style="font-style:normal;">This page documents about $17.80 million in giving across 23 companies, PACs, and individuals, counted once*, and the people who run the PACs receiving and passing that money on. (Every donor's total added together is $19.4 million; about $1.63 million of that went from one donor on this page to another, so it is counted one time. <a href="#counted-once" style="color:#1d5fbf">See how the total adds up</a>.) A few patterns show up repeatedly across otherwise unrelated donors: the same handful of names (Kyle Palmer, Matthew Lusty, Lincoln Shurtz, Casey Hill, Mike Ostermiller, Chris Kyler) sit as officers, treasurers, or paid vendors across multiple PACs at once; PACs frequently pay their own officers or leadership directly; at least one official in a leadership PAC role (Speaker Schultz) loaned his own campaign a large personal sum; and Utah's largest PACs (RPAC, UHREC, NUPAC) redistribute money down through a dense network of sub-PACs, local boards, and vendors rather than giving directly to candidates. 2026 figures throughout are incomplete, since the reporting year isn't over.</p>
       <p class="person-note" style="font-style:normal;font-weight:600;color:var(--ink);margin-top:14px;margin-bottom:6px;">Questions worth asking, based on what's documented here:</p>
       <ul class="person-connections">
         <li>Why do so many of Utah's largest PACs share the same handful of treasurers, officers, and paid vendors?</li>
