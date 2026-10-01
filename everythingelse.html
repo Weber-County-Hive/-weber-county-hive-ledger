@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Everything Else — The Weber County Hive</title>
+<meta name="description" content="Major donors that don&#x27;t fit one industry: a banking trade group, a bank&#x27;s employee PAC, a metal recycler, the Chamber&#x27;s PAC, an auto and real-estate company, a New York donor, and the committee two of them funded.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--paper:#f6f3ec;--card:#fbf9f4;--ink:#1c2431;--soft:#4b5262;--rule:#d9d3c3;--gold:#a8792f;--bar:#3b4a63;--cox:#c79a4b;--track:#e7e1d1;--ok:#2e6b3e;--part:#8a3b2e;--tint:#efe7d6;}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#151a22;--card:#1c222c;--ink:#ece6d8;--soft:#aab0bd;--rule:#323a47;--gold:#d4a85a;--bar:#8fa3c4;--cox:#d4a85a;--track:#2a313d;--ok:#6fbf83;--part:#e08f7e;--tint:#262019;}}
+  :root[data-theme="dark"]{--paper:#151a22;--card:#1c222c;--ink:#ece6d8;--soft:#aab0bd;--rule:#323a47;--gold:#d4a85a;--bar:#8fa3c4;--cox:#d4a85a;--track:#2a313d;--ok:#6fbf83;--part:#e08f7e;--tint:#262019;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,system-ui,sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration-color:var(--gold);text-underline-offset:3px}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 16px 80px}
+  nav.top{font-family:'Roboto Mono',monospace;font-size:12.5px;padding:14px 0;border-bottom:1px solid var(--rule);display:flex;gap:16px;flex-wrap:wrap}
+  nav.top a{text-decoration:none;color:var(--soft)} nav.top a:hover{color:var(--ink)}
+  header.mast{border-bottom:3px solid var(--ink);padding:36px 0 20px}
+  .kicker{font-family:'Roboto Mono',monospace;font-size:12px;letter-spacing:.04em;color:var(--gold);margin:0 0 10px}
+  h1{font-family:'Source Serif 4',Georgia,serif;font-size:clamp(34px,6vw,54px);line-height:1.05;margin:0 0 12px}
+  h1 em{color:var(--gold)}
+  .dek{font-family:'Source Serif 4',Georgia,serif;font-size:19px;color:var(--soft);max-width:64ch;margin:0}
+  .updated{font-family:'Roboto Mono',monospace;font-size:12px;color:var(--soft);margin-top:12px}
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:24px 0 10px}
+  .stat{background:var(--card);border:1px solid var(--rule);padding:14px 16px}
+  .stat b{display:block;font-family:'Roboto Mono',monospace;font-size:22px}
+  .stat span{font-size:13px;color:var(--soft)}
+  .callout{background:var(--tint);border-left:3px solid var(--gold);padding:12px 16px;font-size:14px;margin:12px 0}
+  h2{font-family:'Source Serif 4',Georgia,serif;font-size:26px;margin:40px 0 6px}
+  .sub{color:var(--soft);font-size:14px;margin:0 0 12px}
+  .tablewrap{overflow-x:auto;border:1px solid var(--rule);background:var(--card)}
+  table{border-collapse:collapse;width:100%;font-size:14px;min-width:620px}
+  th,td{padding:9px 12px;border-bottom:1px solid var(--rule);text-align:left;vertical-align:top}
+  th{font-family:'Roboto Mono',monospace;font-size:11.5px;text-transform:uppercase;letter-spacing:.04em;cursor:pointer;user-select:none;white-space:nowrap;background:var(--tint)}
+  th.on::after{content:' ↕';color:var(--gold)}
+  td.n{font-family:'Roboto Mono',monospace;white-space:nowrap;text-align:right} th.n{text-align:right}
+  td.k{font-family:'Roboto Mono',monospace;font-size:12px;color:var(--soft)}
+  .floor{color:var(--part);font-weight:600}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;font-size:13px;color:var(--soft);margin:8px 0 14px}
+  .legend i{display:inline-block;width:14px;height:10px;margin-right:6px;vertical-align:middle}
+  .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,480px),1fr));gap:16px}
+  .card{background:var(--card);border:1px solid var(--rule);border-top:3px solid var(--ink);padding:18px;scroll-margin-top:16px}
+  .card header{display:flex;flex-wrap:wrap;gap:6px;align-items:baseline}
+  .card h3{font-family:'Source Serif 4',Georgia,serif;font-size:21px;margin:0 8px 0 0;flex-basis:100%}
+  .chip{font-family:'Roboto Mono',monospace;font-size:11px;border:1px solid var(--rule);padding:1px 7px;color:var(--soft)}
+  .chip.ok{color:var(--ok);border-color:var(--ok)} .chip.part{color:var(--part);border-color:var(--part)}
+  .big{font-family:'Roboto Mono',monospace;font-size:26px;margin:12px 0 2px} .big small{font-size:13px;color:var(--gold);margin-left:6px}
+  .basis{font-size:13px;color:var(--soft);margin:0 0 12px}
+  .bars{display:grid;gap:3px;margin:8px 0 14px}
+  .yr{display:grid;grid-template-columns:40px 1fr 104px;gap:8px;align-items:center;font-family:'Roboto Mono',monospace;font-size:12px}
+  .yr .trk{height:11px;background:var(--track);display:block} .yr .trk b{display:block;height:100%;background:var(--bar)} .yr .trk b.cox{background:var(--cox)}
+  .yr em{font-style:normal;text-align:right;color:var(--soft)} .yr em.na{font-size:11px;opacity:.75}
+  .nobars{font-size:13px;color:var(--soft);background:var(--tint);padding:8px 10px}
+  h4{font-family:'Roboto Mono',monospace;font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--gold);margin:14px 0 6px}
+  .who ul,.recips{list-style:none;padding:0;margin:0}
+  .who li{font-size:14px;padding:4px 0;border-bottom:1px dotted var(--rule)}
+  .who .src,.rx{display:block;font-size:12px;color:var(--soft)}
+  .muted{font-size:13px;color:var(--soft);margin:0}
+  .recips li{display:grid;grid-template-columns:1fr auto;gap:2px 10px;font-size:14px;padding:4px 0;border-bottom:1px dotted var(--rule)}
+  .ra{font-family:'Roboto Mono',monospace;white-space:nowrap} .rx{grid-column:1/-1}
+  details summary{cursor:pointer;font-size:13px;color:var(--soft);margin-top:6px}
+  .note{font-size:14px;background:var(--tint);padding:10px 12px;margin:14px 0 0}
+  .gaps,.filed{font-size:13px;color:var(--soft);margin:10px 0 0}
+  .srcs ul{font-size:12.5px;color:var(--soft);padding-left:18px}
+  .end{border-top:1px solid var(--rule);margin-top:40px;padding-top:6px}
+  .end ol,.end ul{padding-left:20px} .end li{margin:6px 0}
+  footer{margin-top:40px;padding-top:14px;border-top:3px solid var(--ink);font-size:13px;color:var(--soft)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="top"><a href="index.html">← The Ledger</a><a href="industries.html">Money by industry</a><a href="energy.html">Energy</a><a href="tech.html">Tech</a><a href="realestate.html">Real estate</a><a href="everythingelse.html">Everything else</a></nav>
+  <header class="mast">
+    <p class="kicker">DONOR LEDGER · EVERYTHING ELSE · UTAH CAMPAIGN FINANCE, 2018–2026</p>
+    <h1>Everything <em>Else</em></h1>
+    <p class="dek">Major donors that don&#x27;t fit one industry: a banking trade group, a bank&#x27;s employee PAC, a metal recycler, the Chamber&#x27;s PAC, an auto and real-estate company, a New York donor, and the committee two of them funded.</p>
+    <p class="updated">Updated September 30, 2026 · Public records only</p>
+  </header>
+
+  <div class="stats" id="stats"></div>
+  <div class="callout" id="passthrough"></div>
+  <div class="callout"><strong>How to read this page.</strong> Each total counts checks the donor reported giving, as filed with the state. A <span class="floor">+</span> or "still being pulled" means some years or pages haven't been reviewed yet, so the total is a minimum. "Who runs it" lists the officers named on the committee's own state registration; it is blank where that registration hasn't been pulled.</div>
+
+  <h2>All donors at a glance</h2>
+  <p class="sub">Click a column heading to sort. Click a name to jump to its card.</p>
+  <div class="tablewrap"><table>
+    <thead><tr><th data-k="name">Donor</th><th data-k="kind">Type</th><th data-k="total" class="n">Total given</th><th data-k="cox" class="n">To Gov. Cox</th><th data-k="yearsChecked">Years checked</th></tr></thead>
+    <tbody id="tbody"></tbody>
+  </table></div>
+
+  <h2>Donor by donor</h2>
+  <div class="legend"><span><i style="background:var(--bar)"></i>Given that year</span><span><i style="background:var(--cox)"></i>All of it to Spencer Cox</span><span><i style="background:var(--track)"></i>Scale track</span></div>
+  <div class="cards" id="cards"></div>
+
+  <section class="end">
+    <h2>Questions the record raises</h2>
+    <ol>
+<li>Utahns for Balanced Government returned the Utah Bankers Association&#x27;s $100,000 in full six weeks after receiving it. Neither filing gives a reason. Why was it returned?</li>
+<li>Gershon Barnett, filing from Monsey, New York, has given $454,500 to Utah candidates and committees since 2022, including $125,000 to Spencer Cox. What is his interest in Utah politics?</li>
+<li>Utahns for Balanced Government paid companies tied to its own listed officers: 24NINE (the email domain on its Executive Director&#x27;s filing) and McCauley &amp; Associates (its listed Treasurer&#x27;s firm). What work did those payments cover?</li>
+<li>Zions Bancorporation PAC gave the Utah Democratic Party four times what it gave the Utah Republican Party. Who at the bank decides where the employees&#x27; payroll contributions go?</li>
+    </ol>
+    <p class="sub">These are questions, not conclusions. Read the filings and decide what they mean.</p>
+    <h2>Sources and method</h2>
+    <ul>
+      <li>Itemized Utah campaign-finance disclosures at disclosures.utah.gov: contribution searches by donor name and year, and full DEX (CSV) exports for PACs.</li>
+      <li>PAC and political issues committee registrations (Statements of Organization) at disclosures.utah.gov, for officer names and titles.</li>
+      <li>Utah Division of Corporations business-entity records, where cited on a card.</li>
+      <li>Names are listed as filed. Donors that file under several spellings are combined, and each card lists the spellings found.</li>
+      <li>This page describes what the filings show. It makes no claim about anyone's intent or about whether any law was broken.</li>
+    </ul>
+  </section>
+  <footer>The Weber County Hive · Utah Hive Politics · Public records only. No comment requests.</footer>
+</div>
+<script src="everythingelse-data.js?v=1"></script>
+<script src="ledger-cards.js?v=1"></script>
+</body>
+</html>
