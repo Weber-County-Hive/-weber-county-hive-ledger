@@ -8,17 +8,17 @@
   @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600&family=Roboto+Mono:wght@400;500&display=swap');
 
   :root{
-    --paper:#f6f3ec;
-    --ink:#1c2431;
-    --ink-soft:#4b5262;
-    --rule:#d9d3c3;
-    --gold:#a8792f;
-    --gold-bar:#c79a4b;
-    --bar-track:#e7e1d1;
-    --red-flag:#8a3b2e;
-    --green-complete:#2e6b3e;
-    --card-back:#1c2431;
-    --card-back-text:#f0ece0;
+    --paper:#ffffff;
+    --ink:#0f1b2d;
+    --ink-soft:#4d5868;
+    --rule:#dde3ea;
+    --gold:#1d5fbf;
+    --gold-bar:#3b82f6;
+    --bar-track:#e9eef4;
+    --red-flag:#d12f2f;
+    --green-complete:#1f7a4d;
+    --card-back:#0f1b2d;
+    --card-back-text:#f3f6fa;
   }
 
   *{box-sizing:border-box;}
@@ -74,7 +74,7 @@
   }
 
   .note{
-    background:#efe9d8;
+    background:#f3f6fa;
     border-left:3px solid var(--gold);
     padding:16px 20px;
     font-size:14.5px;
@@ -133,7 +133,7 @@
   }
 
   .front{
-    background:#fffdf8;
+    background:#ffffff;
   }
   .rank{
     font-family:'Roboto Mono',monospace;
@@ -174,9 +174,9 @@
     display:inline-block;
     font-family:'Roboto Mono',monospace;
     font-size:10px;
-    color:#8a6d1a;
-    background:#f5e6a8;
-    border:1px solid #c7a838;
+    color:#1d5fbf;
+    background:#fff4cc;
+    border:1px solid #e3a008;
     padding:1px 5px;
     border-radius:2px;
     margin-top:6px;
@@ -200,7 +200,7 @@
   .flip-hint{
     font-family:'Roboto Mono',monospace;
     font-size:10.5px;
-    color:#a6a08e;
+    color:#8b97a8;
     margin-top:10px;
   }
 
@@ -215,7 +215,7 @@
     font-family:'Roboto Mono',monospace;
     font-size:11px;
     letter-spacing:.03em;
-    color:#c79a4b;
+    color:#3b82f6;
     margin-bottom:8px;
   }
   .back .recipient-name{
@@ -261,7 +261,7 @@
   h2.section.flow-heading{margin-top:10px;}
   .flow-card{
     border:1px solid var(--rule);
-    background:#fffdf8;
+    background:#ffffff;
     margin-bottom:22px;
     padding:20px 22px;
   }
@@ -340,7 +340,7 @@
     transform:translateY(-50%);
     white-space:nowrap;
   }
-  .flow-note{font-size:12px;color:#8b8c86;margin-top:12px;}
+  .flow-note{font-size:12px;color:#7a8594;margin-top:12px;}
 
   @media(max-width:700px){
     .flow-row{flex-direction:column;align-items:stretch;}
@@ -355,7 +355,7 @@
   /* ---- Glossary ---- */
   .glossary{
     border:1px solid var(--rule);
-    background:#fffdf8;
+    background:#ffffff;
     padding:20px 22px;
     margin-bottom:36px;
   }
@@ -400,7 +400,7 @@
   }
   .people{
     border:1px solid var(--rule);
-    background:#fffdf8;
+    background:#ffffff;
     padding:20px 22px;
     margin-bottom:36px;
   }
@@ -445,7 +445,7 @@
   .person-connections b{color:var(--ink);font-weight:600;}
   .person-note{
     font-size:12.5px;
-    color:#8a6d1a;
+    color:#1d5fbf;
     margin-top:6px;
     font-style:italic;
   }
@@ -471,7 +471,7 @@
   .person-details[open] summary{margin-bottom:8px;}
   .sources-block{
     border:1px solid var(--rule);
-    background:#fffdf8;
+    background:#ffffff;
     padding:16px 22px;
     margin:0 0 28px;
   }
@@ -489,6 +489,7 @@
     <p class="kicker">THE WEBER COUNTY HIVE — DONOR LEDGER — ONE OFFICIAL</p>
     <h1>Deidre Henderson — Money In, Money Out</h1>
     <p class="dek">Utah's Lt. Governor's full campaign committee record, 2020-2025 — every contributor and every dollar spent, from itemized state filings. <a href="biggest-donors-flip.html" style="color:var(--gold);">See the full donor ledger and "Who these people are" →</a></p>
+    <p class="hive-updated" style="font-family:'Roboto Mono',ui-monospace,monospace;font-size:12px;letter-spacing:.03em;opacity:.75;margin:8px 0 0">Updated September 30, 2026 · figures re-checked against state filings</p>
   </header>
 
   <div class="meta-row">
@@ -499,7 +500,7 @@
   </div>
 
   <div class="note">
-    <strong>How to read this list.</strong> Every figure comes from itemized state campaign-finance filings, 6 report periods, 2020-2025 (390 rows, 28 <code>[DELETED]</code> entries — a mass-deletion pattern already documented across dozens of other PACs elsewhere in this investigation). A $47,234.25 balance transfer from her prior 2016 Senate committee is excluded from the totals below — it's her own prior war chest, not new contributed money. <strong>No 2026 report has been filed for her committee at all</strong> — not yet resolved whether that's a compliance gap or simply because she isn't on the 2026 ballot this cycle. Tap or click a tile to flip it.
+    <strong>How to read this list.</strong> Every figure comes from itemized state campaign-finance filings, 6 report periods, 2020-2025 (390 rows, 28 <code>[DELETED]</code> entries — the same pattern of [DELETED] entries found in many other committees in this investigation). A $47,234.25 balance transfer from her prior 2016 Senate committee is excluded from the totals below — it's her own prior war chest, not new contributed money. <strong>No 2026 report has been filed for her committee at all</strong> — not yet resolved whether that's a compliance gap or simply because she isn't on the 2026 ballot this cycle. Tap or click a tile to flip it.
   </div>
 
   <h2 class="section">Company contributors</h2>
@@ -540,7 +541,7 @@
       <div class="glossary-item"><span class="abbr" style="width:auto;min-width:160px;">$3,868.87</span><span class="full">Costco <span style='color:var(--ink-soft);font-size:12px;'>— retail vendor</span></span></div>
       <div class="glossary-item"><span class="abbr" style="width:auto;min-width:160px;">$3,295.76</span><span class="full">Capital Grille <span style='color:var(--ink-soft);font-size:12px;'>— restaurant chain (event/dining vendor)</span></span></div>
       <div class="glossary-item"><span class="abbr" style="width:auto;min-width:160px;">$3,000.00</span><span class="full">Utah Jazz <span style='color:var(--ink-soft);font-size:12px;'>— owned by Scott Ryan Smith, who separately gave Lincoln Hill PAC $80,000 and is a Lincoln Shurtz lobbying client (see the main donor ledger)</span></span></div>
-      <div class="glossary-item"><span class="abbr" style="width:auto;min-width:160px;">$2,500.00</span><span class="full">Conservative Millenials <span style='color:var(--ink-soft);font-size:12px;'>— a PAC already documented elsewhere in this investigation with a confirmed officer self-dealing pattern</span></span></div>
+      <div class="glossary-item"><span class="abbr" style="width:auto;min-width:160px;">$2,500.00</span><span class="full">Conservative Millenials <span style='color:var(--ink-soft);font-size:12px;'>— a PAC already documented elsewhere in this investigation whose officer's firm is also a paid vendor to it</span></span></div>
       <div class="glossary-item"><span class="abbr" style="width:auto;min-width:160px;">$1,961.25</span><span class="full">Alissa Daley</span></div>
       <div class="glossary-item"><span class="abbr" style="width:auto;min-width:160px;">$1,708.78</span><span class="full">Sam's Club <span style='color:var(--ink-soft);font-size:12px;'>— retail vendor</span></span></div>
       <div class="glossary-item"><span class="abbr" style="width:auto;min-width:160px;">$1,568.72</span><span class="full">Simply Mac <span style='color:var(--ink-soft);font-size:12px;'>— Apple retailer (tech/office vendor)</span></span></div>
@@ -614,13 +615,13 @@ const pacData = [
     top:{name:"Contribution to Henderson", amount:2500, note:"One of her documented contributors, 2020-2025."}},
   {name:"Utah Bankers Association", amount:2000,
     years:"2020-2025",
-    top:{name:"Contribution to Henderson", amount:2000, note:"Already tracked on the main donor ledger at $416,063."}},
+    top:{name:"Contribution to Henderson", amount:2000, note:"The Bankers Association's PAC has given $763,859 in all, 2018 through 9/25/2026 (see the Everything Else page)."}},
   {name:"Friends of Mia Love PAC", amount:2000,
     years:"2020-2025",
     top:{name:"Contribution to Henderson", amount:2000, note:"One of her documented contributors, 2020-2025."}},
   {name:"Committee to Elect Dan Hemmert", amount:2000,
     years:"2020-2025",
-    top:{name:"Contribution to Henderson", amount:2000, note:"Hemmert's own candidate committee — confirmed real via a full 2018-2026 pull, filed under multiple name variants the direct search didn't match. Reciprocal: Henderson's committee gave his $2,000 the same year (2020). His full committee history is now on file at $107,183.26 total, including $29,000 he self-funded."}},
+    top:{name:"Contribution to Henderson", amount:2000, note:"Hemmert's own candidate committee — confirmed real via a full 2018-2026 pull, filed under multiple name variants the direct search didn't match. Henderson's committee also lists a $2,000 entry with Hemmert's committee in 2020. Both entries carry the same date (11/25/2020), so they may be one transaction seen from both sides; this hasn't been confirmed. His full committee history is now on file at $107,183.26 total, including $29,000 he self-funded."}},
   {name:"Dominion Political Action Committee", amount:1500,
     years:"2020-2025",
     top:{name:"Contribution to Henderson", amount:1500, note:"One of her documented contributors, 2020-2025."}},
@@ -629,7 +630,7 @@ const pacData = [
 const individualData = [
   {name:"Gershon Barnett", amount:10000,
     years:"2020-2025",
-    top:{name:"Contribution to Henderson", amount:10000, note:"Already tracked on the main donor ledger at $429,500 total — this $10,000 is already included in that figure, cross-verified from both donor and recipient sides."}},
+    top:{name:"Contribution to Henderson", amount:10000, note:"Barnett has given $454,500 to Utah candidates and committees, 2022–2026 (see the Everything Else page); this $10,000 is included in that figure."}},
 ];
 
 function renderGrid(containerId, dataset) {
@@ -660,8 +661,8 @@ function renderGrid(containerId, dataset) {
             ${d.years && d.years.indexOf('2026') !== -1 ? `<span class="flag-2026">2026 DATA — SUBJECT TO CHANGE</span>` : ''}
           </div>
           ${d.years ? `<div class="years" style="margin-top:8px;">Years covered: ${d.years}</div>` : ''}
-          ${d.runBy ? `<div class="recipient-note" style="margin-top:8px;"><strong style="color:#c79a4b;">Run by:</strong> ${d.runBy}</div>` : ''}
-          ${d.stillNeed ? `<div class="recipient-note" style="margin-top:8px;"><strong style="color:#e0a458;">Still need:</strong> ${d.stillNeed}</div>` : ''}
+          ${d.runBy ? `<div class="recipient-note" style="margin-top:8px;"><strong style="color:#3b82f6;">Run by:</strong> ${d.runBy}</div>` : ''}
+          ${d.stillNeed ? `<div class="recipient-note" style="margin-top:8px;"><strong style="color:#f2b632;">Still need:</strong> ${d.stillNeed}</div>` : ''}
           <div class="donor-total">${d.name}: $${d.amount.toLocaleString()}${d.plus ? '+' : ''} total documented</div>
         </div>
       </div>
@@ -697,7 +698,7 @@ const companyFlows = [
     {name:"Revere Health", amount:1500, id:""},
     {name:"Wester Metals Recycling LLC", amount:1000, id:""},
   ],
-    note:"Full list of company contributors contributors to Henderson, 2020-2025, ranked by amount."},
+    note:"The 15 largest company contributors to Henderson, 2020-2025, shown here add to $47,000 of the $58,270 total; smaller ones are not listed."},
 ];
 
 const pacFlows = [
@@ -719,7 +720,7 @@ const pacFlows = [
     {name:"Equality Utah Political Action Committee", amount:500, id:""},
     {name:"Utah Food Industry Association Food PAC", amount:500, id:""},
   ],
-    note:"Full list of pac contributors contributors to Henderson, 2020-2025, ranked by amount."},
+    note:"The 15 largest PAC contributors to Henderson, 2020-2025, shown here add to $44,001 of the $44,776 total; smaller ones are not listed."},
 ];
 
 const individualFlows = [
@@ -741,7 +742,7 @@ function buildFlowRow(sourceName, rows, reverse) {
     const d = reverse
       ? `M 100,${y1} C 60,${y1} 40,${y2} 0,${y2}`
       : `M 0,${y1} C 40,${y1} 60,${y2} 100,${y2}`;
-    curves += `<path d="${d}" stroke="#c79a4b" stroke-width="${w}" fill="none" opacity="0.55"/>`;
+    curves += `<path d="${d}" stroke="#3b82f6" stroke-width="${w}" fill="none" opacity="0.55"/>`;
   });
   const sourceBox = `<div class="flow-source" style="height:${H}px;display:flex;align-items:center;justify-content:${reverse ? 'flex-start' : 'flex-end'};">${sourceName}</div>`;
   const svgBox = `<div class="flow-svg-col"><svg viewBox="0 0 100 ${H}" preserveAspectRatio="none" height="${H}">${curves}</svg></div>`;
@@ -785,7 +786,7 @@ function renderFlows(containerId, dataset) {
       ${buildFlowRow(f.name, rows, false)}
     ` : `<p class="flow-note" style="margin-top:16px;font-style:italic;">Outbound giving not yet pulled from disclosures.utah.gov — this entry currently shows inbound money only.</p>`}
     ${f.note ? `<p class="flow-note">${f.note}</p>` : ''}
-    ${f.stillNeed ? `<p class="flow-note" style="color:#a8792f;font-weight:600;">Still need: <span style="font-weight:400;color:var(--ink-soft);">${f.stillNeed}</span></p>` : ''}
+    ${f.stillNeed ? `<p class="flow-note" style="color:#1d5fbf;font-weight:600;">Still need: <span style="font-weight:400;color:var(--ink-soft);">${f.stillNeed}</span></p>` : ''}
     `;
     flowsEl.appendChild(card);
   });
