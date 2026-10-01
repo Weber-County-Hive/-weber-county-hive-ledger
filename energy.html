@@ -4,117 +4,1000 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Energy Money — The Weber County Hive</title>
-<meta name="description" content="Utilities, oil, rail and energy PACs: every check they reported giving to Utah candidates, parties and PACs, and who runs the committees.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  :root{--paper:#f6f3ec;--card:#fbf9f4;--ink:#1c2431;--soft:#4b5262;--rule:#d9d3c3;--gold:#a8792f;--bar:#3b4a63;--cox:#c79a4b;--track:#e7e1d1;--ok:#2e6b3e;--part:#8a3b2e;--tint:#efe7d6;}
-  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#151a22;--card:#1c222c;--ink:#ece6d8;--soft:#aab0bd;--rule:#323a47;--gold:#d4a85a;--bar:#8fa3c4;--cox:#d4a85a;--track:#2a313d;--ok:#6fbf83;--part:#e08f7e;--tint:#262019;}}
-  :root[data-theme="dark"]{--paper:#151a22;--card:#1c222c;--ink:#ece6d8;--soft:#aab0bd;--rule:#323a47;--gold:#d4a85a;--bar:#8fa3c4;--cox:#d4a85a;--track:#2a313d;--ok:#6fbf83;--part:#e08f7e;--tint:#262019;}
-  *{box-sizing:border-box}
-  body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,system-ui,sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased}
-  a{color:inherit;text-decoration-color:var(--gold);text-underline-offset:3px}
-  .wrap{max-width:1100px;margin:0 auto;padding:0 16px 80px}
-  nav.top{font-family:'Roboto Mono',monospace;font-size:12.5px;padding:14px 0;border-bottom:1px solid var(--rule);display:flex;gap:16px;flex-wrap:wrap}
-  nav.top a{text-decoration:none;color:var(--soft)} nav.top a:hover{color:var(--ink)}
-  header.mast{border-bottom:3px solid var(--ink);padding:36px 0 20px}
-  .kicker{font-family:'Roboto Mono',monospace;font-size:12px;letter-spacing:.04em;color:var(--gold);margin:0 0 10px}
-  h1{font-family:'Source Serif 4',Georgia,serif;font-size:clamp(34px,6vw,54px);line-height:1.05;margin:0 0 12px}
-  h1 em{color:var(--gold)}
-  .dek{font-family:'Source Serif 4',Georgia,serif;font-size:19px;color:var(--soft);max-width:64ch;margin:0}
-  .updated{font-family:'Roboto Mono',monospace;font-size:12px;color:var(--soft);margin-top:12px}
-  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:24px 0 10px}
-  .stat{background:var(--card);border:1px solid var(--rule);padding:14px 16px}
-  .stat b{display:block;font-family:'Roboto Mono',monospace;font-size:22px}
-  .stat span{font-size:13px;color:var(--soft)}
-  .callout{background:var(--tint);border-left:3px solid var(--gold);padding:12px 16px;font-size:14px;margin:12px 0}
-  h2{font-family:'Source Serif 4',Georgia,serif;font-size:26px;margin:40px 0 6px}
-  .sub{color:var(--soft);font-size:14px;margin:0 0 12px}
-  .tablewrap{overflow-x:auto;border:1px solid var(--rule);background:var(--card)}
-  table{border-collapse:collapse;width:100%;font-size:14px;min-width:620px}
-  th,td{padding:9px 12px;border-bottom:1px solid var(--rule);text-align:left;vertical-align:top}
-  th{font-family:'Roboto Mono',monospace;font-size:11.5px;text-transform:uppercase;letter-spacing:.04em;cursor:pointer;user-select:none;white-space:nowrap;background:var(--tint)}
-  th.on::after{content:' ↕';color:var(--gold)}
-  td.n{font-family:'Roboto Mono',monospace;white-space:nowrap;text-align:right} th.n{text-align:right}
-  td.k{font-family:'Roboto Mono',monospace;font-size:12px;color:var(--soft)}
-  .floor{color:var(--part);font-weight:600}
-  .legend{display:flex;gap:18px;flex-wrap:wrap;font-size:13px;color:var(--soft);margin:8px 0 14px}
-  .legend i{display:inline-block;width:14px;height:10px;margin-right:6px;vertical-align:middle}
-  .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,480px),1fr));gap:16px}
-  .card{background:var(--card);border:1px solid var(--rule);border-top:3px solid var(--ink);padding:18px;scroll-margin-top:16px}
-  .card header{display:flex;flex-wrap:wrap;gap:6px;align-items:baseline}
-  .card h3{font-family:'Source Serif 4',Georgia,serif;font-size:21px;margin:0 8px 0 0;flex-basis:100%}
-  .chip{font-family:'Roboto Mono',monospace;font-size:11px;border:1px solid var(--rule);padding:1px 7px;color:var(--soft)}
-  .chip.ok{color:var(--ok);border-color:var(--ok)} .chip.part{color:var(--part);border-color:var(--part)}
-  .big{font-family:'Roboto Mono',monospace;font-size:26px;margin:12px 0 2px} .big small{font-size:13px;color:var(--gold);margin-left:6px}
-  .basis{font-size:13px;color:var(--soft);margin:0 0 12px}
-  .bars{display:grid;gap:3px;margin:8px 0 14px}
-  .yr{display:grid;grid-template-columns:40px 1fr 104px;gap:8px;align-items:center;font-family:'Roboto Mono',monospace;font-size:12px}
-  .yr .trk{height:11px;background:var(--track);display:block} .yr .trk b{display:block;height:100%;background:var(--bar)} .yr .trk b.cox{background:var(--cox)}
-  .yr em{font-style:normal;text-align:right;color:var(--soft)} .yr em.na{font-size:11px;opacity:.75}
-  .nobars{font-size:13px;color:var(--soft);background:var(--tint);padding:8px 10px}
-  h4{font-family:'Roboto Mono',monospace;font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--gold);margin:14px 0 6px}
-  .who ul,.recips{list-style:none;padding:0;margin:0}
-  .who li{font-size:14px;padding:4px 0;border-bottom:1px dotted var(--rule)}
-  .who .src,.rx{display:block;font-size:12px;color:var(--soft)}
-  .muted{font-size:13px;color:var(--soft);margin:0}
-  .recips li{display:grid;grid-template-columns:1fr auto;gap:2px 10px;font-size:14px;padding:4px 0;border-bottom:1px dotted var(--rule)}
-  .ra{font-family:'Roboto Mono',monospace;white-space:nowrap} .rx{grid-column:1/-1}
-  details summary{cursor:pointer;font-size:13px;color:var(--soft);margin-top:6px}
-  .note{font-size:14px;background:var(--tint);padding:10px 12px;margin:14px 0 0}
-  .gaps,.filed{font-size:13px;color:var(--soft);margin:10px 0 0}
-  .srcs ul{font-size:12.5px;color:var(--soft);padding-left:18px}
-  .end{border-top:1px solid var(--rule);margin-top:40px;padding-top:6px}
-  .end ol,.end ul{padding-left:20px} .end li{margin:6px 0}
-  footer{margin-top:40px;padding-top:14px;border-top:3px solid var(--ink);font-size:13px;color:var(--soft)}
+  @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600&family=Roboto+Mono:wght@400;500&display=swap');
+
+  :root{
+    --paper:#ffffff;
+    --ink:#0f1b2d;
+    --ink-soft:#4d5868;
+    --rule:#dde3ea;
+    --gold:#1d5fbf;
+    --gold-bar:#3b82f6;
+    --bar-track:#e9eef4;
+    --red-flag:#d12f2f;
+    --green-complete:#1f7a4d;
+    --card-back:#0f1b2d;
+    --card-back-text:#f3f6fa;
+  }
+
+  *{box-sizing:border-box;}
+  html{-webkit-font-smoothing:antialiased;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',system-ui,sans-serif;
+    line-height:1.5;
+  }
+
+  .wrap{max-width:1100px;margin:0 auto;padding:0 24px 100px;}
+
+  header.masthead{
+    border-bottom:3px solid var(--ink);
+    padding:44px 0 20px;
+    margin-bottom:6px;
+  }
+  .kicker{
+    font-family:'Roboto Mono',monospace;
+    font-size:12.5px;
+    letter-spacing:.04em;
+    color:var(--gold);
+    margin:0 0 10px;
+  }
+  h1{
+    font-family:'Source Serif 4',Georgia,serif;
+    font-weight:700;
+    font-size:clamp(34px,5.5vw,54px);
+    line-height:1.06;
+    margin:0 0 14px;
+    max-width:15ch;
+  }
+  .dek{
+    font-family:'Source Serif 4',Georgia,serif;
+    font-size:19px;
+    color:var(--ink-soft);
+    max-width:62ch;
+    margin:0 0 6px;
+  }
+
+  .meta-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px 22px;
+    font-family:'Roboto Mono',monospace;
+    font-size:12px;
+    color:var(--ink-soft);
+    padding:16px 0 30px;
+    border-bottom:1px solid var(--rule);
+    margin-bottom:34px;
+  }
+
+  .note{
+    background:#f3f6fa;
+    border-left:3px solid var(--gold);
+    padding:16px 20px;
+    font-size:14.5px;
+    color:var(--ink-soft);
+    margin-bottom:44px;
+  }
+  .note strong{color:var(--ink);}
+
+  h2.section{
+    font-family:'Source Serif 4',Georgia,serif;
+    font-size:24px;
+    font-weight:600;
+    margin:0 0 4px;
+  }
+  p.section-sub{
+    color:var(--ink-soft);
+    font-size:14.5px;
+    margin:0 0 30px;
+  }
+
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(240px, 1fr));
+    gap:18px;
+    margin-bottom:60px;
+  }
+
+  .tile{
+    perspective:1400px;
+    height:440px;
+  }
+  .years{
+    font-family:'Roboto Mono',monospace;
+    font-size:10px;
+    color:var(--ink-soft);
+    margin-top:4px;
+  }
+  .tile-inner{
+    position:relative;
+    width:100%;
+    height:100%;
+    transition:transform .55s cubic-bezier(.4,.2,.2,1);
+    transform-style:preserve-3d;
+    cursor:pointer;
+  }
+  .tile.flipped .tile-inner{transform:rotateY(180deg);}
+
+  .face{
+    position:absolute;
+    inset:0;
+    backface-visibility:hidden;
+    border:1px solid var(--rule);
+    padding:18px;
+    display:flex;
+    flex-direction:column;
+  }
+
+  .front{
+    background:#ffffff;
+  }
+  .rank{
+    font-family:'Roboto Mono',monospace;
+    font-size:12px;
+    color:var(--ink-soft);
+  }
+  .top3 .rank{color:var(--gold);font-weight:600;}
+  .entity-name{
+    font-family:'Source Serif 4',Georgia,serif;
+    font-weight:600;
+    font-size:18px;
+    margin:6px 0 auto;
+    line-height:1.2;
+  }
+  .flag{
+    display:inline-block;
+    font-family:'Roboto Mono',monospace;
+    font-size:10px;
+    color:var(--red-flag);
+    border:1px solid var(--red-flag);
+    padding:1px 5px;
+    border-radius:2px;
+    margin-top:6px;
+    align-self:flex-start;
+  }
+  .flag-complete{
+    display:inline-block;
+    font-family:'Roboto Mono',monospace;
+    font-size:10px;
+    color:var(--green-complete);
+    border:1px solid var(--green-complete);
+    padding:1px 5px;
+    border-radius:2px;
+    margin-top:6px;
+    align-self:flex-start;
+  }
+  .flag-2026{
+    display:inline-block;
+    font-family:'Roboto Mono',monospace;
+    font-size:10px;
+    color:#1d5fbf;
+    background:#fff4cc;
+    border:1px solid #e3a008;
+    padding:1px 5px;
+    border-radius:2px;
+    margin-top:6px;
+    margin-left:6px;
+    align-self:flex-start;
+  }
+  .amount{
+    font-family:'Roboto Mono',monospace;
+    font-size:23px;
+    font-weight:500;
+    margin-top:10px;
+  }
+  .amount .plus{color:var(--gold);font-size:15px;}
+  .bar-track{
+    height:4px;
+    background:var(--bar-track);
+    width:100%;
+    margin-top:8px;
+  }
+  .bar-fill{height:100%;background:var(--gold-bar);}
+  .flip-hint{
+    font-family:'Roboto Mono',monospace;
+    font-size:10.5px;
+    color:#8b97a8;
+    margin-top:10px;
+  }
+
+  .back{
+    background:var(--card-back);
+    color:var(--card-back-text);
+    transform:rotateY(180deg);
+    justify-content:center;
+    overflow-y:auto;
+  }
+  .back .label{
+    font-family:'Roboto Mono',monospace;
+    font-size:11px;
+    letter-spacing:.03em;
+    color:#3b82f6;
+    margin-bottom:8px;
+  }
+  .back .recipient-name{
+    font-family:'Source Serif 4',Georgia,serif;
+    font-weight:600;
+    font-size:19px;
+    line-height:1.25;
+    margin:0 0 8px;
+  }
+  .back .recipient-amount{
+    font-family:'Roboto Mono',monospace;
+    font-size:22px;
+    margin-bottom:8px;
+  }
+  .back .recipient-note{
+    font-size:12.5px;
+    color:#b9c4d6;
+    line-height:1.4;
+  }
+  .back .donor-total{
+    margin-top:10px;
+    font-family:'Roboto Mono',monospace;
+    font-size:10.5px;
+    color:#7a8594;
+    border-top:1px solid #26364d;
+    padding-top:8px;
+  }
+
+  footer{
+    border-top:3px solid var(--ink);
+    padding-top:24px;
+    font-size:13px;
+    color:var(--ink-soft);
+  }
+  footer p{margin:0 0 10px;}
+
+  @media(max-width:480px){
+    .grid{grid-template-columns:1fr 1fr;}
+    .tile{height:420px;}
+  }
+
+  /* ---- Grand summary banner ---- */
+  .grand-summary{
+    background:var(--card-back);
+    color:var(--card-back-text);
+    padding:32px 28px;
+    margin-bottom:44px;
+    border:1px solid var(--rule);
+  }
+  .grand-summary .gs-label{
+    font-family:'Roboto Mono',monospace;
+    font-size:12px;
+    letter-spacing:.04em;
+    color:#3b82f6;
+    margin:0 0 6px;
+  }
+  .grand-summary .gs-total{
+    font-family:'Roboto Mono',monospace;
+    font-weight:500;
+    font-size:clamp(34px,6vw,52px);
+    line-height:1;
+    margin:0 0 6px;
+  }
+  .grand-summary .gs-sub{
+    font-size:13.5px;
+    color:#b9c4d6;
+    margin:0 0 26px;
+    max-width:60ch;
+  }
+  .gs-top5{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(150px, 1fr));
+    gap:16px 20px;
+    border-top:1px solid #26364d;
+    padding-top:22px;
+  }
+  .gs-top5-item .gs-rank{
+    font-family:'Roboto Mono',monospace;
+    font-size:11px;
+    color:#7a8594;
+  }
+  .gs-top5-item .gs-name{
+    font-family:'Source Serif 4',Georgia,serif;
+    font-weight:600;
+    font-size:15px;
+    line-height:1.25;
+    margin:3px 0 5px;
+  }
+  .gs-top5-item .gs-amount{
+    font-family:'Roboto Mono',monospace;
+    font-size:16.5px;
+    color:#3b82f6;
+  }
+
+  /* ---- PAC key (who runs each recipient PAC) ---- */
+  .pac-key{
+    border:1px solid var(--rule);
+    background:#ffffff;
+    margin-bottom:44px;
+  }
+  .pac-key .pac-key-head{
+    padding:18px 22px 4px;
+  }
+  .pac-key .pac-key-head h2{
+    font-family:'Source Serif 4',Georgia,serif;
+    font-size:20px;
+    font-weight:600;
+    margin:0 0 4px;
+  }
+  .pac-key .pac-key-head p{
+    font-size:13px;
+    color:var(--ink-soft);
+    margin:0 0 14px;
+  }
+  .pac-key-row{
+    display:flex;
+    align-items:flex-start;
+    gap:20px;
+    padding:16px 22px;
+    border-top:1px solid var(--rule);
+  }
+  .pac-key-row .pk-name{
+    flex:0 0 220px;
+    font-family:'Source Serif 4',Georgia,serif;
+    font-weight:600;
+    font-size:15.5px;
+    color:var(--ink);
+    line-height:1.3;
+  }
+  .pac-key-row .pk-name .pk-abbr{
+    display:block;
+    font-family:'Roboto Mono',monospace;
+    font-size:10.5px;
+    font-weight:500;
+    color:var(--gold);
+    margin-top:2px;
+  }
+  .pac-key-row .pk-desc{
+    flex:1 1 auto;
+    font-size:13.5px;
+    color:var(--ink-soft);
+    line-height:1.55;
+  }
+  .pac-key-row .pk-desc b{color:var(--ink);font-weight:600;}
+  .pac-key-note{
+    padding:16px 22px 20px;
+    border-top:1px solid var(--rule);
+    background:#f3f6fa;
+    font-size:13px;
+    color:var(--ink-soft);
+    line-height:1.5;
+  }
+  .pac-key-note b{color:var(--ink);}
+  @media(max-width:640px){
+    .pac-key-row{flex-direction:column;gap:4px;}
+    .pac-key-row .pk-name{flex:none;}
+  }
+
+  /* ---- Flow charts ---- */
+  h2.section.flow-heading{margin-top:10px;}
+  .flow-card{
+    border:1px solid var(--rule);
+    background:#ffffff;
+    margin-bottom:22px;
+    padding:20px 22px;
+  }
+  .flow-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    margin-bottom:14px;
+    flex-wrap:wrap;
+    gap:6px 16px;
+  }
+  .flow-head h3{
+    font-family:'Source Serif 4',Georgia,serif;
+    font-size:19px;
+    font-weight:600;
+    margin:0;
+  }
+  .flow-head .flow-total{
+    font-family:'Roboto Mono',monospace;
+    font-size:14px;
+    color:var(--gold);
+  }
+  .flow-row{
+    display:flex;
+    align-items:center;
+    gap:0;
+  }
+  .flow-source{
+    width:150px;
+    flex-shrink:0;
+    background:var(--card-back);
+    color:var(--card-back-text);
+    padding:14px 12px;
+    font-family:'Source Serif 4',Georgia,serif;
+    font-size:14.5px;
+    font-weight:600;
+    line-height:1.3;
+    text-align:right;
+  }
+  .flow-svg-col{flex:1 1 auto;min-width:40px;}
+  .flow-svg-col svg{display:block;width:100%;}
+  .flow-recipients{width:340px;flex-shrink:0;}
+  .flow-recipient{
+    height:auto;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    border-bottom:1px solid var(--rule);
+    padding:8px 14px;
+    position:relative;
+    min-width:0;
+  }
+  .flow-recipient:last-child{border-bottom:none;}
+  .flow-recipient .rname{
+    display:block;
+    min-width:0;
+    max-width:100%;
+    font-size:13.5px;font-weight:600;color:var(--ink);
+    white-space:normal;overflow-wrap:break-word;
+  }
+  .flow-recipient .rmeta{
+    display:block;
+    min-width:0;
+    max-width:100%;
+    font-size:11px;color:var(--ink-soft);
+    white-space:normal;overflow-wrap:break-word;
+  }
+  .flow-recipient .ramount{
+    font-family:'Roboto Mono',monospace;
+    font-size:12.5px;
+    color:var(--gold);
+    display:block;
+    margin-top:2px;
+    white-space:nowrap;
+  }
+  .flow-note{font-size:12px;color:#7a8594;margin-top:12px;}
+
+  @media(max-width:700px){
+    .flow-row{flex-direction:column;align-items:stretch;}
+    .flow-source{width:auto;text-align:left;margin-bottom:8px;}
+    .flow-svg-col{display:none;}
+    .flow-recipients{width:auto;}
+  }
+
+  /* ---- Glossary ---- */
+  .glossary{
+    border:1px solid var(--rule);
+    background:#ffffff;
+    padding:20px 22px;
+    margin-bottom:36px;
+  }
+  .glossary h2{
+    font-family:'Source Serif 4',Georgia,serif;
+    font-size:19px;
+    font-weight:600;
+    margin:0 0 4px;
+  }
+  .glossary .glossary-sub{
+    font-size:13px;
+    color:var(--ink-soft);
+    margin:0 0 16px;
+  }
+  .glossary-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:4px 28px;
+  }
+  .glossary-item{
+    display:flex;
+    gap:10px;
+    padding:8px 0;
+    border-bottom:1px solid var(--rule);
+  }
+  .glossary-item .abbr{
+    font-family:'Roboto Mono',monospace;
+    font-size:13px;
+    font-weight:500;
+    color:var(--gold);
+    flex-shrink:0;
+    width:78px;
+  }
+  .glossary-item .full{
+    font-size:13px;
+    color:var(--ink);
+    line-height:1.4;
+  }
+  .glossary-item .full b{font-weight:600;}
+  @media(max-width:640px){
+    .glossary-grid{grid-template-columns:1fr;}
+  }
+  .people{
+    border:1px solid var(--rule);
+    background:#ffffff;
+    padding:20px 22px;
+    margin-bottom:36px;
+  }
+  .people h2{
+    font-family:'Source Serif 4',Georgia,serif;
+    font-size:19px;
+    font-weight:600;
+    margin:0 0 4px;
+  }
+  .people .people-sub{
+    font-size:13px;
+    color:var(--ink-soft);
+    margin:0 0 18px;
+  }
+  .person{
+    padding:14px 0;
+    border-bottom:1px solid var(--rule);
+  }
+  .person:last-child{border-bottom:none;}
+  .person-name{
+    font-family:'Source Serif 4',Georgia,serif;
+    font-weight:600;
+    font-size:16px;
+    color:var(--ink);
+  }
+  .person-role{
+    font-family:'Roboto Mono',monospace;
+    font-size:11px;
+    color:var(--gold);
+    margin-top:2px;
+  }
+  .person-connections{
+    margin:8px 0 0;
+    padding-left:18px;
+  }
+  .person-connections li{
+    font-size:13px;
+    color:var(--ink-soft);
+    line-height:1.5;
+    margin-bottom:3px;
+  }
+  .person-connections b{color:var(--ink);font-weight:600;}
+  .person-note{
+    font-size:12.5px;
+    color:#1d5fbf;
+    margin-top:6px;
+    font-style:italic;
+  }
+  .person-details{margin-top:8px;}
+  .person-details summary{
+    font-family:'Roboto Mono',monospace;
+    font-size:11px;
+    color:var(--ink-soft);
+    cursor:pointer;
+    list-style:none;
+    display:inline-flex;
+    align-items:center;
+    gap:5px;
+  }
+  .person-details summary::-webkit-details-marker{display:none;}
+  .person-details summary::before{
+    content:"▸";
+    font-size:10px;
+    color:var(--gold);
+    transition:transform .15s;
+  }
+  .person-details[open] summary::before{transform:rotate(90deg);}
+  .person-details[open] summary{margin-bottom:8px;}
+  .sources-block{
+    border:1px solid var(--rule);
+    background:#ffffff;
+    padding:16px 22px;
+    margin:0 0 28px;
+  }
+  .sources-block summary b{
+    font-family:'Source Serif 4',Georgia,serif;
+    font-size:14px;
+    color:var(--ink);
+    font-weight:600;
+  }
+  @media (max-width:600px){.tile-runby{font-size:13px;margin-top:10px;padding-top:8px}}
+  .tile-runby{margin-top:14px;font-size:14.5px;line-height:1.4;color:#0f1b2d;border-top:1px solid #dde3ea;padding-top:10px}
+  .tile-runby .trb-label{display:block;font-family:'Roboto Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:#1d5fbf;margin-bottom:3px;font-weight:600}
+
+  /* year-by-year section (added 9/30/26) */
+  .yearly{--card:#ffffff;--soft:#4d5868;--bar:#1d5fbf;--cox:#e3a008;--track:#e9eef4;--ok:#1f7a4d;--part:#5b6b82;--tint:#eef4fb;--rule:#dde3ea;margin-top:50px}
+  .yearly .tablewrap{overflow-x:auto;border:1px solid var(--rule);background:#fff}
+  .yearly table{border-collapse:collapse;width:100%;font-size:14px;min-width:620px}
+  .yearly th,.yearly td{padding:9px 12px;border-bottom:1px solid var(--rule);text-align:left;vertical-align:top}
+  .yearly th{font-family:'Roboto Mono',monospace;font-size:11.5px;text-transform:uppercase;cursor:pointer;background:var(--tint);white-space:nowrap}
+  .yearly th.on::after{content:' \2195';color:var(--bar)}
+  .yearly td.n{font-family:'Roboto Mono',monospace;text-align:right;white-space:nowrap}.yearly th.n{text-align:right}
+  .yearly td.k{font-family:'Roboto Mono',monospace;font-size:12px;color:var(--soft)}
+  .yearly .floor{color:var(--part);font-weight:600}
+  .yearly .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,480px),1fr));gap:16px;margin-top:16px}
+  .yearly .card{background:#fff;border:1px solid var(--rule);border-top:3px solid #0f1b2d;padding:18px}
+  .yearly .card header{display:flex;flex-wrap:wrap;gap:6px;align-items:baseline}
+  .yearly .card h3{font-family:'Source Serif 4',Georgia,serif;font-size:20px;margin:0 8px 0 0;flex-basis:100%}
+  .yearly .chip{font-family:'Roboto Mono',monospace;font-size:11px;border:1px solid var(--rule);padding:1px 7px;color:var(--soft)}
+  .yearly .chip.ok{color:var(--ok);border-color:var(--ok)}.yearly .chip.part{color:var(--part);border-color:var(--part)}
+  .yearly .big{font-family:'Roboto Mono',monospace;font-size:24px;margin:12px 0 2px}.yearly .big small{font-size:13px;color:#b07d00;margin-left:6px}
+  .yearly .basis{font-size:13px;color:var(--soft);margin:0 0 12px}
+  .yearly .bars{display:grid;gap:3px;margin:8px 0 14px}
+  .yearly .yr{display:grid;grid-template-columns:40px 1fr 104px;gap:8px;align-items:center;font-family:'Roboto Mono',monospace;font-size:12px}
+  .yearly .yr .trk{height:11px;background:var(--track);display:block}.yearly .yr .trk b{display:block;height:100%;background:var(--bar)}.yearly .yr .trk b.cox{background:var(--cox)}
+  .yearly .yr em{font-style:normal;text-align:right;color:var(--soft)}.yearly .yr em.na{font-size:11px;opacity:.75}
+  .yearly .nobars{font-size:13px;color:var(--soft);background:var(--tint);padding:8px 10px}
+  .yearly h4{font-family:'Roboto Mono',monospace;font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--bar);margin:14px 0 6px}
+  .yearly .who ul,.yearly .recips{list-style:none;padding:0;margin:0}
+  .yearly .who li{font-size:14px;padding:4px 0;border-bottom:1px dotted var(--rule)}
+  .yearly .who .src,.yearly .rx{display:block;font-size:12px;color:var(--soft)}
+  .yearly .muted{font-size:13px;color:var(--soft);margin:0}
+  .yearly .recips li{display:grid;grid-template-columns:1fr auto;gap:2px 10px;font-size:14px;padding:4px 0;border-bottom:1px dotted var(--rule)}
+  .yearly .ra{font-family:'Roboto Mono',monospace;white-space:nowrap}.yearly .rx{grid-column:1/-1}
+  .yearly details summary{cursor:pointer;font-size:13px;color:var(--soft);margin-top:6px}
+  .yearly .note{font-size:14px;background:var(--tint);padding:10px 12px;margin:14px 0 0;border:0}
+  .yearly .gaps,.yearly .filed{font-size:13px;color:var(--soft);margin:10px 0 0}
+  .yearly .srcs ul{font-size:12.5px;color:var(--soft);padding-left:18px}
+  .yearly .legend{display:flex;gap:18px;flex-wrap:wrap;font-size:13px;color:var(--soft);margin:8px 0 6px}
+  .yearly .legend i{display:inline-block;width:14px;height:10px;margin-right:6px;vertical-align:middle}
+  .yearly .callout{background:var(--tint);border-left:3px solid var(--bar);padding:12px 16px;font-size:14px;margin:12px 0}
+  .hive-updated{font-family:'Roboto Mono',ui-monospace,monospace;font-size:12px;letter-spacing:.03em;opacity:.75;margin:8px 0 0}
 </style>
-</head>
 <body>
 <div class="wrap">
-  <nav class="top"><a href="index.html">← The Ledger</a><a href="industries.html">Money by industry</a><a href="energy.html">Energy</a><a href="tech.html">Tech</a><a href="realestate.html">Real estate</a><a href="everythingelse.html">Everything else</a></nav>
-  <header class="mast">
-    <p class="kicker">DONOR LEDGER · ENERGY · UTAH CAMPAIGN FINANCE, 2018–2026</p>
-    <h1>Energy <em>Money</em></h1>
-    <p class="dek">Utilities, oil, rail and energy PACs: every check they reported giving to Utah candidates, parties and PACs, and who runs the committees.</p>
-    <p class="updated">Updated September 30, 2026 · Public records only</p>
+
+  <header class="masthead">
+    <p class="kicker">THE WEBER COUNTY HIVE — DONOR LEDGER — ENERGY</p>
+    <h1>Energy Money</h1>
+    <p class="dek">The energy-sector slice of the full donor ledger — utilities, oil, and energy PACs, ranked by documented giving. <a href="biggest-donors-flip.html" style="color:var(--gold);">See the full donor ledger and "Who these people are" →</a></p>
+    <p class="hive-updated">Updated September 30, 2026 · figures re-checked against state filings</p>
   </header>
 
-  <div class="stats" id="stats"></div>
-  <div class="callout" id="passthrough"></div>
-  <div class="callout"><strong>How to read this page.</strong> Each total counts checks the donor reported giving, as filed with the state. A <span class="floor">+</span> or "still being pulled" means some years or pages haven't been reviewed yet, so the total is a minimum. "Who runs it" lists the officers named on the committee's own state registration; it is blank where that registration hasn't been pulled.</div>
+  <div class="meta-row">
+    <span>Compiled from <b>primary-source disclosures.utah.gov filings</b></span>
+    <span>Status: <b>in progress, not final</b></span>
+  </div>
 
-  <h2>All donors at a glance</h2>
-  <p class="sub">Click a column heading to sort. Click a name to jump to its card.</p>
-  <div class="tablewrap"><table>
-    <thead><tr><th data-k="name">Donor</th><th data-k="kind">Type</th><th data-k="total" class="n">Total given</th><th data-k="cox" class="n">To Gov. Cox</th><th data-k="yearsChecked">Years checked</th></tr></thead>
-    <tbody id="tbody"></tbody>
-  </table></div>
+  <div class="grand-summary" id="grand-summary"></div>
 
-  <h2>Donor by donor</h2>
-  <div class="legend"><span><i style="background:var(--bar)"></i>Given that year</span><span><i style="background:var(--cox)"></i>All of it to Spencer Cox</span><span><i style="background:var(--track)"></i>Scale track</span></div>
-  <div class="cards" id="cards"></div>
+  <div class="pac-key">
+    <div class="pac-key-head">
+      <h2>Who these PACs are</h2>
+      <p>Every leadership and industry PAC that appears as a recipient on this page — what it is and who runs it, per each PAC's own official state filing.</p>
+    </div>
+    <div class="pac-key-row">
+      <div class="pk-name">UHREC<span class="pk-abbr">Utah House Republican Election Committee</span></div>
+      <div class="pk-desc">The Utah House Republican caucus's official leadership PAC. Per its Statement of Organization: <b>Mike Schultz</b> (Speaker of the House) and <b>Casey Snider</b> (Majority Leader) are Primary Officers; <b>Candice Pierucci</b> (Majority Whip) is an Officer. <b>Kyle Palmer</b> is CFO/Treasurer, with sole signature authority over disbursements.</div>
+    </div>
+    <div class="pac-key-row">
+      <div class="pk-name">URSCC<span class="pk-abbr">Utah Republican Senate Campaign Committee</span></div>
+      <div class="pk-desc">The Utah Senate Republican caucus's official leadership PAC. Per its Statement of Organization: <b>J. Stuart Adams</b> (Senate President) and <b>Kirk Cullimore</b> (State Senator) are Primary Officers. <b>Kyle Palmer</b> is CFO/Treasurer — the same treasurer who runs UHREC.</div>
+    </div>
+    <div class="pac-key-row">
+      <div class="pk-name">Adams Leadership PAC</div>
+      <div class="pk-desc">Senate President <b>J. Stuart Adams'</b> personal leadership PAC — separate from URSCC, the caucus-wide committee he also co-leads. Filed from Lehi, UT.</div>
+    </div>
+    <div class="pac-key-row">
+      <div class="pk-name">House Speaker Leadership PAC</div>
+      <div class="pk-desc">Speaker <b>Mike Schultz's</b> personal leadership PAC — separate from UHREC, the caucus-wide committee he also co-leads. Director: Mike Schultz; Chief of Staff: Abby Osborne; CFO/Treasurer: <b>Kyle Palmer</b>.</div>
+    </div>
+    <div class="pac-key-row">
+      <div class="pk-name">Governors Leadership PAC</div>
+      <div class="pk-desc">A gubernatorial leadership PAC, active in this dataset in 2018 and 2020. Current officer/leadership structure not yet independently confirmed in this research.</div>
+    </div>
+    <div class="pac-key-row">
+      <div class="pk-name">Dominion Energy PAC</div>
+      <div class="pk-desc">Per its Statement of Organization (created 4/11/2017): Chairman <b>Corynne Arnett</b> (Dominion SVP, Regulatory Affairs &amp; Customer Experience), Vice Chairman <b>Darius Johnson</b>, Treasurer <b>Nathan Frost</b>. Affiliated with and funded by Dominion Energy Inc. Its own reporting years run 2017-2024; it filed a Statement of Dissolution on 9/27/2024.</div>
+    </div>
+    <div class="pac-key-row">
+      <div class="pk-name">Utah Petroleum Association PAC</div>
+      <div class="pk-desc">Chairman <b>Brad Shafer</b> (Marathon Petroleum); Vice Chairman <b>Chad Calvert</b> (Chevron); Secretary/Treasurer <b>Rikki Hrenko-Browning</b> (President, Utah Petroleum Association); Trustees Cameron Cuch and Spencer Kimball. Funded largely by the trade association itself and member oil companies.</div>
+    </div>
+    <div class="pac-key-row">
+      <div class="pk-name">Utah County Legislative PAC<span class="pk-abbr">UCL PAC</span></div>
+      <div class="pk-desc">Created 3/9/2025 at the same Layton address as UHREC and URSCC. Per its Statement of Organization: President <b>Stephanie Gricius</b> (the sitting HD-50 representative) and Treasurer <b>Kyle Palmer</b>.</div>
+    </div>
+    <div class="pac-key-note">
+      <b>Worth noting:</b> Kyle Palmer serves as CFO/Treasurer of four separate PACs appearing on this page at once — UHREC, URSCC, Adams Leadership PAC, and House Speaker Leadership PAC — giving him disbursement authority across every major Republican legislative leadership committee in the state simultaneously. This is his registered role per each PAC's own official filing, not an inference.
+    </div>
+    <div class="pac-key-note">
+      <b>Why totals on this page are hard to fully trace:</b> most donors here give through more than one channel at once — a direct check to an individual legislator, plus separate checks to one or more of these leadership PACs, which then redistribute their own pooled money to many of the same legislators. A single donor's real influence on a specific recipient can arrive by both paths simultaneously, and those paths don't always show up connected in a single disclosures.utah.gov search. The totals on this page count each donor's own outbound giving once; they do not attempt to trace money a second time after it passes through a PAC.
+    </div>
+  </div>
 
-  <section class="end">
-    <h2>Questions the record raises</h2>
-    <ol>
-<li>Spencer Cox is the largest documented recipient for most donors on this page. How does the timing of the largest checks line up with energy legislation and state energy initiatives in the same years?</li>
-<li>Torus, Inc. has given only to Spencer Cox in every year on record. What business, if any, does Torus have before the state?</li>
-<li>Dominion Energy PAC filed a dissolution confirmation on 9/27/2024, yet UHREC&#x27;s 2026 report lists $6,000 received from it on 1/8/2026. Which entity actually wrote that check?</li>
-<li>Chevron funds the Utah Petroleum Association PAC, and a Chevron executive is that PAC&#x27;s vice chairman. How much of the PAC&#x27;s giving is Chevron money passed through?</li>
-    </ol>
-    <p class="sub">These are questions, not conclusions. Read the filings and decide what they mean.</p>
-    <h2>Sources and method</h2>
-    <ul>
-      <li>Itemized Utah campaign-finance disclosures at disclosures.utah.gov: contribution searches by donor name and year, and full DEX (CSV) exports for PACs.</li>
-      <li>PAC and political issues committee registrations (Statements of Organization) at disclosures.utah.gov, for officer names and titles.</li>
-      <li>Utah Division of Corporations business-entity records, where cited on a card.</li>
-      <li>Names are listed as filed. Donors that file under several spellings are combined, and each card lists the spellings found.</li>
-      <li>This page describes what the filings show. It makes no claim about anyone's intent or about whether any law was broken.</li>
-    </ul>
+  <div class="note">
+    <strong>How to read this list.</strong> Every figure comes from itemized state campaign-finance filings. Some donor totals cover their <em>entire</em> documented giving; others cover only what's been fully pulled so far (marked with a <strong>+</strong>). The recipient shown on the back of each tile is that donor's single largest documented recipient — not necessarily their only one. This page is a filtered slice of the full donor ledger — the PACs and lobbyists who move this money across every industry are documented once, on the main ledger page, not repeated here.
+  </div>
+
+  <h2 class="section">Company donors</h2>
+  <p class="section-sub">Ranked by largest confirmed total — tap or click a tile to flip it</p>
+  <div class="grid" id="grid-companies"></div>
+
+  <h2 class="section">PAC donors</h2>
+  <p class="section-sub">PACs giving out money they've pooled from many sources, tracked separately from single-source company giving</p>
+  <div class="grid" id="grid-pacs"></div>
+  <p class="section-sub" id="pac-empty-note" style="display:none;">No PAC donors added yet.</p>
+
+  <h2 class="section flow-heading">Where the money went</h2>
+  <p class="section-sub">Top recipients for each donor, largest first. Line thickness shows relative size within that donor's own giving.</p>
+
+  <h3 style="font-family:'Source Serif 4',Georgia,serif;font-size:18px;margin:0 0 12px;">Company donors</h3>
+  <div id="flows-companies"></div>
+
+  <h3 style="font-family:'Source Serif 4',Georgia,serif;font-size:18px;margin:24px 0 12px;">PAC donors</h3>
+  <div id="flows-pacs"></div>
+
+
+  <section class="yearly">
+    <h2 class="section">Year by year</h2>
+    <p class="section-sub">Each donor's giving by year, who runs it, and where its money went. Click a column heading to sort; click a name to jump to its card.</p>
+    <div class="callout" id="passthrough"></div>
+    <div class="tablewrap"><table>
+      <thead><tr><th data-k="name">Donor</th><th data-k="kind">Type</th><th data-k="total" class="n">Total given</th><th data-k="cox" class="n">To Gov. Cox</th><th data-k="yearsChecked">Years checked</th></tr></thead>
+      <tbody id="tbody"></tbody>
+    </table></div>
+    <div class="legend"><span><i style="background:#1d5fbf"></i>Given that year</span><span><i style="background:#e3a008"></i>All of it to Spencer Cox</span></div>
+    <div class="cards" id="cards"></div>
   </section>
-  <footer>The Weber County Hive · Utah Hive Politics · Public records only. No comment requests.</footer>
+  <script src="energy-data.js?v=3"></script>
+  <script src="ledger-cards.js?v=3"></script>
+
+  <div class="sources-block">
+    <details class="person-details">
+      <summary><b>Conclusion &amp; questions readers should ask</b></summary>
+      <p class="person-note" style="font-style:normal;">This page documents the energy sector's giving separately — 10 companies and PACs (PacifiCorp, Union Pacific Railroad, EnergySolutions, Torus, Big West Oil, Chevron, rPlus Energies, Edison Electric Institute, Dominion Energy PAC, Utah Petroleum Association PAC), heavily concentrated on Gov. Cox and Utah's legislative leadership committees. Cox is the top documented recipient across nearly every entity on this page. Several donors here (PacifiCorp, EnergySolutions, Big West Oil) show an escalating giving pattern in years leading up to and following Cox's "Operation Gigawatt" nuclear/energy initiative. Big West Oil's giving goes mainly to Cox and the leadership committees, with $250-$500 checks to individual legislators in 2021-2023. Union Pacific Railroad — a completely different industry (rail, not energy) — is included here because its giving pattern overlaps so heavily with PacifiCorp's own donor-legislator list that the two are best read side by side.</p>
+      <p class="person-note" style="font-style:normal;font-weight:600;color:var(--ink);margin-top:14px;margin-bottom:6px;">Questions worth asking, based on what's documented here:</p>
+      <ul class="person-connections">
+        <li>What is the relationship, if any, between the timing of these companies' larger checks and specific energy-policy legislation or state initiatives during the same period?</li>
+        <li>Why does giving from this sector concentrate so heavily on the Governor and legislative leadership PACs rather than spreading across individual legislators, compared to other industries?</li>
+                <li>Dominion Energy PAC filed its dissolution on 9/27/2024, yet a $10,000 check to Spencer Cox (8/19/2025) and $6,000 to UHREC (1/8/2026) appear under its name in other filers' records. Which entity actually wrote those checks?</li>
+        <li>Chevron funds the Utah Petroleum Association PAC, and a Chevron executive is that PAC's vice chairman. How much of the PAC's giving is Chevron money passed through?</li>
+        <li>A recurring group of legislators (Ronald Winterton, Joel Ferry, Evan Vickers, Darlene Pierucci, Todd Weiler, Jim Dunnigan, Logan Wilde, and others) take checks from both PacifiCorp and Union Pacific in the same years — what, if anything, connects the two industries' interest in the same legislators?</li>
+      </ul>
+      <p class="person-note" style="font-style:normal;margin-top:10px;">These are open questions the public record raises, not conclusions this page draws. Readers should look at the primary sources linked throughout and decide for themselves what the documented facts mean.</p>
+    </details>
+  </div>
+
+  <div class="sources-block">
+    <details class="person-details">
+      <summary><b>Sources &amp; methodology</b></summary>
+      <ul class="person-connections">
+        <li>Itemized Utah campaign-finance disclosures, disclosures.utah.gov — individual contribution/expenditure searches and full PAC DEX (CSV) exports</li>
+        <li>Utah Division of Corporations business-entity records</li>
+        <li>Nonprofit Form 990 filings via ProPublica's Nonprofit Explorer</li>
+        <li>Utah's boards and commissions registry, boards.utah.gov</li>
+      </ul>
+      <p class="person-note" style="font-style:normal;">Figures reflect research completed as of publication and will be updated as additional filing years are reviewed. This page shares its source data with the full donor ledger page, which has a longer list of source types used across the whole investigation — sworn disclosure forms, statute text, meeting minutes, and more. This page describes what the record shows without asserting legal conclusions about intent or wrongdoing.</p>
+    </details>
+  </div>
+
+  <footer>
+    <p>Compiled by The Weber County Hive from itemized Utah campaign-finance disclosures (disclosures.utah.gov), PAC registration filings, and Utah Division of Corporations records. Figures reflect research completed as of publication and will be updated as additional filing years are reviewed. Part of a series — see the <a href="biggest-donors-flip.html">full donor ledger</a>.</p>
+    <p><strong>2026 figures are incomplete.</strong> The 2026 reporting year is not yet over, and many committees have not yet filed all of their periodic reports — a "2026 only" or "2026-2026" figure anywhere on this page reflects what has been filed and disclosed so far, not a final year-end total. Treat every 2026-inclusive number as a floor, not a ceiling, until later reports come in.</p>
+    <p>webercountyhive.substack.com</p>
+  </footer>
+
 </div>
-<script src="energy-data.js?v=1"></script>
-<script src="ledger-cards.js?v=1"></script>
+
+<script>
+function fmt(n){ n = Number(n)||0; return n % 1 ? n.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2}) : n.toLocaleString("en-US"); }
+const companyData = [
+  {"name": "PacifiCorp", "amount": 438650, "years": "2018-2026", "top": {"name": "Spencer Cox", "amount": 102500, "note": "Nine checks across 2018 and 2020-2026; no 2019 check"}, "plus": true, "stillNeed": "2018 page 3, 2019 page 3 and 2021 page 2 of the search results not yet seen; Pacific Minerals Inc. and the federal PAC (FEC C00082800) not yet checked."},
+  {"name": "EnergySolutions", "amount": 270167.61, "years": "2018-2026", "top": {"name": "UHREC", "amount": 73500, "note": "2018 $6,500; 2019 $5,000; 2022 $2,000; 2023 $7,500; 2024 $52,500 (incl. $50,000 on 9/6/2024)"}, "plus": true, "stillNeed": "Individual $200-$2,000 legislator checks for 2018-2021 not tallied because of volume; the true all-time total is higher. No per-year totals for 2022-2026."},
+  {"name": "Torus Inc.", "amount": 201041.98, "years": "2022-2026", "top": {"name": "Spencer Cox", "amount": 201041.98, "note": "Five checks: 8/8/2022, 9/15/2023, 6/3/2024, 8/15/2025, 8/4/2026"}, "complete": true},
+  {"name": "Big West Oil", "amount": 117320, "years": "2018-2026", "top": {"name": "Spencer Cox", "amount": 35000, "note": "Five years: 2021 $2,500; 2023 $10,000; 2024 $7,500; 2025 $7,500; 2026 $7,500"}, "plus": true, "stillNeed": "2024-2026 each pulled as a single page flagged 'likely incomplete'; confirm no second page exists."},
+  {"name": "Chevron", "amount": 110891.25, "years": "2022-2026", "top": {"name": "Spencer Cox", "amount": 27500, "note": "2023 $7,500 + $5,000; 2024 $7,500; 2025 $7,500; no 2022 check found"}, "plus": true, "stillNeed": "2020-2021 not pulled. 2024 has about 20 smaller checks recorded without amounts. 2026 is a first batch only."},
+  {"name": "Union Pacific Railroad", "amount": 57350, "years": "2018-2026", "top": {"name": "Spencer Cox", "amount": 15000, "note": "2021 ($3,000 + $2,000), 2024 $5,000, 2025 $5,000"}, "complete": true},
+  {"name": "rPlus Energies", "amount": 20600, "years": "2026", "top": {"name": "Kirk Cullimore", "amount": 2000, "note": "7/17/2026"}, "plus": true, "stillNeed": "Years before 2026 not pulled."},
+  {"name": "Edison Electric Institute", "amount": 12500, "years": "2018-2026", "top": {"name": "Spencer Cox", "amount": 12500, "note": "$10,000 (10/8/2020) + $2,500 (4/9/2024)"}, "complete": true}
+];
+
+const pacData = [
+  {"name": "Dominion Energy PAC", "amount": 223750, "years": "2017-2026", "top": {"name": "Spencer Cox", "amount": 147500, "note": "Six checks: 1/16/2020, 10/8/2020, 10/28/2021, 10/20/2022, 5/2/2024, 8/19/2025"}, "plus": true, "runBy": "Corynne Arnett (Chairman (Primary Officer 1); Dominion SVP Regulatory Affairs & Customer Experience); Darius Johnson (Vice Chairman (Primary Officer 2)); Nathan Frost (PAC Treasurer)", "stillNeed": "The PAC's own CSV exports for 2017-2023 haven't been pulled (2024 is in hand); they would give exact totals for its hundreds of $200-$800 legislator checks. Its two record sources disagree on Cox: the PAC's own 2022-2024 export lists a $25,000 check on 9/11/2023 that the contributor-name search does not show. If it holds, Cox's total is $172,500, not $147,500."},
+  {"name": "Utah Petroleum Association PAC", "amount": 146600, "years": "2020-2026", "top": {"name": "Spencer Cox", "amount": 17875, "note": "2021 $2,700; 2022 $1,450; 2023 $200; 2024 $9,375; 2025 $4,150 (the export's recipient summary shows $16,875; see gaps)"}, "plus": true, "runBy": "Brad Shafer (Chairman (Senior Manager Government and Public Relations, Marathon Petroleum)); Chad Calvert (Vice Chairman (General Manager Government Affairs US Central Region, Chevron)); Rikki Hrenko-Browning (Secretary/Treasurer (CFO); President, Utah Petroleum Association); Cameron Cuch (Trustee); Spencer Kimball (Trustee)", "stillNeed": "2026 is a partial year. The PAC was created 5/13/2019; 2019 is not in the export. Six expenditures to Democratic legislators ($1,500) dated 1/1/2024 were deleted by a 3/31/2025 amendment and are not in the total. * The Senate GOP committee's September 30th Report lists $2,500 from this PAC on 9/15/2026; it is not added here yet, because the PAC's own export may already count it under an earlier date. Waiting on the PAC's next report."}
+];
+
+const individualData = [
+
+];
+
+function hiveRunNames(s){
+  s = String(s); var parts = [], cur = '', depth = 0;
+  for (var i = 0; i < s.length; i++) { var c = s[i];
+    if (c === '(') depth++; if (c === ')') depth = Math.max(0, depth - 1);
+    if (depth === 0 && (c === ';' || c === '\u00b7')) { parts.push(cur); cur = ''; } else cur += c; }
+  parts.push(cur);
+  var out = [], seen = {};
+  parts.forEach(function(p){
+    p = p.split(' \u2014 ')[0].trim(); if (!p || /^[a-z]/.test(p)) return;
+    var k = p.indexOf('('), name = k > -1 ? p.slice(0, k).trim() : p, role = '';
+    if (k > -1) { role = p.slice(k + 1).split(/[,;(]| and /)[0].replace(/\)+$/, '').trim(); if (role.length > 32) role = ''; }
+    if (seen[name]) return; seen[name] = 1;
+    out.push(role ? name + ' (' + role + ')' : name);
+  });
+  var mx = (typeof window !== 'undefined' && window.innerWidth < 600) ? 2 : 4;
+  return out.slice(0, mx).join(' \u00b7 ') + (out.length > mx ? ' +' + (out.length - mx) + ' more' : '');
+}
+function renderGrid(containerId, dataset) {
+  const grid = document.getElementById(containerId);
+  if (!dataset.length) return;
+  const max = Math.max(...dataset.map(d => d.amount));
+  dataset.forEach((d, i) => {
+    const pct = Math.max(6, Math.round((d.amount / max) * 100));
+    const tile = document.createElement('div');
+    tile.className = 'tile' + (i < 3 ? ' top3' : '');
+    tile.innerHTML = `
+      <div class="tile-inner">
+        <div class="face front">
+          <div class="rank">No. ${i + 1}</div>
+          <div class="entity-name">${d.name}</div>
+          <div class="amount">$${fmt(d.amount)}${d.plus ? '<span class="plus">+</span>' : ''}</div>
+          <div class="bar-track"><div class="bar-fill" style="width:${pct}%"></div></div>
+          ${d.runBy ? `<div class="tile-runby"><span class="trb-label">Run by</span>${hiveRunNames(d.runBy)}</div>` : ''}
+          <div class="flip-hint">tap for top recipient →</div>
+        </div>
+        <div class="face back">
+          <div class="label">GAVE THE MOST TO</div>
+          <div class="recipient-name">${d.top.name}</div>
+          <div class="recipient-amount">$${fmt(d.top.amount)}</div>
+          <div class="recipient-note">${d.top.note}</div>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;">
+            ${d.flag ? `<span class="flag">${d.flag}</span>` : ''}
+            ${d.complete ? `<span class="flag-complete">✓ RESEARCH COMPLETE</span>` : ''}
+            ${d.years && d.years.indexOf('2026') !== -1 ? `<span class="flag-2026">2026 DATA — SUBJECT TO CHANGE</span>` : ''}
+          </div>
+          <div class="donor-total">${d.name}: $${fmt(d.amount)}${d.plus ? '+' : ''} total documented</div>
+        </div>
+      </div>
+    `;
+    tile.addEventListener('click', () => tile.classList.toggle('flipped'));
+    grid.appendChild(tile);
+  });
+}
+
+renderGrid('grid-companies', companyData);
+renderGrid('grid-pacs', pacData);
+renderGrid('grid-individuals', individualData);
+if (!pacData.length) document.getElementById('pac-empty-note').style.display = 'block';
+
+/* Count money once: when one donor on this page gives to another donor on this page, that money is subtracted from the combined total. */
+function hiveKey(n){ n = String(n).toLowerCase();
+  if (/uhrec|house republican election/.test(n)) return 'uhrec';
+  if (/nupac|northern utah legislative/.test(n)) return 'nupac';
+  if (/rpac|utah association of realtors/.test(n) && !/national/.test(n)) return 'rpac';
+  if (/salt lake board of realtors/.test(n)) return 'slbr';
+  if (/(northern wasatch association of realtors|nwaor|nwar\b)/.test(n) && !/hba|home builders/.test(n)) return 'nwaor';
+  if (/lincoln hill partners/.test(n)) return 'lhp';
+  if (/lincoln hill pac/.test(n)) return 'lhpac';
+  if (/petroleum association pac/.test(n)) return 'upa';
+  if (/h3 pac/.test(n)) return 'h3';
+  if (/forge the future/.test(n)) return 'meta';
+  if (/dominion (energy )?(inc )?(political action committee|pac)/.test(n)) return 'dom';
+  if (/national association of realtors fund/.test(n)) return 'narf';
+  if (/utahns for balanced/.test(n)) return 'ubg';
+  if (/slopes pac/.test(n) && !/commons/.test(n)) return 'slopes';
+  if (/utah tech leads/.test(n)) return 'utl';
+  if (/utah tech pac/.test(n)) return 'utpac';
+  if (/chamber pac/.test(n)) return 'chamber';
+  if (/zions bancorporation/.test(n)) return 'zions';
+  if (/utah valley home builders/.test(n)) return 'uvhba';
+  return null; }
+function hiveOverlap(){
+  var tiles = [].concat(typeof companyData!=='undefined'?companyData:[], typeof pacData!=='undefined'?pacData:[], typeof individualData!=='undefined'?individualData:[]);
+  var flows = [].concat(typeof companyFlows!=='undefined'?companyFlows:[], typeof pacFlows!=='undefined'?pacFlows:[], typeof individualFlows!=='undefined'?individualFlows:[]);
+  var keys = {}; tiles.forEach(function(t){ var k = hiveKey(t.name); if (k) keys[k] = 1; });
+  var ov = 0;
+  flows.forEach(function(f){ var src = hiveKey(f.name); [].concat(f.recipients||[], f.otherRecipients||[]).forEach(function(r){ var k = hiveKey(r.name); if (k && keys[k] && k !== src) ov += r.amount; }); });
+  return Math.round(ov * 100) / 100; }
+
+function renderSummary() {
+  const allDonors = [...companyData, ...pacData, ...individualData];
+  const __ov = hiveOverlap();
+  const grandTotal = allDonors.reduce((sum, d) => sum + d.amount, 0) - __ov;
+  const anyPlus = allDonors.some(d => d.plus);
+
+  const byRecipient = {};
+  [...companyFlows, ...pacFlows, ...individualFlows].forEach(f => {
+    (f.recipients || []).forEach(r => { byRecipient[r.name] = (byRecipient[r.name] || 0) + r.amount; });
+    (f.otherRecipients || []).forEach(r => { byRecipient[r.name] = (byRecipient[r.name] || 0) + r.amount; });
+  });
+  const top5 = Object.entries(byRecipient).sort((a, b) => b[1] - a[1]).slice(0, 10);
+
+  const el = document.getElementById('grand-summary');
+  el.innerHTML = `
+    <p class="gs-label">TOTAL ENERGY-SECTOR MONEY DOCUMENTED ON THIS PAGE</p>
+    <p class="gs-total">$${fmt(grandTotal)}${anyPlus ? '<span class="plus" style="color:#3b82f6;">+</span>' : ''}</p>
+    <p class="gs-sub">Combined giving from every company and PAC below, ${companyData.length + pacData.length + individualData.length} donors, 2018-2026. This is a floor, not a ceiling — several donors are still marked "+" for pulls in progress.${__ov ? ' <b>*</b> Counted once: $' + __ov.toLocaleString('en-US',{maximumFractionDigits:2}) + ' that one donor on this page gave to another donor on this page is subtracted, so no dollar is counted twice. Figures for 2026 are through the latest filed reports; we are waiting on final year-end reports.' : ''}</p>
+    <div class="gs-top5">
+      ${top5.map(([name, amt], i) => `
+        <div class="gs-top5-item">
+          <div class="gs-rank">TOP RECIPIENT No. ${i + 1}</div>
+          <div class="gs-name">${name}</div>
+          <div class="gs-amount">$${fmt(amt)}</div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
+const companyFlows = [
+  {"name": "PacifiCorp", "total": 438650, "recipients": [{"name": "Spencer Cox", "amount": 102500, "id": "Nine checks across 2018 and 2020-2026; no 2019 check"}, {"name": "UHREC", "amount": 65500, "id": "2019-2026"}, {"name": "Utah Republican Senate Campaign Cmte.", "amount": 58500, "id": "2018-2026"}, {"name": "Adams Leadership PAC", "amount": 25000, "id": "Six checks 2020-2024, matches the PAC's own DEX export"}, {"name": "Brad Wilson", "amount": 18500, "id": "2018-2022"}, {"name": "House Speaker Leadership PAC", "amount": 18500, "id": "2023-2026"}, {"name": "J. Stuart Adams", "amount": 17000, "id": "Personal checks 2018, 2019, 2022, 2025, 2026"}, {"name": "Governors Leadership PAC", "amount": 11000, "id": "2018 and 2020"}, {"name": "Deidre Henderson", "amount": 8000, "id": "2019, 2020, 2023, 2024"}, {"name": "Scott Sandall", "amount": 4500, "id": "2018-2025"}, {"name": "Mike McKell", "amount": 4500, "id": "2019-2026"}, {"name": "Daniel Hemmert", "amount": 4000, "id": "2018-2020; excludes an unconfirmed 2019 $1,500 check"}, {"name": "Daniel McCay", "amount": 3500, "id": "2018-2024"}, {"name": "Karen Mayne", "amount": 3250, "id": "2018, 2020-2022"}, {"name": "Casey Snider", "amount": 3000, "id": "2018-2024"}], "otherRecipients": [], "plus": true, "has2026": true, "stillNeed": "2018 page 3, 2019 page 3 and 2021 page 2 of the search results not yet seen; Pacific Minerals Inc. and the federal PAC (FEC C00082800) not yet checked.", "note": "PacifiCorp (Rocky Mountain Power) checks went to the Governor, legislative leadership committees, and dozens of individual legislators in every year 2018-2026. Its largest check each year went to Spencer Cox."},
+  {"name": "EnergySolutions", "total": 270167.61, "recipients": [{"name": "UHREC", "amount": 73500, "id": "2018 $6,500; 2019 $5,000; 2022 $2,000; 2023 $7,500; 2024 $52,500 (incl. $50,000 on 9/6/2024)"}, {"name": "Sean Reyes", "amount": 22167.61, "id": "Then-Attorney General, 2018-2021"}, {"name": "Utah Republican Senate Campaign Cmte.", "amount": 20500, "id": "2018-2021"}, {"name": "House Speaker Leadership PAC", "amount": 20000, "id": "2024-2026"}, {"name": "Wilson Leadership PAC", "amount": 19000, "id": "2019-2022"}, {"name": "Bridger Bolinder", "amount": 18500, "id": "2022 $1,000; 2024 $11,000; 2025 $6,500"}, {"name": "Spencer Cox", "amount": 17500, "id": "2019 $2,500; 2025 $7,500; 2026 $7,500"}, {"name": "Mike McKell", "amount": 12000, "id": "2022, 2023, 2025, 2026"}, {"name": "Derek Brown", "amount": 10000, "id": "Two $5,000 checks, 10/15/2025"}, {"name": "Utah Republican Party (State)", "amount": 7000, "id": "2018"}, {"name": "J. Stuart Adams", "amount": 7000, "id": "2022"}, {"name": "Mike Schultz", "amount": 5700, "id": "2022 $4,500; 2023 $1,200"}, {"name": "Kirk Cullimore", "amount": 5000, "id": "2022 $4,000; 2023 $1,000"}, {"name": "Jerry Stevenson", "amount": 5000, "id": "2022 $4,000; 2023 $1,000"}, {"name": "Hughes Leadership PAC", "amount": 5000, "id": "Single check, 5/17/2019"}], "otherRecipients": [], "plus": true, "has2026": true, "stillNeed": "Individual $200-$2,000 legislator checks for 2018-2021 not tallied because of volume; the true all-time total is higher. No per-year totals for 2022-2026.", "note": "EnergySolutions' largest single check was $50,000 to the House Republican Election Committee on 9/6/2024. Its checks to individual legislators were often larger than those of the other energy donors on this page."},
+  {"name": "Torus Inc.", "total": 201041.98, "recipients": [{"name": "Spencer Cox", "amount": 201041.98, "id": "Five checks: 8/8/2022, 9/15/2023, 6/3/2024, 8/15/2025, 8/4/2026"}], "otherRecipients": [], "complete": true, "has2026": true, "note": "Every Torus check on record went to Spencer Cox; no other recipient appears in any year. The filing address moved from Lehi to South Salt Lake between the 2024 and 2025 checks."},
+  {"name": "Big West Oil", "total": 117320, "recipients": [{"name": "Spencer Cox", "amount": 35000, "id": "Five years: 2021 $2,500; 2023 $10,000; 2024 $7,500; 2025 $7,500; 2026 $7,500"}, {"name": "Utah Republican Senate Campaign Cmte.", "amount": 33000, "id": "2021-2026"}, {"name": "UHREC", "amount": 21500, "id": "2021-2025"}, {"name": "Wilson Leadership PAC", "amount": 6000, "id": "2020-2022"}, {"name": "Adams Leadership PAC", "amount": 5000, "id": "$1,000/year, 2021-2025"}, {"name": "J. Stuart Adams", "amount": 3000, "id": "2019, 2025, 2026"}, {"name": "House Speaker Leadership PAC", "amount": 3000, "id": "2024-2025"}, {"name": "Utah Taxpayers Association PAC", "amount": 820, "id": "2022, 2023, 2024, 2026"}], "otherRecipients": [], "plus": true, "has2026": true, "stillNeed": "2024-2026 each pulled as a single page flagged 'likely incomplete'; confirm no second page exists.", "note": "Big West Oil's North Salt Lake refinery address is on every filing. Its giving went mainly to Spencer Cox and legislative leadership committees, with $250-$500 checks to individual legislators in 2021-2023."},
+  {"name": "Chevron", "total": 110891.25, "recipients": [{"name": "Spencer Cox", "amount": 27500, "id": "2023 $7,500 + $5,000; 2024 $7,500; 2025 $7,500; no 2022 check found"}, {"name": "Utah Petroleum Association PAC", "amount": 18000, "id": "$2,000/year 2022-2025; $10,000 on 1/8/2026"}, {"name": "Deidre Henderson", "amount": 8000, "id": "$2,000/year 2022-2025"}, {"name": "J. Stuart Adams", "amount": 3500, "id": "Personal: 2025 $1,000; 2026 $2,500"}, {"name": "Kirk Cullimore", "amount": 2650, "id": "2022 $1,150; 2024 $500; 2025 $1,000"}, {"name": "Adams Leadership PAC", "amount": 2500, "id": "2022 $1,000; 2023 $1,500"}, {"name": "Ann Millner", "amount": 2500, "id": "2022 $750; 2024 $500 + $750; 2025 $500"}, {"name": "Luz Escamilla", "amount": 2500, "id": "2022 $500; 2024 $750 + $500; 2025 $750"}, {"name": "Scott Sandall", "amount": 1750, "id": "2023-2025"}, {"name": "Evan Vickers", "amount": 1750, "id": "2022, 2023, 2025"}, {"name": "Lincoln Fillmore", "amount": 1650, "id": "2023 $500 + $400; 2025 $750"}, {"name": "Mike McKell", "amount": 1500, "id": "2022, 2023, 2025"}, {"name": "Ronald Winterton", "amount": 1500, "id": "2022, 2024, 2025"}, {"name": "Jefferson Moss", "amount": 1300, "id": "2022, 2023, 2024"}, {"name": "Angela Romero", "amount": 1250, "id": "2023 $250; 2024 $750 + $250"}], "otherRecipients": [], "plus": true, "has2026": true, "stillNeed": "2020-2021 not pulled. 2024 has about 20 smaller checks recorded without amounts. 2026 is a first batch only.", "note": "Chevron's recipient list includes more Democratic legislators than PacifiCorp's. Chevron also funds the Utah Petroleum Association PAC, whose vice chairman is a Chevron government-affairs manager."},
+  {"name": "Union Pacific Railroad", "total": 57350, "recipients": [{"name": "Spencer Cox", "amount": 15000, "id": "2021 ($3,000 + $2,000), 2024 $5,000, 2025 $5,000"}, {"name": "Utah Republican Party (State)", "amount": 5000, "id": "Single check, 1/12/2018"}, {"name": "Ann Millner", "amount": 1750, "id": "2019 $1,000; 2021 $250 + $500"}, {"name": "Jacob Anderegg", "amount": 1750, "id": "2019 $1,000 + $500; 2020 $250"}, {"name": "Utah House Democratic Leadership Council", "amount": 1250, "id": "2020 $750; 2023 $500"}, {"name": "Evan Vickers", "amount": 1250, "id": "2019 $1,000; 2021 $250"}, {"name": "Steven Eliason", "amount": 1250, "id": "2018 $500 + $500; 2021 $250"}, {"name": "Val Peterson", "amount": 1250, "id": "2019 $500; 2020 $500; 2023 $250"}, {"name": "Wayne Harper", "amount": 1000, "id": "2018"}, {"name": "Jim Dunnigan", "amount": 1000, "id": "2018"}, {"name": "Jefferson Moss", "amount": 1000, "id": "2019 $500; 2020 $500"}, {"name": "Joel Ferry", "amount": 1000, "id": "2020 $500; 2021 $500"}, {"name": "Todd Weiler", "amount": 1000, "id": "2021 $500; 2023 $500"}, {"name": "Brad Wilson", "amount": 1000, "id": "2023"}, {"name": "Luz Escamilla", "amount": 750, "id": "2019"}], "otherRecipients": [], "complete": true, "has2026": true, "note": "A railroad, not an energy company; it is listed here because its checks surfaced in the same 'pacific' search as PacifiCorp and many of the same legislators took checks from both. Recipient amounts cover only the years itemized by name (2018-2021, 2023)."},
+  {"name": "rPlus Energies", "total": 20600, "recipients": [{"name": "Kirk Cullimore", "amount": 2000, "id": "7/17/2026"}, {"name": "Carl Albrecht", "amount": 1000, "id": "6/18/2026"}, {"name": "Mike McKell", "amount": 1000, "id": "7/23/2026"}, {"name": "Wayne Harper", "amount": 1000, "id": "7/15/2026"}, {"name": "Colin Jack", "amount": 1000, "id": "6/20/2026"}, {"name": "Scott Sandall", "amount": 1000, "id": "8/17/2026"}, {"name": "Lincoln Fillmore", "amount": 1000, "id": "8/4/2026"}, {"name": "Luz Escamilla", "amount": 1000, "id": "7/2/2026"}, {"name": "Angela Romero", "amount": 1000, "id": "6/26/2026"}, {"name": "Stephanie Gricius", "amount": 1000, "id": "6/23/2026"}, {"name": "Logan Monson", "amount": 1000, "id": "6/23/2026"}, {"name": "Evan Vickers", "amount": 1000, "id": "6/22/2026"}, {"name": "Chris Wilson", "amount": 1000, "id": "6/19/2026"}, {"name": "Todd Weiler", "amount": 800, "id": "6/20/2026"}, {"name": "Derrin Owens", "amount": 800, "id": "6/18/2026"}], "otherRecipients": [], "plus": true, "has2026": true, "stillNeed": "Years before 2026 not pulled.", "note": "rPlus Energies is the developer and owner of the Green River Energy Center solar-plus-storage project in Emery County. Its 2026 checks went to legislators in both parties."},
+  {"name": "Edison Electric Institute", "total": 12500, "recipients": [{"name": "Spencer Cox", "amount": 12500, "id": "$10,000 (10/8/2020) + $2,500 (4/9/2024)"}], "otherRecipients": [], "complete": true, "has2026": true, "note": "EEI is the national trade group for investor-owned utilities, and PacifiCorp is a member. It gives separately from the company itself."}
+];
+
+const pacFlows = [
+  {"name": "Dominion Energy PAC", "total": 223750, "recipients": [{"name": "Spencer Cox", "amount": 147500, "id": "Six checks: 1/16/2020, 10/8/2020, 10/28/2021, 10/20/2022, 5/2/2024, 8/19/2025"}, {"name": "Governors Leadership PAC", "amount": 50000, "id": "$25,000 (11/15/2018) + $25,000 (12/12/2019)"}, {"name": "UHREC", "amount": 10500, "id": "$2,000 (3/23/2019) + $2,500 (1/14/2024) + $6,000 (1/8/2026, per UHREC's own report; see note)"}, {"name": "Utah Republican Senate Campaign Cmte.", "amount": 7000, "id": "$3,500 (1/6/2022) + $3,500 (1/4/2024); other years' checks not totaled"}, {"name": "J. Stuart Adams", "amount": 1750, "id": "$1,000 (Oct 2022) + $750 (12/13/2022)"}, {"name": "Dominion PAC South Carolina", "amount": 1750, "id": "Transfer 9/25/2024, two days before the dissolution filing"}, {"name": "Mike Schultz", "amount": 750, "id": "12/13/2022"}, {"name": "Brad Wilson", "amount": 750, "id": "12/13/2022"}, {"name": "Carl Albrecht", "amount": 750, "id": "12/13/2022"}, {"name": "Jefferson Moss", "amount": 750, "id": "12/13/2022"}, {"name": "Evan Vickers", "amount": 750, "id": "12/13/2022"}, {"name": "Ann Millner", "amount": 750, "id": "12/13/2022"}, {"name": "Karianne Lisonbee", "amount": 750, "id": "12/13/2022"}], "otherRecipients": [], "plus": true, "has2026": true, "runBy": "Corynne Arnett (Chairman (Primary Officer 1); Dominion SVP Regulatory Affairs & Customer Experience); Darius Johnson (Vice Chairman (Primary Officer 2)); Nathan Frost (PAC Treasurer)", "stillNeed": "The PAC's own CSV exports for 2017-2023 haven't been pulled (2024 is in hand); they would give exact totals for its hundreds of $200-$800 legislator checks. Its two record sources disagree on Cox: the PAC's own 2022-2024 export lists a $25,000 check on 9/11/2023 that the contributor-name search does not show. If it holds, Cox's total is $172,500, not $147,500.", "note": "The PAC's own state folder lists reporting years 2017 through 2024 only, ending with a Statement of Dissolution and a Final Report; it filed a dissolution confirmation on 9/27/2024 reporting a zero balance. Two later entries appear only in other filers' records: $10,000 to Spencer Cox dated 8/19/2025, and $6,000 that UHREC's 2026 Convention Report lists as received on 1/8/2026 from 'Dominion Energy Inc PAC - Utah' at the same Richmond address. Which entity wrote those checks has not been determined. In its final year (2024) the PAC's own export shows $24,375 spent, including $12,500 to Spencer Cox on 4/26/2024. A $225 check to Sen. Jerry Stevenson dated that same day was changed to 'deleted' on 9/27/2024, the day of the dissolution filing.", "fundedBy": [{"name": "Dominion Energy Inc.", "amount": 316850, "id": "Parent company, 2018-2022 only: 2018 $50,000; 2019 $50,000; 2020 about $65,700; 2021 about $51,150; 2022 $100,000"}]},
+  {"name": "Utah Petroleum Association PAC", "total": 146600, "recipients": [{"name": "Spencer Cox", "amount": 17875, "id": "2021 $2,700; 2022 $1,450; 2023 $200; 2024 $9,375; 2025 $4,150 (the export's recipient summary shows $16,875; see gaps)"}, {"name": "Utah Republican Senate Campaign Cmte.", "amount": 17700, "id": "Approximate, name variants combined"}, {"name": "UHREC", "amount": 10250, "id": "2020-2026"}, {"name": "J. Stuart Adams", "amount": 7000, "id": "2020-2026"}, {"name": "JR Bird", "amount": 5000, "id": "3/31/2026, then a legislative candidate"}, {"name": "House Speaker Leadership PAC", "amount": 4500, "id": "2020-2026"}, {"name": "Adams Leadership PAC", "amount": 4000, "id": "2020-2026"}], "otherRecipients": [], "plus": true, "has2026": true, "runBy": "Brad Shafer (Chairman (Senior Manager Government and Public Relations, Marathon Petroleum)); Chad Calvert (Vice Chairman (General Manager Government Affairs US Central Region, Chevron)); Rikki Hrenko-Browning (Secretary/Treasurer (CFO); President, Utah Petroleum Association); Cameron Cuch (Trustee); Spencer Kimball (Trustee)", "stillNeed": "2026 is a partial year. The PAC was created 5/13/2019; 2019 is not in the export. Six expenditures to Democratic legislators ($1,500) dated 1/1/2024 were deleted by a 3/31/2025 amendment and are not in the total. * The Senate GOP committee's September 30th Report lists $2,500 from this PAC on 9/15/2026; it is not added here yet, because the PAC's own export may already count it under an earlier date. Waiting on the PAC's next report.", "note": "The PAC is funded mainly by transfers from its parent trade association and gives small checks to legislators of both parties, with larger checks to leadership committees and the Governor. Its officers include government-affairs managers from Marathon Petroleum and Chevron.", "fundedBy": [{"name": "Utah Petroleum Association", "amount": 71850, "id": "Association-to-PAC transfers: 2023 $13,600; 2024 $23,625; 2025 $34,625"}, {"name": "Chevron", "amount": 18000, "id": "$2,000/year 2022-2025; $10,000 on 1/8/2026"}]}
+];
+
+const individualFlows = [
+
+];
+
+function buildFlowRow(sourceName, rows, reverse) {
+  const maxR = Math.max(...rows.map(r => r.amount));
+  const rowH = 44;
+  const H = rows.length * rowH;
+  let curves = '';
+  rows.forEach((r, i) => {
+    const y1 = H / 2, y2 = i * rowH + rowH / 2;
+    const w = 0.75 + 3.5 * (r.amount / maxR);
+    const d = reverse
+      ? `M 100,${y1} C 60,${y1} 40,${y2} 0,${y2}`
+      : `M 0,${y1} C 40,${y1} 60,${y2} 100,${y2}`;
+    curves += `<path d="${d}" stroke="#3b82f6" stroke-width="${w}" fill="none" opacity="0.55"/>`;
+  });
+  const sourceBox = `<div class="flow-source" style="min-height:${H}px;display:flex;align-items:center;justify-content:${reverse ? 'flex-start' : 'flex-end'};">${sourceName}</div>`;
+  const svgBox = `<div class="flow-svg-col"><svg viewBox="0 0 100 ${H}" preserveAspectRatio="none" height="${H}">${curves}</svg></div>`;
+  const listBox = `
+    <div class="flow-recipients" style="${reverse ? 'padding-left:10px;' : ''}">
+      ${rows.map((r, i) => `
+        <div class="flow-recipient">
+          <span class="rname">${i + 1}. ${r.name}</span>
+          <span class="rmeta">${r.id}</span>
+          <span class="ramount">$${fmt(r.amount)}</span>
+        </div>
+      `).join('')}
+    </div>`;
+  return reverse
+    ? `<div class="flow-row">${listBox}${svgBox}${sourceBox}</div>`
+    : `<div class="flow-row">${sourceBox}${svgBox}${listBox}</div>`;
+}
+
+function renderFlows(containerId, dataset) {
+  const flowsEl = document.getElementById(containerId);
+  dataset.forEach(f => {
+  const rows = (f.recipients || []).slice(0, 15);
+  const hasRecipients = rows.length > 0;
+
+  const card = document.createElement('div');
+  card.className = 'flow-card';
+  card.innerHTML = `
+    <div class="flow-head">
+      <h3>${f.name}</h3>
+      <span class="flow-total">$${fmt(f.total)} documented</span>
+    </div>
+    ${f.complete ? `<span class="flag-complete" style="margin-bottom:10px;">✓ RESEARCH COMPLETE</span>` : ''}
+    ${f.has2026 ? `<span class="flag-2026" style="margin-bottom:10px;">2026 DATA — SUBJECT TO CHANGE</span>` : ''}
+    ${f.runBy ? `<p class="flow-note" style="margin-top:-8px;margin-bottom:14px;"><strong style="color:var(--gold);">Run by:</strong> ${f.runBy}</p>` : ''}
+    ${f.fundedBy ? `
+      <p class="flow-note" style="margin:0 0 6px;font-weight:600;color:var(--ink);">Funded by</p>
+      ${buildFlowRow(f.name, f.fundedBy.slice(0, 15), true)}
+    ` : ''}
+    ${hasRecipients ? `
+      <p class="flow-note" style="margin:20px 0 6px;font-weight:600;color:var(--ink);">Gave to</p>
+      ${buildFlowRow(f.name, rows, false)}
+    ` : `<p class="flow-note" style="margin-top:16px;font-style:italic;">Outbound giving not yet pulled from disclosures.utah.gov — this entry currently shows inbound money only.</p>`}
+    ${f.note ? `<p class="flow-note">${f.note}</p>` : ''}
+    ${f.stillNeed ? `<p class="flow-note" style="color:#1d5fbf;font-weight:600;">Still need: <span style="font-weight:400;color:var(--ink-soft);">${f.stillNeed}</span></p>` : ''}
+    `;
+    flowsEl.appendChild(card);
+  });
+}
+
+renderFlows('flows-companies', companyFlows);
+renderFlows('flows-pacs', pacFlows);
+renderFlows('flows-individuals', individualFlows);
+renderSummary();
+
+</script>
 </body>
 </html>
