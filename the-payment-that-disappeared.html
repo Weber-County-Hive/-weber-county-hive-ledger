@@ -9,18 +9,18 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --paper:#f4f0e6;
-    --paper-card:#faf7ef;
-    --paper-card-2:#f0ecdf;
-    --ink:#1c1c1a;
-    --ink-dim:#5b5850;
-    --ink-dimmer:#8c8878;
-    --rust:#c0572e;
-    --amber:#d9a441;
-    --bronze:#4a3018;
-    --bronze-2:#c76b1f;
-    --wine:#7d2c3f;
-    --border:#ddd3c2;
+    --paper:#ffffff;
+    --paper-card:#ffffff;
+    --paper-card-2:#f3f6fa;
+    --ink:#0f1b2d;
+    --ink-dim:#4d5868;
+    --ink-dimmer:#7a8594;
+    --rust:#1d5fbf;
+    --amber:#e3a008;
+    --bronze:#0f1b2d;
+    --bronze-2:#17294a;
+    --wine:#6b4fd8;
+    --border:#dde3ea;
   }
 
   * { box-sizing: border-box; }
@@ -46,7 +46,7 @@
   /* ---------- HEADER BAND ---------- */
   .header-band{
     background:linear-gradient(135deg, var(--bronze), var(--bronze-2));
-    color:#f4ead9;
+    color:#eef4fb;
     padding:36px 0 40px;
   }
   .site-line{
@@ -56,24 +56,24 @@
     font-family:'IBM Plex Mono', monospace;
     font-size:13px;
     letter-spacing:.03em;
-    color:#e9d6b8;
+    color:#dbe7f7;
     margin-bottom:28px;
   }
-  .site-line a{ color:#f4ead9; text-decoration:none; border-bottom:1px solid rgba(244,234,217,.4); }
-  .site-line a:hover{ border-color:#f4ead9; }
+  .site-line a{ color:#eef4fb; text-decoration:none; border-bottom:1px solid rgba(234,242,252,.4); }
+  .site-line a:hover{ border-color:#eef4fb; }
   .case-tag{
     display:inline-block;
     font-family:'IBM Plex Mono', monospace;
     font-size:13px;
     letter-spacing:.06em;
-    background:rgba(244,234,217,.14);
-    border:1px solid rgba(244,234,217,.35);
+    background:rgba(234,242,252,.14);
+    border:1px solid rgba(234,242,252,.35);
     padding:4px 11px;
     border-radius:3px;
     margin-bottom:18px;
   }
   .header-band h1{
-    color:#fbf3e4;
+    color:#f3f7fc;
     font-size:2.5rem;
     margin:0 0 16px;
     max-width:15ch;
@@ -82,7 +82,7 @@
     font-family:'Source Serif 4', serif;
     font-style:italic;
     font-size:1.22rem;
-    color:#f0ddbe;
+    color:#e4edf9;
     max-width:46ch;
     margin:0;
     line-height:1.5;
@@ -155,8 +155,8 @@
     padding:20px 22px;
   }
   .compare .card.missing{
-    background:#fbeee7;
-    border-color:#e3b8a1;
+    background:#eef4fb;
+    border-color:#b9cdea;
   }
   .compare h3{
     font-size:1.02rem;
@@ -276,7 +276,7 @@
     color:var(--ink-dimmer);
     margin-top:2px;
   }
-  .roster.state .card{ border-color:#c9a24a; background:#fbf6e8; }
+  .roster.state .card{ border-color:#e3a008; background:#f6f9fd; }
 
   blockquote{
     margin:22px 0;
@@ -287,7 +287,7 @@
   }
 
   .caveat{
-    background:#f0ecdf;
+    background:#f3f6fa;
     border:1px solid var(--border);
     border-radius:4px;
     padding:14px 18px;
@@ -380,7 +380,7 @@
   }
   .flip-front{
     background:linear-gradient(135deg, var(--bronze), var(--bronze-2));
-    color:#f4ead9;
+    color:#eef4fb;
     justify-content:space-between;
   }
   .flip-front .name{
@@ -392,13 +392,13 @@
   .flip-front .role{
     font-family:'Inter', sans-serif;
     font-size:.85rem;
-    color:#f0ddbe;
+    color:#e4edf9;
     line-height:1.4;
   }
   .flip-front .tap-hint{
     font-family:'IBM Plex Mono', monospace;
     font-size:.72rem;
-    color:#e9d6b8;
+    color:#dbe7f7;
     opacity:.85;
   }
   .flip-back{
@@ -482,6 +482,7 @@
     <span class="case-tag">CASE 05</span>
     <h1>The Payment That Disappeared</h1>
     <p class="dek">A $62,500 check to a company managed by MIDA's own director appears in one official report on a taxpayer-funded housing nonprofit and is absent from the next — and the state's own filings show that nonprofit's registered leadership doesn't match the board it shows the public.</p>
+    <p class="hive-updated" style="font-family:'Roboto Mono',ui-monospace,monospace;font-size:12px;letter-spacing:.03em;opacity:.75;margin:8px 0 0">Updated September 30, 2026 · figures re-checked against state filings</p>
   </div>
 </div>
 
@@ -724,9 +725,9 @@ flowchart TD
     UWHA -->|"Director"| BROWN
     UWHA -.->|"public website only,<br/>not the state filing"| WESTON
 
-    classDef highlight fill:#f4e6c8,stroke:#4a3018,stroke-width:2.5px,color:#1c1c1a
-    classDef org fill:#f0ecdf,stroke:#c76b1f,stroke-width:2px,color:#1c1c1a
-    classDef person fill:#faf7ef,stroke:#7d2c3f,stroke-width:2px,color:#1c1c1a
+    classDef highlight fill:#eef4fb,stroke:#0f1b2d,stroke-width:2.5px,color:#0f1b2d
+    classDef org fill:#f3f6fa,stroke:#e3a008,stroke-width:2px,color:#0f1b2d
+    classDef person fill:#ffffff,stroke:#6b4fd8,stroke-width:2px,color:#0f1b2d
     class UWHA highlight
     class BIZDEV,RHRD,HEMMCO,FISHCO org
     class HEMMERT,FISH,LUSTY,WALDRIP,GROOM,BROWN,WESTON person
@@ -779,15 +780,52 @@ flowchart TD
     theme: 'base',
     themeVariables: {
       fontFamily: 'Inter, sans-serif',
-      fontSize: '14px',
-      primaryColor: '#f0ecdf',
-      primaryBorderColor: '#c76b1f',
-      primaryTextColor: '#1c1c1a',
-      lineColor: '#8c8878',
-      edgeLabelBackground: '#f4f0e6'
+      fontSize: '18px',
+      primaryColor: '#f3f6fa',
+      primaryBorderColor: '#e3a008',
+      primaryTextColor: '#0f1b2d',
+      lineColor: '#7a8594',
+      edgeLabelBackground: '#ffffff'
     },
     flowchart: { curve: 'basis' }
   });
 </script>
+<style>
+  /* Readable diagrams: wider box, no forced sideways scroll, large-print list version */
+  .mermaid-wide{width:min(1100px,calc(100vw - 32px));max-width:none;margin-left:calc(50% - min(550px, calc(50vw - 16px)));overflow:visible;box-sizing:border-box}
+  .mermaid-wide .mermaid{min-width:0 !important;display:block !important;text-align:center}
+  .mermaid-wide .mermaid svg{max-width:100% !important;height:auto}
+  .mm-list{margin:14px auto 0;max-width:760px;font-size:18px;line-height:1.5;text-align:left}
+  .mm-list summary{cursor:pointer;font-weight:600;font-size:17px;padding:8px 0}
+  .mm-list ul{list-style:none;padding:0;margin:6px 0 0}
+  .mm-list li{padding:10px 0;border-bottom:1px solid #dde3ea}
+  .mm-list b{font-weight:700}
+  .mm-list .lbl{display:block;font-size:15.5px;color:#4d5868}
+</style>
+<script>
+/* Runs before mermaid draws: reads each diagram's source and adds a plain-language list under it. */
+(function(){
+  function clean(s){ return String(s||'').replace(/<br\s*\/?>/gi,' ').replace(/^["'\s]+|["'\s]+$/g,'').replace(/\s+/g,' ').trim(); }
+  document.querySelectorAll('.mermaid').forEach(function(m){
+    if (m.dataset.mmList) return; m.dataset.mmList = '1';
+    var src = m.textContent, labels = {}, edges = [];
+    src.split('\n').forEach(function(line){
+      line = line.trim(); if (!line || /^(flowchart|graph|classDef|class |style |linkStyle|%%|subgraph|end$)/.test(line)) return;
+      var re = /([A-Za-z0-9_]+)\s*(\[\[|\[\(|\(\[|\(\(|\[|\(|\{\{|\{|>)(.*?)(\]\]|\)\]|\]\)|\)\)|\]|\)|\}\}|\})/g, k;
+      while ((k = re.exec(line))) { labels[k[1]] = clean(k[3]); }
+      var e = line.match(/^([A-Za-z0-9_]+)(?:\s*[\[\(\{>].*?[\]\)\}])?\s*(-\.->|==>|-->|---|-\.-|--[^>|]*-->)\s*(?:\|([^|]*)\|)?\s*([A-Za-z0-9_]+)/);
+      if (e) { var lab = e[3] ? clean(e[3]) : ''; var mid = e[2].match(/^--\s*(.+?)\s*-->$/); if (!lab && mid) lab = clean(mid[1]); edges.push([e[1], lab, e[4], e[2].indexOf('.') > -1]); }
+    });
+    if (!edges.length) return;
+    var name = function(id){ return labels[id] || id; };
+    var html = '<details class="mm-list"' + ' open' + '><summary>Read this diagram as a list (large print)</summary><ul>' +
+      edges.map(function(e){ return '<li><b>' + name(e[0]) + '</b> → <b>' + name(e[2]) + '</b>' + (e[1] ? '<span class="lbl">' + e[1] + (e[3] ? ' (dotted line)' : '') + '</span>' : (e[3] ? '<span class="lbl">(dotted line)</span>' : '')) + '</li>'; }).join('') + '</ul></details>';
+    var box = m.parentElement && /diagram|chart|mermaid/i.test(m.parentElement.className) ? m.parentElement : m;
+    box.classList.add('mermaid-wide');
+    box.insertAdjacentHTML('afterend', html);
+  });
+})();
+</script>
+
 </body>
 </html>
