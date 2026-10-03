@@ -12,27 +12,27 @@ window.LEDGER_PAGE = {
    "industry": "Energy",
    "years": {
     "2018": 43200,
-    "2019": 25700,
+    "2019": 29700,
     "2020": 64500,
     "2021": 45000,
-    "2022": 52500,
+    "2022": 61000,
     "2023": 46500,
-    "2024": 63750,
+    "2024": 65250,
     "2025": 51000,
-    "2026": 46500
+    "2026": 47000
    },
    "yearsChecked": "2018-2026",
    "yearsZero": [],
-   "total": 438650,
-   "totalBasis": "Contributions out, 2018-2026: sum of every individually itemized PacifiCorp/Rocky Mountain Power check recorded year by year. Excludes a 2019 $1,500 Hemmert check that was noted early but never re-confirmed. Pre-2018 out of scope by decision.",
+   "total": 453150,
+   "totalBasis": "Contributions out, 2018-2026: sum of every individually itemized PacifiCorp/Rocky Mountain Power check recorded year by year. Includes a $2,500 check to Cox (8/13/2019) and a $1,500 check to Hemmert (8/23/2019) from a results page pulled 8/12/2026. Pre-2018 out of scope by decision.",
    "complete": false,
-   "gaps": "2018 page 3, 2019 page 3 and 2021 page 2 of the search results not yet seen; Pacific Minerals Inc. and the federal PAC (FEC C00082800) not yet checked.",
-   "cox": 102500,
+   "gaps": "Every year 2018-2026 rechecked against the state's results on Oct. 3, 2026. Still not checked: Pacific Minerals Inc. and the federal PAC (FEC C00082800).",
+   "cox": 105000,
    "recipients": [
     {
      "name": "Spencer Cox",
-     "amount": 102500,
-     "note": "Nine checks across 2018 and 2020-2026; no 2019 check"
+     "amount": 105000,
+     "note": "Ten checks, at least one every year 2018-2026"
     },
     {
      "name": "Utah House Republican Election Committee (UHREC)",
@@ -86,8 +86,8 @@ window.LEDGER_PAGE = {
     },
     {
      "name": "Daniel Hemmert",
-     "amount": 4000,
-     "note": "2018-2020; excludes an unconfirmed 2019 $1,500 check"
+     "amount": 5500,
+     "note": "2018-2020, including two 2019 checks ($1,000 and $1,500)"
     },
     {
      "name": "Daniel McCay",
@@ -101,8 +101,8 @@ window.LEDGER_PAGE = {
     },
     {
      "name": "Casey Snider",
-     "amount": 3000,
-     "note": "2018-2024"
+     "amount": 3500,
+     "note": "2018-2026"
     }
    ],
    "fundedBy": [],
