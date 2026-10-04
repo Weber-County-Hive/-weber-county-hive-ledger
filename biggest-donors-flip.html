@@ -758,13 +758,13 @@
       <p>It works like a paycheck: if your boss pays you $100 and you pay $100 in rent, there's still only $100, not $200.</p>
     </div>
     <p class="co-lab">How the combined total adds up</p>
-    <div class="co-bar" role="img" aria-label="All donors added together is $19,425,068. Of that, $17,798,595 is counted once and $1,626,473 is money passed from one donor on this page to another.">
+    <div class="co-bar" role="img" aria-label="All donors added together is $19,425,551. Of that, $17,799,078 is counted once and $1,626,473 is money passed from one donor on this page to another.">
       <div class="a" style="width:91.6%">$17.80 million</div><div class="b" style="width:8.4%"></div>
     </div>
     <div class="co-key">
-      <span class="sw" style="background:var(--ink)"></span><span>Counted once (the page's combined total*)</span><span class="amt">$17,798,595</span>
+      <span class="sw" style="background:var(--ink)"></span><span>Counted once (the page's combined total*)</span><span class="amt">$17,799,078</span>
       <span class="sw" style="background:repeating-linear-gradient(135deg,#3b82f6 0 4px,#8fb5f2 4px 8px)"></span><span>Passed from one donor on this page to another (still shown on both tiles)</span><span class="amt">$1,626,473</span>
-      <span></span><span class="tot">Every donor's total added together</span><span class="amt tot">$19,425,068</span>
+      <span></span><span class="tot">Every donor's total added together</span><span class="amt tot">$19,425,551</span>
     </div>
     <p class="co-lab">Where the $1.63 million went</p>
     <div class="co-flow">
@@ -927,13 +927,13 @@ const pacData = [
     years:"2019 through 9/25/2026",
     stillNeed:"confirm whether 'UARPAC' ($5,000 from NWAOR) is a separate flow from the $306,693 RPAC sent NWAOR; break out 2025's top recipients individually",
     runBy:"Chair Sonya Smithing (Realtor) · Vice-Chair Christy Vail (Realtor) · CFO/Treasurer Jason Burr (Accountant) — all share UAR's own Sandy, UT address/phone; affiliated with the National Association of Realtors",
-    top:{name:"Spencer Cox", amount:213000, note:"Combined: Cox for Governor $125,000 + Friends of Spencer Cox $88,000 (includes $7,000 on 8/21/2026) — RPAC's largest direct candidate spending."}},
+    top:{name:"Spencer Cox", amount:225500, note:"Combined: Cox for Governor $125,000 (8/28/2020) + Friends of Spencer (J.) Cox $100,500 (2019-2026, includes $10,000 filed as \"Political Support\" on 11/12/2025 and $7,000 on 8/21/2026). Corrected Oct. 3, 2026 from $213,000 after a full re-pull — RPAC's largest direct candidate spending."}},
   {name:"UHREC (Mike Schultz)", amount:2389921, plus:true, flag:"TOP RECIPIENT IS A COX CAMPAIGN DIRECTOR",
     years:"2018-2026 (complete)",
     stillNeed:"what specific role/services the $128,838 Coombs payment was for",
     runBy:"Speaker Mike Schultz and Majority Leader Casey Snider, Primary Officers · Majority Whip Candice Pierucci, Officer · Kyle Palmer, Treasurer/CFO — sole signature authority over disbursements",
     top:{name:"Chris Coombs", amount:128838, note:"IDENTIFIED: a Director of 'Friends of Spencer Cox' (Cox's own campaign committee), registered at 136 S Main St Ste A200, Salt Lake City"}},
-  {name:"Salt Lake Board of Realtors", amount:1631391, plus:true,
+  {name:"Salt Lake Board of Realtors", amount:1598876, plus:true,
     years:"2018 through 9/25/2026",
     stillNeed:"identify Kelley Wright (consultant or candidate?); research Majority 51 as its own PAC; pull the PAC's own registered officer names",
     runBy:"CEO Curtis Bullock · President Dawn Stevens (2024) · Rob Ockey, Past President (2024) — also UAR's current Vice President, the same cross-board overlap pattern found at NWAOR",
@@ -948,7 +948,7 @@ const pacData = [
     stillNeed:"pre-2022 not checked; 2026 is partial-year only",
     runBy:"Sen. Ann Millner and Rep. Casey Snider, Primary Officers · Kyle Palmer, Treasurer — sole signature authority, paid via his own Irish Elk LLC",
     top:{name:"Irish Elk LLC", amount:88525, note:"Kyle Palmer's own consulting company, 10 payments 2022–2026 — NUPAC's Treasurer is paid by the PAC through a company he owns; larger than any single candidate total."}},
-  {name:"Northern Wasatch Association of Realtors", amount:562278, plus:true, flag:"PAID ITS OWN PRESIDENT $23,500",
+  {name:"Northern Wasatch Association of Realtors", amount:580776, plus:true, flag:"$23,500 TO ITS PRESIDENT'S CAMPAIGNS",
     years:"2018-2026 (full)",
     stillNeed:"confirm whether 'UARPAC' = RPAC (see notes)",
     runBy:"Rick Southwick and Bob Hill, Realtors, Primary Officers · Kristi Jeppesen, Accountant/CFO · CEO Mike Ostermiller — also a sitting MIDA board member since 2008, and paid $5,000 directly by this PAC in 2023",
@@ -1192,7 +1192,7 @@ const pacFlows = [
       {name:"Real Strategies", amount:495416, id:"Vendor — largest outside vendor"},
       {name:"Utah Central Association of Realtors PAC", amount:292000, id:"Local board redistribution"},
       {name:"Northern Wasatch Association of Realtors PAC", amount:306693, id:"Local board — already on this page as its own PAC"},
-      {name:"Spencer Cox", amount:213000, id:"Governor — combined Cox for Governor $125,000 + Friends of Spencer Cox $88,000 (includes $7,000 on 8/21/2026)"},
+      {name:"Spencer Cox", amount:225500, id:"Governor — combined Cox for Governor $125,000 (8/28/2020) + Friends of Spencer (J.) Cox $100,500 (2019-2026, includes $10,000 filed as \"Political Support\" on 11/12/2025 and $7,000 on 8/21/2026). Corrected Oct. 3, 2026 from $213,000 after a full re-pull"},
       {name:"Washington County Board of Realtors PAC", amount:193643, id:"Local board redistribution"},
       {name:"JY Allen Consulting", amount:140000, id:"Vendor"},
       {name:"Thomas Wright for Governor", amount:100000, id:"2020 GOP gubernatorial primary candidate"}
@@ -1226,7 +1226,7 @@ const pacFlows = [
       {name:"Little America Hotel", amount:43475, id:"Fundraiser venue & catering — vendor, not a candidate"}
     ],
     note:"$2,392,087 in / $2,389,921 out, 2018 through 9/25/2026 (2026 September 30th Report included) — supersedes the earlier $1,075,290.64 (2023-2026 only) figure, nearly doubling the known total. Top recipient Chris Coombs is a Director of Friends of Spencer Cox, sharing Election Hive LLC's exact office address — a direct link between a UHREC vendor payment and Cox's own campaign committee. Election Hive's real total ($84,304) is over 3x what was previously documented from a partial pull."},
-{name:"Salt Lake Board of Realtors", total:1631391, has2026:true,
+{name:"Salt Lake Board of Realtors", total:1598876, has2026:true,
     stillNeed:"identify Kelley Wright; research Majority 51 as its own PAC; pull the PAC's own registered officer names",
     runBy:"CEO Curtis Bullock · President Dawn Stevens (2024) · Rob Ockey, Past President (2024) — also UAR's current Vice President",
     fundedBy:[
@@ -1243,7 +1243,7 @@ const pacFlows = [
       {name:"Consolidated Direct Mail", amount:23000, id:"Vendor — same one NWAOR also used"},
       {name:"Wilson For Mayor", amount:6000, id:"2022-2024, purpose 'Political Support'/'Donations' — not yet identified"}
     ],
-    note:"$1,666,391 in / $1,631,391 out, 2018 through 9/25/2026 (includes the 2026 September 30th Report) — the third-largest PAC donor documented in this investigation, behind RPAC and UHREC. 98 [DELETED] entries found, the same pattern of [DELETED] entries already documented at UAR PAC and NWAOR — a third Realtor-affiliated PAC showing it."},
+    note:"$1,666,391 in / $1,598,876 spent, 2018 through 9/25/2026 (includes the 2026 September 30th Report). Corrected Oct. 3, 2026: the earlier $1,631,391 counted a $32,515 refund to the National Association of Realtors (3/7/2024) as spending — the third-largest PAC donor documented in this investigation, behind RPAC and UHREC. 98 [DELETED] entries found, the same pattern of [DELETED] entries already documented at UAR PAC and NWAOR — a third Realtor-affiliated PAC showing it."},
 {name:"Lincoln Hill Partners PAC", total:760206, plus:true, flag:"DISSOLVED 7/2023 — STILL FILING", has2026:true,
     stillNeed:"inbound donor-side entirely missing; exact 2025 and 2026 year totals",
     runBy:"Lincoln Shurtz and Casey Hill — network also includes a separate 'Lincoln Shurtz' individual PAC operating in parallel with overlapping recipients",
@@ -1284,26 +1284,26 @@ const pacFlows = [
       {name:"Committee to Elect Stuart Adams", amount:1000, id:"Senate President — same-day round-trip with Adams Leadership PAC"}
     ],
     note:"Total reflects $580,284 in confirmed expenditures, 2022-2026 (2026 partial). Deletion pattern: 27 of 29 deleted entries across five years fall in the same 'September 30th' report, every year 2022-2025."},
-{name:"Northern Wasatch Association of Realtors", total:562278, has2026:true,
+{name:"Northern Wasatch Association of Realtors", total:580776, has2026:true,
     stillNeed:"confirm whether 'UARPAC' = RPAC (see notes)",
     runBy:"Rick Southwick and Bob Hill, Realtors, Primary Officers · Kristi Jeppesen, Accountant/CFO · CEO Mike Ostermiller — also a sitting MIDA board member since 2008, and paid $5,000 directly by this PAC in 2023",
     fundedBy:[
-      {name:"Utah Association of REALTORS", amount:360603, id:"State parent org — already on this page as its own PAC (RPAC)"},
+      {name:"Utah Association of REALTORS", amount:392350, id:"State parent org — already on this page as its own PAC (RPAC)"},
       {name:"National Association of REALTORS", amount:151807, id:"National parent org — funds this PAC exclusively alongside the state association; no individual or corporate donors found"}
     ],
     recipients:[
       {name:"Consolidated Direct Mail Inc.", amount:82758, id:"Direct-mail vendor, 2022-2025 — not a candidate"},
       {name:"Access LLC / Access Media", amount:26500, id:"Vendor — $7,500 explicitly tagged 'Gage Froerer Campaign Digital Ads,' 2018"},
-      {name:"Mark Shepherd", amount:23500, id:"NWAOR's OWN PRESIDENT — real estate broker, MIDA board member, sitting Mayor of Clearfield since 2025"},
+      {name:"Mark Shepherd", amount:23500, id:"NWAOR's own President — ten campaign checks, 2018-2026; real estate broker, MIDA board member, Mayor of Clearfield"},
       {name:"Gage Froerer", amount:20000, id:"State Representative — four direct checks; true total incl. digital-ad spending on his behalf runs at least $28,793"},
-      {name:"Steve Hiatt", amount:15000, id:"Paid every year since 2020 — reads as NWAOR's own government-affairs consultant/lobbyist"},
+      {name:"Steve Hiatt", amount:15000, id:"Seven payments, 2020-2024 and 2026, filed as \"Government Affairs Consulting\" (2020), \"Office\" (2024) and \"Other.\" Not yet checked against the state lobbyist registry"},
       {name:"Jim Harvey", amount:13500, id:"Weber County Commissioner"},
       {name:"NUPAC", amount:12500, id:"PAC-to-PAC transfer — confirmed same entity as Northern Utah Legislative PAC below (no other PAC by that name exists)"},
       {name:"Lacy Richards", amount:11500, id:"Former West Haven City Council — later hired by Nilson Homes as Director of Land Entitlement & Government Relations"},
       {name:"Scott Freitag", amount:11152, id:"2019, including a $3,690 mailer-reimbursement line"},
       {name:"Sharon Bolos", amount:10510, id:"Recurring recipient, 2021-2026"}
     ],
-    note:"$512,410 in / $562,278 out, 2018-2026. NWAOR paid its own President Mark Shepherd $23,500 and its own CEO Mike Ostermiller $5,000 directly — $28,500 total to its own leadership, the same pattern of PAC officers being paid by the PAC they run already documented at NUPAC/UHREC via Irish Elk LLC. 38 [DELETED] entries found across these filings, the same pattern of [DELETED] entries already documented at UAR PAC and Salt Lake Board of Realtors."},
+    note:"$544,157 in / $580,776 out, 2018 through 9/15/2026 (re-pulled Oct. 3, 2026; adds the 2026 September 30th report and a $31,747 state-association check of 7/23/2026). Out includes $5,000 sent to UARPAC on 9/1/2023. NWAOR's PAC gave $23,500 to campaigns of its own President, Mark Shepherd (ten checks, 2018-2026, each filed as \"Campaign Contribution\" or \"Donations\"), and paid its own CEO, Mike Ostermiller, $5,000 on 12/13/2023, filed as \"Other\" with no further description. (Wording corrected Oct. 3, 2026: an earlier version said the PAC \"paid\" Shepherd; the filings list every Shepherd payment as a campaign donation.) 38 [DELETED] entries found across these filings, the same pattern of [DELETED] entries already documented at UAR PAC and Salt Lake Board of Realtors."},
 {name:"Lincoln Hill PAC", total:495965, plus:true, flag:"DISTINCT FROM LINCOLN HILL PARTNERS PAC", has2026:true,
     stillNeed:"identify several smaller recipients not yet researched (e.g., John Gilmore, Liberty & Legacy PAC)",
     runBy:"Directors per the Utah corporate registry: Casey Hill, Lincoln Shurtz and Derek Brown — network coordination with Lincoln Hill Partners PAC; see that PAC's own card",
