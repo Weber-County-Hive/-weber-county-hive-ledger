@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Taxpayers PAC and the 2025 Ogden Council Races | The Ledger | The Weber County Hive</title>
+<meta name="description" content="A Layton PAC formed in July 2025 took $15,000 from a Phoenix donor and $1,600 from the Weber County Republican Party, then gave $15,600 to four Ogden City Council candidates. Three returned the money; one returned most of it.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0B1220;
+    --ink-soft:#3E4A5E;
+    --paper:#F3F4F0;
+    --panel:#FFFFFF;
+    --line:#DBDDD6;
+    --verified:#1F6F5C;
+    --verified-bg:#E4F0EC;
+    --lead:#B4791F;
+    --lead-bg:#FBF0DD;
+    --flag:#9C3B33;
+    --flag-bg:#F7E7E4;
+    --display: "Newsreader", serif;
+    --body: "Inter", sans-serif;
+    --mono: "IBM Plex Mono", monospace;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);-webkit-font-smoothing:antialiased}
+  ::selection{background:var(--lead-bg)}
+
+  a{color:inherit}
+
+  /* ===== Masthead ===== */
+  header.mast{
+    background:var(--ink);color:#EDEFEA;padding:44px 5vw 30px;
+    border-bottom:3px solid var(--lead);
+  }
+  .eyebrow{
+    font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    color:#B9C2CE;display:flex;gap:18px;align-items:center;flex-wrap:wrap;margin-bottom:14px;
+  }
+  .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--lead);display:inline-block}
+  h1.title{
+    font-family:var(--display);font-weight:500;font-style:italic;
+    font-size:clamp(30px,4.2vw,52px);line-height:1.05;margin:0 0 10px;color:#fff;
+    max-width:16ch;
+  }
+  .dek{
+    font-size:15px;color:#C7CEDA;max-width:62ch;line-height:1.55;margin:0;
+  }
+  .dek b{color:#fff;font-weight:600}
+
+  /* ===== Layout scaffolding ===== */
+  .wrap{padding:34px 5vw 80px;max-width:1400px;margin:0 auto}
+  section{margin-bottom:46px}
+  .section-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:14px;flex-wrap:wrap}
+  h2.sec{
+    font-family:var(--display);font-style:italic;font-weight:500;font-size:24px;margin:0;
+    display:flex;align-items:baseline;gap:10px;
+  }
+  h2.sec .no{font-family:var(--mono);font-style:normal;font-size:12px;color:var(--ink-soft);border:1px solid var(--line);padding:2px 7px;border-radius:3px}
+  p.lede{color:var(--ink-soft);font-size:14px;max-width:70ch;line-height:1.6;margin:6px 0 0}
+
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:2px}
+
+  /* ===== KPI ledger strip ===== */
+  .kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+  .kpi{background:var(--panel);padding:20px 22px}
+  .kpi .label{font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-soft)}
+  .kpi .val{font-family:var(--mono);font-weight:600;font-size:27px;margin-top:6px;color:var(--ink)}
+  .kpi .val.flag{color:var(--flag)}
+  .kpi .sub{font-size:11.5px;color:var(--ink-soft);margin-top:4px}
+
+  .caution{
+    background:var(--lead-bg);border-left:3px solid var(--lead);padding:14px 18px;
+    font-size:13px;line-height:1.6;color:#5C4213;margin-top:18px;
+  }
+  .caution b{color:#40300D}
+
+  /* ===== Sankey hero ===== */
+  .sankey-panel{padding:6px 10px 10px;overflow-x:auto}
+  #sankey{width:100%;min-width:980px;height:820px}
+  .sankey-controls{display:flex;gap:10px;flex-wrap:wrap;padding:14px 18px 4px;font-family:var(--mono);font-size:12px}
+  .sankey-controls button{
+    font-family:var(--mono);font-size:11.5px;letter-spacing:.02em;
+    background:var(--panel);border:1px solid var(--line);color:var(--ink-soft);
+    padding:6px 12px;border-radius:3px;cursor:pointer;transition:.15s;
+  }
+  .sankey-controls button:hover{border-color:var(--ink-soft);color:var(--ink)}
+  .sankey-controls button.active{background:var(--ink);color:#fff;border-color:var(--ink)}
+
+  .who-runs{padding:18px 22px;margin-top:18px}
+  .who-runs-title{font-family:var(--display);font-style:italic;font-weight:500;font-size:19px;margin-bottom:2px}
+  .who-runs-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line)}
+  .who-runs-card{background:var(--panel);padding:14px 16px}
+  .wr-pac{font-family:var(--mono);font-size:11.5px;font-weight:600;text-transform:uppercase;letter-spacing:.03em;color:var(--lead);margin-bottom:6px}
+  .wr-officers{font-size:13px;line-height:1.55;color:var(--ink)}
+  .wr-officers.wr-unconfirmed{color:var(--ink-soft);font-style:italic}
+  @media (max-width:700px){.who-runs-grid{grid-template-columns:1fr}}
+
+  /* ===== two-col bars ===== */
+  .cols2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .barpanel{padding:16px 18px 8px;overflow-x:auto}
+  .barpanel h3{font-family:var(--body);font-weight:600;font-size:13px;text-transform:uppercase;letter-spacing:.04em;margin:0 0 4px;color:var(--ink-soft)}
+  .barplot{height:420px;min-width:540px}
+
+  @media (max-width:860px){
+    .cols2{grid-template-columns:1fr}
+    .kpi-row{grid-template-columns:1fr 1fr}
+  }
+
+  /* ===== chains ledger ===== */
+  .filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px;align-items:center}
+  .filters input[type=search]{
+    font-family:var(--mono);font-size:12.5px;padding:8px 12px;border:1px solid var(--line);
+    border-radius:3px;background:var(--panel);width:240px;color:var(--ink);
+  }
+  .filters select{
+    font-family:var(--mono);font-size:12.5px;padding:8px 10px;border:1px solid var(--line);
+    border-radius:3px;background:var(--panel);color:var(--ink);
+  }
+  .filters .count{font-family:var(--mono);font-size:11.5px;color:var(--ink-soft);margin-left:auto}
+
+  table.ledger{width:100%;min-width:760px;border-collapse:collapse;font-size:13px}
+  table.ledger thead th{
+    text-align:left;font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;
+    color:var(--ink-soft);border-bottom:2px solid var(--ink);padding:10px 12px;background:var(--panel);
+    position:sticky;top:0;
+  }
+  table.ledger td{padding:11px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  table.ledger tbody tr:hover{background:#FAFAF7}
+  .amt{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+  .arrow{color:var(--ink-soft);padding:0 4px;font-family:var(--mono)}
+  .stamp{
+    display:inline-block;font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.05em;
+    text-transform:uppercase;padding:3px 8px;border-radius:2px;border:1px solid var(--lead);
+    color:var(--lead);background:var(--lead-bg);white-space:nowrap;
+  }
+  .table-scroll{max-height:640px;overflow:auto;border:1px solid var(--line)}
+  table.ledger thead{background:var(--panel)}
+
+  /* ===== energy overlap ===== */
+  #energybar{height:520px}
+  .tier5{background:#D9EAD3}
+  .tier4{background:#D9EAD3}
+  .tier3{background:#FBF0DD}
+  .tier2{background:#CFE2F3}
+  table.ledger td.tiercell{font-family:var(--mono);text-align:right}
+  .tier-header{font-family:var(--mono);font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-soft);background:#ECEDE8;padding:8px 12px;border-bottom:2px solid var(--ink)}
+  .recipient-name{cursor:pointer;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px;color:var(--ink)}
+  .recipient-name:hover{color:var(--lead)}
+  .company-detail-row td{padding:0;border-bottom:1px solid var(--line)}
+  .company-detail{display:none;padding:12px 16px;background:#FBFAF7}
+  .company-detail.open{display:block}
+  .company-pill{display:inline-flex;align-items:center;gap:6px;background:#fff;border:1px solid var(--line);border-radius:20px;padding:5px 12px;margin:3px 6px 3px 0;font-family:var(--mono);font-size:12px}
+  .company-pill b{color:var(--verified)}
+  .expand-arrow{display:inline-block;transition:transform .15s;font-size:10px;margin-left:6px;color:var(--ink-soft)}
+  .expand-arrow.open{transform:rotate(90deg)}
+
+  footer{
+    border-top:1px solid var(--line);padding:26px 5vw 60px;font-family:var(--mono);
+    font-size:11.5px;color:var(--ink-soft);max-width:1400px;margin:0 auto;
+  }
+  footer a{text-decoration:underline}
+
+  .cbar{display:grid;grid-template-columns:minmax(150px,34%) 1fr auto;gap:10px;align-items:center;margin:8px 0;font-size:15px}
+  .cbar-t{background:#EEF0EA;border-radius:3px;height:18px}
+  .cbar-f{height:18px;border-radius:3px;background:#2B5BA8}
+  .cbar-v{font-family:var(--mono);font-size:14px;white-space:nowrap}
+  .flow{display:grid;grid-template-columns:1fr 70px 1fr 70px 1.2fr;align-items:center;gap:0;padding:26px 22px}
+  .fbox{border:2px solid var(--ink);border-radius:6px;padding:16px 18px;background:#fff;font-size:17px;line-height:1.45}
+  .fbox b{display:block;font-size:19px;margin-bottom:4px}
+  .fbox .amt{font-size:17px;color:#2B5BA8;font-weight:600}
+  .farrow{text-align:center;font-size:34px;color:#2B5BA8}
+  .fstack{display:grid;gap:10px}
+  .fstack .fbox{font-size:16px;padding:12px 14px}
+  .ret{color:var(--verified);font-weight:600}
+  p.body{font-size:16px;line-height:1.7;max-width:72ch;margin:0 0 12px}
+  @media (max-width:860px){.flow{grid-template-columns:1fr}.farrow{transform:rotate(90deg);padding:4px 0}.cbar{grid-template-columns:1fr auto}.cbar-t{grid-column:1/-1}}
+</style>
+<link rel="icon" type="image/png" href="hive-bee.png">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&display=swap" rel="stylesheet">
+<style>
+.hb-bar{background:#0d0b0a;border-bottom:1px solid #3a2f1c;padding:10px 20px;}
+.hb-bar a{display:flex;align-items:center;gap:12px;max-width:1100px;margin:0 auto;text-decoration:none;}
+.hb-bar img{width:52px;height:52px;border-radius:4px;display:block;flex:none;}
+.hb-name{font-family:'Cinzel','Trajan Pro',Georgia,serif;color:#d4af37;font-size:16px;letter-spacing:.14em;text-transform:uppercase;line-height:1.2;display:block;}
+.hb-sub{font-family:Georgia,serif;font-style:italic;color:#b8956a;font-size:12.5px;letter-spacing:.02em;display:block;margin-top:2px;}
+.hb-foot{background:#0d0b0a;color:#b8956a;text-align:center;padding:26px 20px 30px;font-family:Georgia,serif;}
+.hb-foot img{width:52px;height:52px;display:block;margin:0 auto 10px;}
+.hb-foot .hb-name{font-size:14px;}
+.hb-foot .hb-tag{font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:#8a7650;margin-top:8px;display:block;}
+@media(max-width:600px){.hb-bar{padding:8px 16px}.hb-bar img{width:38px;height:38px}.hb-name{font-size:13px}.hb-sub{font-size:11.5px}}
+</style>
+</head>
+<body>
+<div class="hb-bar"><a href="https://webercountyhive.substack.com/" target="_blank" rel="noopener"><img src="uhp-badge.png" alt="Utah Hive Politics logo"><span><span class="hb-name">Utah Hive Politics</span><span class="hb-sub">from the publisher of The Weber County Hive</span></span></a></div>
+
+<header class="mast"><div class="eyebrow"><span class="dot"></span>THE WEBER COUNTY HIVE — MONEY FLOW LEDGER · CASE 15</div><h1 class="title">Taxpayers PAC and the 2025 Ogden Council Races</h1><p class="dek">A Layton PAC formed in July 2025 reported <b>$16,600</b> in contributions: $15,000 from one Phoenix, Ariz., donor and $1,600 from the Weber County Republican Party. It then reported <b>$15,600</b> to four Ogden City Council candidates. Three returned the money. One returned most of it.</p><p class="dek" style="font-size:14px">Posted Oct. 19, 2026 · Figures from the PAC's own filings as exported Oct. 7, 2026 · <a href="index.html" style="color:inherit">Back to The Ledger</a></p></header>
+<div class="wrap">
+
+<div class="kpi-row" style="margin-bottom:10px">
+<div class="kpi"><div class="label">Money in</div><div class="val">$16,600</div><div class="sub">two contributions, 2025</div></div>
+<div class="kpi"><div class="label">From one Phoenix donor</div><div class="val">$15,000</div><div class="sub">90% of everything raised</div></div>
+<div class="kpi"><div class="label">To Ogden council candidates</div><div class="val">$15,600</div><div class="sub">four candidates, Oct. 2025</div></div>
+<div class="kpi"><div class="label">To one candidate</div><div class="val">$14,200</div><div class="sub">Jase Reyneveld, District 1</div></div>
+</div>
+
+<section id="what"><div class="section-head"><h2 class="sec"><span class="no">01</span>What this PAC is</h2></div><div class="panel" style="padding:20px 24px">
+<p class="body">"Taxpayers PAC" registered with the state on <b>July 17, 2025</b>. Its Statement of Organization lists an address of 721 Main St #327 in Layton. [1]</p>
+<p class="body"><b>Zach Lautenschlager</b> is listed as President and as CFO, with the occupation "Consultant." <b>Nathan Barnes</b> is listed as Vice President, with the occupation "Business Consultant." [1]</p>
+<p class="body">The name is similar to other groups, but this is a separate committee. We found no record linking it to Taxpayer Shield PAC (the Amendment B campaign) or to the Utah Taxpayers Association. [1]</p>
+<p class="body">KSL.com called it "Taxpayer PAC" in its November 2025 story. The state registration says "Taxpayers PAC." [1][2]</p>
+</div></section>
+
+<section id="flow"><div class="section-head"><h2 class="sec"><span class="no">02</span>How the money moved</h2></div><p class="lede" style="margin-bottom:12px">From the PAC's own reports. Arrows show money the PAC reported. Green notes show what KSL.com reported happened next. [1][2]</p>
+<div class="panel flow">
+<div class="fstack">
+<div class="fbox"><b>David Reece</b>Phoenix, Ariz.<br><span class="amt">$15,000</span> · Sept. 3, 2025</div>
+<div class="fbox"><b>Weber County Republican Party</b>North Ogden<br><span class="amt">$1,600</span> · Oct. 23, 2025</div>
+</div>
+<div class="farrow">→</div>
+<div class="fbox" style="background:#EEF3FB"><b>Taxpayers PAC</b>Layton<br>Reported in: <span class="amt">$16,600</span></div>
+<div class="farrow">→</div>
+<div class="fstack">
+<div class="fbox"><b>Jase Reyneveld</b>District 1 · <span class="amt">$14,200</span><br><span class="ret">Returned $12,700</span></div>
+<div class="fbox"><b>Marcia White</b>At-large A · <span class="amt">$500</span> · <span class="ret">Returned</span></div>
+<div class="fbox"><b>Bart Blair</b>At-large B · <span class="amt">$500</span> · <span class="ret">Returned</span></div>
+<div class="fbox"><b>Ken Richey</b>District 3 · <span class="amt">$400</span> · <span class="ret">Returned</span></div>
+</div>
+</div></section>
+
+<section id="in"><div class="section-head"><h2 class="sec"><span class="no">03</span>Money in</h2></div><div class="panel" style="overflow-x:auto">
+<table class="ledger"><thead><tr><th>Date</th><th>Contributor</th><th>Address on the filing</th><th>Report</th><th style="text-align:right">Amount</th></tr></thead><tbody>
+<tr><td>Sept. 3, 2025</td><td>David Reece</td><td>17431 N Black Canyon Hwy, Phoenix, AZ</td><td>September 30th</td><td class="amt" style="text-align:right">$15,000.00</td></tr>
+<tr><td>Oct. 23, 2025</td><td>Weber County Republican Party</td><td>North Ogden, UT</td><td>General</td><td class="amt" style="text-align:right">$1,600.00</td></tr>
+<tr><td colspan="4"><b>Total</b></td><td class="amt" style="text-align:right"><b>$16,600.00</b></td></tr>
+</tbody></table></div>
+<p class="lede" style="margin-top:10px">The export also shows two contribution lines marked [DELETED] at $0. [1] KSL.com described Reece as a Phoenix businessman and pastor. [2] We have not confirmed anything else about him from public records, so we do not add more here.</p>
+</section>
+
+<section id="out"><div class="section-head"><h2 class="sec"><span class="no">04</span>Money out</h2></div>
+<div class="panel" style="padding:18px 22px;margin-bottom:14px">
+<div class="cbar"><div class="cbar-l">Jase Reyneveld for Ogden City Council</div><div class="cbar-t"><div class="cbar-f" style="width:100%"></div></div><div class="cbar-v">$14,200</div></div>
+<div class="cbar"><div class="cbar-l">Marcia White</div><div class="cbar-t"><div class="cbar-f" style="width:3.5%"></div></div><div class="cbar-v">$500</div></div>
+<div class="cbar"><div class="cbar-l">Bart Blair</div><div class="cbar-t"><div class="cbar-f" style="width:3.5%"></div></div><div class="cbar-v">$500</div></div>
+<div class="cbar"><div class="cbar-l">Ken Richey (filed as "Ken Richie")</div><div class="cbar-t"><div class="cbar-f" style="width:2.8%"></div></div><div class="cbar-v">$400</div></div>
+<div class="cbar"><div class="cbar-l">Fees (Anedot, Mountain America Bank)</div><div class="cbar-t"><div class="cbar-f" style="width:4.3%;background:#8A94A6"></div></div><div class="cbar-v">$615.30</div></div>
+</div>
+<div class="panel" style="overflow-x:auto">
+<table class="ledger"><thead><tr><th>Date</th><th>Paid to</th><th>Purpose filed</th><th style="text-align:right">Amount</th><th>What KSL.com reported next [2]</th></tr></thead><tbody>
+<tr><td>Sept. 3, 2025</td><td>Anedot (payment processor)</td><td>Fee</td><td class="amt" style="text-align:right">$600.30</td><td></td></tr>
+<tr><td>Oct. 6, 2025</td><td>Jase Reyneveld for Ogden City Council</td><td>Political Support</td><td class="amt" style="text-align:right">$7,200.00</td><td rowspan="3">Returned $12,700 after the city clerk told him Ogden's limit is $1,500 per contributor. He said he had believed state rules applied.</td></tr>
+<tr><td>Oct. 8, 2025</td><td>Jase Reyneveld for Ogden City Council</td><td>Political Support</td><td class="amt" style="text-align:right">$3,000.00</td></tr>
+<tr><td>Oct. 14, 2025</td><td>Jase Reyneveld for Ogden City Council</td><td>Political Support</td><td class="amt" style="text-align:right">$4,000.00</td></tr>
+<tr><td>Oct. 23, 2025</td><td>Marcia White</td><td>Political Support</td><td class="amt" style="text-align:right">$500.00</td><td>Returned</td></tr>
+<tr><td>Oct. 23, 2025</td><td>Bart Blair</td><td>Political Support</td><td class="amt" style="text-align:right">$500.00</td><td>Returned</td></tr>
+<tr><td>Oct. 23, 2025</td><td>Ken Richie (Ken Richey)</td><td>Political Support</td><td class="amt" style="text-align:right">$400.00</td><td>Returned</td></tr>
+<tr><td>Nov. 30, 2025</td><td>Mountain America Bank</td><td>Fee (Year End report)</td><td class="amt" style="text-align:right">$15.00</td><td></td></tr>
+<tr><td colspan="3"><b>To candidates</b></td><td class="amt" style="text-align:right"><b>$15,600.00</b></td><td></td></tr>
+</tbody></table></div>
+<p class="lede" style="margin-top:10px">Blair and White told KSL.com they had believed the money came from a group tied to the Republican Party. Blair said, "It wasn't worth it to be tied or connected to anybody that I didn't really know too much about." [2] Reyneveld told KSL.com the PAC's goal is to "support and reward candidates that were committed to limited government and lowering taxes wherever possible." [2]</p>
+</section>
+
+<section id="results"><div class="section-head"><h2 class="sec"><span class="no">05</span>How the four races ended</h2></div><div class="panel" style="overflow-x:auto">
+<table class="ledger"><thead><tr><th>Seat</th><th>Candidate this PAC paid</th><th>Result</th></tr></thead><tbody>
+<tr><td>District 1 (open)</td><td>Jase Reyneveld</td><td>Lost to Flor Lopez, 1,106 to 734</td></tr>
+<tr><td>At-large Seat A</td><td>Marcia White (incumbent)</td><td>Lost to Alicia Washington, 6,431 to 4,926</td></tr>
+<tr><td>At-large Seat B</td><td>Bart Blair (incumbent)</td><td>Lost to Kevin Lundell, 6,870 to 4,536</td></tr>
+<tr><td>District 3</td><td>Ken Richey (incumbent)</td><td>Won over Heath Satow, 1,792 to 1,645</td></tr>
+</tbody></table></div>
+<p class="lede" style="margin-top:10px">Unofficial counts as reported by the Standard-Examiner on Nov. 6, 2025, with more than 99% of ballots counted. [3]</p></section>
+
+<section id="notshown"><div class="section-head"><h2 class="sec"><span class="no">06</span>What the PAC's filing does not show yet</h2></div><div class="panel" style="padding:20px 24px">
+<p class="body"><b>The returned money.</b> KSL.com reported four returns, about $14,100 in all. [2] The PAC's export we read lists only the two contributions above as money coming in. It does not list the returned money as a refund or contribution. [1] Returns may be filed later or in a different way. Readers can check the PAC's newest reports.</p>
+<p class="body"><b>2026.</b> The export showed no 2026 activity as of Oct. 7, 2026. [1]</p>
+<p class="body" style="font-size:13px;color:var(--ink-soft)">How we read it: DEX export DEX20261007_105207.csv from disclosures.utah.gov, read as a CSV file, row by row.</p>
+</div></section>
+
+<section id="questions"><div class="section-head"><h2 class="sec"><span class="no">07</span>Questions to ask, and whom to ask</h2></div><div class="panel" style="padding:20px 24px;font-size:15px;line-height:1.7">
+<p><b>The Lieutenant Governor's elections office:</b> when a candidate returns a PAC's contribution, where should the PAC show that money coming back?</p>
+<p><b>Ogden City Recorder:</b> where can the public read the city's $1,500 contribution limit and the candidates' own 2025 finance reports?</p>
+<p><b>Weber County Republican Party:</b> what the $1,600 to Taxpayers PAC on Oct. 23, 2025, was for, as shown in the party's own report.</p>
+</div></section>
+
+<section id="where-this-connects"><div class="section-head"><h2 class="sec"><span class="no">08</span>Where this connects</h2></div><div class="panel" style="padding:20px 24px;font-size:15px;line-height:1.8"><ul>
+<li><b>People on this page:</b> Zach Lautenschlager and Nathan Barnes (PAC officers); David Reece (donor); Jase Reyneveld, Marcia White, Bart Blair and Ken Richey (2025 Ogden City Council candidates).</li>
+<li><a href="index.html">The Ledger home</a> (all money-flow cases)</li>
+<li><a href="everythingelse.html">Everything Else</a> (other PAC and party money)</li>
+<li><a href="https://weber-county-hive.github.io/PAC/">PAC repo</a> (case files on Utah PACs)</li>
+<li><a href="https://weber-county-hive.github.io/-weber-county-hive-index/">Master index</a></li>
+</ul></div></section>
+
+<section id="sources"><div class="section-head"><h2 class="sec"><span class="no">09</span>Sources</h2></div><details class="panel" style="padding:16px 20px"><summary style="cursor:pointer;font-weight:600">Show sources</summary><ol style="line-height:1.8">
+<li>Utah Lieutenant Governor's Office, campaign finance disclosures, <a href="https://disclosures.utah.gov">disclosures.utah.gov</a>: Taxpayers PAC Statement of Organization and DEX export DEX20261007_105207.csv (exported Oct. 7, 2026)</li>
+<li>Tim Vandenack, "<a href="https://www.ksl.com/article/news/politics/questions-spur-3-ogden-city-council-hopefuls-to-return-donations-fourth-recipient-defends-donor/51398673">Questions spur 3 Ogden City Council hopefuls to return donations; fourth recipient defends donor</a>," KSL.com, Nov. 2, 2025</li>
+<li>Rob Nielsen, "<a href="https://www.standard.net/news/government/2025/nov/06/washington-lundell-lopez-earn-seats-on-ogden-city-council-richey-retains-seat/">Washington, Lundell, Lopez earn seats on Ogden City Council, Richey retains seat</a>," Standard-Examiner, Nov. 6, 2025</li>
+</ol></details></section>
+</div>
+<footer>The Weber County Hive · The Ledger · Public records only · Posted Oct. 19, 2026</footer>
+<div class="hb-foot"><img src="hive-bee.png" alt=""><span class="hb-name">Utah Hive Politics</span><span class="hb-sub">from the publisher of The Weber County Hive</span><span class="hb-tag">Independent · Accountability · Journalism</span></div>
+
+<script data-goatcounter="https://weberhive.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
