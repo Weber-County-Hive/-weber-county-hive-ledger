@@ -3,435 +3,578 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Weber County Hive — Master Index</title>
+<title>The Weber County Hive — Money-Flow Ledger</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Source+Serif+4:ital,wght@0,400;1,400&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --paper:#f4f0e6;
-    --paper-card:#faf7ef;
-    --paper-card-2:#f0ecdf;
-    --ink:#1c1c1a;
-    --ink-dim:#5b5850;
-    --ink-dimmer:#8c8878;
-    --rust:#c0572e;
-    --amber:#d9a441;
-    --teal:#2e5f5a;
-    --blue:#3a5f7d;
-    --border:#ddd6c4;
-    --hive-dark:#17130c;
-    --hive-dark-2:#2a2013;
-    --gold:#d4af37;
+    --paper:#ffffff;
+    --paper-card:#ffffff;
+    --paper-card-2:#f3f6fa;
+    --ink:#0f1b2d;
+    --ink-dim:#4d5868;
+    --ink-dimmer:#7a8594;
+    --rust:#1d5fbf;
+    --amber:#e3a008;
+    --border:#dde3ea;
   }
   *{box-sizing:border-box;margin:0;padding:0;}
-  body{
-    background:var(--paper);
-    color:var(--ink);
-    font-family:'Source Serif 4', serif;
-    line-height:1.5;
-  }
+  body{background:var(--paper);color:var(--ink);font-family:'Source Serif 4', serif;line-height:1.5;}
 
-  /* ===== HIVE HERO ===== */
-  .hive-hero{
-    position:relative;
-    background:linear-gradient(160deg, var(--hive-dark-2) 0%, var(--hive-dark) 70%);
-    padding:90px 24px 110px;
-    overflow:hidden;
-    text-align:center;
-    border-bottom:4px solid var(--gold);
+  header{
+    background:linear-gradient(160deg, #0f1b2d 0%, #0a1424 100%);
+    padding:60px 24px 46px;
+    border-bottom:4px solid var(--amber);
   }
-  .hive-hero::before{
-    content:"";
-    position:absolute;
-    inset:0;
-    opacity:0.16;
-    background-image:
-      linear-gradient(30deg, var(--gold) 12%, transparent 12.5%, transparent 87%, var(--gold) 87.5%, var(--gold)),
-      linear-gradient(150deg, var(--gold) 12%, transparent 12.5%, transparent 87%, var(--gold) 87.5%, var(--gold)),
-      linear-gradient(30deg, var(--gold) 12%, transparent 12.5%, transparent 87%, var(--gold) 87.5%, var(--gold)),
-      linear-gradient(150deg, var(--gold) 12%, transparent 12.5%, transparent 87%, var(--gold) 87.5%, var(--gold)),
-      linear-gradient(60deg, #77571f 25%, transparent 25.5%, transparent 75%, #77571f 75%, #77571f),
-      linear-gradient(60deg, #77571f 25%, transparent 25.5%, transparent 75%, #77571f 75%, #77571f);
-    background-size:44px 76px;
-    background-position:0 0, 0 0, 22px 38px, 22px 38px, 0 0, 22px 38px;
-    mask-image:radial-gradient(ellipse at center, black 0%, transparent 75%);
-    pointer-events:none;
-  }
-  .hex-mark{
-    position:relative;
-    width:96px; height:96px;
-    margin:0 auto 22px;
-  }
-  .hex-mark svg{width:100%; height:100%;}
-  .hive-eyebrow{
+  .header-inner{max-width:900px;margin:0 auto;}
+  .eyebrow{
     font-family:'IBM Plex Mono', monospace;
-    font-size:12px;
-    letter-spacing:3px;
-    color:#c9a96a;
-    text-transform:uppercase;
-    margin-bottom:14px;
-    position:relative;
+    font-size:12px; letter-spacing:3px;
+    color:#9fbbe0; text-transform:uppercase;
+    margin-bottom:12px;
   }
-  .hive-title{
+  h1{
     font-family:'Playfair Display', serif;
     font-weight:800;
-    font-size:clamp(2.4rem, 5vw, 3.6rem);
-    color:var(--gold);
-    letter-spacing:0.5px;
-    position:relative;
-    margin-bottom:10px;
+    font-size:clamp(2rem, 4.5vw, 3rem);
+    color:#eef4fb;
   }
-  .hive-title .small{
-    display:block;
-    font-size:0.32em;
-    font-weight:700;
-    color:#e8dbb5;
-    letter-spacing:6px;
-    margin-top:6px;
-  }
-  .hive-sub{
-    position:relative;
+  header p{
+    color:#c3cfdf;
     font-family:'Source Serif 4', serif;
     font-style:italic;
-    font-size:1.05rem;
-    color:#cbb98c;
+    margin-top:10px;
     max-width:560px;
-    margin:0 auto;
+    font-size:1.05rem;
   }
 
-  /* ===== BODY ===== */
-  .wrap{max-width:1180px;margin:0 auto;padding:56px 24px 100px;}
-  .intro{
-    text-align:center;
-    max-width:680px;
-    margin:0 auto 48px;
+  .wrap{max-width:900px;margin:0 auto;padding:52px 24px 100px;}
+
+  /* ---- Search + filter controls ---- */
+  .controls{margin-bottom:32px;}
+  .search-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-bottom:14px;
   }
-  .intro h2{
-    font-family:'Playfair Display', serif;
-    font-size:1.5rem;
+  #search-input{
+    flex:1 1 220px;
+    font-family:'Inter', sans-serif;
+    font-size:0.95rem;
+    padding:11px 14px;
+    border:1px solid var(--border);
+    border-radius:4px;
+    background:var(--paper-card);
     color:var(--ink);
-    margin-bottom:10px;
   }
-  .intro p{
+  #search-input:focus{outline:2px solid var(--amber); outline-offset:-1px;}
+  #tag-select, #sort-select{
+    font-family:'Inter', sans-serif;
+    font-size:0.85rem;
+    padding:11px 12px;
+    border:1px solid var(--border);
+    border-radius:4px;
+    background:var(--paper-card);
     color:var(--ink-dim);
-    font-size:1rem;
+    flex:0 1 auto;
+    max-width:220px;
+  }
+  #tag-select:focus, #sort-select:focus{outline:2px solid var(--amber); outline-offset:-1px;}
+  .results-count{
+    font-family:'Inter', sans-serif;
+    font-size:0.8rem;
+    color:var(--ink-dimmer);
+    margin-top:12px;
   }
 
-  /* ===== HONEYCOMB CARD GRID ===== */
-  .comb{
-    display:grid;
-    grid-template-columns:repeat(auto-fill, minmax(250px, 1fr));
-    gap:16px;
-  }
-
-  /* ===== SEARCH ===== */
-  .search-row{max-width:620px;margin:0 auto 40px;display:flex;gap:10px;align-items:center;}
-  .search-row input{flex:1;font-family:'Inter',sans-serif;font-size:1rem;padding:12px 16px;border:1px solid var(--border);border-radius:6px;background:var(--paper-card);color:var(--ink);}
-  .search-row input:focus{outline:2px solid var(--amber);outline-offset:1px;}
-  .search-count{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink-dimmer);white-space:nowrap;}
-  .no-results{text-align:center;color:var(--ink-dim);padding:30px 0;display:none;}
-
-  /* ===== LATEST STRIP ===== */
-  .latest{margin-bottom:52px;}
-  .shelf-head{display:flex;align-items:baseline;gap:14px;border-bottom:2px solid var(--ink);padding-bottom:8px;margin-bottom:18px;}
-  .shelf-head h2{font-family:'Playfair Display',serif;font-size:1.35rem;color:var(--ink);}
-  .shelf-head .shelf-note{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink-dimmer);letter-spacing:.5px;}
-  .latest-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:12px;}
-  .latest-card{display:flex;flex-direction:column;gap:6px;background:var(--hive-dark);color:#efe6cc;border-radius:6px;padding:16px 16px 14px;text-decoration:none;border-top:3px solid var(--gold);transition:transform .15s ease;}
-  .latest-card:hover{transform:translateY(-3px);}
-  .latest-card .lc-meta{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#c9a96a;}
-  .latest-card .lc-title{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;line-height:1.3;color:#fff;flex-grow:1;}
-  .latest-card .lc-go{font-family:'Inter',sans-serif;font-size:.78rem;font-weight:600;color:var(--gold);}
-
-  /* ===== SHELVES ===== */
-  .shelf{margin-bottom:46px;}
+  .docket-grid{display:grid; gap:20px;}
 
   .card{
     background:var(--paper-card);
     border:1px solid var(--border);
-    border-radius:6px;
-    padding:18px 18px 16px;
-    text-decoration:none;
-    color:inherit;
-    position:relative;
+    border-radius:4px;
+    padding:28px 28px 24px;
     transition:transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .card:hover{transform:translateY(-2px); box-shadow:0 8px 22px rgba(15,27,45,0.1);}
+  .card-top-row{
     display:flex;
-    flex-direction:column;
-    gap:6px;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:12px;
   }
-  .card:hover{
-    transform:translateY(-3px);
-    box-shadow:0 10px 28px rgba(28,24,20,0.12);
-  }
-  .card-top{display:flex;align-items:center;gap:10px;}
-  .card-badge{
-    width:30px; height:30px;
-    flex-shrink:0;
-  }
-  .card-badge svg{width:100%; height:100%;}
-  .card-eyebrow{
+  .case-tag{
+    display:inline-block;
     font-family:'IBM Plex Mono', monospace;
-    font-size:10px;
-    letter-spacing:1.5px;
+    font-size:10.5px; letter-spacing:1.5px;
     text-transform:uppercase;
+    color:var(--amber);
+    background:var(--paper-card-2);
+    border:1px solid var(--border);
+    padding:3px 10px;
+    border-radius:3px;
+  }
+  .card-dates{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+  }
+  .card-date{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
     color:var(--ink-dimmer);
   }
-  .card h3{
-    font-family:'Playfair Display', serif;
-    font-size:1.1rem;
-    font-weight:700;
-    color:var(--ink);
-    line-height:1.25;
-  }
-  .card p{
-    color:var(--ink-dim);
-    font-size:0.88rem;
-    line-height:1.5;
-    max-height:4.5em;
-    display:-webkit-box;
-    -webkit-line-clamp:3;
-    -webkit-box-orient:vertical;
-    overflow:hidden;
-  }
-  .card .card-link{
-    align-self:flex-start;
-    margin-top:auto;
-    padding-top:10px;
-    font-family:'Inter', sans-serif;
-    font-size:0.82rem;
-    font-weight:600;
-    color:var(--rust);
-    text-decoration:none;
-    border-bottom:1px solid transparent;
+  .card-updated{
     display:inline-flex;
     align-items:center;
+    gap:5px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10.5px;
+    color:#1d5fbf;
+    background:#fff4cc;
+    border:1px solid #e3a008;
+    padding:2px 9px;
+    border-radius:10px;
+  }
+  .card h2{
+    font-family:'Playfair Display', serif;
+    font-size:1.55rem;
+    color:var(--ink);
+    margin-bottom:8px;
+  }
+  .card-total{
+    display:inline-flex;
+    align-items:baseline;
     gap:6px;
+    font-family:'IBM Plex Mono', monospace;
+    font-weight:500;
+    font-size:1.5rem;
+    color:var(--rust);
+    background:linear-gradient(160deg, #eef4fb 0%, #e4edf9 100%);
+    border:1px solid #c3d5ee;
+    padding:6px 14px;
+    border-radius:5px;
+    margin-bottom:14px;
   }
-  .card:hover .card-link{border-bottom-color:var(--rust);}
-  @media (max-width:560px){
-    .hive-hero{padding:60px 20px 70px;}
-    .wrap{padding:36px 16px 70px;}
-    .search-row{flex-direction:column;align-items:stretch;}
-    .search-count{text-align:right;}
+  .card-total .ct-plus{font-size:1.1rem; color:var(--amber);}
+  .card-total .ct-label{
+    font-family:'Inter', sans-serif;
+    font-weight:600;
+    font-size:0.65rem;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    color:var(--ink-dimmer);
+    margin-left:4px;
   }
-  .bee-icon{
-    width:14px; height:14px;
-    display:inline-block;
-    flex-shrink:0;
-    opacity:0.85;
+  .card .dek{
+    font-family:'Source Serif 4', serif;
+    font-style:italic;
+    color:var(--ink-dim);
+    font-size:0.98rem;
+    margin-bottom:14px;
+  }
+  .card p.summary{color:var(--ink-dim); font-size:0.95rem; margin-bottom:16px;}
+  .card-tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+    margin-bottom:16px;
+  }
+  .card-tags span{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10px;
+    color:var(--ink-dimmer);
+    background:var(--paper-card-2);
+    border:1px solid var(--border);
+    padding:2px 8px;
+    border-radius:10px;
+  }
+  .card a.open-link{
+    font-family:'Inter', sans-serif;
+    font-size:0.86rem; font-weight:600;
+    color:var(--rust); text-decoration:none;
+    border-bottom:1px solid transparent;
+  }
+  .card a.open-link:hover{border-bottom-color:var(--rust);}
+
+  .placeholder{
+    border:1px dashed var(--border);
+    border-radius:4px;
+    padding:22px 24px;
+    color:var(--ink-dimmer);
+    font-family:'Inter', sans-serif;
+    font-size:0.85rem;
+    text-align:center;
   }
 
   footer{
     text-align:center;
-    padding:50px 24px 60px;
+    padding:30px 24px 50px;
     color:var(--ink-dimmer);
     font-family:'Inter', sans-serif;
-    font-size:0.82rem;
+    font-size:0.8rem;
   }
-  .footer-hive{
-    width:34px; height:34px;
-    margin:0 auto 16px;
-    opacity:0.55;
-  }
-  footer a{
-    color:var(--rust);
-    text-decoration:none;
-    font-weight:600;
-  }
-  footer a:hover{text-decoration:underline;}
-  footer .footer-sub{
-    margin-top:6px;
-    font-size:0.78rem;
-  }
+  footer a{color:var(--rust); text-decoration:none; font-weight:600;}
+</style>
+<link rel="icon" type="image/png" href="hive-bee.png">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&display=swap" rel="stylesheet">
+<style>
+.hb-bar{background:#0d0b0a;border-bottom:1px solid #3a2f1c;padding:10px 20px;}
+.hb-bar a{display:flex;align-items:center;gap:12px;max-width:1100px;margin:0 auto;text-decoration:none;}
+.hb-bar img{width:52px;height:52px;border-radius:4px;display:block;flex:none;}
+.hb-name{font-family:'Cinzel','Trajan Pro',Georgia,serif;color:#d4af37;font-size:16px;letter-spacing:.14em;text-transform:uppercase;line-height:1.2;display:block;}
+.hb-sub{font-family:Georgia,serif;font-style:italic;color:#b8956a;font-size:12.5px;letter-spacing:.02em;display:block;margin-top:2px;}
+.hb-foot{background:#0d0b0a;color:#b8956a;text-align:center;padding:26px 20px 30px;font-family:Georgia,serif;}
+.hb-foot img{width:52px;height:52px;display:block;margin:0 auto 10px;}
+.hb-foot .hb-name{font-size:14px;}
+.hb-foot .hb-tag{font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:#8a7650;margin-top:8px;display:block;}
+@media(max-width:600px){.hb-bar{padding:8px 16px}.hb-bar img{width:38px;height:38px}.hb-name{font-size:13px}.hb-sub{font-size:11.5px}}
 </style>
 </head>
 <body>
+<div class="hb-bar"><a href="https://webercountyhive.substack.com/" target="_blank" rel="noopener"><img src="uhp-badge.png" alt="Utah Hive Politics logo"><span><span class="hb-name">Utah Hive Politics</span><span class="hb-sub">from the publisher of The Weber County Hive</span></span></a></div>
 
-  <div class="hive-hero">
-    <div class="hex-mark">
-      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="hexFill" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#e8c766"/>
-            <stop offset="55%" stop-color="#d4af37"/>
-            <stop offset="100%" stop-color="#9c7620"/>
-          </linearGradient>
-          <filter id="hexShadow" x="-40%" y="-40%" width="180%" height="180%">
-            <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#000" flood-opacity="0.45"/>
-          </filter>
-        </defs>
-        <polygon points="50,3 93,26 93,74 50,97 7,74 7,26"
-          fill="url(#hexFill)" stroke="#1a1508" stroke-width="2" filter="url(#hexShadow)"/>
-        <polygon points="50,14 84,32.5 84,67.5 50,86 16,67.5 16,32.5"
-          fill="none" stroke="#1a1508" stroke-width="1" stroke-opacity="0.35"/>
-        <!-- bee -->
-        <g transform="translate(50,55)">
-          <!-- wings -->
-          <ellipse cx="-13" cy="-14" rx="11" ry="16" fill="rgba(250,247,239,0.65)" stroke="#1a1508" stroke-width="1.2" transform="rotate(-18 -13 -14)"/>
-          <ellipse cx="13" cy="-14" rx="11" ry="16" fill="rgba(250,247,239,0.65)" stroke="#1a1508" stroke-width="1.2" transform="rotate(18 13 -14)"/>
-          <!-- body -->
-          <defs>
-            <clipPath id="beeBody"><ellipse cx="0" cy="4" rx="14" ry="17"/></clipPath>
-          </defs>
-          <ellipse cx="0" cy="4" rx="14" ry="17" fill="#f2c94c" stroke="#1a1508" stroke-width="2"/>
-          <g clip-path="url(#beeBody)">
-            <rect x="-16" y="-6" width="32" height="4.2" fill="#1a1508"/>
-            <rect x="-16" y="3" width="32" height="4.2" fill="#1a1508"/>
-            <rect x="-16" y="12" width="32" height="4.2" fill="#1a1508"/>
-          </g>
-          <ellipse cx="0" cy="4" rx="14" ry="17" fill="none" stroke="#1a1508" stroke-width="2"/>
-          <!-- head -->
-          <circle cx="0" cy="-16" r="7.5" fill="#1a1508"/>
-          <!-- antennae -->
-          <path d="M-4,-22 C-7,-28 -9,-30 -8,-33" stroke="#1a1508" stroke-width="1.8" fill="none" stroke-linecap="round"/>
-          <path d="M4,-22 C7,-28 9,-30 8,-33" stroke="#1a1508" stroke-width="1.8" fill="none" stroke-linecap="round"/>
-          <circle cx="-8" cy="-33" r="1.8" fill="#1a1508"/>
-          <circle cx="8" cy="-33" r="1.8" fill="#1a1508"/>
-        </g>
-      </svg>
+<header>
+    <div class="header-inner">
+      <div class="eyebrow">The Weber County Hive · Money-Flow Ledger</div>
+      <h1>Where the money moves</h1>
+      <p>Interactive campaign-finance visualizations tracing PAC money as it flows through Utah politics.</p>
     </div>
-    <div class="hive-eyebrow">Weber County Hive · Master Index</div>
-    <h1 class="hive-title">THE HIVE
-      <span class="small">EVERY THREAD, ONE HOME</span>
-    </h1>
-    <p class="hive-sub">Every investigation, docket, and interactive built by The Weber County Hive — one place to find any of it.</p>
-  </div>
+  </header>
 
   <div class="wrap">
-    <div class="search-row">
-      <input type="search" id="hive-search" placeholder="Search projects and new case files — try Meta, PID, Schultz…" aria-label="Search projects and case files">
-      <span class="search-count" id="search-count"></span>
+    <div class="controls">
+      <div class="search-row">
+        <input id="search-input" type="text" placeholder="Search by title, summary, or tag…" autocomplete="off">
+        <select id="tag-select">
+          <option value="">All tags</option>
+        </select>
+        <select id="sort-select">
+          <option value="newest">Newest first</option>
+          <option value="oldest">Oldest first</option>
+          <option value="title">Title (A–Z)</option>
+        </select>
+      </div>
+      <div class="results-count" id="results-count"></div>
     </div>
 
-    <section style="margin:0 auto 40px;max-width:900px;background:var(--hive-dark);border-top:3px solid var(--gold);border-radius:8px;padding:22px 24px;display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;">
-      <div style="color:#efe6cc;max-width:560px;">
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:2px;color:#c9a96a;text-transform:uppercase;">Reader tips</div>
-        <div style="font-family:'Playfair Display',serif;font-size:1.3rem;color:#fff;margin:4px 0;">Tips and comments we checked</div>
-        <div style="font-size:.95rem;color:#d9ccaa;">What readers sent, what we checked, and what held up. Tipster names are never published.</div>
-      </div>
-      <div style="display:flex;gap:10px;flex-wrap:wrap;">
-        <a href="tips.html" style="background:var(--gold);color:var(--hive-dark);font-family:'Inter',sans-serif;font-weight:700;padding:12px 18px;border-radius:6px;text-decoration:none;">See the log →</a>
-        <a href="tips.html#send" style="border:2px solid var(--gold);color:var(--gold);font-family:'Inter',sans-serif;font-weight:700;padding:10px 16px;border-radius:6px;text-decoration:none;">Send a tip</a>
-      </div>
-    </section>
-    <section class="latest" id="latest">
-      <div class="shelf-head"><h2>Latest case files</h2><span class="shelf-note">NEWEST FIRST</span></div>
-      <div class="latest-grid" id="latest-grid"></div>
-    </section>
-
-    <div class="intro">
-      <h2>Browse by project</h2>
-      <p>Each card opens that project's own index, where the full list of published pieces lives.</p>
-    </div>
-
-    <div id="shelves"></div>
-    <p class="no-results" id="no-results">Nothing matches that search. Try a shorter word.</p>
+    <div class="docket-grid" id="ledger-grid"></div>
   </div>
 
   <footer>
-    <svg class="footer-hive" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-      <polygon points="50,6 90,28 90,72 50,94 10,72 10,28"
-        fill="none" stroke="var(--ink-dimmer)" stroke-width="3"/>
-    </svg>
-    <div>Read the full investigations on <a href="https://webercountyhive.substack.com" target="_blank" rel="noopener">The Weber County Hive Substack →</a></div>
-    <div class="footer-sub">Public records, primary sources, no speculation.</div>
+    Read the full investigations on <a href="https://webercountyhive.substack.com" target="_blank" rel="noopener">The Weber County Hive Substack →</a>
   </footer>
+<div class="hb-foot"><img src="hive-bee.png" alt=""><span class="hb-name">Utah Hive Politics</span><span class="hb-sub">from the publisher of The Weber County Hive</span><span class="hb-tag">Independent · Accountability · Journalism</span></div>
 
-<script src="weber-hive-master-data.js?v=8"></script>
+
 <script>
-const SHELVES = [
-  { key:"money",       title:"Money & Elections",       note:"CAMPAIGNS, PACS, DONORS" },
-  { key:"legislature", title:"The Legislature",         note:"BILLS, COMMITTEES, LAWMAKERS, TAXES" },
-  { key:"land",        title:"Land, Water & Energy",    note:"DEVELOPMENT, THE LAKE, DATA CENTERS" },
-  { key:"oversight",   title:"Oversight & Power",       note:"WHO DECIDES, AND WHO CHECKS THEM" },
-  { key:"life",        title:"Everyday Life & Basics",  note:"SCHOOLS, SURVEILLANCE, HOW IT ALL WORKS" }
+// ===== WEBER COUNTY HIVE — MONEY-FLOW LEDGER REPO DATA =====
+// One entry per visualization/piece. To add a new one, add one object here.
+// "date" (YYYY-MM-DD) is the original publish date. "updated" (YYYY-MM-DD) is
+// optional — add it whenever a piece's data changes after publishing, so
+// readers can see it's been revised. "total" (a number) is the headline
+// dollar figure for the piece, shown prominently on its card — set
+// "totalPlus: true" alongside it if the figure is a floor, not a final
+// count. All of these are optional and the index page just skips entries
+// that don't have them yet. "tags" is also optional.
+const LEDGER_ENTRIES = [
+  {
+    tag: "Case 01",
+    title: "The Ledger — Utah PAC Money Flow",
+    dek: "Following the money between PACs, candidates, and vendors",
+    summary: "A full interactive breakdown of how money moves between Utah PACs, candidates, and vendors — built from itemized campaign-finance disclosures.",
+    url: "ledger.html",
+    tags: ["PAC money", "campaign finance", "vendors"]
+  },
+  {
+    tag: "Case 02",
+    title: "Follow the Money — UWHA, Election Hive, and the PAC That Isn't a PAC",
+    dek: "A tip about one nonprofit leads to a Super PAC attorney, a treasurer whose own firm was paid, and a committee that took in $360,000 and spent $370,350",
+    summary: "How a public tip about Utah Workforce Housing Advocacy traces through a Political Issues Committee that moved $360,000 in and $370,350 out — including a $25,000 payment to a PAC treasurer's own firm and two same-day contribution refunds.",
+    updated: "2026-09-30",
+    url: "follow-the-money-uwha.html",
+    tags: ["UWHA", "Election Hive", "PIC", "treasurer payments", "nonprofit"]
+  },
+  {
+    tag: "Case 03",
+    title: "The Roybal Chain: How One PAC Funds a County Commissioner, a Realtors' Association, and the Man Who Registered It at His Own House",
+    dek: "A PAC registered at a lobbyist's home, a Senate President's own leadership PAC, and a real estate trade association all lead to the same Weber County Commissioner",
+    summary: "Chris Roybal's Utah Forward PAC, Adams Leadership PAC, and a century-old realtors' association all funded Gage Froerer's campaigns while he voted to advance the West Weber Inland Port — plus a paid consultant who was simultaneously the county's own economic development director, and a separate housing authority paying Froerer's own family business.",
+    updated: "2026-09-30",
+    url: "west-weber-pac-chain.html",
+    tags: ["Gage Froerer", "Utah Forward PAC", "Adams Leadership PAC", "Weber County Commission", "inland port", "real estate"]
+  },
+  {
+    tag: "Case 04",
+    title: "The Housing Authority Loop",
+    dek: "A commissioner, his wife, and the board that pays his family's companies",
+    summary: "Gage Froerer sits as a trustee of the Weber Housing Authority. So does his wife, Gloria — a fact stated openly and dismissed at his 2019 appointment. The authority has paid his family's real estate companies $19,623, operates out of the same building as his own commissioner office, and doesn't appear on either of his last two disclosure forms.",
+    url: "weber-housing-authority.html",
+    total: 19623,
+    tags: ["Gage Froerer", "Weber Housing Authority", "conflict of interest", "real estate"]
+  },
+  {
+    tag: "Case 05",
+    title: "The Payment That Disappeared",
+    dek: "A $62,500 check to a company managed by MIDA's own director appears in one report and is missing from the next",
+    summary: "Utah Workforce Housing Advocacy's interim report to the state shows two checks, $62,500 total, paid to BizDevOps Consulting, LLC — a company whose only registered principal is managed by Daniel Hemmert, now MIDA's Executive Director. UWHA's year-end final report, covering the same money and the same period, includes neither check. Separately, the nonprofit's own state corporate filing lists a set of officers and directors that largely doesn't match the board shown on its public website.",
+    updated: "2026-09-30",
+    url: "the-payment-that-disappeared.html",
+    total: 62500,
+    tags: ["UWHA", "MIDA", "Dan Hemmert", "BizDevOps Consulting", "nonprofit", "disappearing filing"]
+  },
+  {
+    tag: "Case 06",
+    title: "The Biggest Donors, So Far",
+    dek: "A running, sourced ranking of the largest single donors documented across this investigation to date.",
+    summary: "Every company, PAC, and individual documented as a major Utah political donor across this investigation, ranked and flippable to see who each one gave the most to — plus a \"Who these people are\" breakdown of the lobbyists and officials who run the network.",
+    url: "biggest-donors-flip.html",
+    date: "2026-09-04",
+    updated: "2026-09-30",
+    tags: [
+      "UHREC", "URSCC", "NUPAC", "HSLPAC", "Adams Leadership PAC",
+      "Lincoln Hill Partners", "Lincoln Hill PAC", "Irish Elk LLC",
+      "Election Hive", "Kyle Palmer", "Lincoln Shurtz", "Casey Hill",
+      "Derek Brown", "Chase Everton", "Dan Hemmert", "MIDA", "Stratos",
+      "Spencer Cox", "Mike Schultz", "Stuart Adams", "H3 PAC",
+      "Sage Government Solutions", "RPAC", "NWAOR", "PacifiCorp",
+      "Utah Bankers Association", "EnergySolutions", "campaign finance",
+      "lobbying"
+    ]
+  },
+  {
+    tag: "Case 07",
+    title: "Energy Money",
+    dek: "The energy sector's slice of the donor ledger — utilities, oil, rail and energy PACs, with year-by-year giving and who runs each PAC.",
+    summary: "PacifiCorp, Union Pacific Railroad, EnergySolutions, Torus, Big West Oil, Chevron, rPlus Energies, Edison Electric Institute, Dominion Energy PAC and Utah Petroleum Association PAC. Each card shows giving by year, the largest recipients, and the officers on each PAC's state registration. Updated 9/30/26 with complete Union Pacific and Torus records and the Utah Petroleum Association PAC's full export.",
+    url: "energy.html",
+    total: 1595371,
+    totalPlus: true,
+    date: "2026-09-04",
+    updated: "2026-09-30",
+    tags: [
+      "PacifiCorp", "Union Pacific Railroad", "EnergySolutions", "Torus",
+      "Big West Oil", "Chevron", "rPlus Energies", "Edison Electric Institute",
+      "Dominion Energy PAC", "Utah Petroleum Association PAC",
+      "Spencer Cox", "Operation Gigawatt", "energy policy", "nuclear",
+      "campaign finance", "donor ledger"
+    ]
+  },
+  {
+    tag: "Case 08",
+    title: "Real Estate Money",
+    dek: "The real estate industry's slice of the donor ledger — Realtor association PACs and the people who run them.",
+    summary: "RPAC, Salt Lake Board of Realtors, NWAOR, National Association of REALTORS Fund, Tooele County Board of Realtors, Utah Valley Home Builders Association PAC, Southern Utah Home Builders Association PAC, Salt Lake Home Builders Association PAC, and Northern Wasatch HBA PAC — nine real-estate-industry PACs, split out from the full donor ledger, plus a \"Who these people are\" section on Mike Ostermiller, Chris Kyler, Mike Schultz, Mark Shepherd, J. Stuart Adams, Jed Nilson, and Gage Froerer.",
+    url: "realestate.html",
+    total: 10840035,
+    totalPlus: true,
+    date: "2026-09-04",
+    updated: "2026-09-30",
+    tags: [
+      "RPAC", "Salt Lake Board of Realtors", "NWAOR", "Northern Wasatch HBA PAC", "Tooele County Board of Realtors", "Southern Utah Home Builders", "Salt Lake Home Builders",
+      "National Association of REALTORS Fund", "Mike Ostermiller", "Chris Kyler",
+      "Mike Schultz", "Mark Shepherd", "J. Stuart Adams", "Jed Nilson",
+      "Gage Froerer", "MIDA", "KKOS Lawyers", "campaign finance", "donor ledger"
+    ]
+  },
+  {
+    tag: "Case 09",
+    title: "Everything Else",
+    dek: "The major donors that don't fit one industry — a banking trade group, a bank's employee PAC, a metal recycler, the Chamber's PAC, the tourism industry's PAC, the Utah PACs of Boeing and The Home Depot, an auto and real-estate company, a New York donor, and the committee two of them funded.",
+    summary: "Larry H. Miller Company, Utah Bankers Association, Utah Metal Works, Utah Chamber PAC, Tourism Works PAC, The Boeing Company PAC, The Home Depot PAC, Zions Bancorporation PAC, Gershon Barnett, Utahns for Balanced Government and Beacon Metals. Includes who runs each PAC, the $100,000 the committee returned to the Bankers Association, and Zions Bancorporation PAC giving the Utah Democratic Party four times what it gave the Republican Party.",
+    url: "everythingelse.html",
+    total: 2335011,
+    totalPlus: true,
+    date: "2026-09-10",
+    updated: "2026-09-30",
+    tags: [
+      "Larry H. Miller Company", "Utah Bankers Association", "Utah Metal Works",
+      "Utah Chamber PAC", "Tourism Works PAC", "Boeing PAC", "Home Depot PAC", "Zions Bancorporation PAC", "Gershon Barnett",
+      "Utahns for Balanced Government", "Marty Carpenter", "Beacon Metals", "Spencer Cox", "campaign finance",
+      "donor ledger"
+    ]
+  },
+  {
+    tag: "Case 10",
+    title: "Tech Money",
+    dek: "The tech sector's slice of the donor ledger — telecom, semiconductors, national tech PACs, and Utah's own tech-industry groups, with who runs each committee.",
+    summary: "Meta's Forge the Future Project ($251,446 spent on two candidates in a single day), Lumen Technologies, Micron Technology, Dell Technologies PAC, Utah Tech PAC, and the Silicon Slopes Commons → Slopes PAC → Utah Tech Leads chain. Updated 9/30/26: Lumen, Micron and Dell are now complete, and Utah Tech PAC's 2017-2018 activity is confirmed from its own exports.",
+    url: "tech.html",
+    total: 650510,
+    totalPlus: true,
+    date: "2026-09-10",
+    updated: "2026-09-30",
+    tags: [
+      "Meta", "Forge the Future Project", "Lumen Technologies", "Micron Technology",
+      "IM Flash Technologies", "Dell Technologies PAC", "Silicon Slopes Commons",
+      "Slopes PAC", "Utah Tech Leads", "Utah Tech PAC", "Tami Tran", "Logan Monson",
+      "Spencer Cox", "campaign finance", "donor ledger"
+    ]
+  },
+  {
+    tag: "Case 11",
+    title: "Money By Industry",
+    dek: "The full donor ledger, split by industry — Real Estate, Energy, Everything Else, and Tech, each its own page.",
+    summary: "An index tying together every industry-specific donor ledger page built so far — 38 donors and PACs researched and organized by sector, with a running total for each industry. Numbers are marked as a floor, not a final count, since most entities are still partially researched.",
+    url: "industries.html",
+    total: 15420927,
+    totalPlus: true,
+    date: "2026-09-10",
+    updated: "2026-09-30",
+    tags: [
+      "Real Estate", "Energy", "Everything Else", "Tech", "campaign finance",
+      "donor ledger"
+    ]
+  },
+  {
+    tag: "Case 12",
+    title: "Deidre Henderson — Money In, Money Out",
+    dek: "Every contribution to and payment from Lt. Gov. Deidre Henderson's campaign committee, 2020-2025, from its own state filings.",
+    summary: "$123,546 in new contributions (plus a $47,234.25 balance carried over from her earlier Senate committee) and $111,032.50 spent across six report periods. Her largest contributor is Friends of Spencer Cox ($20,000), followed by Gershon Barnett ($10,000), Chevron ($8,000) and PacifiCorp ($7,500). Payments include $5,000 to her own chief of staff.",
+    url: "deidre-henderson.html",
+    total: 123546,
+    date: "2026-09-03",
+    updated: "2026-09-30",
+    tags: ["Deidre Henderson", "Lieutenant Governor", "Spencer Cox", "Gershon Barnett", "Chevron", "PacifiCorp", "Dan Hemmert", "campaign finance"]
+  },
+  {
+    tag: "Case 13",
+    title: "How the Money Shifted, 2018–2026",
+    dek: "Four industries, the same donors every year: which kinds of political money grew, how the even-year/odd-year election calendar shows up, who runs the PACs, and the lobbyists connected to the money.",
+    summary: "Comparing 2018–19 with 2024–25: real estate about 1.7 times as much, energy about 2 times, tech about 2.2 times, and everything else about 3.5 times. RPAC gives more in legislative years and the Salt Lake Board of Realtors more in city-election years. Includes PAC officers, lobbyist-client connections (KKOS, HEMMCO, Lincoln Hill Partners, Sage Government Solutions) and the share of each industry's money that went to Gov. Spencer Cox.",
+    url: "money-shift.html",
+    date: "2026-10-03",
+    updated: "2026-10-03",
+    tags: ["RPAC", "Salt Lake Board of Realtors", "NWAOR", "PacifiCorp", "Lumen Technologies", "Micron Technology", "Utah Bankers Association", "Gershon Barnett", "Larry H. Miller Company", "Mike Ostermiller", "Chris Kyler", "Dan Hemmert", "Casey Hill", "Lincoln Shurtz", "Spencer Cox", "lobbyists", "election cycles", "campaign finance", "donor ledger"]
+  },
+  {
+    tag: "Case 14",
+    title: "Energy Overlap, PAC Officers and Confirmed Oil Money",
+    dek: "Who runs the PACs on The Ledger, which legislators took money from up to 8 of 9 energy and petroleum sources, and every traced Big West Oil and rPlus Energies contribution.",
+    summary: "Kyle Palmer holds treasurer or CFO roles at five of the six PACs on the page; Sen. Mike McKell drew from 8 of 9 energy and petroleum sources ($18,900); Gov. Cox's combined total from all 9 is $387,016.98; Big West Oil gave $80,120 (2023–2026); Irish Elk LLC corrected to $580,807.55. Updated Oct. 19, 2026 with filings since August: $107,375.10 more to Irish Elk LLC and $39,600 more in energy and petroleum money.",
+    url: "ledger-energy-overlap-pac-officers.html",
+    total: 387016.98,
+    totalPlus: false,
+    date: "2026-10-19",
+    updated: "2026-10-19",
+    tags: [
+      "Kyle Palmer", "Irish Elk LLC", "Mike McKell", "Spencer Cox", "Big West Oil",
+      "rPlus Energies", "Utah Petroleum Association PAC", "UHREC", "URSCC", "campaign finance"
+    ]
+  }
 ];
-const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-function bee(color, id){
-  return `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <polygon points="50,4 92,27 92,73 50,96 8,73 8,27" fill="${color}" stroke="#1a1508" stroke-width="2.5"/>
-    <g transform="translate(50,56)">
-      <ellipse cx="-12" cy="-13" rx="9.5" ry="13.5" fill="rgba(255,255,255,0.55)" stroke="#1a1508" stroke-width="1" transform="rotate(-18 -12 -13)"/>
-      <ellipse cx="12" cy="-13" rx="9.5" ry="13.5" fill="rgba(255,255,255,0.55)" stroke="#1a1508" stroke-width="1" transform="rotate(18 12 -13)"/>
-      <defs><clipPath id="beeBody${id}"><ellipse cx="0" cy="4" rx="12.5" ry="15"/></clipPath></defs>
-      <ellipse cx="0" cy="4" rx="12.5" ry="15" fill="#f2c94c" stroke="#1a1508" stroke-width="1.6"/>
-      <g clip-path="url(#beeBody${id})">
-        <rect x="-14" y="-5" width="28" height="3.7" fill="#1a1508"/>
-        <rect x="-14" y="2.6" width="28" height="3.7" fill="#1a1508"/>
-        <rect x="-14" y="10.2" width="28" height="3.7" fill="#1a1508"/>
-      </g>
-      <ellipse cx="0" cy="4" rx="12.5" ry="15" fill="none" stroke="#1a1508" stroke-width="1.6"/>
-      <circle cx="0" cy="-14" r="6.6" fill="#1a1508"/>
-    </g>
-  </svg>`;
-}
-
-// Latest strip
-const latestGrid = document.getElementById('latest-grid');
-const latestCards = (typeof LATEST !== 'undefined' ? LATEST : []).map(e => {
-  const a = document.createElement('a');
-  a.className = 'latest-card';
-  a.href = e.url;
-  a.innerHTML = `<div class="lc-meta">${esc(e.project)} · ${esc(e.date)}</div>
-    <div class="lc-title">${esc(e.title)}</div>
-    <div class="lc-go">Read the case file →</div>`;
-  a.dataset.hay = [e.title, e.project, ...(e.tags||[])].join(' ').toLowerCase();
-  latestGrid.appendChild(a);
-  return a;
-});
-if (!latestCards.length) document.getElementById('latest').style.display = 'none';
-
-// Shelves
-const shelvesEl = document.getElementById('shelves');
-const repoCards = [];
-const shelfEls = [];
-SHELVES.forEach(sh => {
-  const items = REPOS.filter(r => (r.group || 'oversight') === sh.key);
-  if (!items.length) return;
-  const sec = document.createElement('section');
-  sec.className = 'shelf';
-  sec.innerHTML = `<div class="shelf-head"><h2>${sh.title}</h2><span class="shelf-note">${sh.note}</span></div><div class="comb"></div>`;
-  const grid = sec.querySelector('.comb');
-  items.forEach(r => {
-    const i = repoCards.length;
-    const card = document.createElement('a');
-    card.className = 'card';
-    card.href = r.url;
-    card.innerHTML = `
-      <div class="card-top"><div class="card-badge">${bee(r.color, i)}</div><h3>${esc(r.title)}</h3></div>
-      <p>${esc(r.desc)}</p>
-      <span class="card-link">Open project →</span>`;
-    card.dataset.hay = [r.title, r.desc].join(' ').toLowerCase();
-    grid.appendChild(card);
-    repoCards.push(card);
-  });
-  shelvesEl.appendChild(sec);
-  shelfEls.push(sec);
-});
-
-// Search
-const input = document.getElementById('hive-search');
-const countEl = document.getElementById('search-count');
-function runSearch(){
-  const q = input.value.trim().toLowerCase();
-  let shown = 0;
-  [...latestCards, ...repoCards].forEach(c => {
-    const hit = !q || c.dataset.hay.includes(q);
-    c.style.display = hit ? '' : 'none';
-    if (hit) shown++;
-  });
-  shelfEls.forEach(s => {
-    s.style.display = [...s.querySelectorAll('.card')].some(c => c.style.display !== 'none') ? '' : 'none';
-  });
-  const latestVisible = latestCards.some(c => c.style.display !== 'none');
-  document.getElementById('latest').style.display = latestVisible ? '' : 'none';
-  document.getElementById('no-results').style.display = shown ? 'none' : 'block';
-  countEl.textContent = q ? shown + ' match' + (shown === 1 ? '' : 'es') : (REPOS.length + ' projects');
-}
-input.addEventListener('input', runSearch);
-runSearch();
 </script>
-<script data-goatcounter="https://weberhive.goatcounter.com/count"
-        async src="//gc.zgo.at/count.js"></script>
+<script>
+const grid = document.getElementById('ledger-grid');
+const tagSelect = document.getElementById('tag-select');
+const searchInput = document.getElementById('search-input');
+const sortSelect = document.getElementById('sort-select');
+const resultsCount = document.getElementById('results-count');
+
+// Build the full tag set across all entries (entries without tags simply contribute none)
+const allTags = Array.from(new Set(
+  LEDGER_ENTRIES.flatMap(e => e.tags || [])
+)).sort();
+
+function renderTagSelect() {
+  allTags.forEach(tag => {
+    const opt = document.createElement('option');
+    opt.value = tag;
+    opt.textContent = tag;
+    tagSelect.appendChild(opt);
+  });
+}
+
+function formatDate(d) {
+  if (!d) return '';
+  const dt = new Date(d + 'T00:00:00');
+  if (isNaN(dt)) return d;
+  return dt.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+}
+
+function matchesSearch(entry, q) {
+  if (!q) return true;
+  const hay = [entry.title, entry.dek, entry.summary, ...(entry.tags || [])]
+    .join(' ')
+    .toLowerCase();
+  return hay.includes(q);
+}
+
+function sortEntries(list) {
+  const mode = sortSelect.value;
+  // "Newest"/"oldest" sort by whichever is more recent for that entry —
+  // its update date if it has one, otherwise its original publish date.
+  const effectiveDate = e => e.updated || e.date;
+  const withDate = list.filter(e => effectiveDate(e));
+  const withoutDate = list.filter(e => !effectiveDate(e));
+  if (mode === 'title') {
+    return [...list].sort((a, b) => a.title.localeCompare(b.title));
+  }
+  withDate.sort((a, b) => mode === 'oldest'
+    ? new Date(effectiveDate(a)) - new Date(effectiveDate(b))
+    : new Date(effectiveDate(b)) - new Date(effectiveDate(a)));
+  // Undated entries (older pieces published before dates were tracked) sort to the end
+  return [...withDate, ...withoutDate];
+}
+
+function renderGrid() {
+  const q = searchInput.value.trim().toLowerCase();
+  let filtered = LEDGER_ENTRIES.filter(e => matchesSearch(e, q));
+  const activeTag = tagSelect.value;
+  if (activeTag) {
+    filtered = filtered.filter(e => (e.tags || []).includes(activeTag));
+  }
+  filtered = sortEntries(filtered);
+
+  grid.innerHTML = '';
+  filtered.forEach(e => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    const tagsHtml = (e.tags || []).slice(0, 8).map(t => `<span>${t}</span>`).join('');
+    card.innerHTML = `
+      <div class="card-top-row">
+        <span class="case-tag">${e.tag}</span>
+        <div class="card-dates">
+          ${e.date ? `<span class="card-date">Published ${formatDate(e.date)}</span>` : ''}
+          ${e.updated ? `<span class="card-updated">↻ Updated ${formatDate(e.updated)}</span>` : ''}
+        </div>
+      </div>
+      <h2>${e.title}</h2>
+      <div class="dek">${e.dek}</div>
+      ${e.total ? `<div class="card-total">$${e.total.toLocaleString()}${e.totalPlus ? '<span class="ct-plus">+</span>' : ''}<span class="ct-label">documented</span></div>` : ''}
+      <p class="summary">${e.summary}</p>
+      ${tagsHtml ? `<div class="card-tags">${tagsHtml}</div>` : ''}
+      <a class="open-link" href="${e.url}">Open the visualization →</a>
+    `;
+    grid.appendChild(card);
+  });
+
+  resultsCount.textContent = `${filtered.length} of ${LEDGER_ENTRIES.length} piece${LEDGER_ENTRIES.length === 1 ? '' : 's'} shown`;
+
+  if (LEDGER_ENTRIES.length < 3 && filtered.length === LEDGER_ENTRIES.length) {
+    const ph = document.createElement('div');
+    ph.className = 'placeholder';
+    ph.textContent = 'More money-flow pieces will be added here as they\'re published.';
+    grid.appendChild(ph);
+  } else if (filtered.length === 0) {
+    const ph = document.createElement('div');
+    ph.className = 'placeholder';
+    ph.textContent = 'No pieces match that search or tag. Try clearing the filter.';
+    grid.appendChild(ph);
+  }
+}
+
+searchInput.addEventListener('input', renderGrid);
+sortSelect.addEventListener('change', renderGrid);
+tagSelect.addEventListener('change', renderGrid);
+
+renderTagSelect();
+renderGrid();
+</script>
+<script data-goatcounter="https://weberhive.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
