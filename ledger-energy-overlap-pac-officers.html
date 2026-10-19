@@ -1,0 +1,520 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Energy Overlap, PAC Officers and Confirmed Oil Money | The Ledger | The Weber County Hive</title>
+<meta name="description" content="Who runs the PACs in The Ledger, which legislators took money from up to 8 of 9 energy and petroleum sources, and confirmed Big West Oil and rPlus Energies contributions, from disclosures.utah.gov.">
+<!--BIGSCRIPT-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0B1220;
+    --ink-soft:#3E4A5E;
+    --paper:#F3F4F0;
+    --panel:#FFFFFF;
+    --line:#DBDDD6;
+    --verified:#1F6F5C;
+    --verified-bg:#E4F0EC;
+    --lead:#B4791F;
+    --lead-bg:#FBF0DD;
+    --flag:#9C3B33;
+    --flag-bg:#F7E7E4;
+    --display: "Newsreader", serif;
+    --body: "Inter", sans-serif;
+    --mono: "IBM Plex Mono", monospace;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);-webkit-font-smoothing:antialiased}
+  ::selection{background:var(--lead-bg)}
+
+  a{color:inherit}
+
+  /* ===== Masthead ===== */
+  header.mast{
+    background:var(--ink);color:#EDEFEA;padding:44px 5vw 30px;
+    border-bottom:3px solid var(--lead);
+  }
+  .eyebrow{
+    font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    color:#B9C2CE;display:flex;gap:18px;align-items:center;flex-wrap:wrap;margin-bottom:14px;
+  }
+  .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--lead);display:inline-block}
+  h1.title{
+    font-family:var(--display);font-weight:500;font-style:italic;
+    font-size:clamp(30px,4.2vw,52px);line-height:1.05;margin:0 0 10px;color:#fff;
+    max-width:16ch;
+  }
+  .dek{
+    font-size:15px;color:#C7CEDA;max-width:62ch;line-height:1.55;margin:0;
+  }
+  .dek b{color:#fff;font-weight:600}
+
+  /* ===== Layout scaffolding ===== */
+  .wrap{padding:34px 5vw 80px;max-width:1400px;margin:0 auto}
+  section{margin-bottom:46px}
+  .section-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:14px;flex-wrap:wrap}
+  h2.sec{
+    font-family:var(--display);font-style:italic;font-weight:500;font-size:24px;margin:0;
+    display:flex;align-items:baseline;gap:10px;
+  }
+  h2.sec .no{font-family:var(--mono);font-style:normal;font-size:12px;color:var(--ink-soft);border:1px solid var(--line);padding:2px 7px;border-radius:3px}
+  p.lede{color:var(--ink-soft);font-size:14px;max-width:70ch;line-height:1.6;margin:6px 0 0}
+
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:2px}
+
+  /* ===== KPI ledger strip ===== */
+  .kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+  .kpi{background:var(--panel);padding:20px 22px}
+  .kpi .label{font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-soft)}
+  .kpi .val{font-family:var(--mono);font-weight:600;font-size:27px;margin-top:6px;color:var(--ink)}
+  .kpi .val.flag{color:var(--flag)}
+  .kpi .sub{font-size:11.5px;color:var(--ink-soft);margin-top:4px}
+
+  .caution{
+    background:var(--lead-bg);border-left:3px solid var(--lead);padding:14px 18px;
+    font-size:13px;line-height:1.6;color:#5C4213;margin-top:18px;
+  }
+  .caution b{color:#40300D}
+
+  /* ===== Sankey hero ===== */
+  .sankey-panel{padding:6px 10px 10px;overflow-x:auto}
+  #sankey{width:100%;min-width:980px;height:820px}
+  .sankey-controls{display:flex;gap:10px;flex-wrap:wrap;padding:14px 18px 4px;font-family:var(--mono);font-size:12px}
+  .sankey-controls button{
+    font-family:var(--mono);font-size:11.5px;letter-spacing:.02em;
+    background:var(--panel);border:1px solid var(--line);color:var(--ink-soft);
+    padding:6px 12px;border-radius:3px;cursor:pointer;transition:.15s;
+  }
+  .sankey-controls button:hover{border-color:var(--ink-soft);color:var(--ink)}
+  .sankey-controls button.active{background:var(--ink);color:#fff;border-color:var(--ink)}
+
+  .who-runs{padding:18px 22px;margin-top:18px}
+  .who-runs-title{font-family:var(--display);font-style:italic;font-weight:500;font-size:19px;margin-bottom:2px}
+  .who-runs-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line)}
+  .who-runs-card{background:var(--panel);padding:14px 16px}
+  .wr-pac{font-family:var(--mono);font-size:11.5px;font-weight:600;text-transform:uppercase;letter-spacing:.03em;color:var(--lead);margin-bottom:6px}
+  .wr-officers{font-size:13px;line-height:1.55;color:var(--ink)}
+  .wr-officers.wr-unconfirmed{color:var(--ink-soft);font-style:italic}
+  @media (max-width:700px){.who-runs-grid{grid-template-columns:1fr}}
+
+  /* ===== two-col bars ===== */
+  .cols2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .barpanel{padding:16px 18px 8px;overflow-x:auto}
+  .barpanel h3{font-family:var(--body);font-weight:600;font-size:13px;text-transform:uppercase;letter-spacing:.04em;margin:0 0 4px;color:var(--ink-soft)}
+  .barplot{height:420px;min-width:540px}
+
+  @media (max-width:860px){
+    .cols2{grid-template-columns:1fr}
+    .kpi-row{grid-template-columns:1fr 1fr}
+  }
+
+  /* ===== chains ledger ===== */
+  .filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px;align-items:center}
+  .filters input[type=search]{
+    font-family:var(--mono);font-size:12.5px;padding:8px 12px;border:1px solid var(--line);
+    border-radius:3px;background:var(--panel);width:240px;color:var(--ink);
+  }
+  .filters select{
+    font-family:var(--mono);font-size:12.5px;padding:8px 10px;border:1px solid var(--line);
+    border-radius:3px;background:var(--panel);color:var(--ink);
+  }
+  .filters .count{font-family:var(--mono);font-size:11.5px;color:var(--ink-soft);margin-left:auto}
+
+  table.ledger{width:100%;min-width:760px;border-collapse:collapse;font-size:13px}
+  table.ledger thead th{
+    text-align:left;font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;
+    color:var(--ink-soft);border-bottom:2px solid var(--ink);padding:10px 12px;background:var(--panel);
+    position:sticky;top:0;
+  }
+  table.ledger td{padding:11px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  table.ledger tbody tr:hover{background:#FAFAF7}
+  .amt{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+  .arrow{color:var(--ink-soft);padding:0 4px;font-family:var(--mono)}
+  .stamp{
+    display:inline-block;font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.05em;
+    text-transform:uppercase;padding:3px 8px;border-radius:2px;border:1px solid var(--lead);
+    color:var(--lead);background:var(--lead-bg);white-space:nowrap;
+  }
+  .table-scroll{max-height:640px;overflow:auto;border:1px solid var(--line)}
+  table.ledger thead{background:var(--panel)}
+
+  /* ===== energy overlap ===== */
+  #energybar{height:520px}
+  .tier5{background:#D9EAD3}
+  .tier4{background:#D9EAD3}
+  .tier3{background:#FBF0DD}
+  .tier2{background:#CFE2F3}
+  table.ledger td.tiercell{font-family:var(--mono);text-align:right}
+  .tier-header{font-family:var(--mono);font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-soft);background:#ECEDE8;padding:8px 12px;border-bottom:2px solid var(--ink)}
+  .recipient-name{cursor:pointer;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px;color:var(--ink)}
+  .recipient-name:hover{color:var(--lead)}
+  .company-detail-row td{padding:0;border-bottom:1px solid var(--line)}
+  .company-detail{display:none;padding:12px 16px;background:#FBFAF7}
+  .company-detail.open{display:block}
+  .company-pill{display:inline-flex;align-items:center;gap:6px;background:#fff;border:1px solid var(--line);border-radius:20px;padding:5px 12px;margin:3px 6px 3px 0;font-family:var(--mono);font-size:12px}
+  .company-pill b{color:var(--verified)}
+  .expand-arrow{display:inline-block;transition:transform .15s;font-size:10px;margin-left:6px;color:var(--ink-soft)}
+  .expand-arrow.open{transform:rotate(90deg)}
+
+  footer{
+    border-top:1px solid var(--line);padding:26px 5vw 60px;font-family:var(--mono);
+    font-size:11.5px;color:var(--ink-soft);max-width:1400px;margin:0 auto;
+  }
+  footer a{text-decoration:underline}
+</style>
+<style>.cbar{display:grid;grid-template-columns:minmax(120px,38%) 1fr auto;gap:8px;align-items:center;margin:6px 0;font-size:13px}.cbar-l{overflow-wrap:anywhere}.cbar-t{background:#EEF0EA;border-radius:3px;height:14px}.cbar-f{height:14px;border-radius:3px}.cbar-v{font-family:"IBM Plex Mono",monospace;font-size:12px;white-space:nowrap}@media(max-width:600px){.cbar{grid-template-columns:1fr auto}.cbar-t{grid-column:1/-1}}.barplot{height:auto!important;min-width:0!important}@media(max-width:700px){table.ledger{min-width:0!important;font-size:12.5px}.panel{overflow-x:auto}}</style></head>
+<body>
+<header class="mast"><div class="eyebrow"><span class="dot"></span>THE WEBER COUNTY HIVE — MONEY FLOW LEDGER</div><h1 class="title">Energy Overlap, PAC Officers and Confirmed Oil Money</h1><p class="dek">Who runs the PACs in The Ledger, which legislators took money from up to 8 of 9 energy and petroleum sources, and every traced Big West Oil and rPlus Energies contribution.</p><p class="dek" style="font-size:14px">Posted Oct. 19, 2026 · Figures as of Aug. 12–13, 2026 · <a href="ledger.html" style="color:inherit">Back to The Ledger</a></p></header>
+<div class="wrap">
+<div class="caution"><b>Where this page came from.</b> These sections were part of an August 2026 update to <a href="ledger.html">The Ledger</a> that was saved in the wrong place and never published on the main page. They are published here as their own page, unchanged in their figures, so nothing is lost. All figures are a snapshot as of Aug. 12–13, 2026, from disclosures.utah.gov. The main Ledger page and its money-flow chart are unchanged.</div><section id="officers"><div class="section-head"><h2 class="sec"><span class="no">01</span>Who runs these PACs</h2></div><div class="panel who-runs">
+      
+      <p style="font-size:12.5px;color:var(--ink-soft);margin:4px 0 14px">Names below come directly from each committee's own registration or campaign-finance filing — not inferred. Where we don't have a confirmed officer on file, it's marked as such rather than guessed.</p>
+      <div class="who-runs-grid">
+        <div class="who-runs-card">
+          <div class="wr-pac">Utah House Republican Election Committee (UHREC)</div>
+          <div class="wr-officers"><b>Mike Schultz</b> (Speaker) and <b>Casey Snider</b> (Majority Leader) — Primary Officers. <b>Candice Pierucci</b> (Majority Whip) — Officer. <b>Kyle Palmer</b> — CFO/Treasurer AND Director, sole signature authority over disbursements.</div>
+        </div>
+        <div class="who-runs-card">
+          <div class="wr-pac">House Speaker Leadership PAC</div>
+          <div class="wr-officers"><b>Mike Schultz</b> — Director. <b>Kyle Palmer</b> (Irish Elk LLC) — paid administration/fundraising consultant, same role he holds at NUPAC and Utah House Republican Election Committee.</div>
+        </div>
+        <div class="who-runs-card">
+          <div class="wr-pac">Adams Leadership PAC</div>
+          <div class="wr-officers">Named for and controlled by <b>Sen. J. Stuart Adams</b> (Senate President), Primary Officer. <b>Kyle Palmer</b> — also a listed Primary Officer AND Chief Financial Officer/Treasurer, same dual role he holds across multiple other PACs in this network.</div>
+        </div>
+        <div class="who-runs-card">
+          <div class="wr-pac">Utah Republican Senate Campaign Committee (URSCC)</div>
+          <div class="wr-officers"><b>Sen. J. Stuart Adams</b> (Senate President) and <b>Sen. Kirk Cullimore</b> — Primary Officers. <b>Kyle Palmer</b> — CFO/Treasurer, same role he holds at other PACs on this page. Represents "Members of the Utah Senate Republican Caucus." Irish Elk LLC (Palmer's firm) is URSCC's single largest expenditure recipient — $326,282.55 since 2022.</div>
+        </div>
+        <div class="who-runs-card" style="background:#FBF0DD;grid-column:1/-1">
+          <div class="wr-pac" style="color:var(--flag)">The pattern across all six</div>
+          <div class="wr-officers">Kyle Palmer holds Treasurer and/or CFO authority over <b>five of the six PACs on this page</b> — UHREC, House Speaker Leadership PAC, Adams Leadership PAC, URSCC, and NUPAC. He's also Director of two of them. The one PAC he's not an officer of, Utah Petroleum Association PAC, is instead run directly by Chevron's and Marathon Petroleum's own government-affairs executives.</div>
+        </div>
+        <div class="who-runs-card">
+          <div class="wr-pac">Utah Petroleum Association PAC</div>
+          <div class="wr-officers"><b>Chairman Brad Shafer</b> — Sr. Manager Government &amp; Public Relations, <b>Marathon Petroleum</b>. <b>Vice Chairman Chad Calvert</b> — General Manager Government Affairs, <b>Chevron</b>. Secretary/Treasurer <b>Rikki Hrenko-Browning</b> — President of the Utah Petroleum Association itself. The board is staffed directly by two major oil companies' own government-affairs executives.</div>
+        </div>
+        <div class="who-runs-card">
+          <div class="wr-pac">Northern Utah Legislative PAC (NUPAC)</div>
+          <div class="wr-officers"><b>Sen. F. Ann Millner</b> and <b>Rep. Casey Snider</b> — Primary Officers. <b>Kyle Palmer</b> — Treasurer/CFO (Irish Elk LLC).</div>
+        </div>
+      </div>
+    </div>
+  </section><section id="energy">
+    <div class="section-head">
+      <h2 class="sec"><span class="no">02</span>Energy &amp; petroleum recipient overlap</h2>
+    </div>
+    <p class="lede">Everyone who received energy-or-petroleum-sourced money across the combined dataset, ranked by total. Gov. Cox leads by a wide margin.</p>
+    <div class="panel barpanel">
+      <div id="energybar" class="barplot"></div>
+    </div>
+
+    <p class="lede" style="margin-top:24px">Recipient overlap across all 9 tracked sources: PacifiCorp, Chevron, EnergySolutions, Torus, Dominion, Utah Petroleum Association, Utah Petroleum Marketers &amp; Retailers, Big West Oil, and rPlus Energies (the Green River Energy Center battery/solar company). Anyone funded by 2 or more, tapable for the exact per-source split.</p>
+    <div class="panel" style="padding:16px 20px;margin-bottom:16px;font-size:12.5px;color:var(--ink-soft)">
+      <b style="color:var(--ink)">Mike McKell is funded by 8 of the 9 sources</b> — the highest overlap of anyone tracked, $18,900 combined. Wayne Harper, Todd Weiler, and Colin Jack each hit 7 of 9. Gov. Cox's combined total across all 9 is $387,016.98.
+    </div>
+
+    <div class="panel" style="overflow-x:auto">
+      <table class="ledger" id="tierTable">
+        <thead>
+          <tr>
+            <th>Recipient <span style="font-weight:400;text-transform:none;font-size:10px">(tap a name to see which companies gave)</span></th>
+            <th style="text-align:center"># Cos.</th>
+            <th style="text-align:right">TOTAL</th>
+          </tr>
+        </thead>
+        <tbody id="tierBody"></tbody>
+      </table>
+    </div>
+  </section><section id="confirmed">
+    <div class="section-head">
+      <h2 class="sec"><span class="no">03</span>Confirmed direct contributions — Big West Oil &amp; rPlus Energies</h2>
+      <span class="stamp" style="border-color:#1F6F5C;color:#1F6F5C;background:#E4F0EC">confirmed — direct disclosure data</span>
+    </div>
+    <p class="lede">Unlike the candidate chains on the <a href="ledger.html">main Ledger page</a>, every figure here is a <b>traced, confirmed transaction</b> pulled directly from disclosures.utah.gov for these two companies specifically — not a combinatorial pairing. This data was researched separately from the original four source files and is <b>not</b> included in the KPI totals at the top of this page.</p>
+
+    <div class="cols2">
+      <div class="panel barpanel">
+        <h3>Big West Oil — where the money went (2023-2026, $80,120 total)</h3>
+        <div class="barplot" id="bigWestChart"></div>
+      </div>
+      <div class="panel barpanel">
+        <h3>rPlus Energies LLC — 2026 recipients ($4,600 total)</h3>
+        <div class="barplot" id="rplusChart"></div>
+      </div>
+    </div>
+
+    <div class="panel" style="padding:20px 24px;margin-top:18px;font-size:13.5px;line-height:1.7;color:var(--ink-soft)">
+      <p><b style="color:var(--ink)">Big West Oil</b> — a North Salt Lake refinery (333 W Center Street). Four straight years of giving to Gov. Spencer Cox, landing on an identical $7,500/year amount for 2024-2026. Adams Leadership PAC ($1,000/year, 2023-2025) and J. Stuart Adams personally ($1,000/year, 2025-2026) both show the same repeating-amount pattern. Almost no giving to individual rank-and-file legislators after 2023 — a genuinely different strategy from the blanket small-check approach used by Utah Petroleum Association PAC.</p>
+      <p><b style="color:var(--ink)">rPlus Energies LLC</b> — developer/owner of the Green River Energy Center, an 800MW solar-plus-battery-storage project in Emery County (~$1.1B in construction financing). Gave $800-$1,000 each to five legislators within a five-week window in mid-2026: Derrin Owens, Colin Jack, Todd Weiler, Wayne Harper, and Mike McKell — all five already appear elsewhere in this investigation's other files.</p>
+    </div>
+  </section><section id="fullranking">
+    <div class="section-head">
+      <h2 class="sec"><span class="no">04</span>Full recipient ranking — most to least</h2>
+    </div>
+    <p class="lede">Every recipient found across every dataset on this page, ranked highest to lowest. Search by name. Where the same person or committee appears in more than one dataset, each is shown as its own row rather than silently combined — check the Source column.</p>
+    <div class="filters">
+      <input type="search" id="rankSearchBox" placeholder="Search a name…">
+      <select id="rankSourceFilter"><option value="">All sources</option></select>
+      <span class="count" id="rankResultCount"></span>
+    </div>
+    <div class="table-scroll">
+      <table class="ledger" id="rankTable">
+        <thead>
+          <tr>
+            <th style="width:50px">#</th>
+            <th>Name</th>
+            <th style="text-align:right">Total Received</th>
+            <th>Source</th>
+          </tr>
+        </thead>
+        <tbody id="rankBody"></tbody>
+      </table>
+    </div>
+  </section><section id="sourcing"><div class="section-head"><h2 class="sec"><span class="no">05</span>Sourcing, corrections and research status</h2></div><div class="panel" style="padding:20px 24px;font-size:13.5px;line-height:1.7;color:var(--ink-soft)"><p><b style="color:var(--ink)">Primary source:</b> Utah Lieutenant Governor's Office campaign finance disclosure database, <a href="https://disclosures.utah.gov" target="_blank">disclosures.utah.gov</a>. All figures are itemized contributions and expenditures pulled directly from that system — via its Advanced Search "Download Data by Year" tool and via DEX CSV exports per committee — across multiple research sessions.</p><p><b style="color:var(--ink)">Coverage:</b> spans 2020–2026 depending on the entity; coverage year-by-year varies by filer and is noted per entity in the underlying research files. Several years are confirmed partial (multi-page disclosures.utah.gov results where not every page was captured) — every total on this page is a floor, not a certified complete-year figure, until reconciled against the full filing.</p><p><b style="color:var(--ink)">Known data-cleaning step:</b> "Energy Solutions" and "EnergySolutions" — two spellings for the same company appearing inconsistently across filings — have been merged into a single entity here. The Larry H. Miller Company donor-side spelling variants have also been merged. Additional confirmed data for Big West Oil and rPlus Energies LLC (Section 03 below) come from a separate, independently-researched dataset and are not included in the totals on the main Ledger page.</p><p><b style="color:var(--ink)">Correction, 8/13/26:</b> Irish Elk LLC's total (Kyle Palmer, the recurring PAC-administration/fundraising vendor) was undercounted at $400,732.55 — that figure only combined his UHREC ($74,450) and URSCC ($326,282.55) payments. Cross-checking against the Operation Gigawatt research tracker confirms two more PACs paying him: Adams Leadership PAC (~$114,100, approximate — not yet itemized to the cent) and House Speaker Leadership PAC ($65,975). Corrected total across all four: <b>$580,807.55</b>.</p><p><b style="color:var(--ink)">Excluded from totals:</b> transactions coded <span class="amt">[DELETED]</span> in the source filings — amount zeroed to $0.00 with no date preserved by the filer — are excluded here. Their existence (in some committees' filings, dozens per year, every year) is itself documented separately and is not reflected in any dollar figure on this page.</p></div><div class="panel" style="padding:20px 24px;margin-top:16px">
+      <h3 style="font-family:var(--body);font-weight:600;font-size:13px;text-transform:uppercase;letter-spacing:.04em;margin:0 0 14px;color:var(--ink-soft)">Research status as of Aug. 12, 2026 (Operation Gigawatt tracker)</h3>
+      <table class="ledger" style="font-size:12.5px">
+        <thead><tr><th>Item</th><th style="text-align:center">Status</th><th>Note</th></tr></thead>
+        <tbody>
+          <tr class="tier4"><td>Adams Leadership PAC — payments to Irish Elk LLC (Kyle Palmer's firm)</td><td style="text-align:center">✅ Confirmed</td><td>$114,100 over 3 years, already in master PAC tracker</td></tr>
+          <tr class="tier4"><td>House Speaker Leadership PAC — payments to Irish Elk LLC (Kyle Palmer's firm)</td><td style="text-align:center">✅ Confirmed</td><td>$65,975, 2025-2026</td></tr>
+          <tr class="tier4"><td>URSCC — full donor/expenditure ledger</td><td style="text-align:center">✅ Confirmed</td><td>$2.45M raised / $2.23M spent 2022-2026; Irish Elk is largest single recipient</td></tr>
+          <tr class="tier4"><td>Torus → Cox</td><td style="text-align:center">✅ Confirmed</td><td>$150,000 (3 checks × $50,000), exact match to Utah Political Watch reporting</td></tr>
+          <tr class="tier3"><td>UHREC — full itemized ledger</td><td style="text-align:center">⚠ Partial</td><td>Best remaining gap of the original four PACs — no complete itemized pull yet</td></tr>
+          <tr class="tier3"><td>PacifiCorp — full giving beyond Cox</td><td style="text-align:center">⚠ Needs verification</td><td>Cox portion confirmed ($62,500); the broader $201,500 total figure still open, 2020-2021 not yet pulled</td></tr>
+          <tr class="tier3"><td>Chevron — full itemized breakdown</td><td style="text-align:center">⚠ Needs verification</td><td>Only a bare $32,750 total exists; thinnest data of the four named donor companies</td></tr>
+          <tr class="tier2"><td>Gov. Cox — dedicated campaign-finance file</td><td style="text-align:center">☐ Not started</td><td>Highest-value recipient file that doesn't exist yet, despite being the center of this thread</td></tr>
+          <tr class="tier2"><td>5 additional unnamed summit sponsors</td><td style="text-align:center">☐ Not started</td><td>Utah Political Watch cited "at least nine" sponsors totaling $407K+; only 4 are named/detailed anywhere</td></tr>
+          <tr class="tier2"><td>Beehive Energy Alliance legislators — campaign finance</td><td style="text-align:center">☐ Not started</td><td>Balderree, Christofferson, Shephard, Shelly all have zero campaign-finance data pulled; Colin Jack has a partial first data point (PacifiCorp $500/yr, 2025-2026)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section><div class="panel" style="padding:14px 20px;margin-top:16px;font-size:13px;color:var(--ink-soft)"><b style="color:var(--ink)">Wording fixes, Oct. 19, 2026:</b> the officer summary first said Kyle Palmer had treasurer or CFO authority over "every single PAC on this page"; it lists five of the six (the sixth, the Utah Petroleum Association PAC, is run by Chevron and Marathon Petroleum executives). The research table first used the words "Irish Elk self-dealing"; it now describes the payments. No figures were changed.</div><section id="questions"><div class="section-head"><h2 class="sec"><span class="no">06</span>Questions to ask, and whom to ask</h2></div><div class="panel" style="padding:20px 24px;font-size:14px;line-height:1.7"><p><b>Your legislator's campaign:</b> which energy or petroleum companies on this page gave to the campaign, and did the legislator vote on bills affecting those companies?</p><p><b>The Lieutenant Governor's elections office (disclosures.utah.gov):</b> how can the public see every payment a PAC made to a vendor run by its own treasurer, in one place?</p><p><b>The PACs listed above:</b> who approves payments to a firm owned by the PAC's own treasurer or CFO?</p></div></section><section id="where-this-connects"><div class="section-head"><h2 class="sec"><span class="no">07</span>Where this connects</h2></div><div class="panel" style="padding:20px 24px;font-size:14px;line-height:1.8"><ul><li><a href="ledger.html">The Ledger: where the money moves</a> (the main money-flow chart and candidate chains)</li><li><a href="energy.html">Energy</a> (energy and utility donors)</li><li><a href="biggest-donors-flip.html">Biggest donors</a></li><li><a href="money-shift.html">The money shift</a></li><li><a href="https://weber-county-hive.github.io/Bill-Tracker/weber-hive-2026-hb575.html">H.B. 575 (2026), fuel tax and refinery data</a> on the Bill-Tracker</li><li><a href="https://weber-county-hive.github.io/-weber-county-hive-index/">Master index</a></li></ul></div></section><section id="sources"><div class="section-head"><h2 class="sec"><span class="no">08</span>Sources</h2></div><details class="panel" style="padding:16px 20px"><summary style="cursor:pointer;font-weight:600">Show sources</summary><ol style="line-height:1.8"><li>Utah Lieutenant Governor's Office campaign finance disclosures: <a href="https://disclosures.utah.gov">disclosures.utah.gov</a> (Advanced Search, "Download Data by Year," and DEX CSV exports per committee)</li><li>Committee registrations and officer filings on disclosures.utah.gov for UHREC, House Speaker Leadership PAC, Adams Leadership PAC, URSCC, Utah Petroleum Association PAC and NUPAC</li><li>Utah Political Watch reporting on Torus's $150,000 to Gov. Cox and the summit sponsors (cited in the Aug. 12, 2026 research tracker; link not in our files)</li></ol></details></section>
+</div>
+<footer>The Weber County Hive · The Ledger · Public records only · Posted Oct. 19, 2026 · Figures as of Aug. 12–13, 2026</footer>
+<script>
+const TOP_TO = {"Utah Republican Senate Campaign Committee": 2767279.39, "Utah House Republican Election Committee": 1686437.05, "TOTAL": 918373.74, "Irish Elk LLC": 580807.55, "Cox, Spencer": 324166.98, "Right Insight": 150447.42, "Utahns for Balanced Government": 150000.0, "Utah Petroleum Association PAC": 91850.0, "Wasatch Mountain State Park Golf Course": 89058.08, "Grand America Hotel": 88613.63, "Chris Coombs": 83634.16, "Utah Senate Third House": 77000.0, "Todd Weiler Election Committee": 62500.0, "Wayne Harper Election Committee": 62500.0, "Jill Koford Campaign": 60000.0, "Amazon": 58446.29, "Friends of Dan McCay": 55000.0, "Elect Brady Brammer": 55000.0, "Lincoln Fillmore Election Committee": 52500.0, "John Johnson Election Committee": 52500.0};
+const ENERGY_RECIPIENTS = {"TOTAL": 918373.74, "Cox, Spencer": 311041.98, "Utah House Republican Election Committee": 297250.0, "Utah Republican Senate Campaign Committee": 259500.0, "Utah Petroleum Association PAC": 91850.0, "House Speaker Leadership PAC": 41500.0, "Adams, J": 30500.0, "Adams Leadership PAC": 21500.0, "Bolinder, Bridger": 19550.0, "McKell, Mike": 16250.0, "Henderson, Deidre": 13500.0, "Brown, Derek": 10000.0, "Schultz, Mike": 8950.0, "Stevenson, Jerry": 8600.0, "Wilson Leadership PAC": 8000.0, "Governors Leadership PAC": 8000.0, "Sandall, Scott": 7950.0, "Albrecht, Carl": 7750.0, "Cullimore, Kirk": 7650.0, "Millner, Ann": 7000.0, "Fillmore, Lincoln": 6650.0, "McCay, Daniel": 6250.0, "Snider, Casey": 6150.0, "Wilson, Brad": 6000.0, "Bramble, Curtis": 5250.0};
+const fmt = n => "$" + Math.round(n).toLocaleString("en-US");
+function hbar(div, obj, color){
+  const entries = Object.entries(obj).filter(e=>e[0]!=="TOTAL").sort((a,b)=>b[1]-a[1]).slice(0,14);
+  const max = Math.max(...entries.map(e=>e[1]));
+  document.getElementById(div).innerHTML = entries.map(([k,v]) =>
+    `<div class="cbar"><div class="cbar-l">${k}</div><div class="cbar-t"><div class="cbar-f" style="width:${Math.max(2,v/max*100)}%;background:${color}"></div></div><div class="cbar-v">${fmt(v)}</div></div>`).join("");
+}
+hbar("energybar", ENERGY_RECIPIENTS, "#9C3B33");
+/* ================= COMPANY-BY-COMPANY TIER BREAKDOWN ================= */
+// All 9 sources merged: the original 5 (PacifiCorp, Chevron, EnergySolutions,
+// Torus, Dominion) plus the 4 researched since (Utah Petroleum Association,
+// Utah Petroleum Marketers & Retailers, Big West Oil, rPlus Energies — the
+// Green River Energy Center solar+battery-storage company).
+// Only recipients funded by 2+ of these 9 sources are shown.
+const TIER_DATA = [
+  {name:"McKell, Mike", tier:8, total:18900.0, companies:{"PacifiCorp": 2500, "Chevron": 1500, "EnergySolutions": 12000, "Dominion": 350, "Utah Petroleum Assoc": 900.0, "Petroleum Marketers": 400.0, "Big West Oil": 250.0, "rPlus Energies": 1000.0}},
+  {name:"Cox, Spencer", tier:7, total:387016.98, companies:{"PacifiCorp": 85000, "Chevron": 27500, "EnergySolutions": 15000, "Torus": 151041.98, "Dominion": 62850, "Utah Petroleum Assoc": 13125.0, "Big West Oil": 32500.0}},
+  {name:"Adams, J", tier:7, total:37000.0, companies:{"PacifiCorp": 17000, "Chevron": 4500, "EnergySolutions": 7000, "Dominion": 2250, "Utah Petroleum Assoc": 4000.0, "Petroleum Marketers": 250.0, "Big West Oil": 2000.0}},
+  {name:"Fillmore, Lincoln", tier:7, total:8500.0, companies:{"PacifiCorp": 2000, "Chevron": 2400, "EnergySolutions": 2000, "Dominion": 350, "Utah Petroleum Assoc": 900.0, "Petroleum Marketers": 600.0, "Big West Oil": 250.0}},
+  {name:"Harper, Wayne", tier:7, total:6350.0, companies:{"PacifiCorp": 500, "Chevron": 2000, "Dominion": 850, "Utah Petroleum Assoc": 600.0, "Petroleum Marketers": 1150.0, "Big West Oil": 250.0, "rPlus Energies": 1000.0}},
+  {name:"Weiler, Todd", tier:7, total:4750.0, companies:{"PacifiCorp": 500, "Chevron": 1650, "Dominion": 350, "Utah Petroleum Assoc": 1000.0, "Petroleum Marketers": 200.0, "Big West Oil": 250.0, "rPlus Energies": 800.0}},
+  {name:"Wilson, Chris", tier:7, total:4650.0, companies:{"PacifiCorp": 500, "Chevron": 500, "EnergySolutions": 1000, "Dominion": 1100, "Utah Petroleum Assoc": 900.0, "Petroleum Marketers": 400.0, "Big West Oil": 250.0}},
+  {name:"Jack, Colin", tier:7, total:4050.0, companies:{"PacifiCorp": 1000, "Chevron": 550, "EnergySolutions": 300, "Dominion": 500, "Utah Petroleum Assoc": 600.0, "Petroleum Marketers": 100.0, "rPlus Energies": 1000.0}},
+  {name:"Adams Leadership PAC", tier:6, total:26100.0, companies:{"PacifiCorp": 15000, "Chevron": 2500, "EnergySolutions": 1000, "Utah Petroleum Assoc": 4000.0, "Petroleum Marketers": 600.0, "Big West Oil": 3000.0}},
+  {name:"Sandall, Scott", tier:6, total:10675.0, companies:{"PacifiCorp": 2000, "Chevron": 1750, "EnergySolutions": 4200, "Dominion": 575, "Utah Petroleum Assoc": 900.0, "Petroleum Marketers": 1250.0}},
+  {name:"McCay, Daniel", tier:6, total:7700.0, companies:{"PacifiCorp": 2000, "Chevron": 1500, "EnergySolutions": 2750, "Dominion": 350, "Utah Petroleum Assoc": 1000.0, "Petroleum Marketers": 100.0}},
+  {name:"Snider, Casey", tier:6, total:7250.0, companies:{"PacifiCorp": 2000, "Chevron": 650, "EnergySolutions": 3500, "Dominion": 250, "Utah Petroleum Assoc": 600.0, "Petroleum Marketers": 250.0}},
+  {name:"Ipson, Don L", tier:6, total:4925.0, companies:{"Chevron": 1750, "EnergySolutions": 1000, "Dominion": 575, "Utah Petroleum Assoc": 800.0, "Petroleum Marketers": 300.0, "Big West Oil": 500.0}},
+  {name:"Winterton, Ronald", tier:6, total:4475.0, companies:{"PacifiCorp": 500, "Chevron": 1500, "EnergySolutions": 700, "Dominion": 575, "Utah Petroleum Assoc": 1100.0, "Petroleum Marketers": 100.0}},
+  {name:"Utah House Republican Election Committee", tier:5, total:145250.0, companies:{"PacifiCorp": 55500, "EnergySolutions": 62000, "Utah Petroleum Assoc": 11250.0, "Petroleum Marketers": 2500.0, "Big West Oil": 14000.0}},
+  {name:"Utah Republican Senate Campaign Committee", tier:5, total:88375.0, companies:{"PacifiCorp": 48500, "Chevron": 1000, "Utah Petroleum Assoc": 13875.0, "Petroleum Marketers": 2250.0, "Big West Oil": 22750.0}},
+  {name:"Albrecht, Carl", tier:5, total:10600.0, companies:{"PacifiCorp": 1500, "Chevron": 1500, "EnergySolutions": 4750, "Dominion": 1250, "Utah Petroleum Assoc": 1600.0}},
+  {name:"Schultz, Mike", tier:5, total:10500.0, companies:{"PacifiCorp": 2000, "Chevron": 1250, "EnergySolutions": 5700, "Dominion": 1250, "Petroleum Marketers": 300.0}},
+  {name:"Millner, Ann", tier:5, total:9775.0, companies:{"Chevron": 2500, "EnergySolutions": 4500, "Dominion": 975, "Utah Petroleum Assoc": 1400.0, "Petroleum Marketers": 400.0}},
+  {name:"Moss, Jefferson", tier:5, total:6600.0, companies:{"PacifiCorp": 1000, "Chevron": 1300, "EnergySolutions": 2700, "Utah Petroleum Assoc": 1300.0, "Petroleum Marketers": 300.0}},
+  {name:"Vickers, Evan", tier:5, total:5975.0, companies:{"PacifiCorp": 1000, "Chevron": 2500, "Dominion": 975, "Utah Petroleum Assoc": 1400.0, "Petroleum Marketers": 100.0}},
+  {name:"Bramble, Curtis", tier:5, total:5650.0, companies:{"PacifiCorp": 2000, "EnergySolutions": 3000, "Utah Petroleum Assoc": 300.0, "Petroleum Marketers": 100.0, "Big West Oil": 250.0}},
+  {name:"Wilcox, Ryan", tier:5, total:5400.0, companies:{"PacifiCorp": 1000, "Chevron": 900, "EnergySolutions": 3000, "Utah Petroleum Assoc": 400.0, "Petroleum Marketers": 100.0}},
+  {name:"Escamilla, Luz", tier:5, total:5350.0, companies:{"PacifiCorp": 1000, "Chevron": 2500, "Dominion": 650, "Utah Petroleum Assoc": 1000.0, "Petroleum Marketers": 200.0}},
+  {name:"Stratton, Keven", tier:5, total:4850.0, companies:{"PacifiCorp": 500, "Chevron": 1000, "EnergySolutions": 2300, "Dominion": 350, "Utah Petroleum Assoc": 700.0}},
+  {name:"Hinkins, David", tier:5, total:4425.0, companies:{"PacifiCorp": 1500, "Chevron": 1250, "Dominion": 575, "Utah Petroleum Assoc": 600.0, "Petroleum Marketers": 500.0}},
+  {name:"Hawkins, Jon", tier:5, total:3850.0, companies:{"PacifiCorp": 500, "Chevron": 250, "EnergySolutions": 2750, "Dominion": 250, "Petroleum Marketers": 100.0}},
+  {name:"Peterson, Val", tier:5, total:3650.0, companies:{"Chevron": 1000, "EnergySolutions": 750, "Dominion": 600, "Utah Petroleum Assoc": 1100.0, "Petroleum Marketers": 200.0}},
+  {name:"Watkins, Christine", tier:5, total:3550.0, companies:{"Chevron": 1100, "EnergySolutions": 1500, "Dominion": 250, "Utah Petroleum Assoc": 600.0, "Petroleum Marketers": 100.0}},
+  {name:"Owens, Derrin", tier:5, total:3500.0, companies:{"Chevron": 1250, "Utah Petroleum Assoc": 1000.0, "Petroleum Marketers": 200.0, "Big West Oil": 250.0, "rPlus Energies": 800.0}},
+  {name:"Teuscher, Jordan", tier:5, total:2650.0, companies:{"PacifiCorp": 500, "Chevron": 400, "Dominion": 250, "Utah Petroleum Assoc": 1300.0, "Petroleum Marketers": 200.0}},
+  {name:"Cutler, Paul", tier:5, total:2600.0, companies:{"PacifiCorp": 500, "Chevron": 800, "EnergySolutions": 800, "Utah Petroleum Assoc": 400.0, "Petroleum Marketers": 100.0}},
+  {name:"Eliason, Steven", tier:5, total:2500.0, companies:{"PacifiCorp": 500, "Chevron": 1050, "EnergySolutions": 500, "Dominion": 250, "Petroleum Marketers": 200.0}},
+  {name:"Ivory, Ken", tier:5, total:2450.0, companies:{"PacifiCorp": 1000, "Chevron": 500, "EnergySolutions": 500, "Dominion": 250, "Utah Petroleum Assoc": 200.0}},
+  {name:"Brammer, Brady", tier:5, total:1350.0, companies:{"PacifiCorp": 250, "Chevron": 250, "EnergySolutions": 500, "Dominion": 250, "Petroleum Marketers": 100.0}},
+  {name:"House Speaker Leadership PAC", tier:4, total:46000.0, companies:{"PacifiCorp": 18500, "EnergySolutions": 20000, "Utah Petroleum Assoc": 4500.0, "Big West Oil": 3000.0}},
+  {name:"Cullimore, Kirk", tier:4, total:8950.0, companies:{"Chevron": 2650, "EnergySolutions": 5000, "Dominion": 500, "Utah Petroleum Assoc": 800.0}},
+  {name:"Lisonbee, Karianne", tier:4, total:4550.0, companies:{"Chevron": 800, "EnergySolutions": 2400, "Dominion": 750, "Utah Petroleum Assoc": 600.0}},
+  {name:"Stenquist, Jeff", tier:4, total:3800, companies:{"PacifiCorp": 1500, "Chevron": 1300, "EnergySolutions": 750, "Dominion": 250}},
+  {name:"Welton, Douglas", tier:4, total:2900.0, companies:{"PacifiCorp": 500, "EnergySolutions": 1500, "Dominion": 350, "Petroleum Marketers": 550.0}},
+  {name:"Pierucci, Darlene", tier:4, total:2850.0, companies:{"Chevron": 1050, "EnergySolutions": 750, "Dominion": 250, "Utah Petroleum Assoc": 800.0}},
+  {name:"Kyle, Jason", tier:4, total:2650.0, companies:{"PacifiCorp": 250, "Chevron": 500, "EnergySolutions": 1300, "Utah Petroleum Assoc": 600.0}},
+  {name:"Peterson, Karen", tier:4, total:2650.0, companies:{"PacifiCorp": 500, "Chevron": 650, "EnergySolutions": 1300, "Petroleum Marketers": 200.0}},
+  {name:"Dunnigan, Jim", tier:4, total:2550.0, companies:{"Chevron": 750, "EnergySolutions": 1250, "Dominion": 350, "Petroleum Marketers": 200.0}},
+  {name:"Romero, Angela", tier:4, total:2550.0, companies:{"Chevron": 1250, "EnergySolutions": 500, "Utah Petroleum Assoc": 600.0, "Petroleum Marketers": 200.0}},
+  {name:"Anderegg, Jacob", tier:4, total:2500.0, companies:{"PacifiCorp": 500, "EnergySolutions": 1300, "Dominion": 400, "Utah Petroleum Assoc": 300.0}},
+  {name:"King, Brian", tier:4, total:2300.0, companies:{"PacifiCorp": 1000, "Chevron": 800, "Dominion": 250, "Utah Petroleum Assoc": 250.0}},
+  {name:"Grover, Keith", tier:4, total:2200.0, companies:{"PacifiCorp": 500, "EnergySolutions": 1250, "Dominion": 350, "Petroleum Marketers": 100.0}},
+  {name:"Brooks, Walter", tier:4, total:2150.0, companies:{"EnergySolutions": 1500, "Dominion": 250, "Utah Petroleum Assoc": 300.0, "Petroleum Marketers": 100.0}},
+  {name:"Musselman, Calvin", tier:4, total:2150.0, companies:{"Chevron": 1300, "Dominion": 250, "Utah Petroleum Assoc": 400.0, "Petroleum Marketers": 200.0}},
+  {name:"Owens, Doug", tier:4, total:2125.0, companies:{"Chevron": 500, "Dominion": 825, "Utah Petroleum Assoc": 600.0, "Petroleum Marketers": 200.0}},
+  {name:"Spendlove, Robert", tier:4, total:2050.0, companies:{"PacifiCorp": 1000, "Chevron": 500, "Dominion": 250, "Utah Petroleum Assoc": 300.0}},
+  {name:"Barlow, Stewart", tier:4, total:2050.0, companies:{"Chevron": 1050, "EnergySolutions": 500, "Utah Petroleum Assoc": 300.0, "Petroleum Marketers": 200.0}},
+  {name:"Peterson, Thomas", tier:4, total:1800.0, companies:{"PacifiCorp": 500, "Chevron": 700, "EnergySolutions": 200, "Utah Petroleum Assoc": 400.0}},
+  {name:"Chew, Scott", tier:4, total:1450.0, companies:{"PacifiCorp": 500, "Chevron": 500, "Dominion": 350, "Petroleum Marketers": 100.0}},
+  {name:"Thurston, Norman", tier:4, total:1100.0, companies:{"PacifiCorp": 250, "EnergySolutions": 500, "Dominion": 250, "Petroleum Marketers": 100.0}},
+  {name:"Ward, Raymond", tier:4, total:1050.0, companies:{"Chevron": 400, "Dominion": 250, "Utah Petroleum Assoc": 200.0, "Petroleum Marketers": 200.0}},
+  {name:"Defay, Ariel", tier:4, total:950.0, companies:{"Chevron": 250, "EnergySolutions": 200, "Utah Petroleum Assoc": 400.0, "Petroleum Marketers": 100.0}},
+  {name:"Bolinder, Bridger", tier:3, total:19550, companies:{"PacifiCorp": 500, "Chevron": 550, "EnergySolutions": 18500}},
+  {name:"Stevenson, Jerry", tier:3, total:7850, companies:{"Chevron": 2500, "EnergySolutions": 5000, "Dominion": 350}},
+  {name:"Thatcher, Daniel", tier:3, total:4100, companies:{"Chevron": 500, "EnergySolutions": 3250, "Dominion": 350}},
+  {name:"Utah Taxpayers Association PAC", tier:3, total:2511.25, companies:{"Chevron": 341.25, "EnergySolutions": 1550, "Big West Oil": 620.0}},
+  {name:"Jimenez, Timothy", tier:3, total:1850.0, companies:{"Chevron": 400, "EnergySolutions": 1250, "Utah Petroleum Assoc": 200.0}},
+  {name:"Maloy, Cory", tier:3, total:1700.0, companies:{"EnergySolutions": 1050, "Dominion": 250, "Petroleum Marketers": 400.0}},
+  {name:"Christofferson, Kay", tier:3, total:1350.0, companies:{"PacifiCorp": 500, "Chevron": 250, "Utah Petroleum Assoc": 600.0}},
+  {name:"Moss, Carol", tier:3, total:1200.0, companies:{"Chevron": 250, "Dominion": 750, "Petroleum Marketers": 200.0}},
+  {name:"Gricius, Stephanie", tier:3, total:1100.0, companies:{"EnergySolutions": 500, "Utah Petroleum Assoc": 200.0, "Petroleum Marketers": 400.0}},
+  {name:"Johnson, John", tier:3, total:950.0, companies:{"EnergySolutions": 200, "Dominion": 350, "Utah Petroleum Assoc": 400.0}},
+  {name:"Birkeland, Kera", tier:3, total:850.0, companies:{"EnergySolutions": 500, "Dominion": 250, "Petroleum Marketers": 100.0}},
+  {name:"Hollins, Sandra", tier:3, total:800.0, companies:{"Chevron": 500, "Utah Petroleum Assoc": 200.0, "Petroleum Marketers": 100.0}},
+  {name:"Strong, Mark", tier:3, total:650.0, companies:{"EnergySolutions": 300, "Dominion": 250, "Petroleum Marketers": 100.0}},
+  {name:"Henderson, Deidre", tier:2, total:13500, companies:{"PacifiCorp": 5500, "Chevron": 8000}},
+  {name:"Wilson, Brad", tier:2, total:6000, companies:{"PacifiCorp": 5000, "Chevron": 1000}},
+  {name:"Ferry, Joel", tier:2, total:3500, companies:{"PacifiCorp": 500, "EnergySolutions": 3000}},
+  {name:"Mayne, Karen", tier:2, total:2150, companies:{"PacifiCorp": 1500, "Dominion": 650}},
+  {name:"Utah House Democratic Leadership Council", tier:2, total:1500.0, companies:{"EnergySolutions": 500, "Petroleum Marketers": 1000.0}},
+  {name:"Kennedy, Michael", tier:2, total:1350, companies:{"EnergySolutions": 1000, "Dominion": 350}},
+  {name:"Acton, Cheryl", tier:2, total:1200.0, companies:{"EnergySolutions": 1000, "Petroleum Marketers": 200.0}},
+  {name:"Ballard, Melissa", tier:2, total:1050.0, companies:{"Chevron": 650, "Utah Petroleum Assoc": 400.0}},
+  {name:"Kwan, Karen", tier:2, total:950.0, companies:{"Chevron": 750, "Petroleum Marketers": 200.0}},
+  {name:"Burton, Jefferson", tier:2, total:900.0, companies:{"Chevron": 700, "Petroleum Marketers": 200.0}},
+  {name:"Parke, Dave", tier:2, total:750, companies:{"PacifiCorp": 250, "Chevron": 500}},
+  {name:"Dailey-Provost, Jen", tier:2, total:750.0, companies:{"Chevron": 500, "Petroleum Marketers": 250.0}},
+  {name:"Davis, Gene", tier:2, total:750, companies:{"Chevron": 500, "Dominion": 250}},
+  {name:"Auxier, Tiara", tier:2, total:720.51, companies:{"EnergySolutions": 520.51, "Utah Petroleum Assoc": 200.0}},
+  {name:"Koford, Jill", tier:2, total:700.0, companies:{"EnergySolutions": 500, "Petroleum Marketers": 200.0}},
+  {name:"Riebe, Kathleen", tier:2, total:700.0, companies:{"Chevron": 500, "Petroleum Marketers": 200.0}},
+  {name:"Buxton, David", tier:2, total:650.0, companies:{"Chevron": 250, "Utah Petroleum Assoc": 400.0}},
+  {name:"Pulsipher, Susan", tier:2, total:550, companies:{"Chevron": 250, "EnergySolutions": 300}},
+  {name:"Balderree, Heidi", tier:2, total:400.0, companies:{"EnergySolutions": 200, "Petroleum Marketers": 200.0}},
+  {name:"Stoddard, Andrew", tier:2, total:350.0, companies:{"Chevron": 250, "Petroleum Marketers": 100.0}},
+  {name:"Lesser, Rosemary", tier:2, total:350.0, companies:{"Chevron": 250, "Petroleum Marketers": 100.0}},
+  {name:"Nguyen, Hoang", tier:2, total:300.0, companies:{"Utah Petroleum Assoc": 200.0, "Petroleum Marketers": 100.0}},
+  {name:"Bennion, Gay Lynn", tier:2, total:300.0, companies:{"Utah Petroleum Assoc": 200.0, "Petroleum Marketers": 100.0}},
+];
+
+const tierBody = document.getElementById("tierBody");
+const tierGroups = [8, 7, 6, 5, 4, 3, 2];
+let tierHtml = "";
+let rowIdx = 0;
+tierGroups.forEach(t => {
+  const rowsInTier = TIER_DATA.filter(d => d.tier === t);
+  if (rowsInTier.length === 0) return;
+  tierHtml += `<tr><td colspan="3" class="tier-header">— ${t} sources —</td></tr>`;
+  rowsInTier.forEach(d => {
+    const id = "detail-" + rowIdx;
+    const companies = Object.entries(d.companies)
+      .sort((a, b) => b[1] - a[1])
+      .map(([label, amt]) => `<span class="company-pill">${label}: <b>${fmt(amt)}</b></span>`)
+      .join("");
+    tierHtml += `<tr class="tier${t}">
+      <td><span class="recipient-name" onclick="toggleDetail('${id}')">${d.name}<span class="expand-arrow" id="arrow-${id}">▶</span></span></td>
+      <td style="text-align:center">${d.tier}</td>
+      <td class="tiercell" style="font-weight:600">${fmt(d.total)}</td>
+    </tr>
+    <tr class="company-detail-row">
+      <td colspan="3"><div class="company-detail" id="${id}">${companies}</div></td>
+    </tr>`;
+    rowIdx++;
+  });
+});
+tierBody.innerHTML = tierHtml;
+
+function toggleDetail(id){
+  const el = document.getElementById(id);
+  const arrow = document.getElementById("arrow-" + id);
+  el.classList.toggle("open");
+  arrow.classList.toggle("open");
+}
+
+
+const BIG_WEST_OIL = {
+  "Cox, Spencer": 32500,
+  "UT Rep. Senate Cmte": 22750,
+  "UT House Rep. Elec. Cmte": 14000,
+  "House Speaker Ldr. PAC": 3000,
+  "Adams Ldr. PAC": 3000,
+  "Adams, J (personal)": 2000,
+  "UT Taxpayers Assn PAC": 620,
+  "Individual legislators (2023-24, ~$250 ea)": 2250
+};
+const RPLUS_ENERGIES = {
+  "Jack, Colin": 1000,
+  "Weiler, Todd": 800,
+  "Owens, Derrin": 800,
+  "Harper, Wayne": 1000,
+  "McKell, Mike": 1000
+};
+
+hbar("bigWestChart", BIG_WEST_OIL, "#1F6F5C");
+hbar("rplusChart", RPLUS_ENERGIES, "#1F6F5C");
+
+/* ================= FULL RECIPIENT RANKING ================= */
+// Combines every recipient across every dataset on this page. Each source stays
+// its own row — nothing here is silently summed across datasets.
+const ALL_RECIPIENTS = [];
+Object.entries(TOP_TO).forEach(([name, amt]) => {
+  if (name === "TOTAL") return; // placeholder aggregate row, not a real recipient
+  ALL_RECIPIENTS.push({name, amt, source: "Original 4-file dataset"});
+});
+Object.entries(BIG_WEST_OIL).forEach(([name, amt]) => {
+  ALL_RECIPIENTS.push({name, amt, source: "Big West Oil (confirmed)"});
+});
+Object.entries(RPLUS_ENERGIES).forEach(([name, amt]) => {
+  ALL_RECIPIENTS.push({name, amt, source: "rPlus Energies (confirmed)"});
+});
+ALL_RECIPIENTS.sort((a, b) => b.amt - a.amt);
+
+const rankBody = document.getElementById("rankBody");
+const rankSearchBox = document.getElementById("rankSearchBox");
+const rankSourceFilter = document.getElementById("rankSourceFilter");
+const rankResultCount = document.getElementById("rankResultCount");
+
+[...new Set(ALL_RECIPIENTS.map(r => r.source))].forEach(s => {
+  const opt = document.createElement("option");
+  opt.value = s; opt.textContent = s;
+  rankSourceFilter.appendChild(opt);
+});
+
+function renderRanking(){
+  const q = rankSearchBox.value.trim().toLowerCase();
+  const sf = rankSourceFilter.value;
+  const filtered = ALL_RECIPIENTS.filter(r => {
+    if (sf && r.source !== sf) return false;
+    if (!q) return true;
+    return r.name.toLowerCase().includes(q);
+  });
+  rankBody.innerHTML = filtered.map((r, i) => `
+    <tr>
+      <td class="amt">${i + 1}</td>
+      <td>${r.name}</td>
+      <td class="amt" style="text-align:right">${fmt(r.amt)}</td>
+      <td>${r.source}</td>
+    </tr>
+  `).join("");
+  rankResultCount.textContent = filtered.length + " of " + ALL_RECIPIENTS.length + " entries";
+}
+rankSearchBox.addEventListener("input", renderRanking);
+rankSourceFilter.addEventListener("change", renderRanking);
+renderRanking();
+
+
+
+
+</script><script data-goatcounter="https://weberhive.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body></html>
