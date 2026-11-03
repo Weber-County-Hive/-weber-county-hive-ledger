@@ -53,6 +53,16 @@ var HBX = {
       "name": "Case 16: Clyde Companies Political Giving, 2018–2026"
     },
     {
+      "callNumber": "LG 100.08",
+      "slug": "gambling-money-utah",
+      "name": "Case 17: Gambling Money in Utah, 2018–2026"
+    },
+    {
+      "callNumber": "LG 100.09",
+      "slug": "gambling-money-utah-plain",
+      "name": "Case 17 (easy version): Gambling Money in Utah"
+    },
+    {
       "callNumber": "LG 200.01",
       "slug": "biggest-donors-flip",
       "name": "Case 06: The Biggest Donors, So Far"

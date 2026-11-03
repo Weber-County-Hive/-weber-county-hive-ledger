@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gambling Money in Utah</title>
+<meta name="description" content="Every gambling-industry campaign donation to Utah candidates and PACs, 2018-2026, from the state's own disclosure data, and how it lines up with the Attorney General's case against Kalshi.">
+<link rel="icon" type="image/png" href="hive-bee.png">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Source+Sans+3:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="leaflet.css">
+<script src="leaflet.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<style>
+:root{--felt:#0f1b2d;--felt2:#13233F;--gold:#1d5fbf;--ink:#1b2430;--muted:#55606e;--line:#d9dde3;--bg:#ffffff;--soft:#f3f6fa}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:18px/1.6 'Source Sans 3',Arial,sans-serif}
+a{color:#1d5fa8}
+.hb-bar{background:#0d0b0a;border-bottom:1px solid #3a2f1c;padding:8px 16px}
+.hb-bar a{display:flex;align-items:center;gap:12px;text-decoration:none}
+.hb-bar img{height:44px;width:auto}
+.hb-name{font-family:'Cinzel',Georgia,serif;color:#d4af37;font-size:14px;letter-spacing:.14em;text-transform:uppercase;display:block}
+.hb-sub{font-family:Georgia,serif;font-style:italic;color:#b8956a;font-size:12px;display:block}
+.hb-line-top{display:block;font-family:Georgia,serif;color:#e8d9b5;font-size:12px;margin-top:3px}
+header.case{background:var(--felt);color:#fff;padding:34px 16px 30px;border-bottom:6px solid var(--gold)}
+.wrap{max-width:1000px;margin:0 auto;padding:0 16px}
+.eyebrow{color:var(--gold);font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:14px;margin:0}
+h1{font-family:'Playfair Display',Georgia,serif;font-size:clamp(30px,5vw,46px);line-height:1.15;margin:8px 0 10px}
+.sub{font-size:20px;color:#e6efe9;margin:0 0 10px}
+.dates{font-size:15px;color:#cfe0d6;margin:0}
+h2{font-family:'Playfair Display',Georgia,serif;color:var(--felt);font-size:30px;margin:44px 0 12px;border-bottom:3px solid var(--gold);padding-bottom:6px}
+h3{color:var(--felt2);font-size:22px;margin:24px 0 8px}
+.plain{background:var(--soft);border-left:6px solid var(--gold);padding:16px 20px;border-radius:6px;font-size:19px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:18px 0}
+.tile{border:2px solid var(--felt);border-radius:10px;padding:16px;text-align:center;background:#fff}
+.tile b{display:block;font-size:34px;color:var(--felt);line-height:1.1}
+.tile span{font-size:15px;color:var(--muted)}
+.counter{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;background:var(--felt2);color:#fff;border-radius:10px;padding:14px;margin:18px 0}
+.counter div{text-align:center}.counter b{display:block;font-size:26px;color:var(--gold)}.counter span{font-size:14px}
+.counter p{grid-column:1/-1;margin:4px 0 0;font-size:13px;color:#cfe0d6;text-align:center}
+table{width:100%;border-collapse:collapse;font-size:16px}
+th,td{border-bottom:1px solid var(--line);padding:8px 6px;text-align:left;vertical-align:top}
+th{background:var(--felt);color:#fff;position:sticky;top:0}
+td.num,th.num{text-align:right;white-space:nowrap}
+.tbl-wrap{max-height:560px;overflow:auto;border:1px solid var(--line);border-radius:8px}
+.filters{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0}
+.filters select,.filters input{font-size:16px;padding:8px;border:1px solid #9aa5b1;border-radius:6px}
+.note{font-size:14px;color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.flip{perspective:1000px;min-height:300px;cursor:pointer}
+.flip-in{position:relative;width:100%;height:100%;min-height:300px;transition:transform .6s;transform-style:preserve-3d}
+.flip.on .flip-in{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;padding:18px;overflow:auto}
+.front{background:var(--felt);color:#fff;border:3px solid var(--gold)}
+.front h4{font-family:'Playfair Display',Georgia,serif;font-size:24px;margin:0 0 6px;color:var(--gold)}
+.front .amt{font-size:30px;font-weight:700}
+.back{background:#fff;border:3px solid var(--felt);transform:rotateY(180deg);font-size:15.5px}
+.back ul{padding-left:18px;margin:6px 0}
+.tap{font-size:13px;color:#cfe0d6;margin-top:10px}
+.timeline{border-left:4px solid var(--gold);margin:10px 0 0 8px;padding-left:20px}
+.ev{margin:0 0 16px;position:relative}
+.ev:before{content:"";position:absolute;left:-30px;top:6px;width:14px;height:14px;border-radius:50%;background:var(--felt);border:3px solid var(--gold)}
+.ev b{color:var(--felt)}
+.ev.money:before{background:var(--gold);border-color:var(--felt)}
+#map{height:460px;border-radius:10px;border:2px solid var(--felt)}
+.mermaid{background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;overflow-x:auto}
+.fair{background:#eef4fb;border-left:6px solid #1d5fbf;padding:14px 18px;border-radius:6px}
+.qs h3{margin-top:18px}
+.qs ol{padding-left:22px}.qs li{margin:0 0 8px}
+details{border:1px solid var(--line);border-radius:8px;padding:10px 14px;margin:14px 0}
+summary{font-weight:700;color:var(--felt);cursor:pointer;font-size:19px}
+.hb-foot{background:#0d0b0a;color:#b8956a;text-align:center;padding:26px 16px 30px;font-family:Georgia,serif;margin-top:50px}
+.hb-foot img{height:40px}
+.hb-tag{font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:#8a7650;margin-top:8px;display:block}
+.hb-line{max-width:720px;margin:14px auto 0;color:#e8d9b5;font-size:15.5px;line-height:1.5}
+.hb-tips{margin:16px 0 4px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.hb-btn{display:inline-block;border:2px solid #d4af37;background:#d4af37;color:#0d0b0a;font:700 15px Georgia,serif;padding:10px 18px;border-radius:6px;text-decoration:none}
+.hb-btn2{background:transparent;color:#d4af37}
+.hb-small{font-size:12.5px;color:#8a7650;margin:6px 0 0}
+@media (max-width:600px){body{font-size:17px}h2{font-size:25px}.tile b{font-size:28px}th,td{font-size:14.5px}}
+.eyebrow{color:#9ec0ea}.counter b{color:#9ec0ea}.front h4{color:#9ec0ea}.ev.money:before{background:#9ec0ea}
+.hbx-top{margin:0}
+.hbx-slim{background:#0e2438;color:#dbe7f0;font:600 14px/1.4 Arial,sans-serif;padding:7px 20px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.hbx-slim a{color:#F3E3B3;text-decoration:underline}
+.hbx-tools{max-width:980px;margin:14px auto 4px;padding:0 20px;display:flex;flex-wrap:wrap;gap:8px;align-items:flex-start;font-family:Arial,sans-serif;position:relative;z-index:2}
+.hbx-tool{display:inline-block;font:700 15px Arial,sans-serif;color:#13233F!important;background:#fff;border:1px solid #c8cfd6;border-radius:6px;padding:9px 13px;text-decoration:none!important;cursor:pointer;line-height:1.2}
+.hbx-tool:hover{border-color:#13233F}.hbx-cnchip b{color:#1f5f9e;font-family:ui-monospace,Menlo,monospace}
+.hbx-jump{flex-basis:100%;order:5;border:1px solid #c8cfd6;border-radius:6px;background:#fff;color:#13233F}.hbx-jump summary{cursor:pointer;padding:9px 13px;font:700 15px Arial,sans-serif}
+.hbx-jump ol{margin:0;padding:4px 16px 12px 36px}.hbx-jump li{margin:6px 0;font-size:16.5px}.hbx-jump a{color:#13233F}
+.hbx-shelfwrap{background:#0e2438;color:#dbe7f0;padding:26px 20px 30px;font:16px/1.5 Arial,sans-serif;margin-top:48px;position:relative;z-index:1}
+.hbx-shelfwrap .in{max-width:900px;margin:0 auto}
+.hbx-shelf{border:2px dashed #9fd0ee;border-radius:10px;padding:16px 18px}
+.hbx-cn-big{font:600 17px ui-monospace,Menlo,monospace;margin-bottom:12px;color:#fff}.hbx-cn-big b{color:#9fd0ee}
+.hbx-nav{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.hbx-nav-btn{flex:1;min-width:220px;background:#12304a;border:1px solid #4d86ad;border-radius:8px;padding:12px 14px;color:#fff!important;text-decoration:none!important;font-size:16px}.hbx-nav-btn b{color:#9fd0ee;font-family:ui-monospace,Menlo,monospace}.hbx-off{opacity:.5}
+.hbx-list summary{cursor:pointer;font-weight:700;padding:6px 0}.hbx-list ol{list-style:none;margin:6px 0 0;padding:0}.hbx-list li{padding:6px 0;border-bottom:1px solid #2b4a63}.hbx-list a{color:#fff!important;text-decoration:none}
+.hbx-shelf-head{color:#9fd0ee;font:600 13px ui-monospace,Menlo,monospace;letter-spacing:.1em}.hbx-cn{font-family:ui-monospace,Menlo,monospace;color:#9fd0ee;margin-right:6px}
+.hbx-find{margin:14px 0 4px}.hbx-find label{display:block;font-weight:700;margin-bottom:6px}.hbx-find div{display:flex;gap:8px;flex-wrap:wrap}.hbx-find input{flex:1;min-width:0;width:100%;padding:12px 14px;font-size:17px;border:2px solid #4d86ad;border-radius:6px;color:#13233F;background:#fff}.hbx-find button{padding:12px 18px;font-size:16px;font-weight:700;background:#9fd0ee;color:#0e2438;border:0;border-radius:6px;cursor:pointer}
+.hbx-search{font-size:15px;margin-top:12px}.hbx-search a,.hbx-search b{color:#9fd0ee}
+.hbx-totop{display:none;position:fixed;right:16px;bottom:16px;z-index:50;background:#0e2438;color:#fff!important;border:2px solid #9fd0ee;border-radius:24px;padding:10px 16px;font:700 15px Arial,sans-serif;text-decoration:none!important;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+.hbx-dates{font-family:ui-monospace,Menlo,monospace;font-size:13px}
+@media print{.hbx-tools,.hbx-totop{display:none}}
+.hbx-tools{margin-top:16px;margin-bottom:14px}
+.hbx-shelfwrap+.hb-foot{margin-top:0}
+.hbx-shelf details.hbx-list li,.hbx-shelf details.hbx-list p{font-size:16px!important}
+.hbx-pagedates,p.hive-updated{font-family:ui-monospace,Menlo,monospace!important;font-size:14px!important;letter-spacing:.02em;opacity:.95!important;margin:10px 0 0!important}
+</style>
+</head>
+<body>
+<div class="hb-bar"><a href="https://webercountyhive.substack.com/" target="_blank" rel="noopener"><img src="uhp-badge.png" alt="Utah Hive Politics logo"><span><span class="hb-name">Utah Hive Politics</span><span class="hb-sub">from the publisher of The Weber County Hive</span><span class="hb-line-top">The people's publication. We investigate what's best for the public as a whole, not any party or special interest.</span></span></a></div>
+<div class="hbx-slim" style="background:#0e2438;color:#dbe7f0;font:600 14px/1.4 Arial,sans-serif;padding:7px 20px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap"><span>The Ledger · LG 100.08</span><span><a href="index.html" style="color:#F3E3B3">← The Ledger home</a> · <a href="https://weber-county-hive.github.io/-weber-county-hive-index/" style="color:#F3E3B3">← Hive library (every repo)</a></span></div>
+
+<header class="case"><div class="wrap">
+<p class="eyebrow">The Ledger · Case 17 · Gambling Money in Utah</p>
+<h1>Casino Money and the Attorney General</h1>
+<p class="sub">Utah bans gambling. Gambling-industry companies still gave $115,800 to Utah candidates from 2018 to 2026. Here is every dollar, who got it, and what was happening at the time.</p>
+<p class="dates">Posted Nov. 3, 2026 · Updated Nov. 3, 2026</p>
+</div></header>
+
+<main class="wrap">
+
+<div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px;background:#eef4fb;border:2px dashed #1d5fbf;padding:14px 18px;margin:24px 0 0;border-radius:8px"><span>New to this? Start with the easy version: short, simple words, no tables.</span><a href="gambling-money-utah-plain.html" style="display:inline-block;background:#0f1b2d;color:#fff;text-decoration:none;font-weight:700;padding:12px 18px;border-radius:6px">Read the easy version →</a></div>
+
+<h2>In plain words</h2>
+<div class="plain">
+<p style="margin-top:0">A tip came in about Attorney General Derek Brown taking money from gambling companies while his office charged one of them. We checked every candidate and PAC donation filed with the state from 2018 through 2026, 655,619 transactions in all.</p>
+<p><b>What the records show:</b> Brown received $83,000 from gambling-industry donors, more than every other Utah candidate in nine years combined ($32,800). Las Vegas Sands, a casino company that has long fought <i>online</i> gambling, gave only to Utah's attorneys general: $5,000 to Sean Reyes in 2018 and $50,000 to Brown on April 21, 2026, two months after Brown wrote that prediction markets are gambling and Kalshi sued the state. One sweepstakes-casino company, VGW, gave to 22 campaign accounts (21 legislators and Brown) in the two months before the Nov. 3, 2026 election.</p>
+<p style="margin-bottom:0"><b>What the records don't show:</b> why anyone gave, or whether any donor asked for anything. Those are questions for readers to ask, listed at the bottom of this page.</p>
+</div>
+
+<div class="tiles">
+<div class="tile"><b>$115,800</b><span>Gambling-industry money to Utah candidates, 2018–2026</span></div>
+<div class="tile"><b>$83,000</b><span>To AG Derek Brown (72% of the total)</span></div>
+<div class="tile"><b>$55,000</b><span>From Las Vegas Sands, all to Utah attorneys general</span></div>
+<div class="tile"><b>22</b><span>Candidates VGW gave to, Aug. 31–Oct. 29, 2026</span></div>
+<div class="tile"><b>About 4%</b><span>Share of the contributions Brown reported, 2024–Oct. 2026, not counting loans, duplicates counted once (17.7% in 2026 alone)</span></div>
+<div class="tile"><b>$0</b><span>To any Utah PAC, 2018–2026</span></div>
+</div>
+
+<div class="counter">
+<div><b>31</b><span>records read</span></div>
+<div><b>655,619</b><span>transactions checked</span></div>
+<div><b>8</b><span>records checked but not used</span></div>
+<div><b>~90</b><span>searches run</span></div>
+<p>Behind this piece (estimate). Records read: 18 statewide disclosure files, Brown's own filings, three lobbyist records, committee minutes, H.B. 243 and its three floor votes, the Legislature's 2026 roster, Utah Code 76-9-1402 and the AG's Kalshi release.</p>
+</div>
+
+<h2>Utah's rule on gambling</h2>
+<p>The Utah Constitution, Article VI, Section 27, says the Legislature "shall not authorize any game of chance, lottery or gift enterprise under any pretext or for any purpose." In 2026, H.B. 243 added "proposition bets" to the state's definition of gambling.</p>
+<p>The companies on this page argue some of their products aren't gambling. Sweepstakes casinos and fantasy "pick'em" apps say they're games of skill or promotions; Kalshi says its bets are federally regulated futures contracts. Utah disagrees about Kalshi, and has sued and charged it.</p>
+
+<h2>Who gave, and who got sued</h2>
+<div class="plain">
+<p style="margin-top:0">It's easy to read this as "took the money, then sued the givers." The records show something different:</p>
+<ul>
+<li><b>Kalshi, the company Brown's office sued and charged, gave nothing</b> to any Utah campaign, 2018–2026.</li>
+<li><b>The companies that gave to Brown</b> (Sands, DraftKings, PrizePicks, Arb Gaming, VGW and Stacie Stern) <b>have not been sued or charged by his office</b>, as far as we found. (VGW and Arb Gaming were named in private class-action suits in 2025; those are lawsuits by consumers, not the state.)</li>
+<li><b>The biggest giver, Las Vegas Sands, is a competitor</b> of online betting, not part of it. Its $50,000 came two months after Brown publicly called prediction markets gambling.</li>
+<li><b>One donor changed what it does in Utah:</b> On Nov. 2, after the Kalshi charges, DraftKings stopped offering its sports, novelty, political and some other event contracts (its prediction-market product) to people in Utah.</li>
+</ul>
+<p style="margin-bottom:0">So the open question isn't "did he sue his donors." It's whether the companies that gave are being treated the same as the one that didn't. That's question 2 and 3 below.</p>
+</div>
+
+<h2>Is this allowed?</h2>
+<h3>Can gambling companies give to Utah candidates?</h3>
+<p>Yes. Utah has no limit on how much a person, company or union can give to a candidate for state office, and out-of-state companies can give. Every gift on this page was reported on the state's public disclosure site, as the law requires.</p>
+<h3>Can the attorney general take money from companies his office may look into?</h3>
+<p>We found no Utah law that stops it or requires the AG to step back from a case because of a donation. It has come up before: in 2008, then-AG Mark Shurtleff's campaign took $50,000 from Jeremy Johnson, head of iWorks, while Johnson was under investigation. Shurtleff said, "I never knew he was under investigation until now" (City Weekly). Whether Utah should have a rule is question 9 below.</p>
+<h3>Can I get in trouble for using these apps?</h3>
+<p>Utah law makes "participating in gambling," including online gambling, a class B misdemeanor (Utah Code 76-9-1402). Brown said on Oct. 28: "Gambling is illegal in Utah, whether you place the bet, run the game, or promote it." As far as we found, no Utah user has been charged; the charges so far are against Kalshi and its founders.</p>
+<h3>Is Brown on today's ballot?</h3>
+<p>No. Brown was elected Nov. 5, 2024, and took office in January 2025. Utah's attorney general serves a four-year term, so his next election is 2028.</p>
+
+<h2>The Utah way on gambling</h2>
+<ul>
+<li><b>Banned from the start.</b> Utah's constitution, written in 1895 and in force at statehood in 1896, bans "any game of chance, lottery or gift enterprise." Utah has no casinos, no state lottery and no Powerball. Along with Hawaii, it has the strictest gambling prohibitions in the country (AP, March 2026).</li>
+<li><b>Voters said no, too.</b> A 1992 ballot measure to allow betting on horse races got about 40% and failed (Pignanelli, Deseret News, Oct. 7, 2026).</li>
+<li><b>The faith of many Utahns.</b> About half of Utahns belong to The Church of Jesus Christ of Latter-day Saints. At General Conference on Oct. 3, 2026, President D. Todd Christofferson said "gambling is morally wrong" and "built on the desire to obtain something for nothing," and spoke about the growth of prediction markets and sports betting (KUER).</li>
+<li><b>Voices from both parties.</b> Gov. Spencer Cox, as quoted by AP in March 2026: "We are putting a casino in the pocket of every single American, and they are targeting especially young people." Rep. Blake Moore introduced a federal bill to regulate prediction markets, and Sen. John Curtis cosponsored the Prediction Markets are Gambling Act (UPR, April 20, 2026). In a Deseret News opinion piece on Oct. 7, 2026, Republican political consultant and lobbyist Renae Cowley called gambling "a scourge upon humanity," and Frank Pignanelli, who served as a Democrat in the Utah Legislature, wrote that "issues, not wagers, should drive public policy."</li>
+</ul>
+<p>That's the backdrop for the $115,800 in donations on this page.</p>
+
+<h2>Why do gambling companies give in a state that bans gambling? What each side says</h2>
+<p>Twenty of the 24 people who received this money are Republicans, and Utah's Constitution bans gambling. So why the money? No record shows anyone's reasons. But the public record does show the arguments on each side, and they help explain how this happens:</p>
+<h3>1. The companies say their products aren't gambling</h3>
+<ul>
+<li><b>Sweepstakes casinos (VGW):</b> VGW's attorney, Bill Gantz, told Tennessee lawmakers on March 3, 2026, "This is not gambling," and said "no purchase is necessary to play a freemium game."</li>
+<li><b>Pick'em apps (PrizePicks):</b> PrizePicks told California's attorney general in 2024 that its contests are games of skill, where "skilled players achieve significantly more success."</li>
+<li><b>Prediction markets (Kalshi):</b> Kalshi says its bets are federally regulated financial contracts. It called Utah's charges a "crazy overreach" and said "Utah is clearly playing politics."</li>
+</ul>
+<p>A lawmaker who accepts those arguments may not see a gift from these companies as conflicting with the gambling ban. Utah's answer, in H.B. 243 and in court, is that they are gambling.</p>
+<h3>2. Some see it as a federal question</h3>
+<p>The federal Commodity Futures Trading Commission says only it can regulate prediction markets, and it sued Utah on Oct. 27, 2026. Its chair said Congress made the CFTC "the federal regulator with sole responsibility to oversee these markets." Utah says its constitution decides what is gambling here.</p>
+<h3>3. Some worry about going too far</h3>
+<p>When the House debated H.B. 243, Rep. Matt MacPherson asked whether it would reach "player-to-player fantasy-type engagements where it's more based on skill." The sponsor, Rep. Joseph Elison, said it would not. Nine House members voted no. Their reasons aren't in the news coverage we found.</p>
+<h3>4. The gifts came after the vote</h3>
+<p>Seventeen of the 21 legislators VGW gave to voted <b>for</b> the ban on prop bets, months before VGW's gifts. During the House debate, Rep. Tyler Clancy, who received no gambling money, said: "Sports gambling is destroying my generation." Utah has no limit on campaign gifts.</p>
+<p><b>What's still unknown:</b> why these companies give to people who keep gambling illegal, and what, if anything, they expect. Those are questions 7, 12, 13 and 14 below.</p>
+
+<h2>What Kalshi is charged with</h2>
+<ul>
+<li><b>Criminal case (filed Oct. 28, 2026, Salt Lake City):</b> Kalshi and co-founders Tarek Mansour and Luana Lopes Lara face 14 counts: one count of pattern of unlawful activity (second-degree felony), 12 counts of online gambling promotion (third-degree felonies) and one count of gambling promotion (class A misdemeanor). These are charges, not convictions. No court date was reported.</li>
+<li><b>Civil case (filed Oct. 20, 2026):</b> The state asks the court to stop Kalshi from operating in Utah and estimates Kalshi collected $30.6 million to $61.2 million in fees from Utah accounts through Oct. 19, 2026 (the state's estimate, per The Block and Covers).</li>
+<li><b>The federal side:</b> A federal judge ruled for Utah in August; the 10th Circuit refused to pause that on Sept. 8; and on Oct. 27 the CFTC sued Utah and Brown, saying federal law, not Utah's, covers these markets.</li>
+</ul>
+
+<h2>Timeline: the money and the law, side by side</h2>
+<div class="timeline">
+<div class="ev money"><b>Oct. 25, 2018</b> · Las Vegas Sands gives $5,000 to then-AG Sean Reyes.</div>
+<div class="ev money"><b>Aug. 29, 2023</b> · Performance Predictions LLC (named in public listings as PrizePicks) gives Reyes $2,500.</div>
+<div class="ev money"><b>Apr. 9, 2024</b> · PrizePicks (filed as Side Prize LLC) gives candidate Brown $1,000; it gives another $1,000 on Oct. 8, 2024.</div>
+<div class="ev"><b>Oct. 2021</b> · Lincoln Hill Partners merges with Utah Policy Advocates; UtahPolicy's report lists Lincoln Shurtz, Casey Hill, Chase Everton and Derek Brown at the combined firm.</div>
+<div class="ev money"><b>Oct. 4, 2024</b> · Stacie Stern gives Brown $1,000 (Brooklyn, NY address).</div>
+<div class="ev money"><b>Jan.–Apr. 2025</b> · PrizePicks (Sideprize LLC) gives Brown $5,000; DraftKings (DK Crown) gives $5,000. The American Gaming Association gives Gov. Cox $2,500 (Apr. 18).</div>
+<div class="ev"><b>Late Oct.–early Nov. 2025</b> · About 15 private class-action suits are filed in Utah courts against sweepstakes operators; ARB Gaming and VGW are among the companies named (allegations, not findings).</div>
+<div class="ev money"><b>Jan. 16–19, 2026</b> · Arb Gaming gives Brown $5,000; Stacie Stern gives $10,000 (Rolling Hills, CA address).</div>
+<div class="ev"><b>Jan. 20, 2026</b> · Lincoln Shurtz registers as a Utah lobbyist for VGW.</div>
+<div class="ev"><b>Feb. 10, 2026</b> · House passes H.B. 243 (prop bets are gambling), 63–9.</div>
+<div class="ev"><b>Feb. 22, 2026</b> · Brown writes a Deseret News op-ed calling prediction markets "the newest iteration of gambling."</div>
+<div class="ev"><b>Feb. 26, 2026</b> · Kalshi sues Gov. Cox and the AG's office in federal court to block enforcement (Deseret News).</div>
+<div class="ev"><b>Feb. 27, 2026</b> · Senate passes H.B. 243, 25–0. Gov. Cox signs it March 25; it takes effect May 6.</div>
+<div class="ev money"><b>Apr. 21, 2026</b> · Las Vegas Sands gives Brown $50,000.</div>
+<div class="ev"><b>July 30, 2026</b> · Chase Everton registers as Kalshi's only Utah lobbyist.</div>
+<div class="ev"><b>Aug. 2026</b> · U.S. District Judge Robert Shelby rules for Utah: federal law doesn't override Utah's gambling laws for Kalshi's sports contracts. Kalshi appeals.</div>
+<div class="ev"><b>Sept. 8, 2026</b> · The 10th Circuit refuses to block Utah's laws while Kalshi's appeal goes on.</div>
+<div class="ev"><b>Sept. 13, 2026</b> · A state investigator opens a Kalshi account and places about a dozen bets over 11 days (per the charges).</div>
+<div class="ev money"><b>Aug. 31–Oct. 29, 2026</b> · VGW Luckyland gives to 22 campaign accounts (21 legislators and Brown), $27,800 total (Brown $5,000 on Sept. 30).</div>
+<div class="ev"><b>Sept. 14, 2026</b> · VGW's announced closing date for its LuckyLand Slots site; its Chumba, LuckyLand Casino and Global Poker sites stay open.</div>
+<div class="ev"><b>Oct. 20, 2026</b> · Utah sues Kalshi companies and two Susquehanna firms in 3rd District Court.</div>
+<div class="ev"><b>Oct. 27, 2026</b> · The federal Commodity Futures Trading Commission (CFTC) sues Utah and Brown in federal court, saying only it can regulate these markets.</div>
+<div class="ev"><b>Oct. 28, 2026</b> · Criminal charges filed against Kalshi and its two co-founders.</div>
+<div class="ev"><b>Oct. 29, 2026</b> · News reports Brown's gambling-industry donations.</div>
+<div class="ev"><b>Nov. 2, 2026</b> · DraftKings (a Brown donor), Robinhood and Fanatics say they're stopping sports and other event contracts for Utah customers (Fanatics as of Nov. 4).</div>
+</div>
+
+<h2>Who paid whom</h2>
+<div class="mermaid">
+%%{init: {'theme':'base','themeVariables':{'fontSize':'20px','primaryColor':'#0f1b2d','primaryTextColor':'#ffffff','lineColor':'#1d5fbf','primaryBorderColor':'#1d5fbf'}}}%%
+flowchart LR
+  LVS["Las Vegas Sands"] -->|"$50,000 · 2026"| BR["AG Derek Brown"]
+  LVS -->|"$5,000 · 2018"| RE["AG Sean Reyes (then)"]
+  ST["Stacie Stern<br/>(Underdog, per news)"] -->|"$11,000"| BR
+  PP["PrizePicks"] -->|"$7,000"| BR
+  PP -->|"$2,500 · 2023"| RE
+  DK["DraftKings"] -->|"$5,000"| BR
+  ARB["Arb Gaming"] -->|"$5,000"| BR
+  VGW["VGW Luckyland"] -->|"$5,000"| BR
+  VGW -->|"$22,800"| LEG["21 other candidates"]
+  AGA["American Gaming Assn."] -->|"$2,500"| COX["Gov. Spencer Cox"]
+  BR -. "office sues + charges" .-> KAL["Kalshi"]
+</div>
+
+<h2>Every donation, 2018–2026</h2>
+<p>From the state's own downloadable data. Sort by tapping a heading; filter by company or recipient.</p>
+<div class="filters">
+<select id="fCo"><option value="">All companies</option></select>
+<select id="fYr"><option value="">All years</option></select>
+<input id="fTx" type="search" placeholder="Search a name">
+</div>
+<p class="note" id="sumline"></p>
+<div class="tbl-wrap"><table id="tbl"><thead><tr><th data-k="date">Date</th><th data-k="recipient">Recipient</th><th data-k="office">Office</th><th data-k="donor">Donor as filed</th><th data-k="city">Donor city</th><th class="num" data-k="amount">Amount</th></tr></thead><tbody></tbody></table></div>
+<p class="note">Notes: Stacie Stern's two gifts list different addresses; likely the same person, not confirmed. Brown's 2025 PrizePicks and DraftKings gifts appear twice in the state's bulk file under different transaction numbers, but once on his filed report; each is counted once here.</p>
+
+<h2>The 21 legislators VGW gave to</h2>
+<p>VGW gave to 21 sitting legislators between Aug. 31 and Oct. 29, 2026: 17 Republicans and 4 Democrats. Seventeen are on today's ballot. H.B. 243, the 2026 bill that made prop bets gambling, passed <b>months before</b> these gifts; the vote column shows how each one voted on it.</p>
+<div class="tbl-wrap" style="max-height:none"><table id="vgw"><thead><tr><th>Legislator</th><th>Office</th><th class="num">VGW gift</th><th>H.B. 243 vote</th><th>Nov. 3, 2026 ballot</th></tr></thead><tbody></tbody></table></div>
+<p class="note">H.B. 243 final votes: House Feb. 10, 2026 (63–9); Senate Feb. 27, 2026 (25–0). Of the 21: 17 voted yes, 2 voted no (Pierucci, Teuscher), 2 were absent (McKell, Cullimore). Districts and parties from the Legislature's 2026 roster; ballot status from Ballotpedia's 2026 candidate lists. Results for today's races will be added when they're called.<br>* Filed under the name "Pierucci, Darlene"; this is Rep. Candice Pierucci's campaign account.</p>
+
+<h2>The companies</h2>
+<p class="note">Tap a card to flip it.</p>
+<div class="cards" id="cards"></div>
+
+<h2>Where the money came from</h2>
+<div id="map" role="img" aria-label="Map of donor home cities with lines to Salt Lake City"></div>
+<p class="note">Donor cities as written on the filings. Lines are drawn to Salt Lake City; line width shows the amount.</p>
+
+<h2>The Attorney General's connections</h2>
+<ul>
+<li><b>Lincoln Hill.</b> Utah's corporate registry lists Derek Brown as a director of Lincoln Hill PAC, with Casey Hill and Lincoln Shurtz. Brown's company, Integrity Strategies LLC, gave that PAC $17,500, and the PAC gave "Derek Brown for Attorney General" $15,100. That $15,100 includes $10,000 dated Sept. 24, 2025 (Brown's 2025 report, filed under the name Lincoln Hill Partners PAC).</li>
+<li><b>Lobbying.</b> A "Brown, Derek" was a registered Utah lobbyist from 2017 to 2023 (lobbyist.utah.gov, record now closed). His 54 listed clients include no gambling or prediction-market company.</li>
+<li><b>Kalshi's lobbyist.</b> Chase Everton, who joined Lincoln Hill Partners with Brown in the 2021 merger, is Kalshi's only registered Utah lobbyist (since July 30, 2026).</li>
+<li><b>VGW's lobbyist.</b> Lincoln Shurtz of Lincoln Hill Partners has been VGW's registered Utah lobbyist since Jan. 20, 2026.</li>
+<li><b>Campaign vendor.</b> Brown's campaign paid Election Hive $68,212 in 2025. The Deseret News quotes its founder, Matt Lusty, as Brown's campaign advisor.</li>
+</ul>
+<div class="fair"><b>For fairness:</b> Brown's office is suing and prosecuting Kalshi, the company his former colleague at Lincoln Hill Partners lobbies for. Lusty told the Deseret News the donations "have no influence on his decision-making." Las Vegas Sands has a long public record of opposing online gambling, so its money may line up with the AG's fight against prediction markets rather than against it. No record shows why any donor gave.</div>
+
+<h2>What this search can't see</h2>
+<div class="plain">
+<ul style="margin:0">
+<li><b>Money passed through national groups.</b> Brown's 2024 campaign reported $50,000 from the "Republican National Attorneys General Association" (as filed) on Aug. 29, 2024. Utah's records don't show who gave that group its money, so any gambling money inside it wouldn't show up here.</li>
+<li><b>Money under other names.</b> We searched donor names. A gift from a company's employee, lobbyist or another business name wouldn't show up unless the name points to gambling.</li>
+<li><b>Party and federal money.</b> We didn't search Utah political-party filings or federal (FEC) records.</li>
+</ul>
+</div>
+
+<h2 class="qs-h">Questions to ask, and whom to ask</h2>
+<div class="qs">
+<h3>For AG Derek Brown's office (<a href="https://attorneygeneral.utah.gov">attorneygeneral.utah.gov</a>)</h3>
+<ol>
+<li>Las Vegas Sands gave your campaign $50,000 on April 21, 2026, two months after your Feb. 22 op-ed calling prediction markets gambling. Did anyone from Sands contact your office about Kalshi or prediction markets before or after that donation?</li>
+<li>You said the Kalshi case is "part of a larger investigation," and The Block reported you said Utah is focused on Kalshi for now (Oct. 20, 2026). Are the other companies that gave to your campaign part of that investigation: DraftKings, PrizePicks, Underdog, Arb Gaming and VGW?</li>
+<li>Do DraftKings, PrizePicks, Underdog, Arb Gaming or VGW currently take money from people in Utah? If so, why haven't they been charged the way Kalshi was?</li>
+<li>Kalshi's only registered Utah lobbyist, Chase Everton, joined Lincoln Hill Partners with you in 2021. Have you stepped back from any part of the Kalshi case because of that history?</li>
+<li>Will your campaign keep or return the gambling-industry donations?</li>
+<li>The national attorneys general association that gave your campaign $50,000 in August 2024 doesn't list its donors in Utah records. Did any gambling-industry money reach your campaign through it?</li>
+</ol>
+<h3>For your state legislators (<a href="https://le.utah.gov">le.utah.gov</a>)</h3>
+<ol start="7">
+<li>VGW Luckyland, a sweepstakes-casino company named in Utah class-action suits, gave to 21 legislators between Aug. 31 and Oct. 29, 2026. Did you receive any of it, and will you vote on sweepstakes or gambling bills in 2027?</li>
+<li>Utah's Constitution bans games of chance. Does Utah law clearly cover sweepstakes casinos, fantasy pick'em apps and prediction markets, or does the Legislature need to close gaps?</li>
+<li>Utah has no limit on campaign gifts and no rule that keeps an attorney general off cases involving donors. Should there be one?</li>
+<li>For the nine House members who voted no on H.B. 243, including Reps. Candice Pierucci and Jordan Teuscher: why did you vote against it?</li>
+</ol>
+<h3>For Gov. Spencer Cox's office (<a href="https://governor.utah.gov">governor.utah.gov</a>)</h3>
+<ol start="11">
+<li>The American Gaming Association, the casino industry's trade group, gave your campaign $2,500 in April 2025. What position has your office taken on prediction markets like Kalshi, which sued you and the AG?</li>
+</ol>
+<h3>For the companies</h3>
+<ol start="12">
+<li>Las Vegas Sands: why give only to Utah's attorneys general, Reyes in 2018 and Brown in 2026, and no other Utah candidates?</li>
+<li>VGW: why give to 22 Utah campaign accounts in the two months before the Nov. 3, 2026 election?</li>
+<li>PrizePicks: why give to both of Utah's last two attorneys general (Reyes in 2023, if Performance Predictions LLC is PrizePicks, and Brown in 2024 and 2025)? And Stacie Stern: are the 2024 gift (Brooklyn address) and the 2026 gift (Rolling Hills address) from the same person, and were either given on behalf of Underdog?</li>
+</ol>
+<h3>For the Lt. Governor's Office (<a href="https://disclosures.utah.gov">disclosures.utah.gov</a>)</h3>
+<ol start="15">
+<li>Why does the state's bulk data list many of Brown's 2025 donations twice, under different transaction numbers (including PrizePicks and DraftKings), when his filed report shows each once?</li>
+</ol>
+</div>
+
+<h2>How we checked</h2>
+<p>We downloaded the state's "Download Data by Year" files for Candidates &amp; Office Holders and for Political Action Committees, every year from 2018 to 2026 (18 files, 655,619 transactions), and searched every donor name for gambling, sweepstakes, fantasy-sports and prediction-market companies, plus the words "gaming," "casino," "betting" and "sweepstake." We removed false matches (a pizza chain, a person named Bettinger, campaign hotel bills). We confirmed Brown's donations on his own filed reports. This is a donor-name search: money given through people or firms with other names would not appear. Political party filings were not searched.</p>
+
+<details><summary>Sources (tap to open)</summary>
+<ul>
+<li>Utah Lt. Governor's Office, <a href="https://disclosures.utah.gov/Search/AdvancedSearch">disclosures.utah.gov Advanced Search</a>, "Download Data by Year," Candidates &amp; Office Holders and PACs, 2018–2026 (downloaded Nov. 3, 2026)</li>
+<li>Derek Brown (2024 Attorney General) filings, <a href="https://disclosures.utah.gov/Search/PublicSearch/FolderDetails/1423400">disclosures.utah.gov folder 1423400</a>: 2025 Year End report and 2026 Received Contributions Report (read Nov. 3, 2026)</li>
+<li><a href="https://lobbyist.utah.gov/Search/PublicSearch">lobbyist.utah.gov</a>: Brown, Derek (folder 1414737, closed); Kalshi, VGW and PrizePicks registrations (read Nov. 1 and 3, 2026)</li>
+<li>H.B. 243 (2026) Gambling Revisions: <a href="https://le.utah.gov/~2026/bills/static/HB0243.html">bill page</a>, House and Senate roll calls (read Nov. 3, 2026)</li>
+<li>Utah Legislature, <a href="https://le.utah.gov/asp/roster/roster.asp">Legislators by Year, 2026</a> (read Nov. 3, 2026)</li>
+<li>Ballotpedia, Utah State Senate and House elections, 2026 (read Nov. 3, 2026)</li>
+<li>Ballotpedia, <a href="https://ballotpedia.org/Campaign_finance_in_Utah">Campaign finance in Utah</a> (contribution limits)</li>
+<li>Utah Code <a href="https://le.utah.gov/xcode/Title76/Chapter9/C76-9-S1402_2025050720250507.pdf">76-9-1402</a>, Participating in gambling</li>
+<li>Utah Attorney General, <a href="https://attorneygeneral.utah.gov/utah-sues-kalshi/">"Utah sues Kalshi"</a> (Oct. 20, 2026)</li>
+<li>Deseret News, <a href="https://www.deseret.com/sports/2026/10/28/utah-files-criminal-charges-kalshi-illegal-gambling-promotion-cftc-sues-utah-block-laws/">"Utah files criminal charges against Kalshi and its founders"</a> (Oct. 28, 2026)</li>
+<li>KUER, <a href="https://www.kuer.org/politics-government/2026-10-28/kalshi-prediction-market-utah-gambling-criminal-charges">"Utah ups the ante in Kalshi gambling fight with felony charges"</a> (Oct. 28, 2026)</li>
+<li>The Block, <a href="https://theblock.co/news/regulation/2026-10-27-cftc-sues-utah-battle-over-prediction-market-regulation-intensifies-431922">"CFTC sues Utah"</a> (Oct. 27, 2026)</li>
+<li>FOX 13, <a href="https://www.fox13now.com/news/politics/other-predictive-markets-pull-out-of-utah-after-kalshi-criminal-charges">"Other predictive markets pull out of Utah"</a> (Nov. 2, 2026)</li>
+<li>City Weekly, <a href="https://cityweekly.net/utah/article-6061-news-the-$50000-question-utahs-attorney-general-explains-campaign-donations-received-from-company-his-office-brought-fraud-charges-against.html">"The $50,000 Question"</a> (Shurtleff, 2008)</li>
+<li>Deseret News, <a href="https://www.deseret.com/utah/2026/02/11/utah-moves-to-ban-proposition-betting/">"Utah moves to ban proposition betting"</a> (Feb. 11, 2026): House debate quotes</li>
+<li>Sweepsy, <a href="https://www.sweepsy.com/news/vgw-testifies-tennessee-sweeps-ban-bill/">"VGW Testifies Against Tennessee Sweeps Ban Bill"</a> (March 2026)</li>
+<li>Casino.org, <a href="https://www.casino.org/news/prizepicks-tells-california-fantasy-sports-skill-contests/">"PrizePicks Tells California AG its Fantasy Sports are Contests of Skill"</a> (Feb. 20, 2024)</li>
+<li>KUTV, <a href="https://kutv.com/news/local/utah-charges-kalshi-and-its-founders-escalating-a-fight-over-who-can-regulate-prediction">Kalshi's response to the charges</a> (Oct. 29, 2026)</li>
+<li>AP via KUER, <a href="https://www.kuer.org/business-economy/2026-03-12/utahs-anti-gambling-tradition-takes-the-lead-in-kalshi-and-polymarket-fight">"Utah's anti-gambling tradition takes the lead in Kalshi and Polymarket fight"</a> (March 12, 2026)</li>
+<li>UPR, <a href="https://www.upr.org/politics/2026-04-20/prediction-markets-gambling-john-curtis">Curtis and prediction markets</a> (April 20, 2026)</li>
+<li>KUER, <a href="https://www.kuer.org/race-religion-social-justice/2026-10-03/latter-day-saint-leader-decries-explosion-in-sports-betting-prediction-markets">"Latter-day Saint leader decries explosion in sports betting, prediction markets"</a> (Oct. 3, 2026)</li>
+<li>Deseret News opinion, Pignanelli &amp; Cowley, <a href="https://www.deseret.com/opinion/2026/10/07/the-politics-of-gambling/">"The politics of gambling"</a> (Oct. 7, 2026)</li>
+<li>Utah Constitution, <a href="https://le.utah.gov/xcode/ArticleVI/Article_VI,_Section_27.html">Article VI, Section 27</a></li>
+<li>Deseret News, <a href="https://www.deseret.com/utah/2026/10/29/utah-attorney-general-received-campaign-donations-from-gambling-companies-disclosures-show">"Utah attorney general received campaign donations from gambling companies, disclosures show"</a> (Oct. 29, 2026)</li>
+<li>Deseret News, <a href="https://www.deseret.com/business/2026/02/26/kalshi-sues-utah-over-efforts-to-stop-prop-betting-in-the-state">"Kalshi sues Utah over efforts to stop prop betting in the state"</a> (Feb. 26, 2026)</li>
+<li>The Block, <a href="https://theblock.co/news/regulation/2026-10-20-utah-likens-kalshi-back-alley-gambling-den-lawsuit-naming-susquehanna-firms-421442">Utah lawsuit naming Susquehanna firms</a> (Oct. 20, 2026)</li>
+<li>Covers, <a href="https://www.covers.com/industry/utah-sues-kalshi-susquehanna-for-alleged-illegal-gambling-oct-21-2026">"Utah Sues Kalshi, Susquehanna"</a> (Oct. 21, 2026)</li>
+<li>Al Jazeera, <a href="https://aljazeera.com/economy/2026/10/29/kalshi-co-founders-hit-with-criminal-charges-in-us-state-of-utah">Kalshi co-founders charged in Utah</a> (Oct. 29, 2026)</li>
+<li>GamblingNews, <a href="https://www.gamblingnews.com/news/utah-sees-inundation-of-class-action-lawsuits-against-sweepstakes-casinos/">Utah class-action suits against sweepstakes casinos</a> (Nov. 5, 2025)</li>
+<li>Covers, <a href="https://www.covers.com/industry/sweepstakes-casino-luckyland-slots-to-shut-down-in-north-america-aug-11-2026">LuckyLand Slots to shut down</a> (Aug. 11, 2026)</li>
+<li>BettingUSA, <a href="https://www.bettingusa.com/states/ut/daily-fantasy/">Utah daily fantasy</a> (updated Sept. 16, 2026)</li>
+<li>BuzzFeed News, <a href="https://www.buzzfeednews.com/article/jamesarkin/gambling-lobby-turns-to-attorneys-general-for-protection-fro">"Gambling Lobby Turns To Attorneys General For Protection From Internet Competition"</a></li>
+<li>Blockport, <a href="https://blockport.io/latest-news/aga-1b-claim-fuels-state-fights-prediction-markets/">AGA's $1B claim fuels state fights over prediction markets</a> (May 31, 2026)</li>
+<li>Utah Division of Corporations, Lincoln Hill PAC (Entity #12822174-0140), directors (Hive research file)</li>
+</ul>
+</details>
+</main>
+
+<div class="hb-foot"><img src="hive-bee.png" alt=""><span class="hb-name">Utah Hive Politics</span><span class="hb-sub">from the publisher of The Weber County Hive</span><span class="hb-tag">Independent · Accountability · Journalism</span><p class="hb-line">The Weber County Hive and Utah Hive Politics: the people's publication. We investigate what's best for the public as a whole, not for any party or special interest group. We report public records. You decide.</p><p class="hb-tips"><a class="hb-btn" href="https://weber-county-hive.github.io/-weber-county-hive-index/tips.html#send">Send a tip</a><a class="hb-btn hb-btn2" href="https://weber-county-hive.github.io/-weber-county-hive-index/tips.html">Tips we checked</a><a class="hb-btn hb-btn2" href="https://weber-county-hive.github.io/-weber-county-hive-index/tips.html#send">See a mistake? Tell us</a></p><p class="hb-small">We never name tipsters. When we correct a page, the fix and its date are shown on the page.</p><p class="hb-small"><a href="index.html" style="color:#d4af37">The Ledger home</a> · <a href="https://weber-county-hive.github.io/-weber-county-hive-index/" style="color:#d4af37">Master Index (Hive library)</a> · <a href="https://webercountyhive.substack.com/" style="color:#d4af37">Read on Substack</a></p></div>
+
+<script src="gambling-data.js"></script>
+<script>
+const G=window.GAMBLING_GIFTS||[];
+const fmt=n=>'$'+n.toLocaleString('en-US');
+const fd=d=>{const [y,m,dd]=d.split('-');return `${+m}/${+dd}/${y}`};
+// filters
+const cos=[...new Set(G.map(g=>g.company))].sort(), yrs=[...new Set(G.map(g=>g.date.slice(0,4)))].sort();
+cos.forEach(c=>fCo.add(new Option(c,c))); yrs.forEach(y=>fYr.add(new Option(y,y)));
+let sortK='date',asc=true;
+function draw(){
+  const t=fTx.value.toLowerCase();
+  let rows=G.filter(g=>(!fCo.value||g.company===fCo.value)&&(!fYr.value||g.date.startsWith(fYr.value))&&(!t||(g.recipient+' '+g.donor).toLowerCase().includes(t)));
+  rows.sort((a,b)=>{const x=a[sortK],y=b[sortK];return (x>y?1:x<y?-1:0)*(asc?1:-1)});
+  tbl.tBodies[0].innerHTML=rows.map(g=>`<tr><td>${fd(g.date)}</td><td>${g.recipient}</td><td>${g.office||''}</td><td>${g.donor}${g.note?' *':''}</td><td>${g.city}</td><td class="num">${fmt(g.amount)}</td></tr>`).join('');
+  sumline.textContent=`${rows.length} donations · ${fmt(rows.reduce((s,g)=>s+g.amount,0))}`;
+}
+[fCo,fYr].forEach(e=>e.onchange=draw); fTx.oninput=draw;
+tbl.querySelectorAll('th').forEach(th=>th.onclick=()=>{const k=th.dataset.k;asc=sortK===k?!asc:true;sortK=k;draw()});
+draw();
+vgw.tBodies[0].innerHTML=G.filter(g=>g.hb243).sort((a,b)=>a.recipient.split(' ').pop().localeCompare(b.recipient.split(' ').pop())).map(g=>`<tr><td>${g.recipient}${g.filedAs?' *':''}</td><td>${g.office}</td><td class="num">${fmt(g.amount)}</td><td>${g.hb243}</td><td>${g.ballot2026}</td></tr>`).join('');
+// cards
+const C=[
+ {n:'Las Vegas Sands',w:'Casino company (Las Vegas, Macau, Singapore)',tot:55000,b:['Gave only to Utah attorneys general: Reyes $5,000 (2018), Brown $50,000 (Apr. 21, 2026)','Long public record of opposing online gambling (Coalition to Stop Internet Gambling)','No registered Utah lobbyist found','Operates no casinos in Utah']},
+ {n:'VGW (Luckyland, Chumba)',w:'Sweepstakes-casino company',tot:27800,b:['Gave to 21 legislators and Brown ($5,000), Aug. 31–Oct. 29, 2026','Named (with others) in Utah class-action suits, late 2025 (allegations)','Announced closing LuckyLand Slots on Sept. 14, 2026; other sites still open','Utah lobbyist: Lincoln Shurtz (since Jan. 20, 2026)']},
+ {n:'Stacie Stern',w:'Individual; identified in news reports as an Underdog executive',tot:11000,b:['Brown: $1,000 (Oct. 4, 2024, Brooklyn NY) and $10,000 (Jan. 19, 2026, Rolling Hills CA)','Filed under her own name, not Underdog','Same person? Not confirmed']},
+ {n:'PrizePicks (Sideprize LLC)',w:'Fantasy "pick\'em" app',tot:9500,b:['Brown: $1,000 (Apr. 9, 2024) + $1,000 (Oct. 8, 2024) + $2,500 (Jan. 15, 2025) + $2,500 (Mar. 21, 2025)','Reyes: $2,500 (Aug. 29, 2023), filed as Performance Predictions LLC, a name public listings tie to PrizePicks','Reported available to Utahns in a "legal gray area"','Utah lobbyists: Greg and Jeffrey Hartley; Greg Hughes (Jan.–July 2026)']},
+ {n:'DraftKings (DK Crown)',w:'Sportsbook and fantasy company',tot:5000,b:['Brown: $5,000 (Apr. 8, 2025)','No registered Utah lobbyist found']},
+ {n:'Arb Gaming',w:'Sweepstakes-casino operator',tot:5000,b:['Brown: $5,000 (Jan. 16, 2026)','Named in Utah class-action suits, late 2025 (allegations)','No registered Utah lobbyist found']},
+ {n:'American Gaming Association',w:'Casino industry trade group',tot:2500,b:['Gov. Cox: $2,500 (Apr. 18, 2025)','Says prediction markets cost states and tribes $1B+ (Kalshi disputes it)']},
+ {n:'Kalshi (not a donor)',w:'Prediction market',tot:0,b:['Gave nothing to any Utah candidate or PAC, 2018–2026','Sued Utah, Feb. 2026; sued by Utah Oct. 20, 2026; charged Oct. 28, 2026','Only Utah lobbyist: Chase Everton (since July 30, 2026)']}
+];
+cards.innerHTML=C.map(c=>`<div class="flip" tabindex="0" onclick="this.classList.toggle('on')" onkeydown="if(event.key==='Enter')this.classList.toggle('on')"><div class="flip-in"><div class="face front"><h4>${c.n}</h4><div>${c.w}</div><div class="amt" style="margin-top:14px">${c.tot?fmt(c.tot):'$0'}</div><div>to Utah campaigns, 2018–2026</div><div class="tap">Tap for the record →</div></div><div class="face back"><b>${c.n}</b><ul>${c.b.map(x=>`<li>${x}</li>`).join('')}</ul></div></div></div>`).join('');
+// map
+const pts={'Las Vegas, NV':[36.17,-115.14],'Boulder, CO':[40.015,-105.27],'Boston, MA':[42.36,-71.06],'Atlanta, GA':[33.75,-84.39],'Scottsdale, AZ':[33.49,-111.93],'Rolling Hills, CA':[33.76,-118.36],'Brooklyn, NY':[40.68,-73.94],'Washington, DC':[38.9,-77.04]};
+const slc=[40.76,-111.89];
+try{const m=L.map('map',{scrollWheelZoom:false}).setView([39.5,-98],4);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap'}).addTo(m);
+const by={};G.forEach(g=>{by[g.city]=(by[g.city]||0)+g.amount});
+Object.entries(by).forEach(([c,a])=>{const p=pts[c];if(!p)return;L.polyline([p,slc],{color:'#1d5fbf',weight:Math.max(2,Math.sqrt(a)/18),opacity:.8}).addTo(m);L.circleMarker(p,{radius:8,color:'#0f1b2d',fillColor:'#0f1b2d',fillOpacity:.9}).addTo(m).bindPopup(`<b>${c}</b><br>${fmt(a)} to Utah candidates`)});
+L.circleMarker(slc,{radius:10,color:'#1d5fbf',fillColor:'#1d5fbf',fillOpacity:1}).addTo(m).bindPopup('<b>Utah campaigns</b>');}catch(e){}
+mermaid.initialize({startOnLoad:true,securityLevel:'loose'});
+</script>
+<script src="lg-shelf.js?v=2"></script>
+<script data-goatcounter="https://weberhive.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

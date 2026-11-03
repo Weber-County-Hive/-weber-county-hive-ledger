@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gambling Money, Plain Words</title>
+<meta name="description" content="The easy version: who in the gambling industry gave money to Utah campaigns, 2018-2026, in plain words.">
+<link rel="icon" type="image/png" href="hive-bee.png">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Source+Sans+3:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{--felt:#0f1b2d;--felt2:#13233F;--gold:#1d5fbf;--ink:#1b2430;--muted:#55606e;--line:#d9dde3;--bg:#ffffff;--soft:#f3f6fa}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:20px/1.65 'Source Sans 3',Arial,sans-serif}
+a{color:#1d5fa8}
+.hb-bar{background:#0d0b0a;border-bottom:1px solid #3a2f1c;padding:8px 16px}
+.hb-bar a{display:flex;align-items:center;gap:12px;text-decoration:none}
+.hb-bar img{height:44px;width:auto}
+.hb-name{font-family:'Cinzel',Georgia,serif;color:#d4af37;font-size:14px;letter-spacing:.14em;text-transform:uppercase;display:block}
+.hb-sub{font-family:Georgia,serif;font-style:italic;color:#b8956a;font-size:12px;display:block}
+.hb-line-top{display:block;font-family:Georgia,serif;color:#e8d9b5;font-size:12px;margin-top:3px}
+header.case{background:var(--felt);color:#fff;padding:34px 16px 30px;border-bottom:6px solid var(--gold)}
+.wrap{max-width:820px;margin:0 auto;padding:0 16px}
+.eyebrow{color:var(--gold);font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:15px;margin:0}
+h1{font-family:'Playfair Display',Georgia,serif;font-size:clamp(30px,5vw,44px);line-height:1.15;margin:8px 0 10px}
+.dates{font-size:16px;color:#cfe0d6;margin:0}
+h2{font-family:'Playfair Display',Georgia,serif;color:var(--felt);font-size:30px;margin:42px 0 12px;border-bottom:3px solid var(--gold);padding-bottom:6px}
+.switch{display:flex;flex-wrap:wrap;align-items:center;gap:12px;background:#eef4fb;border:2px dashed var(--gold);padding:14px 18px;margin:24px 0;border-radius:8px}
+.btn{display:inline-block;background:var(--felt);color:#fff;text-decoration:none;font-weight:700;padding:12px 18px;border-radius:6px}
+.big{background:var(--soft);border-left:6px solid var(--gold);padding:18px 22px;border-radius:6px;font-size:22px}
+.bars{margin:14px 0}
+.bar{display:grid;grid-template-columns:150px 1fr;gap:10px;align-items:center;margin:10px 0}
+.bar span{font-weight:700}
+.fill{background:var(--felt);color:#fff;font-weight:700;padding:8px 10px;border-radius:4px;white-space:nowrap;min-width:max-content}
+.fill.g{background:#9ec0ea;color:#0f1b2d}
+.know{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.know div{border:3px solid var(--felt);border-radius:10px;padding:16px}
+.know div.no{border-color:var(--gold)}
+.know h3{margin:0 0 8px;color:var(--felt)}
+dl dt{font-weight:700;color:var(--felt);margin-top:14px}
+dl dd{margin:2px 0 0 0}
+ol li{margin-bottom:10px}
+.hb-foot{background:#0d0b0a;color:#b8956a;text-align:center;padding:26px 16px 30px;font-family:Georgia,serif;margin-top:50px}
+.hb-foot img{height:40px}
+.hb-tag{font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:#8a7650;margin-top:8px;display:block}
+.hb-line{max-width:720px;margin:14px auto 0;color:#e8d9b5;font-size:15.5px;line-height:1.5}
+.hb-tips{margin:16px 0 4px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.hb-btn{display:inline-block;border:2px solid #d4af37;background:#d4af37;color:#0d0b0a;font:700 15px Georgia,serif;padding:10px 18px;border-radius:6px;text-decoration:none}
+.hb-btn2{background:transparent;color:#d4af37}
+.hb-small{font-size:12.5px;color:#8a7650;margin:6px 0 0}
+@media (max-width:600px){body{font-size:18px}.bar{grid-template-columns:1fr}.big{font-size:19px}}
+.eyebrow{color:#9ec0ea}.counter b{color:#9ec0ea}.front h4{color:#9ec0ea}.ev.money:before{background:#9ec0ea}
+.hbx-top{margin:0}
+.hbx-slim{background:#0e2438;color:#dbe7f0;font:600 14px/1.4 Arial,sans-serif;padding:7px 20px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.hbx-slim a{color:#F3E3B3;text-decoration:underline}
+.hbx-tools{max-width:980px;margin:14px auto 4px;padding:0 20px;display:flex;flex-wrap:wrap;gap:8px;align-items:flex-start;font-family:Arial,sans-serif;position:relative;z-index:2}
+.hbx-tool{display:inline-block;font:700 15px Arial,sans-serif;color:#13233F!important;background:#fff;border:1px solid #c8cfd6;border-radius:6px;padding:9px 13px;text-decoration:none!important;cursor:pointer;line-height:1.2}
+.hbx-tool:hover{border-color:#13233F}.hbx-cnchip b{color:#1f5f9e;font-family:ui-monospace,Menlo,monospace}
+.hbx-jump{flex-basis:100%;order:5;border:1px solid #c8cfd6;border-radius:6px;background:#fff;color:#13233F}.hbx-jump summary{cursor:pointer;padding:9px 13px;font:700 15px Arial,sans-serif}
+.hbx-jump ol{margin:0;padding:4px 16px 12px 36px}.hbx-jump li{margin:6px 0;font-size:16.5px}.hbx-jump a{color:#13233F}
+.hbx-shelfwrap{background:#0e2438;color:#dbe7f0;padding:26px 20px 30px;font:16px/1.5 Arial,sans-serif;margin-top:48px;position:relative;z-index:1}
+.hbx-shelfwrap .in{max-width:900px;margin:0 auto}
+.hbx-shelf{border:2px dashed #9fd0ee;border-radius:10px;padding:16px 18px}
+.hbx-cn-big{font:600 17px ui-monospace,Menlo,monospace;margin-bottom:12px;color:#fff}.hbx-cn-big b{color:#9fd0ee}
+.hbx-nav{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.hbx-nav-btn{flex:1;min-width:220px;background:#12304a;border:1px solid #4d86ad;border-radius:8px;padding:12px 14px;color:#fff!important;text-decoration:none!important;font-size:16px}.hbx-nav-btn b{color:#9fd0ee;font-family:ui-monospace,Menlo,monospace}.hbx-off{opacity:.5}
+.hbx-list summary{cursor:pointer;font-weight:700;padding:6px 0}.hbx-list ol{list-style:none;margin:6px 0 0;padding:0}.hbx-list li{padding:6px 0;border-bottom:1px solid #2b4a63}.hbx-list a{color:#fff!important;text-decoration:none}
+.hbx-shelf-head{color:#9fd0ee;font:600 13px ui-monospace,Menlo,monospace;letter-spacing:.1em}.hbx-cn{font-family:ui-monospace,Menlo,monospace;color:#9fd0ee;margin-right:6px}
+.hbx-find{margin:14px 0 4px}.hbx-find label{display:block;font-weight:700;margin-bottom:6px}.hbx-find div{display:flex;gap:8px;flex-wrap:wrap}.hbx-find input{flex:1;min-width:0;width:100%;padding:12px 14px;font-size:17px;border:2px solid #4d86ad;border-radius:6px;color:#13233F;background:#fff}.hbx-find button{padding:12px 18px;font-size:16px;font-weight:700;background:#9fd0ee;color:#0e2438;border:0;border-radius:6px;cursor:pointer}
+.hbx-search{font-size:15px;margin-top:12px}.hbx-search a,.hbx-search b{color:#9fd0ee}
+.hbx-totop{display:none;position:fixed;right:16px;bottom:16px;z-index:50;background:#0e2438;color:#fff!important;border:2px solid #9fd0ee;border-radius:24px;padding:10px 16px;font:700 15px Arial,sans-serif;text-decoration:none!important;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+.hbx-dates{font-family:ui-monospace,Menlo,monospace;font-size:13px}
+@media print{.hbx-tools,.hbx-totop{display:none}}
+.hbx-tools{margin-top:16px;margin-bottom:14px}
+.hbx-shelfwrap+.hb-foot{margin-top:0}
+.hbx-shelf details.hbx-list li,.hbx-shelf details.hbx-list p{font-size:16px!important}
+.hbx-pagedates,p.hive-updated{font-family:ui-monospace,Menlo,monospace!important;font-size:14px!important;letter-spacing:.02em;opacity:.95!important;margin:10px 0 0!important}
+</style>
+</head>
+<body>
+<div class="hb-bar"><a href="https://webercountyhive.substack.com/" target="_blank" rel="noopener"><img src="uhp-badge.png" alt="Utah Hive Politics logo"><span><span class="hb-name">Utah Hive Politics</span><span class="hb-sub">from the publisher of The Weber County Hive</span><span class="hb-line-top">The people's publication. We investigate what's best for the public as a whole, not any party or special interest.</span></span></a></div>
+<div class="hbx-slim" style="background:#0e2438;color:#dbe7f0;font:600 14px/1.4 Arial,sans-serif;padding:7px 20px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap"><span>The Ledger · LG 100.09</span><span><a href="index.html" style="color:#F3E3B3">← The Ledger home</a> · <a href="https://weber-county-hive.github.io/-weber-county-hive-index/" style="color:#F3E3B3">← Hive library (every repo)</a></span></div>
+
+<header class="case"><div class="wrap">
+<p class="eyebrow">The Ledger · Case 17 · Plain-words version</p>
+<h1>Gambling Money in Utah, Made Simple</h1>
+<p class="dates">Posted Nov. 3, 2026 · Updated Nov. 3, 2026</p>
+</div></header>
+
+<main class="wrap">
+<div class="switch"><span>This is the easy version. Want every donation, the map, the timeline and all the sources?</span><a class="btn" href="gambling-money-utah.html">See the full version →</a></div>
+
+<h2>The short story</h2>
+<div class="big">
+<p style="margin-top:0">Gambling is against the law in Utah. But gambling companies still gave <b>$115,800</b> to Utah political campaigns from 2018 to 2026.</p>
+<p>Most of it, <b>$83,000</b>, went to Attorney General Derek Brown. His office is now suing and charging Kalshi, a betting app.</p>
+<p style="margin-bottom:0">The records show who gave and how much. They don't show <b>why</b>.</p>
+</div>
+
+<h2>Who got the money</h2>
+<div class="bars">
+<div class="bar"><span>Derek Brown (AG)</span><div class="fill" style="width:100%">$83,000</div></div>
+<div class="bar"><span>21 other candidates</span><div class="fill" style="width:27.5%">$22,800</div></div>
+<div class="bar"><span>Sean Reyes (AG, 2018 and 2023)</span><div class="fill g" style="width:9%">$7,500</div></div>
+<div class="bar"><span>Gov. Spencer Cox</span><div class="fill g" style="width:3%">$2,500</div></div>
+<div class="bar"><span>Any Utah PAC</span><div class="fill g" style="width:0">$0</div></div>
+</div>
+<p>Brown got more than every other Utah candidate in nine years put together.</p>
+
+<h2>Did he sue the companies that paid him?</h2>
+<div class="big">
+<p style="margin-top:0"><b>No.</b> The company Brown's office sued and charged, <b>Kalshi, gave nothing</b> to any Utah campaign.</p>
+<p>The companies that <b>did</b> give to Brown have <b>not</b> been sued or charged by Brown's office, as far as we found.</p>
+<p style="margin-bottom:0">The open question is whether they're being treated the same as Kalshi.</p>
+</div>
+
+<h2>The biggest gift</h2>
+<p>Las Vegas Sands, a big casino company, gave Brown <b>$50,000</b> on April 21, 2026. That was two months after Brown wrote that prediction markets are gambling. It gave Utah money only one other time: <b>$5,000</b> to the attorney general before him, Sean Reyes, in 2018.</p>
+<p>Las Vegas Sands has spent years fighting <b>online</b> gambling, which competes with its casinos. Brown's office is fighting an online betting app. So the gift may line up with what Brown is already doing. No record says why it was given.</p>
+
+<h2>The Utah way</h2>
+<ul>
+<li>Gambling has been against Utah's constitution since statehood. No casinos, no lottery, no Powerball.</li>
+<li>Utah voters turned down horse-race betting in 1992.</li>
+<li>About half of Utahns are Latter-day Saints. On Oct. 3, 2026, Church leader D. Todd Christofferson said "gambling is morally wrong."</li>
+<li>Gov. Cox, as quoted by AP, said betting apps put "a casino in the pocket of every single American."</li>
+</ul>
+<p>That's the backdrop for the <b>$115,800</b> on this page.</p>
+
+<h2>Why do gambling companies give in a state that bans gambling?</h2>
+<p>No record shows anyone's reasons. But here is what each side says in public:</p>
+<ul>
+<li><b>The companies say they aren't gambling.</b> The sweepstakes company says no one has to pay to play. The pick'em app says winning takes skill. Kalshi says its bets are federal financial contracts.</li>
+<li><b>The federal agency over these markets (the CFTC) sides with Kalshi</b> and sued Utah over it.</li>
+<li><b>Some lawmakers worried the ban could go too far</b>, for example into fantasy sports.</li>
+<li><b>The gifts came after the vote.</b> 17 of the 21 lawmakers who got sweepstakes money voted <b>for</b> the 2026 ban on prop bets, months earlier.</li>
+</ul>
+<p>Why the companies give, and what they expect, is still unknown. You can ask them; the questions are on the <a href="gambling-money-utah.html">full version</a>.</p>
+
+<h2>Is this allowed?</h2>
+<p><b>Yes.</b> Utah has no limit on how much a person or company can give to a state candidate. We found no Utah rule that keeps an attorney general off a case because of a donation.</p>
+
+<h2>Can I get in trouble for using these apps?</h2>
+<p>Utah law says taking part in gambling, including online, is a class B misdemeanor. As far as we found, only Kalshi and its two founders have been charged, not users.</p>
+
+<h2>Is Brown on today's ballot?</h2>
+<p><b>No.</b> He was elected in 2024. His next election is in 2028. But <b>17</b> of the 21 lawmakers who got money from the sweepstakes company VGW are on today's ballot. Their names are on the <a href="gambling-money-utah.html">full version</a>.</p>
+
+<h2>What we know, and what we don't</h2>
+<div class="know">
+<div><h3>We know</h3><ul>
+<li>Who gave, how much, and when (state records)</li>
+<li>Kalshi gave nothing to any Utah campaign</li>
+<li>Kalshi's Utah lobbyist once worked at the same firm as Brown</li>
+<li>Brown's office sued Kalshi Oct. 20 and filed charges Oct. 28, 2026</li>
+<li>The federal agency over these markets sued Utah on Oct. 27, 2026</li>
+</ul></div>
+<div class="no"><h3>We don't know</h3><ul>
+<li>Why any company gave</li>
+<li>If any donor asked Brown for anything</li>
+<li>Why other betting apps that gave to Brown haven't been charged</li>
+<li>If Brown will keep the money</li>
+</ul></div>
+</div>
+
+<h2>Words to know</h2>
+<dl>
+<dt>Prediction market</dt><dd>An app where people bet on what will happen, like who wins a game or an election. Kalshi is one. It says its bets are legal under federal rules. Utah says they're gambling.</dd>
+<dt>Sweepstakes casino</dt><dd>An online site with casino-style games that uses "coins" instead of cash bets, so it says it isn't gambling. VGW and Arb Gaming run these.</dd>
+<dt>Fantasy "pick'em" app</dt><dd>An app where you pick how well players will do. PrizePicks and Underdog are examples.</dd>
+<dt>Lobbyist</dt><dd>A person paid to talk to lawmakers and officials for a company or group. They must register with the state.</dd>
+<dt>PAC</dt><dd>Political action committee: a group that collects money and gives it to campaigns.</dd>
+</dl>
+
+<h2>Questions you can ask</h2>
+<ol>
+<li><b>Ask the AG's office</b> (<a href="https://attorneygeneral.utah.gov">attorneygeneral.utah.gov</a>): Will you keep or give back the gambling money?</li>
+<li><b>Ask the AG's office:</b> Are the other companies that gave to your campaign part of your "larger investigation"?</li>
+<li><b>Ask your legislators</b> (<a href="https://le.utah.gov">le.utah.gov</a>): Did you get money from VGW, and will you vote on gambling bills in 2027?</li>
+<li><b>Ask your legislators:</b> Does Utah law clearly cover sweepstakes sites, pick'em apps and prediction markets?</li>
+</ol>
+<p>All 15 questions are on the <a href="gambling-money-utah.html">full version</a>.</p>
+
+<h2>Where this came from</h2>
+<p>A tip came in. We checked every campaign and PAC donation filed with the state from 2018 to 2026 (655,619 transactions) on <a href="https://disclosures.utah.gov">disclosures.utah.gov</a>, and Brown's own reports. Full source list on the <a href="gambling-money-utah.html">full version</a>.</p>
+
+<div class="switch"><span>Ready for the details?</span><a class="btn" href="gambling-money-utah.html">See the full version →</a></div>
+</main>
+
+<div class="hb-foot"><img src="hive-bee.png" alt=""><span class="hb-name">Utah Hive Politics</span><span class="hb-sub">from the publisher of The Weber County Hive</span><span class="hb-tag">Independent · Accountability · Journalism</span><p class="hb-line">The Weber County Hive and Utah Hive Politics: the people's publication. We investigate what's best for the public as a whole, not for any party or special interest group. We report public records. You decide.</p><p class="hb-tips"><a class="hb-btn" href="https://weber-county-hive.github.io/-weber-county-hive-index/tips.html#send">Send a tip</a><a class="hb-btn hb-btn2" href="https://weber-county-hive.github.io/-weber-county-hive-index/tips.html">Tips we checked</a><a class="hb-btn hb-btn2" href="https://weber-county-hive.github.io/-weber-county-hive-index/tips.html#send">See a mistake? Tell us</a></p><p class="hb-small">We never name tipsters. When we correct a page, the fix and its date are shown on the page.</p><p class="hb-small"><a href="index.html" style="color:#d4af37">The Ledger home</a> · <a href="https://weber-county-hive.github.io/-weber-county-hive-index/" style="color:#d4af37">Master Index (Hive library)</a> · <a href="https://webercountyhive.substack.com/" style="color:#d4af37">Read on Substack</a></p></div>
+<script src="lg-shelf.js?v=2"></script>
+<script data-goatcounter="https://weberhive.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
