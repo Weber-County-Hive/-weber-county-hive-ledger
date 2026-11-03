@@ -10,17 +10,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --ink:#0B1220;
+    --ink:#0f1b2d;
     --ink-soft:#3E4A5E;
-    --paper:#F3F4F0;
+    --paper:#f3f6fa;
     --panel:#FFFFFF;
-    --line:#DBDDD6;
-    --verified:#1F6F5C;
-    --verified-bg:#E4F0EC;
-    --lead:#B4791F;
-    --lead-bg:#FBF0DD;
-    --flag:#9C3B33;
-    --flag-bg:#F7E7E4;
+    --line:#dde3ea;
+    --verified:#0f766e;
+    --verified-bg:#e6f4f1;
+    --lead:#1d5fbf;
+    --lead-bg:#eef4fb;
+    --flag:#b3261e;
+    --flag-bg:#fbe3df;
     --display: "Newsreader", serif;
     --body: "Inter", sans-serif;
     --mono: "IBM Plex Mono", monospace;
@@ -142,9 +142,9 @@
 
   /* ===== energy overlap ===== */
   #energybar{height:520px}
-  .tier5{background:#D9EAD3}
-  .tier4{background:#D9EAD3}
-  .tier3{background:#FBF0DD}
+  .tier5{background:#e6f4f1}
+  .tier4{background:#e6f4f1}
+  .tier3{background:#eef4fb}
   .tier2{background:#CFE2F3}
   table.ledger td.tiercell{font-family:var(--mono);text-align:right}
   .tier-header{font-family:var(--mono);font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-soft);background:#ECEDE8;padding:8px 12px;border-bottom:2px solid var(--ink)}
@@ -177,14 +177,79 @@
 .hb-foot .hb-name{font-size:14px;}
 .hb-foot .hb-tag{font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:#8a7650;margin-top:8px;display:block;}
 @media(max-width:600px){.hb-bar{padding:8px 16px}.hb-bar img{width:38px;height:38px}.hb-name{font-size:13px}.hb-sub{font-size:11.5px}}
+.hbx-top{margin:0}
+.hb-bar{background:#0d0b0a;border-bottom:1px solid #3a2f1c;padding:10px 20px}
+.hb-bar a{display:flex;align-items:center;gap:12px;max-width:1100px;margin:0 auto;text-decoration:none}
+.hb-bar img{width:52px;height:52px;border-radius:4px;display:block;flex:none}
+.hb-name{font-family:'Cinzel','Trajan Pro',Georgia,serif;color:#d4af37;font-size:16px;letter-spacing:.14em;text-transform:uppercase;line-height:1.2;display:block}
+.hb-sub{font-family:Georgia,serif;font-style:italic;color:#b8956a;font-size:12.5px;display:block;margin-top:2px}
+.hb-line-top{font-family:Georgia,serif;color:#e8d9b5;font-size:12.5px;display:block;margin-top:3px;line-height:1.4}
+.hbx-slim{background:#0e2438;color:#dbe7f0;font:600 14px/1.4 Arial,sans-serif;padding:7px 20px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.hbx-slim a{color:#F3E3B3;text-decoration:underline}
+.hb-foot{background:#0d0b0a;color:#b8956a;text-align:center;padding:26px 20px 30px;font-family:Georgia,serif;line-height:1.5}
+.hb-foot img{width:52px;height:52px;display:block;margin:0 auto 10px}
+.hb-foot .hb-name,.hb-foot .hb-sub{display:block}
+.hb-foot .hb-tag{font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:#8a7650;margin-top:8px;display:block}
+.hb-line{max-width:720px;margin:14px auto 0;color:#e8d9b5;font-size:15.5px;line-height:1.5}
+.hb-tips{margin:16px 0 4px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.hb-btn{display:inline-block;border:2px solid #d4af37;background:#d4af37;color:#0d0b0a!important;font:700 15px Georgia,serif;padding:10px 18px;border-radius:6px;text-decoration:none!important}
+.hb-btn2{background:transparent;color:#d4af37!important}
+.hb-small{font-size:12.5px;color:#8a7650;margin:6px 0 0}
+.hb-small a{color:#d4af37;text-decoration:underline}
+.hb-foot p{max-width:720px;margin-left:auto!important;margin-right:auto!important}
+.hbx-tools{max-width:980px;margin:14px auto 4px;padding:0 20px;display:flex;flex-wrap:wrap;gap:8px;align-items:flex-start;font-family:Arial,sans-serif;position:relative;z-index:2}
+.hbx-tool{display:inline-block;font:700 15px Arial,sans-serif;color:#13233F!important;background:#fff;border:1px solid #c8cfd6;border-radius:6px;padding:9px 13px;text-decoration:none!important;cursor:pointer;line-height:1.2}
+.hbx-tool:hover{border-color:#13233F}.hbx-cnchip b{color:#1f5f9e;font-family:ui-monospace,Menlo,monospace}
+.hbx-jump{flex-basis:100%;order:5;border:1px solid #c8cfd6;border-radius:6px;background:#fff;color:#13233F}.hbx-jump summary{cursor:pointer;padding:9px 13px;font:700 15px Arial,sans-serif}
+.hbx-jump ol{margin:0;padding:4px 16px 12px 36px}.hbx-jump li{margin:6px 0;font-size:16.5px}.hbx-jump a{color:#13233F}
+.hbx-shelfwrap{background:#0e2438;color:#dbe7f0;padding:26px 20px 30px;font:16px/1.5 Arial,sans-serif;margin-top:48px;position:relative;z-index:1}
+.hbx-shelfwrap .in{max-width:900px;margin:0 auto}
+.hbx-shelf{border:2px dashed #9fd0ee;border-radius:10px;padding:16px 18px}
+.hbx-cn-big{font:600 17px ui-monospace,Menlo,monospace;margin-bottom:12px;color:#fff}.hbx-cn-big b{color:#9fd0ee}
+.hbx-nav{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.hbx-nav-btn{flex:1;min-width:220px;background:#12304a;border:1px solid #4d86ad;border-radius:8px;padding:12px 14px;color:#fff!important;text-decoration:none!important;font-size:16px}.hbx-nav-btn b{color:#9fd0ee;font-family:ui-monospace,Menlo,monospace}.hbx-off{opacity:.5}
+.hbx-list summary{cursor:pointer;font-weight:700;padding:6px 0}.hbx-list ol{list-style:none;margin:6px 0 0;padding:0}.hbx-list li{padding:6px 0;border-bottom:1px solid #2b4a63}.hbx-list a{color:#fff!important;text-decoration:none}
+.hbx-shelf-head{color:#9fd0ee;font:600 13px ui-monospace,Menlo,monospace;letter-spacing:.1em}.hbx-cn{font-family:ui-monospace,Menlo,monospace;color:#9fd0ee;margin-right:6px}
+.hbx-find{margin:14px 0 4px}.hbx-find label{display:block;font-weight:700;margin-bottom:6px}.hbx-find div{display:flex;gap:8px;flex-wrap:wrap}.hbx-find input{flex:1;min-width:0;width:100%;padding:12px 14px;font-size:17px;border:2px solid #4d86ad;border-radius:6px;color:#13233F;background:#fff}.hbx-find button{padding:12px 18px;font-size:16px;font-weight:700;background:#9fd0ee;color:#0e2438;border:0;border-radius:6px;cursor:pointer}
+.hbx-search{font-size:15px;margin-top:12px}.hbx-search a,.hbx-search b{color:#9fd0ee}
+.hbx-totop{display:none;position:fixed;right:16px;bottom:16px;z-index:50;background:#0e2438;color:#fff!important;border:2px solid #9fd0ee;border-radius:24px;padding:10px 16px;font:700 15px Arial,sans-serif;text-decoration:none!important;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+.hbx-dates{font-family:ui-monospace,Menlo,monospace;font-size:13px}
+@media(max-width:600px){.hb-bar img{width:38px;height:38px}.hb-line-top{font-size:11.5px}}
+@media print{.hbx-tools,.hbx-totop{display:none}}
+/* Hive library standard (Nov. 2, 2026) */
+.hb-foot .hb-name{font-size:16px}
+.hb-foot .hb-sub{font-size:12.5px}
+.hbx-tools{margin-top:16px;margin-bottom:14px}
+.hbx-shelfwrap+.hb-foot{margin-top:0}
+.hbx-shelf details.hbx-list li,.hbx-shelf details.hbx-list p{font-size:16px!important}
+.hb-bar img[src="hive-bee.png"]{border-radius:50%}
+.hbx-pagedates,p.hive-updated{font-family:ui-monospace,Menlo,monospace!important;font-size:14px!important;letter-spacing:.02em;opacity:.95!important;margin:10px 0 0!important}
+.mast .hbx-pagedates,.header-inner .hbx-pagedates{color:inherit}
+header .header-inner .hbx-pagedates,header .header-inner .hive-updated,header.band .hive-updated,.header-band .hive-updated{color:#c9d3df!important}
+/* Larger reading text to match the other Hive repos (Nov. 2, 2026) */
+li a,td a,p a{overflow-wrap:anywhere}
+section p:not(.hive-updated):not(.pull-quote),section li,.wrap > p,.panel p,p.body,p.lede,.beat p,.profile-block p,.step p,.beginners p,p.intro,.callout,.caution,.caveat,.correction,.warn,.note,div.item,.pull{font-size:19px!important;line-height:1.6}
+.dek,p.dek,div.dek{font-size:20px!important;line-height:1.55}
+td,.panel,.wr-officers,.pk-desc,.ir-desc,.pac-key-note,p.note,p.basis,p.gaps,p.filed,p.nobars,.flow-note,.person-note,.recipient-note,.flip-face p,.flip-card-back p,.cast-card p,.flip-back,.source-list li,.full-sources-body p,.person-connections li,.card ul li,p.summary,.card .dek,.diagram-note,.cast-sub,.section-sub,.profiles-sub,.runners,footer p,footer li{font-size:17px!important;line-height:1.55}
+.kicker,.eyebrow,.tier-label,.donor-total,.person-role,.sub,.label,div.l,.tile-runby,.flow-source,.chain-arrow,.wr-pac,.hint,.pr,.flag:not(.val){font-size:15px!important}
+.wrap ul li{font-size:18px!important;line-height:1.55}
+.gs-sub,.pac-key-head p,.cbar-l{font-size:17px!important;line-height:1.55}
+.yearly .card h3{font-size:20px!important}
+caption.small,caption.small a{font-size:16px!important}
+.diagram-caption,.correction .tag{font-size:14px!important}
+.glossary-item .full,.glossary-item{font-size:17px!important;line-height:1.5}
+.person-details summary{font-size:15px!important}
+.person-name{font-size:19px!important}.person-role{font-size:16px!important}
+@media(max-width:700px){.diagram-box,.mermaid{overflow-x:auto;max-width:100%}.wrap table,section table,.panel table{display:block;overflow-x:auto;max-width:100%}section svg,.panel svg{max-width:100%;height:auto}}
 </style>
 </head>
 <body>
-<div class="hb-bar"><a href="https://webercountyhive.substack.com/" target="_blank" rel="noopener"><img src="uhp-badge.png" alt="Utah Hive Politics logo"><span><span class="hb-name">Utah Hive Politics</span><span class="hb-sub">from the publisher of The Weber County Hive</span></span></a></div>
+<div class="hbx-top"><div class="hb-bar"><a href="https://webercountyhive.substack.com/" target="_blank" rel="noopener"><img src="hive-bee.png" alt="The Hive bee seal"><span><span class="hb-name">Utah Hive Politics</span><span class="hb-sub">from the publisher of The Weber County Hive</span><span class="hb-line-top">The people's publication. We investigate what's best for the public as a whole, not any party or special interest.</span></span></a></div>
+<div class="hbx-slim"><span>The Ledger · LG 100.05</span><span><a href="index.html">← The Ledger home</a> · <a href="https://weber-county-hive.github.io/-weber-county-hive-index/">← Hive library (every repo)</a></span></div></div>
 
-<header class="mast"><div class="eyebrow"><span class="dot"></span>THE WEBER COUNTY HIVE — MONEY FLOW LEDGER</div><h1 class="title">Energy Overlap, PAC Officers and Confirmed Oil Money</h1><p class="dek">Who runs the PACs in The Ledger, which legislators took money from up to 8 of 9 energy and petroleum sources, and every traced Big West Oil and rPlus Energies contribution.</p><p class="dek" style="font-size:14px">Posted Oct. 19, 2026 · August snapshot plus new filings through Oct. 19, 2026 · <a href="ledger.html" style="color:inherit">Back to The Ledger</a></p></header>
+<header class="mast"><div class="eyebrow"><span class="dot"></span>THE WEBER COUNTY HIVE — MONEY FLOW LEDGER</div><h1 class="title">Energy Overlap, PAC Officers and Confirmed Oil Money</h1><p class="dek">Who runs the PACs in The Ledger, which legislators took money from up to 8 of 9 energy and petroleum sources, and every traced Big West Oil and rPlus Energies contribution.</p><p class="hbx-pagedates">Posted Oct. 19, 2026 · August snapshot plus new filings through Oct. 19, 2026 · Page look updated Nov. 2, 2026 · <a href="ledger.html" style="color:inherit">Back to The Ledger</a></p></header>
 <div class="wrap">
-<div class="caution"><b>Where this page came from.</b> These sections were part of an August 2026 update to <a href="ledger.html">The Ledger</a> that was saved in the wrong place and never published on the main page. They are published here as their own page, unchanged in their figures, so nothing is lost. All figures are a snapshot as of Aug. 12–13, 2026, from disclosures.utah.gov. The main Ledger page and its money-flow chart are unchanged.</div><section id="update-oct-2026"><div class="section-head"><h2 class="sec"><span class="no">★</span>Update: filed after Aug. 13, 2026</h2><span class="stamp" style="border-color:#1F6F5C;color:#1F6F5C;background:#E4F0EC">new data · pulled Oct. 19, 2026</span></div>
+<div class="caution"><b>Where this page came from.</b> These sections were part of an August 2026 update to <a href="ledger.html">The Ledger</a> that was saved in the wrong place and never published on the main page. They are published here as their own page, unchanged in their figures, so nothing is lost. All figures are a snapshot as of Aug. 12–13, 2026, from disclosures.utah.gov. The main Ledger page and its money-flow chart are unchanged.</div><section id="update-oct-2026"><div class="section-head"><h2 class="sec"><span class="no">★</span>Update: filed after Aug. 13, 2026</h2><span class="stamp" style="border-color:#0f766e;color:#0f766e;background:#e6f4f1">new data · pulled Oct. 19, 2026</span></div>
 <p class="lede">Everything below this box is the August snapshot, unchanged. This box adds only what was filed since: the 2026 September 30 reports and the General reports filed as of Oct. 19, 2026. It does not replace any August figure.</p>
 <div class="cols2">
 <div class="panel" style="padding:18px 20px"><h3>Irish Elk LLC: new payments since August</h3>
@@ -221,7 +286,7 @@
           <div class="wr-pac">Utah Republican Senate Campaign Committee (URSCC)</div>
           <div class="wr-officers"><b>Sen. J. Stuart Adams</b> (Senate President) and <b>Sen. Kirk Cullimore</b> — Primary Officers. <b>Kyle Palmer</b> — CFO/Treasurer, same role he holds at other PACs on this page. Represents "Members of the Utah Senate Republican Caucus." Irish Elk LLC (Palmer's firm) is URSCC's single largest expenditure recipient — $326,282.55 since 2022.</div>
         </div>
-        <div class="who-runs-card" style="background:#FBF0DD;grid-column:1/-1">
+        <div class="who-runs-card" style="background:#eef4fb;grid-column:1/-1">
           <div class="wr-pac" style="color:var(--flag)">The pattern across all six</div>
           <div class="wr-officers">Kyle Palmer holds Treasurer and/or CFO authority over <b>five of the six PACs on this page</b> — UHREC, House Speaker Leadership PAC, Adams Leadership PAC, URSCC, and NUPAC. He's also Director of two of them. The one PAC he's not an officer of, Utah Petroleum Association PAC, is instead run directly by Chevron's and Marathon Petroleum's own government-affairs executives.</div>
         </div>
@@ -264,7 +329,7 @@
   </section><section id="confirmed">
     <div class="section-head">
       <h2 class="sec"><span class="no">03</span>Confirmed direct contributions — Big West Oil &amp; rPlus Energies</h2>
-      <span class="stamp" style="border-color:#1F6F5C;color:#1F6F5C;background:#E4F0EC">confirmed — direct disclosure data</span>
+      <span class="stamp" style="border-color:#0f766e;color:#0f766e;background:#e6f4f1">confirmed — direct disclosure data</span>
     </div>
     <p class="lede">Unlike the candidate chains on the <a href="ledger.html">main Ledger page</a>, every figure here is a <b>traced, confirmed transaction</b> pulled directly from disclosures.utah.gov for these two companies specifically — not a combinatorial pairing. This data was researched separately from the original four source files and is <b>not</b> included in the KPI totals at the top of this page.</p>
 
@@ -326,8 +391,9 @@
     </div>
   </section><div class="panel" style="padding:14px 20px;margin-top:16px;font-size:13px;color:var(--ink-soft)"><b style="color:var(--ink)">Wording fixes, Oct. 19, 2026:</b> the officer summary first said Kyle Palmer had treasurer or CFO authority over "every single PAC on this page"; it lists five of the six (the sixth, the Utah Petroleum Association PAC, is run by Chevron and Marathon Petroleum executives). The research table first used the words "Irish Elk self-dealing"; it now describes the payments. No figures were changed.</div><section id="questions"><div class="section-head"><h2 class="sec"><span class="no">06</span>Questions to ask, and whom to ask</h2></div><div class="panel" style="padding:20px 24px;font-size:14px;line-height:1.7"><p><b>Your legislator's campaign:</b> which energy or petroleum companies on this page gave to the campaign, and did the legislator vote on bills affecting those companies?</p><p><b>The Lieutenant Governor's elections office (disclosures.utah.gov):</b> how can the public see every payment a PAC made to a vendor run by its own treasurer, in one place?</p><p><b>The PACs listed above:</b> who approves payments to a firm owned by the PAC's own treasurer or CFO?</p></div></section><section id="where-this-connects"><div class="section-head"><h2 class="sec"><span class="no">07</span>Where this connects</h2></div><div class="panel" style="padding:20px 24px;font-size:14px;line-height:1.8"><ul><li><a href="ledger.html">The Ledger: where the money moves</a> (the main money-flow chart and candidate chains)</li><li><a href="energy.html">Energy</a> (energy and utility donors)</li><li><a href="biggest-donors-flip.html">Biggest donors</a></li><li><a href="money-shift.html">The money shift</a></li><li><a href="https://weber-county-hive.github.io/Bill-Tracker/weber-hive-2026-hb575.html">H.B. 575 (2026), fuel tax and refinery data</a> on the Bill-Tracker</li><li><a href="https://weber-county-hive.github.io/-weber-county-hive-index/">Master index</a></li></ul></div></section><section id="sources"><div class="section-head"><h2 class="sec"><span class="no">08</span>Sources</h2></div><details class="panel" style="padding:16px 20px"><summary style="cursor:pointer;font-weight:600">Show sources</summary><ol style="line-height:1.8"><li>Utah Lieutenant Governor's Office campaign finance disclosures: <a href="https://disclosures.utah.gov">disclosures.utah.gov</a> (Advanced Search, "Download Data by Year," and DEX CSV exports per committee)</li><li>Committee registrations and officer filings on disclosures.utah.gov for UHREC, House Speaker Leadership PAC, Adams Leadership PAC, URSCC, Utah Petroleum Association PAC and NUPAC</li><li>Utah Political Watch reporting on Torus's $150,000 to Gov. Cox and the summit sponsors (cited in the Aug. 12, 2026 research tracker; link not in our files)</li></ol></details></section>
 </div>
-<footer>The Weber County Hive · The Ledger · Public records only · Posted Oct. 19, 2026 · August snapshot plus new filings through Oct. 19, 2026</footer>
-<div class="hb-foot"><img src="hive-bee.png" alt=""><span class="hb-name">Utah Hive Politics</span><span class="hb-sub">from the publisher of The Weber County Hive</span><span class="hb-tag">Independent · Accountability · Journalism</span></div>
+<div class="hbx-shelfwrap"><div class="in"><div class="hbx-shelf" id="hbx-shelf"></div></div></div>
+<div class="hb-foot"><img src="hive-bee.png" alt=""><span class="hb-name">Utah Hive Politics</span><span class="hb-sub">from the publisher of The Weber County Hive</span><span class="hb-tag">Independent &middot; Accountability &middot; Journalism</span><p class="hb-line">The Weber County Hive and Utah Hive Politics: the people's publication. We investigate what's best for the public as a whole, not for any party or special interest group. We report public records. You decide.</p><p class="hb-tips"><a class="hb-btn" href="https://weber-county-hive.github.io/-weber-county-hive-index/tips.html#send">Send a tip</a><a class="hb-btn hb-btn2" href="https://weber-county-hive.github.io/-weber-county-hive-index/tips.html">Tips we checked</a><a class="hb-btn hb-btn2" href="https://weber-county-hive.github.io/-weber-county-hive-index/tips.html#send">See a mistake? Tell us</a></p><p class="hb-small">Public records only · Posted Oct. 19, 2026 · August snapshot plus new filings through Oct. 19, 2026</p><p class="hb-small">We never name tipsters. When we correct a page, the fix and its date are shown on the page.</p><p class="hb-small"><a href="index.html">The Ledger home</a> · <a href="https://weber-county-hive.github.io/-weber-county-hive-index/">Master Index (Hive library)</a> · <a href="https://webercountyhive.substack.com/">Read on Substack</a></p></div>
+<script src="lg-shelf.js?v=1"></script>
 
 <script>
 const TOP_TO = {"Utah Republican Senate Campaign Committee": 2767279.39, "Utah House Republican Election Committee": 1686437.05, "TOTAL": 918373.74, "Irish Elk LLC": 580807.55, "Cox, Spencer": 324166.98, "Right Insight": 150447.42, "Utahns for Balanced Government": 150000.0, "Utah Petroleum Association PAC": 91850.0, "Wasatch Mountain State Park Golf Course": 89058.08, "Grand America Hotel": 88613.63, "Chris Coombs": 83634.16, "Utah Senate Third House": 77000.0, "Todd Weiler Election Committee": 62500.0, "Wayne Harper Election Committee": 62500.0, "Jill Koford Campaign": 60000.0, "Amazon": 58446.29, "Friends of Dan McCay": 55000.0, "Elect Brady Brammer": 55000.0, "Lincoln Fillmore Election Committee": 52500.0, "John Johnson Election Committee": 52500.0};
@@ -339,7 +405,7 @@ function hbar(div, obj, color){
   document.getElementById(div).innerHTML = entries.map(([k,v]) =>
     `<div class="cbar"><div class="cbar-l">${k}</div><div class="cbar-t"><div class="cbar-f" style="width:${Math.max(2,v/max*100)}%;background:${color}"></div></div><div class="cbar-v">${fmt(v)}</div></div>`).join("");
 }
-hbar("energybar", ENERGY_RECIPIENTS, "#9C3B33");
+hbar("energybar", ENERGY_RECIPIENTS, "#b3261e");
 /* ================= COMPANY-BY-COMPANY TIER BREAKDOWN ================= */
 // All 9 sources merged: the original 5 (PacifiCorp, Chevron, EnergySolutions,
 // Torus, Dominion) plus the 4 researched since (Utah Petroleum Association,
@@ -496,8 +562,8 @@ const RPLUS_ENERGIES = {
   "McKell, Mike": 1000
 };
 
-hbar("bigWestChart", BIG_WEST_OIL, "#1F6F5C");
-hbar("rplusChart", RPLUS_ENERGIES, "#1F6F5C");
+hbar("bigWestChart", BIG_WEST_OIL, "#0f766e");
+hbar("rplusChart", RPLUS_ENERGIES, "#0f766e");
 
 /* ================= FULL RECIPIENT RANKING ================= */
 // Combines every recipient across every dataset on this page. Each source stays
