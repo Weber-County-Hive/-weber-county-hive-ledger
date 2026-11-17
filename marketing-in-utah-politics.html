@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Who Gets Paid to Sell You a Candidate | The Ledger</title>
+<meta name="description" content="Marketing money in Utah politics: Reagan Outdoor Advertising gave $183,276 to 2026 Utah campaigns and was paid $95,715.83 by them, plus Election Hive, Roost and Gathering Inc., from the state's own records.">
+<link rel="icon" type="image/png" href="hive-bee.png">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Source+Sans+3:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="leaflet.css">
+<script src="leaflet.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<style>
+:root{--felt:#0f1b2d;--felt2:#13233F;--gold:#1d5fbf;--ink:#1b2430;--muted:#55606e;--line:#d9dde3;--bg:#ffffff;--soft:#f3f6fa}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:18px/1.6 'Source Sans 3',Arial,sans-serif}
+a{color:#1d5fa8}
+.hb-bar{background:#0d0b0a;border-bottom:1px solid #3a2f1c;padding:8px 16px}
+.hb-bar a{display:flex;align-items:center;gap:12px;text-decoration:none}
+.hb-bar img{height:44px;width:auto}
+.hb-name{font-family:'Cinzel',Georgia,serif;color:#d4af37;font-size:14px;letter-spacing:.14em;text-transform:uppercase;display:block}
+.hb-sub{font-family:Georgia,serif;font-style:italic;color:#b8956a;font-size:12px;display:block}
+.hb-line-top{display:block;font-family:Georgia,serif;color:#e8d9b5;font-size:12px;margin-top:3px}
+header.case{background:var(--felt);color:#fff;padding:34px 16px 30px;border-bottom:6px solid var(--gold)}
+.wrap{max-width:1000px;margin:0 auto;padding:0 16px}
+.eyebrow{color:var(--gold);font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:14px;margin:0}
+h1{font-family:'Playfair Display',Georgia,serif;font-size:clamp(30px,5vw,46px);line-height:1.15;margin:8px 0 10px}
+.sub{font-size:20px;color:#e6efe9;margin:0 0 10px}
+.dates{font-size:15px;color:#cfe0d6;margin:0}
+h2{font-family:'Playfair Display',Georgia,serif;color:var(--felt);font-size:30px;margin:44px 0 12px;border-bottom:3px solid var(--gold);padding-bottom:6px}
+h3{color:var(--felt2);font-size:22px;margin:24px 0 8px}
+.plain{background:var(--soft);border-left:6px solid var(--gold);padding:16px 20px;border-radius:6px;font-size:19px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:18px 0}
+.tile{border:2px solid var(--felt);border-radius:10px;padding:16px;text-align:center;background:#fff}
+.tile b{display:block;font-size:34px;color:var(--felt);line-height:1.1}
+.tile span{font-size:15px;color:var(--muted)}
+.counter{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;background:var(--felt2);color:#fff;border-radius:10px;padding:14px;margin:18px 0}
+.counter div{text-align:center}.counter b{display:block;font-size:26px;color:var(--gold)}.counter span{font-size:14px}
+.counter p{grid-column:1/-1;margin:4px 0 0;font-size:13px;color:#cfe0d6;text-align:center}
+table{width:100%;border-collapse:collapse;font-size:16px}
+th,td{border-bottom:1px solid var(--line);padding:8px 6px;text-align:left;vertical-align:top}
+th{background:var(--felt);color:#fff;position:sticky;top:0}
+td.num,th.num{text-align:right;white-space:nowrap}
+.tbl-wrap{max-height:560px;overflow:auto;border:1px solid var(--line);border-radius:8px}
+.filters{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0}
+.filters select,.filters input{font-size:16px;padding:8px;border:1px solid #9aa5b1;border-radius:6px}
+.note{font-size:14px;color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.flip{perspective:1000px;min-height:300px;cursor:pointer}
+.flip-in{position:relative;width:100%;height:100%;min-height:300px;transition:transform .6s;transform-style:preserve-3d}
+.flip.on .flip-in{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;padding:18px;overflow:auto}
+.front{background:var(--felt);color:#fff;border:3px solid var(--gold)}
+.front h4{font-family:'Playfair Display',Georgia,serif;font-size:24px;margin:0 0 6px;color:var(--gold)}
+.front .amt{font-size:30px;font-weight:700}
+.back{background:#fff;border:3px solid var(--felt);transform:rotateY(180deg);font-size:15.5px}
+.back ul{padding-left:18px;margin:6px 0}
+.tap{font-size:13px;color:#cfe0d6;margin-top:10px}
+.timeline{border-left:4px solid var(--gold);margin:10px 0 0 8px;padding-left:20px}
+.ev{margin:0 0 16px;position:relative}
+.ev:before{content:"";position:absolute;left:-30px;top:6px;width:14px;height:14px;border-radius:50%;background:var(--felt);border:3px solid var(--gold)}
+.ev b{color:var(--felt)}
+.ev.money:before{background:var(--gold);border-color:var(--felt)}
+#map{height:460px;border-radius:10px;border:2px solid var(--felt)}
+.mermaid{background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;overflow-x:auto}
+.fair{background:#eef4fb;border-left:6px solid #1d5fbf;padding:14px 18px;border-radius:6px}
+.qs h3{margin-top:18px}
+.qs ol{padding-left:22px}.qs li{margin:0 0 8px}
+details{border:1px solid var(--line);border-radius:8px;padding:10px 14px;margin:14px 0}
+summary{font-weight:700;color:var(--felt);cursor:pointer;font-size:19px}
+.hb-foot{background:#0d0b0a;color:#b8956a;text-align:center;padding:26px 16px 30px;font-family:Georgia,serif;margin-top:50px}
+.hb-foot img{height:40px}
+.hb-tag{font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:#8a7650;margin-top:8px;display:block}
+.hb-line{max-width:720px;margin:14px auto 0;color:#e8d9b5;font-size:15.5px;line-height:1.5}
+.hb-tips{margin:16px 0 4px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.hb-btn{display:inline-block;border:2px solid #d4af37;background:#d4af37;color:#0d0b0a;font:700 15px Georgia,serif;padding:10px 18px;border-radius:6px;text-decoration:none}
+.hb-btn2{background:transparent;color:#d4af37}
+.hb-small{font-size:12.5px;color:#8a7650;margin:6px 0 0}
+@media (max-width:600px){body{font-size:17px}h2{font-size:25px}.tile b{font-size:28px}th,td{font-size:14.5px}}
+.eyebrow{color:#9ec0ea}.counter b{color:#9ec0ea}.front h4{color:#9ec0ea}.ev.money:before{background:#9ec0ea}
+.hbx-top{margin:0}
+.hbx-slim{background:#0e2438;color:#dbe7f0;font:600 14px/1.4 Arial,sans-serif;padding:7px 20px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.hbx-slim a{color:#F3E3B3;text-decoration:underline}
+.hbx-tools{max-width:980px;margin:14px auto 4px;padding:0 20px;display:flex;flex-wrap:wrap;gap:8px;align-items:flex-start;font-family:Arial,sans-serif;position:relative;z-index:2}
+.hbx-tool{display:inline-block;font:700 15px Arial,sans-serif;color:#13233F!important;background:#fff;border:1px solid #c8cfd6;border-radius:6px;padding:9px 13px;text-decoration:none!important;cursor:pointer;line-height:1.2}
+.hbx-tool:hover{border-color:#13233F}.hbx-cnchip b{color:#1f5f9e;font-family:ui-monospace,Menlo,monospace}
+.hbx-jump{flex-basis:100%;order:5;border:1px solid #c8cfd6;border-radius:6px;background:#fff;color:#13233F}.hbx-jump summary{cursor:pointer;padding:9px 13px;font:700 15px Arial,sans-serif}
+.hbx-jump ol{margin:0;padding:4px 16px 12px 36px}.hbx-jump li{margin:6px 0;font-size:16.5px}.hbx-jump a{color:#13233F}
+.hbx-shelfwrap{background:#0e2438;color:#dbe7f0;padding:26px 20px 30px;font:16px/1.5 Arial,sans-serif;margin-top:48px;position:relative;z-index:1}
+.hbx-shelfwrap .in{max-width:900px;margin:0 auto}
+.hbx-shelf{border:2px dashed #9fd0ee;border-radius:10px;padding:16px 18px}
+.hbx-cn-big{font:600 17px ui-monospace,Menlo,monospace;margin-bottom:12px;color:#fff}.hbx-cn-big b{color:#9fd0ee}
+.hbx-nav{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.hbx-nav-btn{flex:1;min-width:220px;background:#12304a;border:1px solid #4d86ad;border-radius:8px;padding:12px 14px;color:#fff!important;text-decoration:none!important;font-size:16px}.hbx-nav-btn b{color:#9fd0ee;font-family:ui-monospace,Menlo,monospace}.hbx-off{opacity:.5}
+.hbx-list summary{cursor:pointer;font-weight:700;padding:6px 0}.hbx-list ol{list-style:none;margin:6px 0 0;padding:0}.hbx-list li{padding:6px 0;border-bottom:1px solid #2b4a63}.hbx-list a{color:#fff!important;text-decoration:none}
+.hbx-shelf-head{color:#9fd0ee;font:600 13px ui-monospace,Menlo,monospace;letter-spacing:.1em}.hbx-cn{font-family:ui-monospace,Menlo,monospace;color:#9fd0ee;margin-right:6px}
+.hbx-find{margin:14px 0 4px}.hbx-find label{display:block;font-weight:700;margin-bottom:6px}.hbx-find div{display:flex;gap:8px;flex-wrap:wrap}.hbx-find input{flex:1;min-width:0;width:100%;padding:12px 14px;font-size:17px;border:2px solid #4d86ad;border-radius:6px;color:#13233F;background:#fff}.hbx-find button{padding:12px 18px;font-size:16px;font-weight:700;background:#9fd0ee;color:#0e2438;border:0;border-radius:6px;cursor:pointer}
+.hbx-search{font-size:15px;margin-top:12px}.hbx-search a,.hbx-search b{color:#9fd0ee}
+.hbx-totop{display:none;position:fixed;right:16px;bottom:16px;z-index:50;background:#0e2438;color:#fff!important;border:2px solid #9fd0ee;border-radius:24px;padding:10px 16px;font:700 15px Arial,sans-serif;text-decoration:none!important;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+.hbx-dates{font-family:ui-monospace,Menlo,monospace;font-size:13px}
+@media print{.hbx-tools,.hbx-totop{display:none}}
+.hbx-tools{margin-top:16px;margin-bottom:14px}
+.hbx-shelfwrap+.hb-foot{margin-top:0}
+.hbx-shelf details.hbx-list li,.hbx-shelf details.hbx-list p{font-size:16px!important}
+.hbx-pagedates,p.hive-updated{font-family:ui-monospace,Menlo,monospace!important;font-size:14px!important;letter-spacing:.02em;opacity:.95!important;margin:10px 0 0!important}
+</style>
+<style>
+.bars{margin:12px 0 4px}.br{display:grid;grid-template-columns:minmax(120px,240px) 1fr 110px;gap:10px;align-items:center;margin:7px 0;font-size:16px}
+.br .t{height:24px;background:#e8eef6;border-radius:4px;overflow:hidden}.br .f{height:100%;background:#0f1b2d}.br .f.b{background:#1d5fbf}.br .v{text-align:right;font-weight:700}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:4px}.two .f{height:12px}
+.months{display:flex;align-items:flex-end;gap:8px;height:260px;border-bottom:2px solid #0f1b2d;padding:0 4px;margin-top:10px}
+.mo{flex:1;display:flex;gap:3px;align-items:flex-end;height:100%;position:relative}
+.mo i{display:block;flex:1;background:#0f1b2d;border-radius:3px 3px 0 0}.mo i.b{background:#1d5fbf}
+.mol{display:flex;gap:8px;padding:4px 4px 0;font-size:14px;color:#55606e}.mol span{flex:1;text-align:center}
+.key{font-size:15px;margin:8px 0}.key b{display:inline-block;width:14px;height:14px;vertical-align:-2px;margin:0 4px 0 12px}
+.mermaid .edgeLabel,.mermaid .edgeLabel p,.mermaid .edgeLabel span{color:#0f1b2d!important;fill:#0f1b2d!important;background:#e8eef6!important;font-weight:600}
+@media(max-width:600px){.br{grid-template-columns:110px 1fr 86px;font-size:14px}.months{height:200px}}
+</style>
+</head>
+<body>
+<div class="hb-bar"><a href="https://webercountyhive.substack.com/" target="_blank" rel="noopener"><img src="uhp-badge.png" alt="Utah Hive Politics logo"><span><span class="hb-name">Utah Hive Politics</span><span class="hb-sub">from the publisher of The Weber County Hive</span><span class="hb-line-top">The people's publication. We investigate what's best for the public as a whole, not any party or special interest.</span></span></a></div>
+<div class="hbx-slim" style="background:#0e2438;color:#dbe7f0;font:600 14px/1.4 Arial,sans-serif;padding:7px 20px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap"><span>The Ledger · LG 100.10</span><span><a href="index.html" style="color:#F3E3B3">← The Ledger home</a> · <a href="https://weber-county-hive.github.io/-weber-county-hive-index/" style="color:#F3E3B3">← Hive library (every repo)</a></span></div>
+<header class="case"><div class="wrap">
+<p class="eyebrow">The Ledger · Case 18 · Marketing in Utah Politics</p>
+<h1>Who Gets Paid to Sell You a Candidate</h1>
+<p class="sub">Billboards, mailers, signs and the firms that run campaigns. One billboard company gave $183,276 to 2026 Utah campaigns, and campaigns paid it $93,725.73. Here is every line, from the state's own records.</p>
+<p class="dates">Posted Nov. 17, 2026 · Updated Nov. 17, 2026 · Figures as of Nov. 17, 2026</p>
+</div></header>
+
+<main class="wrap">
+
+<div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px;background:#eef4fb;border:2px dashed #1d5fbf;padding:14px 18px;margin:24px 0 0;border-radius:8px"><span>New to this? Start with the easy version: short, simple words, no tables.</span><a href="marketing-in-utah-politics-plain.html" style="display:inline-block;background:#0f1b2d;color:#fff;text-decoration:none;font-weight:700;padding:12px 18px;border-radius:6px">Read the easy version →</a></div>
+
+<h2>In plain words</h2>
+<div class="plain">
+<p style="margin-top:0">Most of the money a campaign raises ends up with someone who sells marketing: billboards, mailers, yard signs, digital ads, signature gatherers and the consultants who plan it all. Every one of those payments has to be reported. So does every gift a marketing company makes to a candidate.</p>
+<p>A tip came in with two tables about one billboard company, Reagan Outdoor Advertising. We checked both against the state's campaign finance site, disclosures.utah.gov, line by line, and found eight more entries the tables missed.</p>
+<p style="margin-bottom:0"><b>What the records show:</b> In 2026, Reagan gave $183,276 to Utah candidates, PACs and parties, and campaigns paid Reagan $93,725.73, almost all for advertising. Eight campaigns are on both lists. Those are two different kinds of money, so we never add them together. The records don't show prices, how many boards each campaign got, or whether every candidate was offered the same terms.</p>
+</div>
+
+<div class="tiles">
+<div class="tile"><b>$183,276</b><span>Reagan gave to 2026 Utah campaigns, PACs and parties (70 gifts)</span></div>
+<div class="tile"><b>$93,725.73</b><span>Campaigns and groups paid Reagan in 2026 (36 payments). Two more, $1,990.10, name only "Reagan" and are not counted.</span></div>
+<div class="tile"><b>$50,000</b><span>Largest single gift: Gov. Spencer Cox, Sept. 14, 2026</span></div>
+<div class="tile"><b>8</b><span>Campaigns on both lists: Reagan gave to them, and they paid Reagan (a ninth is unconfirmed)</span></div>
+<div class="tile"><b>5</b><span>Spellings Reagan's gifts are filed under (not counting capital letters)</span></div>
+<div class="tile"><b>$49,676</b><span>Of Reagan's gifts were donated space or advertising (14 gifts); $133,600 was cash</span></div>
+</div>
+
+<div class="counter">
+<div><b>34</b><span>records read</span></div>
+<div><b>108</b><span>transactions checked line by line</span></div>
+<div><b>6</b><span>records checked but not used</span></div>
+<div><b>~45</b><span>searches run</span></div>
+<p>Behind this piece (estimate). Records read: the tip's two tables, six pages of 2026 state search results, campaign reports for Alvey, Adams, Waldrip, Gibson and Bolos, three federal and state laws, two bills and a hearing summary, the 2027 bill-request list, four business records, three lobbyist registrations and five news reports. Not used: Reagan Airport travel charges, the unrelated Utah Reagan Caucus, and people whose last name is Reagan.</p>
+</div>
+
+<h2>1. One company on both sides of the ledger</h2>
+<p>Reagan Outdoor Advertising, at 1775 N. Warm Springs Road in Salt Lake City, shows up in 2026 campaign reports two ways: as a <b>donor</b> and as a <b>vendor</b>.</p>
+
+<h3>By month: what Reagan gave, and what it was paid</h3>
+<div class="key"><b style="background:#0f1b2d"></b>Reagan gave<b style="background:#1d5fbf"></b>Campaigns paid Reagan</div>
+<div class="months" id="months" role="img" aria-label="Bar chart of Reagan gifts and payments to Reagan by month, 2026"></div>
+<div class="mol" id="molabels"></div>
+<p class="note">Two different kinds of money, shown side by side by month. September's tall bar is mostly the $50,000 gift to Gov. Cox. Tap or hover a bar for the amount.</p>
+
+<h3>Who Reagan gave the most to</h3>
+<div class="bars" id="topgifts"></div>
+<p class="note">Most legislators on the list received $700 to $1,500. Besides "Reagan Outdoor Advertising," gifts are filed under four other spellings: "Regan Outdoor Advertising," "Reagan Inc," "Reagan Outdoor" and "Reagan Outdoor Adertising."</p>
+
+<h3>Who paid Reagan the most</h3>
+<div class="bars" id="toppayers"></div>
+<p class="note">Not counted: two payments filed to the payee name "Reagan" alone, with no other identifier (Stephanie Hollist, $1,770 on June 10; Trevor Lee, $220.10 on April 3). The amounts look like Reagan's other charges, but a matching amount doesn't prove who was paid. They are listed separately below as unconfirmed until the campaigns' own reports or invoices show the vendor.</p>
+
+<h2>2. Eight campaigns on both lists</h2>
+<div class="plain">
+<p style="margin-top:0"><b>Why these eight?</b> These are the campaigns we identified in both our 2026 Reagan contribution and expenditure searches. We matched every recipient name on the contribution list against every payer name on the confirmed expenditure list, and these eight are the only matches. A ninth, Trevor Lee, received a $1,000 gift from Reagan and paid $220.10 to a payee filed only as "Reagan"; we list him as unconfirmed. Inclusion shows a donor–vendor relationship; it does not establish preferential pricing, coordination or wrongdoing.</p>
+<p style="margin-bottom:0"><b>Cash or donated space?</b> The state's 2026 year files mark each gift. Of Reagan's 70 gifts, <b>14 ($49,676) are marked in-kind</b>, described as billboards, donated space or advertising, and <b>56 ($133,600) are cash</b>. For seven of these eight campaigns, Reagan's gift was donated billboard space or advertising, not cash; the campaign also paid Reagan for other advertising. Douglas Fiefia's $1,000 gift was cash. An in-kind gift can work like a discount, so a gift and a payment to the same campaign are not two separate cash transactions.</p>
+</div>
+<p class="note">Sorted by what the campaign paid Reagan, largest first.</p>
+<div class="tbl-wrap" style="max-height:none"><table id="both"><thead><tr><th>Candidate</th><th class="num">Reagan gave</th><th>Cash or donated (candidate's report)</th><th class="num">Campaign paid Reagan</th><th style="min-width:160px">Side by side</th></tr></thead><tbody></tbody></table></div>
+
+<h3>Who paid whom</h3>
+<div class="mermaid">
+%%{init: {'theme':'base','themeVariables':{'fontSize':'20px','primaryColor':'#0f1b2d','primaryTextColor':'#ffffff','lineColor':'#1d5fbf','primaryBorderColor':'#1d5fbf','edgeLabelBackground':'#e8eef6'}}}%%
+flowchart LR
+  R["Reagan Outdoor<br/>Advertising"] -->|"$50,000"| COX["Gov. Spencer Cox"]
+  R -->|"$41,000"| PAC["Party, leadership and<br/>legislator PACs"]
+  R -->|"$92,276"| LEG["Candidates<br/>(legislators and others)"]
+  CAMP["2026 campaigns<br/>and groups"] -->|"$93,725.73<br/>mostly advertising"| R
+  NINE["8 campaigns<br/>on both lists"] -.->|"also in"| LEG
+  NINE -.->|"also in"| CAMP
+</div>
+<p class="note">Party, leadership and legislator PACs: Adams Leadership PAC, House Speaker Leadership PAC, Utah House Republican Election Committee, Utah Republican Senate Campaign Committee, Northern Utah Legislative PAC and Conservative Millennials PAC. Arrows show reported money only.</p>
+
+<h3>What the reports don't show</h3>
+<p>A campaign report shows the payment. It doesn't show the rate, how many boards, or whether another candidate was offered the same terms. Some reports list in-kind gifts from billboard companies, meaning donated space instead of cash. In June we documented one: a Weber County Commission campaign (Sharon Bolos) reported a $1,000 in-kind gift from Reagan and a $4,950 payment to Reagan on the same day, May 7, 2026. As the candidate pointed out at the time, an in-kind gift can work as a discount, so the campaign's net cost may have been lower than the payment alone.</p>
+
+<h3>Past public reporting</h3>
+<p>In 2012, KSL reported that Reagan turned down a Davis County commission candidate's billboard about commissioner pay. Dewey Reagan called it negative campaigning. KSL also reported that an earlier voicemail to the candidate from "Reagan's Marc Davey" gave another reason: the commission was one of the company's landlords. Dewey Reagan told KSL the decision had nothing to do with supporting one candidate over another (KSL, May 31, 2012). In 2015, news outlets reported that Bill and Dewey Reagan ran a PAC, Utahns for Independent Government, that put up billboards for every Salt Lake City mayoral candidate except the incumbent (Utah Policy, Fox 13, KSL, 2015).</p>
+<p>In July 2024, Scenic Utah, a nonprofit led by former Salt Lake City Mayor Ralph Becker, sent the Federal Highway Administration and UDOT a list of 29 billboards across the state it says are illegal or nonconforming, including a set of Reagan boards along I-15 in Orem. As of that report, neither agency had found any of them illegal (Deseret News / KSL, July 2024). In 2024, a Reagan Outdoor lobbyist, Nate Sechrest, spoke for a bill on billboards along scenic byways, which Scenic Utah opposed (Salt Lake Tribune, Jan. 15, 2024). These are disputes over where boards stand, not over campaign ads; we include them because they show the company's business is shaped by state law and state agencies.</p>
+
+<h2>3. The rules: TV must sell to both sides. Billboards don't have to.</h2>
+<p>Federal law treats broadcast stations differently from billboard companies. If a TV or radio station lets one legally qualified candidate use its airtime, it must give equal opportunities to the other candidates for that office, and it has no power to censor what they say (47 U.S.C. § 315(a)). No federal law puts that duty on outdoor advertising.</p>
+<p>At least one state does. Since 1965, Minnesota law has made it unlawful for an outdoor advertising company to discriminate in providing space based on "race, color, creed or political affiliation." The company still doesn't have to sell to anyone unwilling to pay its rates (Minn. Stat. § 325E.24). Utah has no similar law that we found.</p>
+<div class="mermaid">
+%%{init: {'theme':'base','themeVariables':{'fontSize':'20px','primaryColor':'#0f1b2d','primaryTextColor':'#ffffff','lineColor':'#1d5fbf','primaryBorderColor':'#1d5fbf','edgeLabelBackground':'#e8eef6'}}}%%
+flowchart TB
+  Q["A candidate wants<br/>to buy political ads"] --> TV["TV or radio station"]
+  Q --> BB["Billboard company"]
+  TV --> TV2["Must offer equal<br/>opportunities to rivals<br/>(47 U.S.C. § 315)"]
+  BB --> MN["In Minnesota: can't refuse<br/>over political affiliation<br/>(Minn. Stat. § 325E.24)"]
+  BB --> UT["In Utah: no equal-access<br/>rule that we found"]
+</div>
+<p>Utah lawmakers have taken up billboards and signs in recent sessions:</p>
+<ul>
+<li><b>H.B. 198 (2025), "Highway Expansion Impacts on Signage Amendments,"</b> sponsored by Rep. Val Peterson. It changed the rules for moving or raising billboards when road work blocks them. A summary of the Senate Economic Development and Workforce Services Committee hearing records a Reagan Outdoor Advertising representative speaking in support. Reagan gave Rep. Peterson $1,500 in 2026.</li>
+<li><b>H.B. 33 (2026), "Political Signs Amendments,"</b> primary sponsor Rep. Jordan Teuscher, Senate sponsor Sen. Evan Vickers. The bill as introduced required a political sign's "paid for by" disclosure to be "reasonably legible" to someone standing near the sign. The version that passed kept a readability rule only for billboards (text "large enough to be easily readable by an ordinary observer at a reasonable distance") and dropped it for ordinary signs. It also shrank the exemption for small signs from 4 by 8 feet to under 24 by 18 inches, so more signs will need a "paid for by" line. Those changes take effect Jan. 1, 2027 (le.utah.gov, H.B. 33 introduced and enrolled). Reagan gave Sen. Vickers $1,000 and Conservative Millennials PAC, whose officers include Rep. Teuscher, $1,000 in 2026.</li>
+<li><b>2027:</b> no bill requests had been filed under the Legislature's "Signs and Billboards" subject as of Nov. 17, 2026 (le.utah.gov, 2027 General Session).</li>
+</ul>
+
+<h2>Timeline</h2>
+<div class="timeline">
+<div class="ev"><b>1965</b> · Minnesota bars billboard companies from refusing space over political affiliation.</div>
+<div class="ev"><b>May 31, 2012</b> · KSL reports Reagan turned down a Davis County commission candidate's billboard.</div>
+<div class="ev"><b>Jan. 4, 2013</b> · Nathaniel Sechrest's lobbyist registration for R.O.A. General, Inc. dba Reagan Outdoor Advertising begins (still open in the state register as pulled Oct. 27, 2026).</div>
+<div class="ev"><b>Summer 2015</b> · Utahns for Independent Government, led by Bill and Dewey Reagan, puts up billboards in the Salt Lake City mayor's race.</div>
+<div class="ev"><b>Dec. 13, 2017</b> · Election Hive LLC is formed.</div>
+<div class="ev"><b>2022</b> · Utahns for Safer Communities reports $125,000 from Mike Schultz and pays Chase Marketing Group $99,657 for advertising before the general election.</div>
+<div class="ev"><b>Oct.–Dec. 2024</b> · Preserving Utah Values PAC sends mailers and texts attacking Democratic lawmakers while reporting $0; after complaints, a later report shows House Speaker Mike Schultz gave it $120,000.</div>
+<div class="ev"><b>2025 session</b> · H.B. 198 changes the rules for moving billboards blocked by road work; a Reagan representative speaks in support at the Senate committee.</div>
+<div class="ev"><b>March 2025</b> · The Utah Attorney General's Office charges 11 signature gatherers with forgery from the 2024 cycle; at least five had worked for Gathering Inc.</div>
+<div class="ev"><b>2026 session</b> · H.B. 33 passes: billboards must carry a readable "paid for by" line, and fewer small signs are exempt. Both take effect Jan. 1, 2027.</div>
+<div class="ev money"><b>Jan.–June 2026</b> · Reagan gives to leadership and party PACs; Adams Leadership PAC gets $11,000.</div>
+<div class="ev"><b>June 2026</b> · A Democratic consultant's PAC sends "Republicans Against" mailers in the Box Elder County Commission GOP primary.</div>
+<div class="ev money"><b>Sept. 14, 2026</b> · Reagan gives Gov. Spencer Cox $50,000.</div>
+<div class="ev money"><b>Sept.–Oct. 2026</b> · Campaigns pay Reagan $61,563.08 in the two months before the election.</div>
+<div class="ev"><b>March 3, 2026</b> · H.B. 112, which would have covered social media ads and set fines, fails 2-3 in a Senate committee.</div>
+<div class="ev"><b>June 2026</b> · Make Liberty Win's mailers in Sen. Stuart Adams's primary show AI-generated images; Salt Lake Indivisible postcards carry no "paid for" line.</div>
+<div class="ev"><b>Oct. 24, 2026</b> · Roy City Citizens' organizer tells the Hive he is the group's only funder; as of Nov. 17, no report seen.</div>
+<div class="ev"><b>Oct. 2026</b> · Senate District 21 voters get a mailer from "10,000 Integrity Trackers" with no visible "paid for by" line.</div>
+<div class="ev"><b>Nov. 17, 2026</b> · No 2027 "Signs and Billboards" bill requests filed yet.</div>
+</div>
+
+<h2>4. Mailers: who's paying for what lands in your mailbox</h2>
+<p>State law requires a mailed political ad to say who paid for it. If no candidate authorized it, it must also say that (Utah Code 20A-11-901).</p>
+<ul>
+<li><b>A candidate's own mailer.</b> A reader sent us a 2026 mailer from Speaker Mike Schultz's House District 12 campaign. Its fine print reads "Paid for by Elect Mike Schultz."</li>
+<li><b>A mailer with no clear payer.</b> In October, voters in Senate District 21 received a mailer attacking Sen. Brady Brammer with a return address of "10,000 Integrity Trackers." No "paid for by" line was visible on the copy we saw, and we found no political committee, issue committee or corporation filed under that name (disclosures.utah.gov, searched Oct. 24, 2026).</li>
+<li><b>Postage through a party permit.</b> House District 10 candidate Jim Alvey's reports list $10,210 paid to "State Inicia" in three payments (Sept. 21 and Oct. 13, 2026), with no address. Doug Fiefia's reports list $12,444 to "Utah Republican Party State Indicia," the name of the party's program for candidate mailers on its nonprofit postage permit. In 2026, Republican candidates and PACs reported paying the party $441,267.67, and the party reported 39 payments to USPS totaling $305,345.98. The report lines don't name the Utah Republican Party as the payee, so a reader can't see the party from the line alone, and no filing on either side uses the word "postage." Each payment shows the candidate's own campaign paid for the mailing. Full details: <a href="https://weber-county-hive.github.io/Unelected-Power/utgop-state-indicia.html">The State Party Indicia (Unelected Power, UP 100.13)</a>.</li>
+<li><b>The same postage line in 2025 city races.</b> In Riverton, a mayoral candidate's mailer said "Postage paid by the Utah Republican Party" but did not say who paid for the mailer or whether the candidate authorized it; the Lieutenant Governor's Office said that omission broke state law and sent its standard notice. The candidate said she reimbursed the party for the postage. Utah GOP Chair Robert Axson said candidates must request the party's discounted rate and donate the full mailing cost to the party (Salt Lake Tribune, July 31, 2025). In Provo, the mayor's postcards carried the same "Postage Paid by" line, and her reports listed just under $1,400 paid to the party for postage and a small donation (KUER, Oct. 23, 2025). The party's candidate page lists a "Postage Discount Form" and says party resources after convention go only to candidates who won at convention.</li>
+<li><b>Missing lines are common, and the fix is a notice.</b> The Lieutenant Governor's Office called a missing "paid for by" line on a mailer "a fairly common mistake" and said it has a standard procedure to notify the candidate (Salt Lake Tribune, Aug. 6, 2025, Lehi; Aug. 7, 2025, Hurricane). The notice reminds the candidate that full compliance is expected going forward; the news reports describe no fine.</li>
+</ul>
+
+<h2>5. Negative and unsigned mailers</h2>
+<p>Utah's attribution rule covers mailers, billboards, broadcast, print and "any other type of general public political advertising." An ad must clearly say who paid for it. An ad a candidate didn't authorize must also say it "is not authorized by any candidate or candidate's committee." Through 2026, lawn signs up to 4 by 8 feet, bumper stickers, pins and buttons are exempt (Utah Code 20A-11-901). Starting Jan. 1, 2027, H.B. 33 shrinks the sign exemption to signs smaller than 24 by 18 inches, or a candidate's own sign that names the candidate. The rule is about <b>who paid</b>. It doesn't check whether what the ad says is true.</p>
+<p>Six cases from our research and news reports show where the money is hard to see, and one shows enforcement working:</p>
+<div class="cards" id="mailcards"></div>
+<p class="note">Tap a card to flip it. The groups behind these ads come from different sides of Utah politics.</p>
+<h3>Texts, social media and AI images</h3>
+<p>The same groups that mail also text. Preserving Utah Values (2024) and Utahns for Safer Communities (2026) both sent texts as well as mail. On the campaign side, texting shows up as a vendor payment. In the state's 2026 files, 17 campaigns and committees paid VOTTIV (filed under several spellings) $52,796.21, and 15 more paid other texting services such as Scale to Win, RumbleUp, Peerly and Prompt.io $16,502.33. In county races, Sharon Bolos's 2026 Weber County report lists $1,859.81 to VOTTIV Campaigns for texts.</p>
+<ul>
+<li><b>Utah's "paid for by" rule</b> reaches "any other type of general public political advertising," but it doesn't name text messages, social media or influencer posts.</li>
+<li><b>H.B. 112 (2026)</b>, primary sponsor Rep. Sahara Hayes, Senate sponsor Sen. Ronald Winterton, would have added paid internet and social media ads to the rule and let election officers fine violators ($1,000 per ad in statewide and legislative races, $500 in local ones) instead of relying on criminal charges. It passed the House 66-1 and failed 2-3 in a Senate committee on March 3, 2026.</li>
+<li><b>November 2025, Park City.</b> On the eve of the city election, a text titled "GOP Voting Alert" appeared to back mayor and council candidates in nonpartisan races. The Summit County Republican Party said it made no endorsements, that the text went mainly to Democratic voters, and that it had no "paid for by" line. The party filed a complaint asking the Lieutenant Governor's Office to find out who paid for and sent it (TownLift, Nov. 17, 2025). We have not found a public outcome. The mayor's race was decided by 11 votes in unofficial results.</li>
+<li><b>AI images.</b> Since May 1, 2024, a Utah political ad that uses AI-made images, video or audio must say so, for example "This image generated by AI" (S.B. 131, 2024).</li>
+<li><b>June 2026, Senate President Stuart Adams's primary.</b> Make Liberty Win, a PAC funded by Young Americans for Liberty, put $100,000 into mailers, texts and calls. Its state filing lists $137,500 from Make Liberty Win's federal PAC on May 18, payments to Creative Influence ($59,676.63), Prompt.io (a texting platform) and Traction Control, and $60,152.70 returned to the federal PAC on July 10; at least five mail pieces showed AI-generated images of Adams (Deseret News, June 11, 2026). The article doesn't say whether the AI label appeared. On the other side, Salt Lake Indivisible sent about 6,000 postcards urging voters to oust Adams with no "paid for" line naming the group; an organizer said volunteers paid for most of it. Adams's campaign asked the Lieutenant Governor's Office to investigate.</li>
+</ul>
+<h3>Mike Schultz and outside ads, before 2026</h3>
+<p>Records show House Speaker Mike Schultz paid for outside advertising through PACs in earlier elections:</p>
+<ul>
+<li><b>2022:</b> Utahns for Safer Communities' reports list $25,000 and then $100,000 from Mike Schultz. The PAC paid Hartley Consulting for advertising, then Chase Marketing Group $99,657 for advertising from Sept. 29 to Oct. 21, 2022. The reports don't say who the ads were about.</li>
+<li><b>2024:</b> Preserving Utah Values PAC sent mailers and texts attacking Democratic lawmakers. A later report showed Schultz gave it $120,000. Schultz said in a statement that defending Utah values "is the right thing to do" (Salt Lake Tribune, Dec. 2, 2024).</li>
+</ul>
+<p class="note">Giving to a PAC that runs independent ads is legal. We report what the filings show; they don't show who wrote or approved the ads.</p>
+<p><b>Timing has come up before.</b> In 2020, lobbyists Spencer Stokes and Casey Hill and organizer Karen Hammond formed Utah Term Limits, a PAC that sent mailers in two state Senate Republican primaries. The Salt Lake Tribune reported it was formed one day after the deadlines that would have required it to disclose donors and spending before the primary, so donors would not show until a report due after the election (Salt Lake Tribune, June 26, 2020). That is the same pattern seen in 2024 and 2026: the ad arrives first and the money shows up in a later report.</p>
+<h3>Roy City Citizens: still waiting</h3>
+<p>In Roy, the "Vote FOR" mailer on the Prop. 10 tax referendum came from Roy City Citizens. Its organizer, Randy Scadden, told the Hive in writing on Oct. 24, 2026, that he is the group's only funder, and the Hive said it would report it that way until the group files its report. As of Nov. 17, 2026, we have no update and have not seen the group's report. The full exchange is in the <a href="https://webercountyhive-coder.github.io/referendum/roy-prop-10-tax-referendum.html">Roy case file</a>.</p>
+<div class="plain"><p style="margin:0"><b>What the record shows across these cases:</b> the rules require a name on the ad and a report with the state, but the money behind an attack can surface after voters have already received it, or under a name that doesn't say who's behind it. When the Lieutenant Governor's Office got complaints about a PAC reporting $0, its stated next step was to try to contact the PAC and then forward the complaint to the Attorney General (Salt Lake Tribune, Dec. 4, 2024).</p></div>
+
+<h2>6. The firms behind the campaigns</h2>
+<p>A few firms are paid by many campaigns. Their own websites and state business records show who runs them.</p>
+<p class="note">Tap a card to flip it.</p>
+<div class="cards" id="cards"></div>
+
+<h3>What 2026 campaigns paid the firms</h3>
+<p>Totals from the state's 2026 year files for candidates, PACs and parties, by payee name (Nov. 17, 2026). County and city races file elsewhere and aren't included.</p>
+<div class="bars" id="firmbars"></div>
+<p class="note">Name versions combined: Roost includes "Roost Company," "Roost & Company," "Roost Campaign Services" and Utah Doers PAC's independent expenditures through Roost; In the Field includes "Black Peak"; VOTTIV includes "Votiv." Saunders excludes people named Saunders. Irish Elk LLC is Kyle Palmer's company; its payers include Adams Leadership PAC ($74,881.10), the Utah Republican Senate Campaign Committee ($74,050), House Speaker Leadership PAC ($72,838) and the Utah House Republican Election Committee ($53,945). Gathering Inc. here leaves out "Black Peak signature gathering," which is In the Field.</p>
+<h3>How the firms connect, by the names in the records</h3>
+<div class="mermaid">
+%%{init: {'theme':'base','themeVariables':{'fontSize':'22px','primaryColor':'#0f1b2d','primaryTextColor':'#ffffff','lineColor':'#1d5fbf','primaryBorderColor':'#1d5fbf','edgeLabelBackground':'#e8eef6'}}}%%
+flowchart TB
+  LU["Matthew Lusty"] -->|"manager"| EH["Election Hive LLC"]
+  LU -->|"manager"| HO["Honey Communications"]
+  HI["Casey Hill"] -->|"lobbyist, 2019–2024"| EH
+  HI -->|"officer"| GA["Gathering Inc."]
+  LE["Tanner Leatham"] -->|"officer"| GA
+  ST["Spencer Stokes"] -->|"officer"| GA
+</div>
+<div class="mermaid">
+%%{init: {'theme':'base','themeVariables':{'fontSize':'22px','primaryColor':'#0f1b2d','primaryTextColor':'#ffffff','lineColor':'#1d5fbf','primaryBorderColor':'#1d5fbf','edgeLabelBackground':'#e8eef6'}}}%%
+flowchart TB
+  ST["Spencer Stokes"] -->|"member"| RO["Roost Communications"]
+  HL["Matthew Holton"] -->|"member"| RO
+  ST -->|"member"| SS["Stokes Strategies"]
+  SS -->|"gave $5,000 · 5/26/26"| AL["Adams Leadership PAC"]
+  AL -->|"paid $49,861.06"| RO
+  AD["Sen. Stuart Adams campaign"] -->|"paid $76,682"| GA["Gathering Inc."]
+  ST -->|"officer"| GA
+</div>
+<p class="note">Titles as listed in state business records and the lobbyist register. We don't know the start dates for every officer listing.</p>
+
+<h3>Where the firms are</h3>
+<div id="map" role="img" aria-label="Map of the firms' listed Salt Lake City addresses"></div>
+<p class="note">Addresses as listed in business records and on filings. Pin spots are approximate.</p>
+
+<h2>People named on this page, and why</h2>
+<ul>
+<li><b>Dewey and Bill Reagan</b>: named in 2015 news reports as leading Utahns for Independent Government; Dewey Reagan was quoted by KSL in 2012.</li>
+<li><b>Nathaniel Sechrest</b>: the PAC's treasurer in 2015 news reports, and a registered lobbyist for R.O.A. General, Inc. dba Reagan Outdoor Advertising since Jan. 4, 2013. The state register also lists L. Tasman Biesinger, Nancy Sechrest, Scott Howell, Leslie Van Frank, Michael Green and Jordan Garn for Reagan under its three filed names.</li>
+<li><b>Gov. Spencer Cox</b>: received Reagan's largest 2026 gift, $50,000. Election Hive is his campaign's largest documented vendor (see <a href="follow-the-money-uwha.html">Case 02</a>).</li>
+<li><b>Rep. Val Peterson, Rep. Jordan Teuscher, Sen. Evan Vickers</b>: sponsors of the two sign and billboard bills above.</li>
+<li><b>Matthew Lusty</b>: listed as manager of Election Hive and Honey Communications (see <a href="follow-the-money-uwha.html">Case 02</a> and <a href="gambling-money-utah.html">Case 17</a>).</li>
+<li><b>Casey Hill, Spencer Stokes, Tanner Leatham, Matthew Holton</b>: listed as officers or members of the firms in section 6.</li>
+<li><b>Sen. Stuart Adams, Jim Alvey, Katrina Gibson, Steve Waldrip</b>: campaigns whose reports we used for the firm payments.</li>
+</ul>
+
+<div class="fair"><b>For fairness:</b> The transactions shown here do not, by themselves, establish wrongdoing. Reagan has said in the past that political giving lets it tell its story and doesn't decide how laws come out (KSL, 2005). Reagan's 2026 gifts went to Republicans and Democrats, including Democrats Angela Romero, Stephanie Pitcher, Karen Kwan and Sahara Hayes. The records show how few firms touch so many campaigns, and that some of them both sell to candidates and fund them. They don't show why anyone gave or what anyone was charged.</div>
+
+<h2>Graded by the Collective Rubric</h2>
+<p class="note">These grades are not a personal opinion. They are The Weber County Hive's standing, published five-part rubric, applied the same way to every bill, official, board and money system we cover. <b>C</b> means the law's minimum was met. <b>A</b> or <b>B</b> means the public got more than the minimum. <b>D</b> or <b>F</b> means gaps the public can't see past or checks that are weak or missing. Here we grade <b>the system</b> the records show, not any one person or company.</p>
+<div class="tbl-wrap" style="max-height:none"><table><thead><tr><th>Criterion</th><th>Grade</th><th>Why, from the record</th></tr></thead><tbody>
+<tr><td><b>Power</b><br><span class="note">Does it add or remove a check on power the public would otherwise have no say over?</span></td><td style="font-size:26px;font-weight:700">D</td><td>A billboard company can choose which candidates get space, and Utah has no equal-access rule like broadcasters have or Minnesota has. The same company gives to the lawmakers who write its rules: a Reagan representative supported H.B. 198 at committee, and Reagan gave the bill's sponsor $1,500. A handful of firms with shared officers touch many campaigns.</td></tr>
+<tr><td><b>Transparency</b><br><span class="note">Can the public actually see the process?</span></td><td style="font-size:26px;font-weight:700">D</td><td>Gifts and payments are filed and public, so the minimum is met for Reagan's money. But the state's search shows no totals, splits one company across five spellings, and only the downloadable year files show which gifts were donated space. Outside mailers can arrive with no visible payer ("10,000 Integrity Trackers") or from groups whose money shows up as $0 or only on a later report (Preserving Utah Values in 2024; Utahns for Safer Communities in 2026). H.B. 33 will require more signs to name a payer starting in 2027, but its readability rule covers billboards only.</td></tr>
+<tr><td><b>Financial Accountability</b><br><span class="note">Who actually pays, and is that disclosed plainly?</span></td><td style="font-size:26px;font-weight:700">C</td><td>Every payment we checked has a date, payer and amount, and in-kind gifts are marked with a description, which is the legal minimum. No report shows rates, how many boards, or the terms other candidates got. Some payees are filed as just "Reagan," and party postage is filed as "State Indicia" without naming the party.</td></tr>
+<tr><td><b>Environmental Impact</b><br><span class="note">Is the effect on land, water and wildlife a real constraint?</span></td><td style="font-size:26px;font-weight:700">N/A</td><td>Campaign money records don't measure this. Billboards do affect how roadsides look, and H.B. 198 made it easier to raise or move boards blocked by road work, but these records give us nothing to grade it on.</td></tr>
+<tr><td><b>Community Impact</b><br><span class="note">Who bears the cost or holds a stake, and did they get real standing to be heard?</span></td><td style="font-size:26px;font-weight:700">D</td><td>Voters receive the ads and can't see prices, terms or, sometimes, who paid. Candidates without connections to the few firms that run many campaigns start behind. Attack mailers in 2022, 2024 and 2026 came from groups whose money showed up late, as $0, or not at all.</td></tr>
+<tr><td><b>Overall</b></td><td style="font-size:30px;font-weight:700">D</td><td>The law's floor (report it, name the payer) is mostly met. The public still can't see the prices, the terms, or quickly who's behind an attack.</td></tr>
+</tbody></table></div>
+
+<h2>The Legislature's record: does it help, harm, or stay neutral for the collective?</h2>
+<p class="note">Same verdict labels we use on every bill: <b>Help</b>, <b>Mixed</b>, <b>Harm</b>, <b>Neutral</b>, plus <b>Gap</b> where no law exists.</p>
+<div class="tbl-wrap" style="max-height:none"><table><thead><tr><th>Law or decision</th><th>Verdict</th><th>Why</th></tr></thead><tbody>
+<tr><td>Utah Code 20A-11-901, "paid for by" rule</td><td><b>Help</b></td><td>Requires a payer's name on mailers, billboards and broadcast ads. Gaps: small signs and pins are exempt, and the rule doesn't reach whether claims are true.</td></tr>
+<tr><td>H.B. 33 (2026), Political Signs Amendments</td><td><b>Mixed</b></td><td>Helps: starting Jan. 1, 2027, billboards must carry a readable "paid for by" line, and the exemption shrinks from signs up to 4 by 8 feet to signs under 24 by 18 inches. Falls short: the readability rule for ordinary signs was in the introduced bill and dropped before passage.</td></tr>
+<tr><td>H.B. 198 (2025), Highway Expansion Impacts on Signage</td><td><b>Mixed</b></td><td>Deals with a real problem (road work blocking existing boards) in a way that serves billboard owners; the industry supported it at committee. We found no public cost figure in the record we read.</td></tr>
+<tr><td>Enforcement when a PAC reports $0 while advertising</td><td><b>Neutral</b></td><td>A process exists (complaint, contact attempt, referral to the Attorney General), but in 2024 the donor became public only after the election.</td></tr>
+<tr><td>Equal access to billboard space</td><td><b>Gap</b></td><td>No Utah law that we found. Broadcasters face a federal equal-opportunity rule; Minnesota bars billboard companies from refusing space over political affiliation.</td></tr>
+<tr><td>S.B. 131 (2024), AI disclosure in political ads</td><td><b>Help</b></td><td>Requires a label when a political ad uses AI-made images, video or audio. In force since May 1, 2024.</td></tr>
+<tr><td>H.B. 112 (2026), Political Advertising Amendments</td><td><b>Killed</b></td><td>Would have covered paid social media and internet ads and set fines per ad. Passed the House 66-1; failed 2-3 in a Senate committee on March 3, 2026.</td></tr>
+<tr><td>Text messages</td><td><b>Gap</b></td><td>Utah's ad rule doesn't name text messages. In 2024 a group texted voters while reporting $0; in 2026 a group's June texts show up only as money on a later report.</td></tr>
+<tr><td>2027 session</td><td><b>Watch</b></td><td>No "Signs and Billboards" bill requests as of Nov. 17, 2026. Requests to watch: Andrew Stoddard's Candidate Nomination Procedures Amendments and Initiative and Referenda Signature Amendments (signature gathering), and Candice Pierucci's Banning Foreign Funding in Ballot Propositions and Elections. None has bill text yet.</td></tr>
+</tbody></table></div>
+
+<h3>How the rules could better protect the public</h3>
+<ol>
+<li><b>Show totals and group spellings</b> on disclosures.utah.gov, and show cash vs. in-kind in search results, not only in the year files.</li>
+<li><b>Require a rate disclosure</b> when a vendor that gives to a campaign is also paid by it, or require one published political rate for every candidate, as federal law already requires of broadcasters (47 U.S.C. § 315(b)).</li>
+<li><b>Add a readable "paid for by" rule</b> for every sign that must carry one, not only billboards.</li>
+<li><b>Require a PAC to report its funders before its ads go out</b>, not at the next deadline.</li>
+<li><b>Cover texts and social media</b> in the "paid for by" rule, as H.B. 112 proposed in 2026.</li>
+<li><b>Name the real sponsor on outside mailers</b>, such as the top donors, so a name like "Integrity Trackers" or "Republicans Against" can't hide who paid.</li>
+</ol>
+<p class="note">These are policy options drawn from what the records show is missing. They are not endorsements of any bill.</p>
+
+<h2>Every gift from Reagan, 2026</h2>
+<p>Sort by tapping a heading. Search a name.</p>
+<div class="filters"><input id="gTx" type="search" placeholder="Search a name"><select id="gMo"><option value="">All months</option></select></div>
+<p class="note" id="gsum"></p>
+<div class="tbl-wrap"><table id="gtbl"><thead><tr><th data-k="date">Date</th><th data-k="to">Recipient</th><th data-k="filedAs">Filed as</th><th data-k="type">Cash or in-kind</th><th class="num" data-k="amount">Amount</th></tr></thead><tbody></tbody></table></div>
+
+<h2>Every payment to Reagan, 2026</h2>
+<p>Filed to Reagan Outdoor Advertising or Reagan Signs.</p>
+<div class="filters"><input id="pTx" type="search" placeholder="Search a name"></div>
+<p class="note" id="psum"></p>
+<div class="tbl-wrap"><table id="ptbl"><thead><tr><th data-k="date">Date</th><th data-k="payer">Paid by</th><th data-k="payeeAs">Payee as filed</th><th class="num" data-k="amount">Amount</th></tr></thead><tbody></tbody></table></div>
+
+<h3>Unconfirmed: payee filed only as "Reagan"</h3>
+<div class="tbl-wrap" style="max-height:none"><table id="utbl"><thead><tr><th>Date</th><th>Paid by</th><th>Payee as filed</th><th class="num">Amount</th></tr></thead><tbody></tbody></table></div>
+<p class="note">Not included in any total, chart or the both-lists table.</p>
+
+<h2>What this search can't see</h2>
+<div class="plain"><ul style="margin:0">
+<li><b>Cash vs. donated space.</b> The search results don't mark in-kind gifts; the state's downloadable year files do, and we used them.</li>
+<li><b>Prices and terms.</b> No report shows the rate, how many boards, how long, or what other candidates were offered.</li>
+<li><b>Federal races and city races.</b> We searched state filings only, not FEC records or city clerks' filings.</li>
+<li><b>Other spellings.</b> We found five. If a gift was filed under a spelling we didn't search, it isn't here.</li>
+<li><b>Other billboard companies.</b> This page covers Reagan. YESCO and Saunders Outdoor also appear in 2026 reports and are not counted here.</li>
+</ul></div>
+
+<h2 class="qs-h">Questions to ask, and whom to ask</h2>
+<div class="qs">
+<h3>For billboard companies</h3>
+<ol>
+<li>Do you offer every candidate the same rates and terms?</li>
+<li>What political ads have you declined, and why?</li>
+<li>When you give a campaign donated space, how is it valued and reported?</li>
+</ol>
+<h3>For your state legislators (<a href="https://le.utah.gov">le.utah.gov</a>)</h3>
+<ol start="4">
+<li>Should billboard companies have an equal-access rule like broadcasters, or like Minnesota's?</li>
+<li>H.B. 33's first version required the "paid for by" line on ordinary signs to be readable up close. Why was that dropped?</li>
+</ol>
+<h3>For the Lieutenant Governor's Office (<a href="https://disclosures.utah.gov">disclosures.utah.gov</a>)</h3>
+<ol start="6">
+<li>Can the disclosure site show totals and group a company's different spellings together?</li>
+<li>The year files show whether a gift was cash or in-kind. Can the search results show it too?</li>
+<li>Who reviews mailers like the "10,000 Integrity Trackers" one that show no "paid for by" line?</li>
+<li>What happened to the 2024 complaints about Preserving Utah Values PAC after they were forwarded to the Attorney General?</li>
+<li>Has Roy City Citizens filed its report on the Prop. 10 mailer, and where can the public see it?</li>
+</ol>
+</div>
+
+<h2>Check it yourself</h2>
+<ol>
+<li>Go to <a href="https://disclosures.utah.gov">disclosures.utah.gov</a> and choose <b>Advanced Search</b>.</li>
+<li>Pick <b>Contributions</b> to see who a company gave to, or <b>Expenditures</b> to see who paid it. Pick the year, type the company name and click <b>Find</b>.</li>
+<li>Try every spelling. A "Reagan" search also picks up Reagan Airport travel and the unrelated Utah Reagan Caucus, so read each line.</li>
+<li>Click through every page of results. Totals are not shown; add them yourself.</li>
+<li>Look for the same name on both lists, and for gifts and payments on the same day.</li>
+</ol>
+
+<h2>Where this connects</h2>
+<ul>
+<li><a href="follow-the-money-uwha.html">Case 02: Follow the Money</a>: Election Hive, Matthew Lusty and UWHA.</li>
+<li><a href="gambling-money-utah.html">Case 17: Gambling Money in Utah</a>: Lincoln Hill, Casey Hill and Election Hive's AG client.</li>
+<li><a href="clyde-companies-giving.html">Case 16: Clyde Companies</a>: another company's giving, with Gov. Cox as the largest recipient.</li>
+<li><a href="https://weber-county-hive.github.io/candidates2026/">2026 voter guide (candidates2026)</a>: several candidates on Reagan's lists, including Alvey, Stevenson, Koford and Bishop, appear in the guide.</li>
+<li><a href="https://weber-county-hive.github.io/Unelected-Power/utgop-state-indicia.html">The State Party Indicia (UP 100.13)</a>: candidate mailers on the Utah GOP's nonprofit postage permit.</li>
+<li><a href="https://weber-county-hive.github.io/Bill-Tracker/">Bill-Tracker</a>: the Hive's bill case files and the 2027 bill watch.</li>
+</ul>
+
+<h2>How we checked</h2>
+<p>A tip came in with two tables: Reagan's 2026 gifts ($175,956, 64 rows) and payments to Reagan ($93,725.73). We searched disclosures.utah.gov Advanced Search for 2026 Contributions under "Reagan Outdoor," "Regan," "Reagan Inc" and "reagan outdoor," and 2026 Expenditures with payee "Reagan," and read every page. All 64 of the tip's gifts matched to the dollar. We found six more gifts filed under other spellings or filed later (Fiefia, Winterton, Albrecht, Plumb, Benson, Fitisemanu: $7,320). The tip's payment total, $93,725.73 in 36 entries, matched the state's search results. The state's downloadable 2026 year file, pulled the same day, includes 35 of those 36; Jill Koford's $5,630 payment dated Oct. 26 appears in the search results but not in the year file, so it may have been changed or is still being processed. We kept it in the total and note it here. two more payments filed to payee "Reagan" alone (Hollist, Lee: $1,990.10) are listed separately as unconfirmed. The tip's grand total of $269,681 added the two tables together; we keep them apart because one is gifts from Reagan and the other is payments to Reagan. We then downloaded the state's 2026 year files for candidates, PACs and political parties (100,202 transactions) and used them for cash vs. in-kind, the vendor totals in section 6 and the follow-up filings in section 5. We left out Reagan Airport travel, the Utah Reagan Caucus and people whose last name is Reagan.</p>
+
+<details><summary>Sources</summary>
+<ul>
+<li><a href="https://www.sltrib.com/news/2025/07/31/utah-election-officials-rebuke/">Salt Lake Tribune, July 31, 2025</a>: Riverton mailer, "Postage paid by the Utah Republican Party," missing disclosure</li>
+<li><a href="https://www.kuer.org/politics-government/2025-10-23/utah-municipal-elections-are-nonpartisan-fyi-but-not-without-party-influence">KUER, Oct. 23, 2025</a>: Provo postcards and party postage</li>
+<li><a href="https://www.utgop.org/candidates">Utah Republican Party candidate resources</a> (Postage Discount Form)</li>
+<li><a href="https://www.sltrib.com/news/politics/2025/08/06/lehi-city-council-candidates">Salt Lake Tribune, Aug. 6, 2025</a> and <a href="https://www.sltrib.com/news/environment/2025/08/07/hurricane-mayor-broke-campaign">Aug. 7, 2025</a>: "fairly common mistake," standard notice</li>
+<li><a href="https://townlift.com/2025/11/summit-county-gop-files-complaint-over-misleading-election-eve-text-message/">TownLift, Nov. 17, 2025</a>: Park City election-eve text complaint</li>
+<li><a href="https://sltrib.com/news/politics/2020/06/26/lobbyists-utah-senate">Salt Lake Tribune, June 26, 2020</a>: Utah Term Limits PAC timing</li>
+<li><a href="https://www.deseret.com/utah/2024/07/19/utah-billboard-laws-scenic-utah-yesco-reagan">Deseret News, July 19, 2024</a> (also on <a href="https://www.ksl.com/article/51074064">KSL</a>): Scenic Utah's list of 29 billboards</li>
+<li><a href="https://sltrib.com/news/environment/2024/01/15/does-bill-open-door-more">Salt Lake Tribune, Jan. 15, 2024</a>: scenic byway billboard bill</li>
+<li>Utah Lieutenant Governor, <a href="https://disclosures.utah.gov">disclosures.utah.gov</a>, Advanced Search: 2026 Contributions, contributor "Reagan Outdoor," "Regan," "Reagan Inc," "reagan outdoor"; 2026 Expenditures, payee "Reagan" (all pages read Nov. 17, 2026).</li>
+<li>47 U.S.C. § 315 (Cornell LII): <a href="https://www.law.cornell.edu/uscode/text/47/315">law.cornell.edu/uscode/text/47/315</a></li>
+<li>Minn. Stat. § 325E.24: <a href="https://www.revisor.mn.gov/statutes/cite/325E.24">revisor.mn.gov/statutes/cite/325E.24</a></li>
+<li>H.B. 198 (2025): <a href="https://le.utah.gov/Session/2025/bills/introduced/HB0198.pdf">introduced text</a>; <a href="https://www.uasd.org/uploads/files/19099/Senate-Economic-Development-and-Workforce-Services-Committee-4th-sub-HB-198.pdf">Senate committee hearing summary, 4th Sub. H.B. 198</a></li>
+<li>H.B. 33 (2026): <a href="https://le.utah.gov/Session/2026/bills/introduced/HB0033.pdf">introduced text</a>; <a href="https://le.utah.gov/Session/2026/bills/enrolled/HB0033.pdf">enrolled text</a></li>
+<li>Utah Legislature, 2027 General Session bill requests: <a href="https://le.utah.gov/bills/billSearch.jsp">le.utah.gov/bills/billSearch.jsp</a></li>
+<li>Utah Code 20A-11-901, political advertisements: <a href="https://le.utah.gov/xcode/Title20A/Chapter11/20A-11-S901.html">le.utah.gov</a></li>
+<li>KSL, "Billboard company rejects Davis candidate's ad," May 31, 2012: <a href="https://www.ksl.com/article/20634380/billboard-company-rejects-davis-candidates-ad">ksl.com</a></li>
+<li>Utah Policy, 2015: <a href="https://utahpolicy.com/archive/6330-outside-group-starts-spending-in-salt-lake-city-mayoral-race?amp">"Outside group starts spending in Salt Lake City mayoral race"</a></li>
+<li>Fox 13, Aug. 26, 2015: <a href="https://www.fox13now.com/2015/08/26/investigations-under-way-into-slc-mayors-race">"Investigations under way into SLC mayor's race"</a></li>
+<li>KSL, 2015: <a href="https://www.ksl.com/article/35701065/more-pac-funded-billboards-raised-for-slc-mayoral-candidates">"More PAC-funded billboards raised for SLC mayoral candidates"</a></li>
+<li>Salt Lake Tribune, Oct. 24, 2024: <a href="https://sltrib.com/news/politics/2024/10/24/utah-democrats-attacked-with-anti">Preserving Utah Values PAC mailers and texts</a>; Dec. 2, 2024: <a href="https://sltrib.com/news/politics/2024/12/02/utah-house-speaker-gave-120k-his">Speaker Schultz gave the PAC $120,000</a>; Dec. 4, 2024: <a href="https://www.sltrib.com/news/politics/2024/12/04/complaints-about-anti-trans-pacs">complaints referred to the Attorney General</a></li>
+<li>Alliance for a Better Utah complaint: <a href="https://betterutah.org/shadowy-anti-transgender-pac-fails-to-disclose-financials">betterutah.org</a></li>
+<li>KSL, June 6, 2026: <a href="https://www.ksl.com/article/news/politics/democratic-firm-behind-republican-campaign-seeks-to-oust-commissioners-over-data-center/51507692">Majorities Matter PAC mailers in Box Elder County</a></li>
+<li>Utah Code 20A-11-901 text in effect through 2026 (last amended 2022): <a href="https://law.counselstack.com/statute/ut/20A-11-901">copy read Nov. 17, 2026</a>; H.B. 33 (2026) amends it effective Jan. 1, 2027</li>
+<li>KSL, 2026: <a href="https://www.ksl.com/article/51509599/republican-lawmakers-question-political-group-over-late-financial-disclosures">Checks and Balances PAC late reports and fines</a></li>
+<li>Utahns for Safer Communities (also filed as Utahns for Safe Communities): 2022 Primary, September 30, General and Year End reports, and 2026 filings, read for the Hive's June 27, 2026 article; mailer disclaimer from a reader-sent copy</li>
+<li>Roy City Citizens: written exchange with Randy Scadden, Oct. 24, 2026, published in the <a href="https://webercountyhive-coder.github.io/referendum/roy-prop-10-tax-referendum.html">Roy case file</a></li>
+<li>Deseret News, June 11, 2026: <a href="https://www.deseret.com/politics/2026/06/11/utah-senate-president-stuart-adams-faces-ai-election-attacks-from-outside-groups-over-data-center/">Adams faces AI election attacks from outside groups</a></li>
+<li>H.B. 112 (2026): <a href="https://le.utah.gov/Session/2026/bills/introduced/HB0112S03.pdf">3rd Substitute text</a>; <a href="https://pf.utleg.gov/public-web/sessions/2026GS/fiscal-notes/HB0112.fn.pdf">fiscal note</a>; vote history via <a href="https://policyrisk.com/state-bill/UT-HB112-2026GS">bill tracker</a></li>
+<li>S.B. 131 (2024): <a href="https://le.utah.gov/~2024/bills/sbillenr/SB0131.pdf">enrolled text</a></li>
+<li>Sharon Bolos 2026 Weber County campaign reports (VOTTIV Campaigns, texts), read page by page in October 2026</li>
+<li>KSL, 2005 quote from Dewey Reagan: <a href="https://www.ksl.com/article/919929">ksl.com/article/919929</a></li>
+<li>Utah Division of Corporations records (and copies read through OpenCorporates and Bizapedia where the state site was down) for Election Hive LLC, Honey Communications LLC, Roost Communications LLC, Stokes Strategies LLC and Gathering, Inc.</li>
+<li>Election Hive website, client testimonials (screenshots, June 2026).</li>
+<li>Utah lobbyist register (pulled Oct. 27, 2026): Casey Hill; Reagan Outdoor Advertising (three filed names).</li>
+<li>Utah Attorney General's Office, March 2025 forgery charges.</li>
+<li>Campaign reports for Jim Alvey (HD-10), Sen. Stuart Adams, Steve Waldrip (HD-8, 2018–2022), Katrina Gibson and Sharon Bolos (Weber County Commission) and Adams Leadership PAC.</li>
+</ul>
+<p class="note">Reported from public records. The Hive did not contact the people or companies named.</p>
+</details>
+</main>
+
+
+<div class="hb-foot"><img src="hive-bee.png" alt=""><span class="hb-name">Utah Hive Politics</span><span class="hb-sub">from the publisher of The Weber County Hive</span><span class="hb-tag">Independent · Accountability · Journalism</span><p class="hb-line">The Weber County Hive and Utah Hive Politics: the people's publication. We investigate what's best for the public as a whole, not for any party or special interest group. We report public records. You decide.</p><p class="hb-tips"><a class="hb-btn" href="https://weber-county-hive.github.io/-weber-county-hive-index/tips.html#send">Send a tip</a><a class="hb-btn hb-btn2" href="https://weber-county-hive.github.io/-weber-county-hive-index/tips.html">Tips we checked</a><a class="hb-btn hb-btn2" href="https://weber-county-hive.github.io/-weber-county-hive-index/tips.html#send">See a mistake? Tell us</a></p><p class="hb-small">We never name tipsters. When we correct a page, the fix and its date are shown on the page.</p><p class="hb-small"><a href="index.html" style="color:#d4af37">The Ledger home</a> · <a href="https://weber-county-hive.github.io/-weber-county-hive-index/" style="color:#d4af37">Master Index (Hive library)</a> · <a href="https://webercountyhive.substack.com/" style="color:#d4af37">Read on Substack</a></p></div>
+
+<script src="reagan-2026-data.js"></script>
+<script>
+const G=window.REAGAN_GIFTS||[],PALL=window.REAGAN_PAYMENTS||[],P=PALL.filter(p=>p.confirmed),PU=PALL.filter(p=>!p.confirmed);
+const fmt=n=>'$'+n.toLocaleString('en-US',{minimumFractionDigits:n%1?2:0,maximumFractionDigits:2});
+const fd=d=>{const [y,m,dd]=d.split('-');return `${+m}/${+dd}/${y}`};
+const sumBy=(a,k,v)=>a.reduce((o,x)=>(o[x[k]]=(o[x[k]]||0)+x[v],o),{});
+// months chart
+const MN=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov'];
+const gm=sumBy(G.map(g=>({m:+g.date.slice(5,7),a:g.amount})),'m','a'),pm=sumBy(P.map(p=>({m:+p.date.slice(5,7),a:p.amount})),'m','a');
+const mx=Math.max(...Object.values(gm),...Object.values(pm));
+months.innerHTML=MN.map((n,i)=>{const g=gm[i+1]||0,p=pm[i+1]||0;return `<div class="mo"><i style="height:${g/mx*100}%" title="${n}: Reagan gave ${fmt(g)}"></i><i class="b" style="height:${p/mx*100}%" title="${n}: campaigns paid Reagan ${fmt(Math.round(p*100)/100)}"></i></div>`}).join('');
+molabels.innerHTML=MN.map(n=>`<span>${n}</span>`).join('');
+// bar lists
+function bars(el,obj,cls,n){const e=Object.entries(obj).map(([k,v])=>[k,Math.round(v*100)/100]).sort((a,b)=>b[1]-a[1]).slice(0,n);const m=e[0][1];el.innerHTML=e.map(([k,v])=>`<div class="br"><span>${k}</span><div class="t"><div class="f ${cls}" style="width:${v/m*100}%"></div></div><span class="v">${fmt(v)}</span></div>`).join('')}
+bars(topgifts,sumBy(G,'to','amount'),'',12);
+bars(toppayers,sumBy(P,'payer','amount'),'b',12);
+// both lists
+const gt=sumBy(G,'to','amount'),pt=sumBy(P,'payer','amount');
+const gtype=k=>{const t=G.filter(g=>g.to===k);const i=t.filter(g=>g.type!=='Cash').reduce((s,g)=>s+g.amount,0),c=t.filter(g=>g.type==='Cash').reduce((s,g)=>s+g.amount,0);return [i?fmt(i)+' donated space/ads':'',c?fmt(c)+' cash':''].filter(Boolean).join(' + ')};
+const both=Object.keys(gt).filter(k=>pt[k]).map(k=>[k,gt[k],Math.round(pt[k]*100)/100]).sort((a,b)=>b[2]-a[2]);
+const bm=Math.max(...both.map(b=>Math.max(b[1],b[2])));
+document.querySelector('#both tbody').innerHTML=both.map(([k,g,p])=>`<tr><td>${k}</td><td class="num">${fmt(g)}</td><td>${gtype(k)}</td><td class="num">${fmt(p)}</td><td><div class="two"><div class="t" style="background:#e8eef6"><div class="f" style="width:${g/bm*100}%;background:#0f1b2d;height:12px"></div></div><div class="t" style="background:#e8eef6"><div class="f b" style="width:${p/bm*100}%;background:#1d5fbf;height:12px"></div></div></div></td></tr>`).join('');
+// tables
+function table(tb,rows,cols,tx,sumEl,label,extra){let k='date',asc=true;
+ function draw(){const t=tx.value.toLowerCase();let r=rows.filter(x=>(!t||Object.values(x).join(' ').toLowerCase().includes(t))&&(!extra||extra(x)));
+  r.sort((a,b)=>{const x=a[k],y=b[k];return (x>y?1:x<y?-1:0)*(asc?1:-1)});
+  tb.tBodies[0].innerHTML=r.map(x=>'<tr>'+cols.map(c=>c==='amount'?`<td class="num">${fmt(x[c])}</td>`:c==='date'?`<td>${fd(x[c])}</td>`:`<td>${x[c]}</td>`).join('')+'</tr>').join('');
+  sumEl.textContent=`${r.length} ${label} · ${fmt(Math.round(r.reduce((s,x)=>s+x.amount,0)*100)/100)}`}
+ tx.oninput=draw;tb.querySelectorAll('th').forEach(th=>th.onclick=()=>{const n=th.dataset.k;asc=k===n?!asc:true;k=n;draw()});tb._draw=draw;draw()}
+[...new Set(G.map(g=>g.date.slice(0,7)))].sort().forEach(m=>gMo.add(new Option(MN[+m.slice(5)-1]+' 2026',m)));
+table(gtbl,G,['date','to','filedAs','type','amount'],gTx,gsum,'gifts',x=>!gMo.value||x.date.startsWith(gMo.value));gMo.onchange=()=>gtbl._draw();
+table(ptbl,P,['date','payer','payeeAs','amount'],pTx,psum,'payments');
+utbl.tBodies[0].innerHTML=PU.map(x=>`<tr><td>${fd(x.date)}</td><td>${x.payer}</td><td>${x.payeeAs}</td><td class="num">${fmt(x.amount)}</td></tr>`).join('');
+// cards
+const C=[
+ {n:'Reagan Outdoor Advertising',w:'Billboard company, Salt Lake City',big:'$183,276 given · $93,725.73 paid to it',b:['2026: 70 gifts to candidates, PACs and parties; largest $50,000 to Gov. Cox','2026: 36 payments to it from campaigns and groups, mostly advertising (two more filed to "Reagan" only are not counted)','Filed under at least five spellings','Registered lobbyists include Nathaniel Sechrest (since 2013)']},
+ {n:'Election Hive LLC',w:'Campaign consulting firm',big:'Formed Dec. 13, 2017',b:['Manager and registered agent: Matthew Lusty, 136 S. Main St., Ste. A200','Website testimonials: Rep. Blake Moore, AG Derek Brown, Sen. Chris Wilson, Rep. Anthony Loubet, Joann Brinton, Lori Maughan','Steve Waldrip\'s HD-8 campaigns paid it $39,483.93 in 10 payments, 2018–2022','Casey Hill was its registered lobbyist, Jan. 9, 2019–Sept. 10, 2024']},
+ {n:'Honey Communications',w:'Digital advertising firm',big:'Same office as Election Hive',b:['State records list Matthew Lusty as manager','Katrina Gibson\'s 2026 reports: $10,576 for digital advertising plus $1,000 to "Honey" for data collection','Gibson also paid Election Hive $819.33']},
+ {n:'Roost Communications',w:'Campaign media and strategy firm ("Roost Co.")',big:'$49,861.06 from Adams Leadership PAC',b:['Filed as Roost, Roost Company, Roost & Company, Roost Campaign Services','Members listed: Spencer Stokes and Matthew Holton (read from copies of the state record)','Jim Alvey\'s largest vendor: $21,187.99 through Nov. 2, 2026','Sen. Stuart Adams\'s campaign also paid Roost $50,000 on July 9, 2026','Utah Doers PAC reported $22,500 in independent expenditures through Roost supporting five candidates (Oct. 16, 2026)','Website names Rep. Celeste Maloy\'s campaign as a case study']},
+ {n:'Stokes Strategies',w:'Lobbying firm',big:'$5,000 to Adams Leadership PAC, May 26, 2026',b:['Member listed: Spencer Stokes','Same South Temple office block as Roost','Has given Adams Leadership PAC $16,000 since 2021']},
+ {n:'Gathering Inc.',w:'Signature-gathering firm',big:'$76,682 from Sen. Stuart Adams\'s campaign',b:['Officers listed: Casey Hill, Spencer Stokes, Tanner Leatham','March 2025: AG charged 11 gatherers with forgery from 2024; at least five had worked for Gathering Inc.; most forged signatures were caught in verification','Adams: six payments, Jan. 30–July 17, 2026; Alvey: $11,864, including $9,000 on Nov. 5','All 2026 state filers: $201,733.80 from 18 campaigns and committees']}
+];
+cards.innerHTML=C.map(c=>`<div class="flip" tabindex="0" onclick="this.classList.toggle('on')" onkeydown="if(event.key==='Enter')this.classList.toggle('on')"><div class="flip-in"><div class="face front"><h4>${c.n}</h4><div>${c.w}</div><div class="amt" style="margin-top:14px;font-size:24px">${c.big}</div><div class="tap">Tap for the record →</div></div><div class="face back"><b>${c.n}</b><ul>${c.b.map(x=>`<li>${x}</li>`).join('')}</ul></div></div></div>`).join('');
+
+const M=[
+ {n:'Preserving Utah Values PAC',w:'2024 legislative races',big:'Reported $0 while advertising',b:['Mailers, texts and mobile billboards said Democratic lawmakers "voted against Utah\'s girls" (Salt Lake Tribune)','Officers listed: Wisconsin consultants Thomas and Timothy Datwyler','Alliance for a Better Utah complained it reported zero contributions and spending','Later report: House Speaker Mike Schultz gave it $120,000 (Tribune, Dec. 2, 2024)','Lt. Governor\'s Office forwarded complaints to the Attorney General']},
+ {n:'Utahns for Safer Communities',w:'2022 and June 2026',big:'$0, then $3,870 reported later',b:['June 2026 ads and texts carried "Paid for by Utahns for Safer Communities. Not authorized by any candidate," including a mailer about HD-44 candidate Scott Stephenson\'s time as Board of Pardons chair','Its 2026 Convention and Primary reports (through June 11) showed $0 in and $0 out','Its later September 30th report lists $2,235 from H3 PAC (June 12) and $1,635 from Hartley Consulting (June 13), and $2,200 paid to Hartley Consulting (June 23)','Its 2022 reports list $25,000 and then $100,000 from Mike Schultz ($125,000), most of what it raised that year','In 2022 it paid Hartley Consulting for advertising, then Chase Marketing Group $99,657 for advertising (Sept. 29–Oct. 21, 2022); the reports don\'t say who those ads were about','Its 2026 ads aren\'t tied to Schultz in any filing we have seen','Run by Greg and Jeff Hartley, who also run H3 PAC','The Hive sent a compliance question to state election officials in June 2026; the later report is the filing that shows the June money']},
+ {n:'Majorities Matter PAC',w:'June 2026, Box Elder County Commission GOP primary',big:'About $11,000 in ads',b:['Its state filings list $10,886.12 from Fulcrum Campaigns in May and June (described as campaign ads and mail), then $140,000 from Western Futures Fund on Sept. 25 and $100,754 in advertising in October','Created in 2025 by Thom DeSirant, a partner at Democratic firm Fulcrum Campaigns (KSL)','Ads branded "Republicans Against the Stratos Project Data Center" urged voters to remove two commissioners','Commissioner Lee Perry called them deceptive; Speaker Schultz called them dishonest and misleading','KSL didn\'t report what disclaimer the ads carried']},
+ {n:'"10,000 Integrity Trackers"',w:'Oct. 2026, Senate District 21',big:'No payer found',b:['Mailer attacking Sen. Brady Brammer on one side and U.S. Rep. Mike Kennedy on the other','No "paid for by" line visible on the copy we saw','No PAC, issue committee or corporation filed under that name (searched Oct. 24, 2026)']}
+,
+ {n:'Roy City Citizens',w:'Oct. 2026, Roy Prop. 10 tax referendum',big:'Report not yet seen',b:['The committee behind the "Vote FOR" mailer in Roy','Its organizer, Randy Scadden, told the Hive in writing (Oct. 24, 2026) that he is the group\'s only funder','The Hive said it would report it that way until the group files its report','As of Nov. 17, 2026, we have no update and have not seen a report','The full exchange is in the Hive\'s Roy case file']},
+ {n:'Checks and Balances PAC',w:'2026: a late report',big:'Fined for missing a deadline',b:['Missed the April 18, 2026 report deadline (KSL)','Sen. Brady Brammer and Rep. Jordan Teuscher asked the Lt. Governor\'s Office to look into it','The PAC admitted fault, citing health issues, and filed after KSL contacted it','The Lt. Governor\'s Office confirmed it would be fined']}
+];
+mailcards.innerHTML=M.map(c=>`<div class="flip" tabindex="0" onclick="this.classList.toggle('on')" onkeydown="if(event.key==='Enter')this.classList.toggle('on')"><div class="flip-in"><div class="face front"><h4>${c.n}</h4><div>${c.w}</div><div class="amt" style="margin-top:14px;font-size:24px">${c.big}</div><div class="tap">Tap for the record →</div></div><div class="face back"><b>${c.n}</b><ul>${c.b.map(x=>`<li>${x}</li>`).join('')}</ul></div></div></div>`).join('');
+// other firms chart
+const FIRMS=[['Election Hive',349391.45,16],['Irish Elk LLC',326694.10,10],['Roost (all name versions)',249691.62,16],['Gathering Inc.',201733.80,18],['Tactical Campaigns',111173.18,8],['Express Digital Direct',105750.36,10],['Reagan Outdoor / Reagan Signs',93725.73,19],['Right Hook Strategies',70000,2],['VOTTIV (texts)',52796.21,17],['Empower Public Affairs',50430.63,3],['In the Field (incl. Black Peak)',45427,8],['YESCO',6053.97,2],['Honey Communications',5050,1],['Saunders Outdoor / Saunders Signs',4550,2]];
+{const m=FIRMS[0][1];firmbars.innerHTML=FIRMS.map(([n,v,c])=>`<div class="br"><span>${n}<br><small style="color:#55606e">${c} payer${c>1?'s':''}</small></span><div class="t"><div class="f" style="width:${v/m*100}%"></div></div><span class="v">${fmt(v)}</span></div>`).join('');}
+// map
+try{const m=L.map('map',{scrollWheelZoom:false});
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap'}).addTo(m);
+const F=[[40.8045,-111.9130,'Reagan Outdoor Advertising','1775 N. Warm Springs Rd.'],[40.7668,-111.8910,'Election Hive LLC and Honey Communications','136 S. Main St., Ste. A200'],[40.7692,-111.8775,'Roost Communications and Stokes Strategies','505 E. South Temple, Ste. 200'],[40.7627,-111.8922,'Gathering Inc.','10 W. Broadway, Ste. 202']];
+F.forEach(p=>L.circleMarker([p[0],p[1]],{radius:11,color:'#1d5fbf',fillColor:'#0f1b2d',fillOpacity:.9,weight:3}).addTo(m).bindPopup('<b>'+p[2]+'</b><br>'+p[3]).bindTooltip(p[2],{permanent:true,direction:'right'}));
+m.fitBounds(F.map(p=>[p[0],p[1]]),{padding:[60,60]});}catch(e){}
+mermaid.initialize({startOnLoad:true,securityLevel:'loose'});
+
+</script>
+<script src="lg-shelf.js?v=3"></script>
+<script data-goatcounter="https://weberhive.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

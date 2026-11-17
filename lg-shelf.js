@@ -63,6 +63,16 @@ var HBX = {
       "name": "Case 17 (easy version): Gambling Money in Utah"
     },
     {
+      "callNumber": "LG 100.10",
+      "slug": "marketing-in-utah-politics",
+      "name": "Case 18: Who Gets Paid to Sell You a Candidate"
+    },
+    {
+      "callNumber": "LG 100.11",
+      "slug": "marketing-in-utah-politics-plain",
+      "name": "Case 18 (easy version): Who Gets Paid to Sell You a Candidate"
+    },
+    {
       "callNumber": "LG 200.01",
       "slug": "biggest-donors-flip",
       "name": "Case 06: The Biggest Donors, So Far"
