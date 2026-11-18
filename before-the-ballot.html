@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Before the Ballot: Who Recruits Utah Candidates, and Who Pays to Get Them On It | The Ledger</title>
+<meta name="description" content="Who recruits Utah candidates, who paid for signature gathering in 2026, under what names, and what the law requires, from the public record.">
+<link rel="icon" type="image/png" href="hive-bee.png">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Source+Sans+3:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="leaflet.css">
+<script src="leaflet.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<style>
+:root{--felt:#0f1b2d;--felt2:#13233F;--gold:#1d5fbf;--ink:#1b2430;--muted:#55606e;--line:#d9dde3;--bg:#ffffff;--soft:#f3f6fa}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:18px/1.6 'Source Sans 3',Arial,sans-serif}
+a{color:#1d5fa8}
+.hb-bar{background:#0d0b0a;border-bottom:1px solid #3a2f1c;padding:8px 16px}
+.hb-bar a{display:flex;align-items:center;gap:12px;text-decoration:none}
+.hb-bar img{height:44px;width:auto}
+.hb-name{font-family:'Cinzel',Georgia,serif;color:#d4af37;font-size:14px;letter-spacing:.14em;text-transform:uppercase;display:block}
+.hb-sub{font-family:Georgia,serif;font-style:italic;color:#b8956a;font-size:12px;display:block}
+.hb-line-top{display:block;font-family:Georgia,serif;color:#e8d9b5;font-size:12px;margin-top:3px}
+header.case{background:var(--felt);color:#fff;padding:34px 16px 30px;border-bottom:6px solid var(--gold)}
+.wrap{max-width:1000px;margin:0 auto;padding:0 16px}
+.eyebrow{color:var(--gold);font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:14px;margin:0}
+h1{font-family:'Playfair Display',Georgia,serif;font-size:clamp(30px,5vw,46px);line-height:1.15;margin:8px 0 10px}
+.sub{font-size:20px;color:#e6efe9;margin:0 0 10px}
+.dates{font-size:15px;color:#cfe0d6;margin:0}
+h2{font-family:'Playfair Display',Georgia,serif;color:var(--felt);font-size:30px;margin:44px 0 12px;border-bottom:3px solid var(--gold);padding-bottom:6px}
+h3{color:var(--felt2);font-size:22px;margin:24px 0 8px}
+.plain{background:var(--soft);border-left:6px solid var(--gold);padding:16px 20px;border-radius:6px;font-size:19px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:18px 0}
+.tile{border:2px solid var(--felt);border-radius:10px;padding:16px;text-align:center;background:#fff}
+.tile b{display:block;font-size:34px;color:var(--felt);line-height:1.1}
+.tile span{font-size:15px;color:var(--muted)}
+.counter{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;background:var(--felt2);color:#fff;border-radius:10px;padding:14px;margin:18px 0}
+.counter div{text-align:center}.counter b{display:block;font-size:26px;color:var(--gold)}.counter span{font-size:14px}
+.counter p{grid-column:1/-1;margin:4px 0 0;font-size:13px;color:#cfe0d6;text-align:center}
+table{width:100%;border-collapse:collapse;font-size:16px}
+th,td{border-bottom:1px solid var(--line);padding:8px 6px;text-align:left;vertical-align:top}
+th{background:var(--felt);color:#fff;position:sticky;top:0}
+td.num,th.num{text-align:right;white-space:nowrap}
+.tbl-wrap{max-height:560px;overflow:auto;border:1px solid var(--line);border-radius:8px}
+.filters{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0}
+.filters select,.filters input{font-size:16px;padding:8px;border:1px solid #9aa5b1;border-radius:6px}
+.note{font-size:14px;color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.flip{perspective:1000px;min-height:300px;cursor:pointer}
+.flip-in{position:relative;width:100%;height:100%;min-height:300px;transition:transform .6s;transform-style:preserve-3d}
+.flip.on .flip-in{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;padding:18px;overflow:auto}
+.front{background:var(--felt);color:#fff;border:3px solid var(--gold)}
+.front h4{font-family:'Playfair Display',Georgia,serif;font-size:24px;margin:0 0 6px;color:var(--gold)}
+.front .amt{font-size:30px;font-weight:700}
+.back{background:#fff;border:3px solid var(--felt);transform:rotateY(180deg);font-size:15.5px}
+.back ul{padding-left:18px;margin:6px 0}
+.tap{font-size:13px;color:#cfe0d6;margin-top:10px}
+.timeline{border-left:4px solid var(--gold);margin:10px 0 0 8px;padding-left:20px}
+.ev{margin:0 0 16px;position:relative}
+.ev:before{content:"";position:absolute;left:-30px;top:6px;width:14px;height:14px;border-radius:50%;background:var(--felt);border:3px solid var(--gold)}
+.ev b{color:var(--felt)}
+.ev.money:before{background:var(--gold);border-color:var(--felt)}
+#map{height:460px;border-radius:10px;border:2px solid var(--felt)}
+.mermaid{background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;overflow-x:auto}
+.fair{background:#eef4fb;border-left:6px solid #1d5fbf;padding:14px 18px;border-radius:6px}
+.qs h3{margin-top:18px}
+.qs ol{padding-left:22px}.qs li{margin:0 0 8px}
+details{border:1px solid var(--line);border-radius:8px;padding:10px 14px;margin:14px 0}
+summary{font-weight:700;color:var(--felt);cursor:pointer;font-size:19px}
+.hb-foot{background:#0d0b0a;color:#b8956a;text-align:center;padding:26px 16px 30px;font-family:Georgia,serif;margin-top:50px}
+.hb-foot img{height:40px}
+.hb-tag{font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:#8a7650;margin-top:8px;display:block}
+.hb-line{max-width:720px;margin:14px auto 0;color:#e8d9b5;font-size:15.5px;line-height:1.5}
+.hb-tips{margin:16px 0 4px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.hb-btn{display:inline-block;border:2px solid #d4af37;background:#d4af37;color:#0d0b0a;font:700 15px Georgia,serif;padding:10px 18px;border-radius:6px;text-decoration:none}
+.hb-btn2{background:transparent;color:#d4af37}
+.hb-small{font-size:12.5px;color:#8a7650;margin:6px 0 0}
+@media (max-width:600px){body{font-size:17px}h2{font-size:25px}.tile b{font-size:28px}th,td{font-size:14.5px}}
+.eyebrow{color:#9ec0ea}.counter b{color:#9ec0ea}.front h4{color:#9ec0ea}.ev.money:before{background:#9ec0ea}
+.hbx-top{margin:0}
+.hbx-slim{background:#0e2438;color:#dbe7f0;font:600 14px/1.4 Arial,sans-serif;padding:7px 20px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.hbx-slim a{color:#F3E3B3;text-decoration:underline}
+.hbx-tools{max-width:980px;margin:14px auto 4px;padding:0 20px;display:flex;flex-wrap:wrap;gap:8px;align-items:flex-start;font-family:Arial,sans-serif;position:relative;z-index:2}
+.hbx-tool{display:inline-block;font:700 15px Arial,sans-serif;color:#13233F!important;background:#fff;border:1px solid #c8cfd6;border-radius:6px;padding:9px 13px;text-decoration:none!important;cursor:pointer;line-height:1.2}
+.hbx-tool:hover{border-color:#13233F}.hbx-cnchip b{color:#1f5f9e;font-family:ui-monospace,Menlo,monospace}
+.hbx-jump{flex-basis:100%;order:5;border:1px solid #c8cfd6;border-radius:6px;background:#fff;color:#13233F}.hbx-jump summary{cursor:pointer;padding:9px 13px;font:700 15px Arial,sans-serif}
+.hbx-jump ol{margin:0;padding:4px 16px 12px 36px}.hbx-jump li{margin:6px 0;font-size:16.5px}.hbx-jump a{color:#13233F}
+.hbx-shelfwrap{background:#0e2438;color:#dbe7f0;padding:26px 20px 30px;font:16px/1.5 Arial,sans-serif;margin-top:48px;position:relative;z-index:1}
+.hbx-shelfwrap .in{max-width:900px;margin:0 auto}
+.hbx-shelf{border:2px dashed #9fd0ee;border-radius:10px;padding:16px 18px}
+.hbx-cn-big{font:600 17px ui-monospace,Menlo,monospace;margin-bottom:12px;color:#fff}.hbx-cn-big b{color:#9fd0ee}
+.hbx-nav{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.hbx-nav-btn{flex:1;min-width:220px;background:#12304a;border:1px solid #4d86ad;border-radius:8px;padding:12px 14px;color:#fff!important;text-decoration:none!important;font-size:16px}.hbx-nav-btn b{color:#9fd0ee;font-family:ui-monospace,Menlo,monospace}.hbx-off{opacity:.5}
+.hbx-list summary{cursor:pointer;font-weight:700;padding:6px 0}.hbx-list ol{list-style:none;margin:6px 0 0;padding:0}.hbx-list li{padding:6px 0;border-bottom:1px solid #2b4a63}.hbx-list a{color:#fff!important;text-decoration:none}
+.hbx-shelf-head{color:#9fd0ee;font:600 13px ui-monospace,Menlo,monospace;letter-spacing:.1em}.hbx-cn{font-family:ui-monospace,Menlo,monospace;color:#9fd0ee;margin-right:6px}
+.hbx-find{margin:14px 0 4px}.hbx-find label{display:block;font-weight:700;margin-bottom:6px}.hbx-find div{display:flex;gap:8px;flex-wrap:wrap}.hbx-find input{flex:1;min-width:0;width:100%;padding:12px 14px;font-size:17px;border:2px solid #4d86ad;border-radius:6px;color:#13233F;background:#fff}.hbx-find button{padding:12px 18px;font-size:16px;font-weight:700;background:#9fd0ee;color:#0e2438;border:0;border-radius:6px;cursor:pointer}
+.hbx-search{font-size:15px;margin-top:12px}.hbx-search a,.hbx-search b{color:#9fd0ee}
+.hbx-totop{display:none;position:fixed;right:16px;bottom:16px;z-index:50;background:#0e2438;color:#fff!important;border:2px solid #9fd0ee;border-radius:24px;padding:10px 16px;font:700 15px Arial,sans-serif;text-decoration:none!important;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+.hbx-dates{font-family:ui-monospace,Menlo,monospace;font-size:13px}
+@media print{.hbx-tools,.hbx-totop{display:none}}
+.hbx-tools{margin-top:16px;margin-bottom:14px}
+.hbx-shelfwrap+.hb-foot{margin-top:0}
+.hbx-shelf details.hbx-list li,.hbx-shelf details.hbx-list p{font-size:16px!important}
+.hbx-pagedates,p.hive-updated{font-family:ui-monospace,Menlo,monospace!important;font-size:14px!important;letter-spacing:.02em;opacity:.95!important;margin:10px 0 0!important}
+</style>
+<style>
+.bars{margin:12px 0 4px}.br{display:grid;grid-template-columns:minmax(120px,240px) 1fr 110px;gap:10px;align-items:center;margin:7px 0;font-size:16px}
+.br .t{height:24px;background:#e8eef6;border-radius:4px;overflow:hidden}.br .f{height:100%;background:#0f1b2d}.br .f.b{background:#1d5fbf}.br .v{text-align:right;font-weight:700}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:4px}.two .f{height:12px}
+.months{display:flex;align-items:flex-end;gap:8px;height:260px;border-bottom:2px solid #0f1b2d;padding:0 4px;margin-top:10px}
+.mo{flex:1;display:flex;gap:3px;align-items:flex-end;height:100%;position:relative}
+.mo i{display:block;flex:1;background:#0f1b2d;border-radius:3px 3px 0 0}.mo i.b{background:#1d5fbf}
+.mol{display:flex;gap:8px;padding:4px 4px 0;font-size:14px;color:#55606e}.mol span{flex:1;text-align:center}
+.key{font-size:15px;margin:8px 0}.key b{display:inline-block;width:14px;height:14px;vertical-align:-2px;margin:0 4px 0 12px}
+.mermaid .edgeLabel,.mermaid .edgeLabel p,.mermaid .edgeLabel span{color:#0f1b2d!important;fill:#0f1b2d!important;background:#e8eef6!important;font-weight:600}
+.mermaid{text-align:center}.mermaid svg{display:block;margin:0 auto}
+@media(max-width:600px){.br{grid-template-columns:110px 1fr 86px;font-size:14px}.months{height:200px}}
+</style>
+</head>
+<body>
+<div class="hb-bar"><a href="https://webercountyhive.substack.com/" target="_blank" rel="noopener"><img src="uhp-badge.png" alt="Utah Hive Politics logo"><span><span class="hb-name">Utah Hive Politics</span><span class="hb-sub">from the publisher of The Weber County Hive</span><span class="hb-line-top">The people's publication. We investigate what's best for the public as a whole, not any party or special interest.</span></span></a></div>
+<div class="hbx-slim" style="background:#0e2438;color:#dbe7f0;font:600 14px/1.4 Arial,sans-serif;padding:7px 20px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap"><span>The Ledger · LG 100.14</span><span><a href="index.html" style="color:#F3E3B3">← The Ledger home</a> · <a href="https://weber-county-hive.github.io/-weber-county-hive-index/" style="color:#F3E3B3">← Hive library (every repo)</a></span></div>
+<header class="case"><div class="wrap">
+<p class="eyebrow">The Ledger · Case 20 · Candidate Recruiting and Signature Money</p>
+<h1>Before the Ballot</h1>
+<p class="sub">Who recruits Utah candidates, and who pays to get them on the ballot. What Utah's 2026 campaign reports show about signature gathering, recruiting groups and the money behind them, from the public record.</p>
+<p class="dates">Posted Nov. 17, 2026 · Updated Nov. 17, 2026 · Figures as of Nov. 17, 2026</p>
+</div></header>
+
+<main class="wrap">
+
+<div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px;background:#eef4fb;border:2px dashed #1d5fbf;padding:14px 18px;margin:24px 0 0;border-radius:8px"><span>New to this? Start with the easy version: short, simple words, no tables.</span><a href="before-the-ballot-plain.html" style="background:#1d5fbf;color:#fff;padding:8px 14px;border-radius:6px;font-weight:700;text-decoration:none">Read the easy version →</a></div>
+
+<h2>In plain words</h2>
+<div class="plain">
+<p style="margin-top:0">By the time you see a candidate's name on a mailer or a ballot, two things have already happened. Someone decided to run, often after being asked. And that person got onto the ballot, either by winning delegates at a party convention or by turning in voter signatures.</p>
+<p>In 2026, many campaigns paid companies to gather those signatures. Some PACs paid for signatures for candidates they chose to help. Groups on both sides say they recruit candidates, but no report shows who asked whom to run.</p>
+<p style="margin-bottom:0"><b>What the records show:</b> who paid for signature gathering in 2026, how much, under what names, and whether those candidates reached their signature count. They also show where some recruiting groups' money came from. They don't show who recruited whom, or what each payment bought.</p>
+</div>
+
+<div class="tiles">
+<div class="tile"><b>$118,125</b><span>CMV PAC reported for signature gathering for 16 candidates, Jan. 19 to Feb. 17, 2026</span></div>
+<div class="tile"><b>15 of 24</b><span>Candidates named in 2026 signature spending who reached their required count</span></div>
+<div class="tile"><b>$58,477</b><span>In payments and donated services tied to one signature company, In The Field / Black Peak, across 11 campaigns</span></div>
+<div class="tile"><b>6+</b><span>Spellings of that one company's name in the reports</span></div>
+<div class="tile"><b>$400,000</b><span>Given to Elevate PAC on Oct. 19, 2026, by The Frosty Group, a Draper corporation formed five months earlier</span></div>
+<div class="tile"><b>No field</b><span>On any campaign report for who asked a candidate to run</span></div>
+</div>
+
+<div class="counter">
+<div><b>~400</b><span>payment rows checked</span></div>
+<div><b>174</b><span>signature rows matched</span></div>
+<div><b>9</b><span>bills and laws read</span></div>
+<div><b>~55</b><span>searches run</span></div>
+<p>Behind this piece (estimate). Records read: the state's 2026 campaign finance year files (100,202 rows), one full PAC report (about 200 entries), 9 bills and their status records, 5 organization websites and 1 donation page, 3 state candidate lists, 1 SEC filing, 1 set of Articles of Incorporation, 2 company records, the state's lobbyist-and-client list, and three outside reviews of the draft.</p>
+</div>
+
+<h2>1. Two doors to a party's primary ballot</h2>
+<p>For most of Utah's history, a party's nominee was chosen by delegates at a convention. In 2014, a citizen initiative called Count My Vote pushed for direct primaries. Lawmakers answered with a compromise, <b>S.B. 54</b>, which Gov. Gary Herbert signed on March 10, 2014. It kept conventions and gave members seeking a qualified party's nomination an additional route to the primary ballot: gather enough signatures from voters in their own party.</p>
+<div class="mermaid">
+%%{init: {'theme':'base','themeVariables':{'fontSize':'22px','primaryColor':'#0f1b2d','primaryTextColor':'#ffffff','lineColor':'#1d5fbf','primaryBorderColor':'#1d5fbf','edgeLabelBackground':'#e8eef6'}}}%%
+flowchart TB
+  A["Someone decides to run<br/>(often after being asked)"] --> B["Door 1: Convention<br/>Party delegates vote"]
+  A --> C["Door 2: Signatures<br/>Voters in the party sign"]
+  C --> D["Signatures gathered by<br/>volunteers, the campaign,<br/>or a paid company"]
+  D --> E["County clerk checks<br/>every signature"]
+  B --> F["Party primary ballot"]
+  E --> F
+</div>
+<p>Candidates can take either door, or both. The number of signatures depends on the office (Utah Code 20A-9-408). In 2026 it was 1,000 for a state House seat and 2,000 for a state Senate seat. County clerks check every signature, and any voter can look up the petitions they signed in the past six months at <a href="https://vote.utah.gov">vote.utah.gov</a>.</p>
+
+<h2>2. Who asks people to run</h2>
+<p>Some Utah groups say plainly that finding candidates is part of what they do. Tap a card to see what each says and what its 2026 reports show.</p>
+<div class="cards" id="groupcards"></div>
+<p class="note">Tap a card to flip it. Group descriptions come from each group's own website or from the news report cited.</p>
+
+<p><b>One recruiting effort was announced publicly.</b> On July 29, 2025, KSL reported that Vote Save America, the political arm of Crooked Media, would spend $20,000 to partner with Utah's Elevate PAC to find and recruit candidates. The targets were eight Republican House members and two Republican senators: Jill Koford, Matt MacPherson, Anthony Loubet, Jim Dunnigan, Ken Ivory, Clint Okerlund, Steve Eliason, Jordan Teuscher, Dan McCay and Kirk Cullimore.</p>
+<p>The same races drew organized help from more than one direction. Jim Dunnigan, for example, received CMV PAC signature support ($5,625), was on the Elevate recruiting target list, and was supported by a Utah Doers PAC independent expenditure. Each is a separate record.</p>
+<div class="fair">A website tells you what a group says it does. It doesn't tell you whom it asked. Campaign finance reports don't have a field for who encouraged someone to run. Money or donated services may show up later, but a contribution alone doesn't prove a group recruited anyone.</div>
+
+<h2>3. Elevate PAC and The Frosty Group</h2>
+<h3>One committee, three names</h3>
+<div class="mermaid">
+%%{init: {'theme':'base','themeVariables':{'fontSize':'22px','primaryColor':'#0f1b2d','primaryTextColor':'#ffffff','lineColor':'#1d5fbf','primaryBorderColor':'#1d5fbf','edgeLabelBackground':'#e8eef6'}}}%%
+flowchart TB
+  W["elevateutahpac.com<br/>'Paid for by Elevate Utah PAC'"] -->|"Donate button"| AB["ActBlue page:<br/>'Elevate PAC'"]
+  R["State report 207607<br/>filed as 'Elevate PAC'"] --- Y["State year file<br/>lists it as 'Life Elevated'"]
+  AB -.->|"same name"| R
+  R -->|"$25,000.14 in 2026"| S["Elevate Strategies<br/>(consulting firm)"]
+</div>
+<p>Candidates and groups reported money from "Elevate PAC." Here is how the names fit together:</p>
+<ul><li>The PAC's state filing (its Statement of Organization) names it <b>"Elevate PAC."</b> It was created May 3, 2022, and lists no other name.</li><li>Its report for Sept. 26 to Oct. 22 is also filed as "Elevate PAC," with a Salt Lake City address.</li><li>The state's downloadable 2026 data lists the same reports as <b>"Life Elevated."</b></li><li>The website elevateutahpac.com says it is "Paid for by Elevate Utah PAC." Its Donate button goes to an ActBlue page for "Elevate PAC."</li><li>KSL listed an elevateutahpac.com email as the contact for Elevate PAC's recruiting.</li><li>The PAC reported $30,270.25 from "Substack." Elevate runs a paid Substack newsletter. It also paid Squarespace, ActBlue and ShipStation.</li></ul>
+<p><b>What this means:</b> these records point to one committee using three names.</p>
+<p><b>Who runs it.</b> The state filing lists <b>Gabrielle Finlayson</b> (president), <b>Jacqueline Morgan</b> (vice president) and <b>Benjamin Haynes</b> (treasurer). All three list their job as consultant. All three use email addresses at elevatecampaignstrategies.com and the PAC's Salt Lake City suite.</p>
+<p><b>The PAC and the consulting firm.</b> Elevate PAC paid Elevate Strategies $25,000.14 in 2026. Elevate Strategies was paid $520,686.71 by 18 filers in all. KUER called Gabi Finlayson president of Elevate Utah PAC and a senior partner at Elevate Strategies. The Salt Lake Tribune called the PAC the political action committee for Elevate Strategies.</p>
+<p><b>What this means:</b> the PAC and the firm share people and an address. That doesn't show who owns the firm.</p>
+<p><b>A payment to the president.</b> On June 12, the PAC reported a $10,000 "Campaign Expense" payment to Gabrielle Finlayson, its president. The report doesn't say what it covered.</p>
+
+<h3>Where Elevate PAC's money went, and came from</h3>
+<div class="bars" id="elevbars"></div>
+<p class="note">Elevate PAC, 2026 through mid-November: $745,482.12 in contributions and $583,693.74 in spending, from the state year file. Its Oct. 22 report shows $742,755.93 in contributions for the year to that date.</p>
+
+<h3>Who is The Frosty Group?</h3>
+<div class="timeline">
+<div class="ev"><b>May 13, 2026</b> · Aaron Frost signs Articles of Incorporation for Frosty Group, Inc. as incorporator. The Articles are stamped "Expedite" and were drafted by the national law firm Foley &amp; Lardner LLP's Milwaukee office.</div>
+<div class="ev"><b>May 14, 2026</b> · Filed at 2:12 p.m. A Utah corporation in Draper; registered agent CT Corporation System; may engage in "any lawful act or activity"; 1,000 shares. No owners are named.</div>
+<div class="ev"><b>Aug. 5, 2026</b> · Curiosity Holdings, LLC is formed with the same registered agent (Aaron Frost) and the same Draper address. Its record does not list owners.</div>
+<div class="ev"><b>Oct. 19, 2026</b> · Elevate PAC reports $400,000 from "The Frosty Group" of Draper, at the same street address listed as Frosty Group, Inc.'s principal office.</div>
+</div>
+<p>The matching address ties the donor to Frosty Group, Inc. The Articles don't name the owners or say where the money came from. Curiosity Holdings does not appear in the 2026 campaign finance data.</p>
+<p><b>What this means:</b> the records show who gave the $400,000: a five-month-old corporation. They don't show who owns it.</p>
+<div class="fair"><b>A caution on names.</b> An Aaron Frost, known as "Frosty," founded the Utah software company HeroDevs and was its CEO until the end of 2025. Utah business records also list an Aaron Frost as a director of the 2019 nonprofit "Joel Frost for Sandy City Council," and more than one person whose name includes "Aaron Frost." A matching name, nickname or city is not enough to identify a donor. No record we found states that Frosty Group, Inc.'s incorporator is the HeroDevs founder or the nonprofit's director. We report the corporation and its listed incorporator only. Who owns or controls Frosty Group, Inc., and where its $400,000 came from, are not shown in the records we reviewed.</div>
+
+<h2>4. The signature company in two parties' campaigns</h2>
+<p>In The Field LLC, also filed as "Black Peak," gathered signatures for campaigns in both parties in early 2026.</p>
+<ul><li><b>Ten campaigns</b> reported <b>11 payments</b> to it, totaling <b>$47,677</b>.</li><li>Its name was spelled at least <b>six different ways</b>.</li><li>Two more entries were donated help from the same company, worth <b>$10,800</b>.</li><li>All together, the records tie it to <b>11 campaigns and $58,477</b>.</li><li>$33,027 of the payments were filed as "Signature Gathering." The rest were filed under general purposes.</li></ul>
+<div class="tbl-wrap" style="max-height:none"><table><thead><tr><th>Date</th><th>Campaign (as filed)</th><th>Office (2026)</th><th>Filed as</th><th>Purpose filed</th><th class="num">Amount</th></tr></thead><tbody>
+<tr><td>1/10/2026</td><td>Ward, Raymond</td><td>House 19 (R)</td><td>In the Field, LLC</td><td>Signature Gathering</td><td class="num">$2,400.00</td></tr>
+<tr><td>1/14/2026</td><td>Hollist, Stephanie</td><td>Senate 7 (R)</td><td>In the Field</td><td>Campaign Expense</td><td class="num">$7,500.00</td></tr>
+<tr><td>1/14/2026</td><td>Jensen, McKay</td><td>House 60 (R)</td><td>Black Peak - In the Field</td><td>Signature Gathering</td><td class="num">$1,250.00</td></tr>
+<tr><td>1/14/2026</td><td>Sloan, Chris</td><td>Senate 11 (R)</td><td>In the Field</td><td>Campaign Expense</td><td class="num">$5,000.00</td></tr>
+<tr><td>1/15/2026</td><td>Schultz, Mike</td><td>House 12 (R), Speaker</td><td>In the Field, LLC</td><td>Advertising</td><td class="num">$2,125.00</td></tr>
+<tr><td>1/20/2026</td><td>Nuttall, Tracy</td><td>State School Board 11 (R)</td><td>Black Peak signature gathering</td><td>Signature Gathering</td><td class="num">$1,250.00</td></tr>
+<tr><td>1/26/2026</td><td>Smith, Kelly</td><td>Senate 21 (R)</td><td>Black Peak Signatures</td><td>Signature Gathering</td><td class="num">$1,000.00</td></tr>
+<tr><td>1/30/2026</td><td>Parke, Dave</td><td>House 30 (R)</td><td>In The Field, LLC</td><td>Signature Gathering</td><td class="num">$2,500.00</td></tr>
+<tr><td>2/19/2026</td><td>Jackson, Julie</td><td>House 34 (D)</td><td>BNF In The Field LLC</td><td>Signature Gathering</td><td class="num">$13,927.00</td></tr>
+<tr><td>3/6/2026</td><td>Sorenson, John*</td><td>House 17 (R)</td><td>In the Field dba Black Peak</td><td>Signature Gathering</td><td class="num">$10,700.00</td></tr>
+<tr><td>3/6/2026</td><td>Sorenson, John*</td><td>House 17 (R)</td><td>In the Field dba Black Peak</td><td>Campaign Expense</td><td class="num">$25.00</td></tr>
+<tr><td>1/19/2026</td><td><i>In-kind:</i> CMV PAC to Jensen, McKay</td><td>House 60 (R)</td><td>Black Peak Signature Gathering</td><td>Donated service</td><td class="num">$5,625.00</td></tr>
+<tr><td>1/27/2026</td><td><i>In-kind:</i> Gagon, Gina to own campaign</td><td>House 67 (R)</td><td>In the Field - Signature Validation deposit</td><td>Donated service</td><td class="num">$5,175.00</td></tr>
+</tbody></table></div>
+<p class="note">*Filed as "Sorenson, John." The state's candidate list shows Adam Sorenson as the only Sorenson in House District 17. The "Sorenson, John" committee's own reports list Adam Sorenson of Farmington as a contributor and reimburse him for campaign expenses, so the records point to Adam Sorenson's campaign. The committee name and ballot name differ, which is why we flag it.</p>
+<p>One Democratic campaign (Julie Jackson) and ten Republican campaigns used the same company. Three of them (Hollist, Sloan and Schultz) filed the payment as "Campaign Expense" or "Advertising." Their reports don't say what it bought. Without contracts or invoices, the reports can't show a price per signature.</p>
+<p>State business records show In The Field LLC was formed Sept. 14, 2022. "Black Peak" is a registered business name of the same company, filed April 9, 2025. <i>(From our June 2026 research.)</i> Using a registered business name is legal and common.</p>
+
+<h2>5. When a PAC pays for the signatures</h2>
+<p>Several PACs and a party committee reported paying for candidates' signature gathering themselves, not just giving money.</p>
+<div class="bars" id="pacbars"></div>
+<p class="note">CMV PAC: 16 candidates, Jan. 19 to Feb. 17. Most entries were $5,625; Scott Sandall, Tamara Tran and Brian McKenzie each got $11,250 and Corey Astill $16,875. Utah Association of Realtors: in-kind through AC Strategies for Chris Sloan ($21,250) and Stephanie Bagwell ($4,250), April 15. Checks &amp; Balances PAC: through Summit Civic Strategies and Empower Public Affairs. Utah Republican Senate Campaign Committee: Gathering, Inc., May 11. Fresh Air PAC ($9,250 to Apollo Political) and Governing Group PAC ($13,396.08 to individual gatherers) are not shown because their reports don't say which petition the work was for.</p>
+<p><b>Who runs CMV PAC.</b> Its state filing shows:</p>
+<ul><li>Created Jan. 15, 2016</li><li>Other name it uses: <b>"Count My Vote"</b></li><li>Treasurer: Val Oveson, an accountant</li><li>Directors: Rich McKeown and Taylor Morgan</li><li>Officer: David May</li></ul>
+<p>Count My Vote was also the name of the 2014 initiative. We have not documented whether the 2016 committee is the same group.</p>
+<p><b>A clue from the lobbyist records.</b> Taylor Morgan is a registered lobbyist with Morgan May Public Affairs. His clients include "Alliance for Good Government Political Action Committee (Count My Vote)," from March 5, 2014, to Jan. 18, 2018. Then <b>CMV PAC</b> starts Jan. 18, 2018, the same day. It's listed at the same Draper address as his firm, which is also CMV PAC's address. David May, of the same firm and a CMV PAC officer, has listed "Count My Vote" as a client since Jan. 4, 2021.</p>
+<p><b>What this means:</b> the same people run CMV PAC and represent Count My Vote. That doesn't prove the two committees are one group.</p>
+<p><b>Where CMV PAC's money came from.</b> In 2026 it took in $412,055.40.</p>
+<ul><li><b>$361,000</b> came from "Utah Legacy Endowed Fund," in three gifts (Jan. 14, March 12 and May 28). The donor's address was in Cedar City.</li><li>$50,000 came from a donor filed as Scott Anderson of Salt Lake City, on Jan. 27. We have not confirmed which Scott Anderson.</li></ul>
+<p><b>Is the fund the one in the SEC filing?</b> A federal SEC filing is for <b>Utah Legacy Endowed Fund, LLC</b>, a Delaware company with a Salt Lake City office. Its manager is Legacy Investment Partners LLC. Michael Okerlund Leavitt and Gail Miller are listed as members of the manager. The names match, but the addresses don't, so we have not matched the donor to that company. This is a lead, not a finding.</p>
+<p><b>Not on the corporation list.</b> Neither Utah Legacy Endowed Fund nor Frosty Group appears on the state's list of corporations that file political-spending reports (checked Nov. 17, 2026, under F, T and U). Since May 12, 2015, a corporation doesn't have to report money it gives to a committee that reports it.</p>
+<div class="plain"><b>One benefit, two entries.</b> When a PAC pays for a candidate's signatures, the state's PAC guide tells the PAC to report "the entity to whom the expenditure was ultimately disbursed" and "the recipient of the in-kind contribution." The candidate may also report it as an in-kind gift. Those are two descriptions of the same help, so we count each once.</div>
+<p>Campaigns also paid other signature firms directly. The largest was Gathering Inc. (also filed as "Gather"): $72,548.25 from 10 campaigns. It also appears in <a href="marketing-in-utah-politics.html">Case 18</a>.</p>
+
+<h2>6. Did paying for signatures work?</h2>
+<p>Not always. The state's final totals (finalized April 24, 2026) show 15 of these 24 candidates reached their required count and 9 did not. These are total certified signatures, not how many a particular vendor gathered. Falling short doesn't mean missing the ballot, since many candidates also went through convention.</p>
+<div class="tbl-wrap" style="max-height:none"><table><thead><tr><th>Candidate</th><th>Paid help in the records</th><th class="num">Certified</th><th class="num">Required</th><th>Reached?</th></tr></thead><tbody>
+<tr><td>Scott Sandall (Senate 1)</td><td>CMV PAC</td><td class="num">2,203</td><td class="num">2,000</td><td>Yes</td></tr>
+<tr><td>Tami Tran (Senate 6)</td><td>CMV PAC</td><td class="num">2,017</td><td class="num">2,000</td><td>Yes</td></tr>
+<tr><td>Stephanie Hollist (Senate 7)</td><td>In The Field</td><td class="num">2,199</td><td class="num">2,000</td><td>Yes</td></tr>
+<tr><td>Chris Sloan (Senate 11)</td><td>In The Field; Realtors (in-kind)</td><td class="num">1,394</td><td class="num">2,000</td><td>No</td></tr>
+<tr><td>Kelly Smith (Senate 21)</td><td>In The Field</td><td class="num">2,477</td><td class="num">2,000</td><td>Yes</td></tr>
+<tr><td>Mike Schultz (House 12)</td><td>In The Field</td><td class="num">1,071</td><td class="num">1,000</td><td>Yes</td></tr>
+<tr><td>Erik Craythorne (House 13)</td><td>CMV PAC</td><td class="num">35</td><td class="num">1,000</td><td>No</td></tr>
+<tr><td>Kara Toone (House 14)</td><td>CMV PAC</td><td class="num">1,013</td><td class="num">1,000</td><td>Yes</td></tr>
+<tr><td>Bob Stevenson (House 16)</td><td>CMV PAC</td><td class="num">1,110</td><td class="num">1,000</td><td>Yes</td></tr>
+<tr><td>Lili Bitner (House 17)</td><td>CMV PAC</td><td class="num">1,070</td><td class="num">1,000</td><td>Yes</td></tr>
+<tr><td>Sam Barlow (House 17)</td><td>CMV PAC</td><td class="num">1,044</td><td class="num">1,000</td><td>Yes</td></tr>
+<tr><td>Adam Sorenson (House 17)*</td><td>In The Field</td><td class="num">394</td><td class="num">1,000</td><td>No</td></tr>
+<tr><td>Ray Ward (House 19)</td><td>In The Field; CMV PAC</td><td class="num">1,098</td><td class="num">1,000</td><td>Yes</td></tr>
+<tr><td>Stephanie Bagwell (House 28)</td><td>Realtors (in-kind)</td><td class="num">365</td><td class="num">1,000</td><td>No</td></tr>
+<tr><td>Sheldon Birch (House 29)</td><td>CMV PAC</td><td class="num">1,241</td><td class="num">1,000</td><td>Yes</td></tr>
+<tr><td>Dave Parke (House 30)</td><td>In The Field</td><td class="num">5</td><td class="num">1,000</td><td>No</td></tr>
+<tr><td>Julie Jackson (House 34)</td><td>In The Field</td><td class="num">38</td><td class="num">1,000</td><td>No</td></tr>
+<tr><td>Jim Dunnigan (House 36)</td><td>CMV PAC</td><td class="num">1,127</td><td class="num">1,000</td><td>Yes</td></tr>
+<tr><td>Chris McConnehey (House 38)</td><td>CMV PAC</td><td class="num">1,006</td><td class="num">1,000</td><td>Yes</td></tr>
+<tr><td>Lisa Dean (House 39)</td><td>CMV PAC</td><td class="num">997</td><td class="num">1,000</td><td>No</td></tr>
+<tr><td>Jake Hunsaker (House 48)</td><td>CMV PAC</td><td class="num">1,024</td><td class="num">1,000</td><td>Yes</td></tr>
+<tr><td>McKay Jensen (House 60)</td><td>In The Field; CMV PAC; Checks and Balances (in-kind)</td><td class="num">884</td><td class="num">1,000</td><td>No</td></tr>
+<tr><td>Gina Gagon (House 67)</td><td>In The Field (in-kind deposit)</td><td class="num">935</td><td class="num">1,000</td><td>No</td></tr>
+<tr><td>Tracy Nuttall (School Board 11)</td><td>In The Field</td><td class="num">2,220</td><td class="num">2,000</td><td>Yes</td></tr>
+</tbody></table></div>
+<p class="note">*See the Sorenson note in section 4. Corey Astill and Brian McKenzie, who received CMV PAC signature support, do not appear on the state's signature list. The state page's status labels don't always match its own totals, so we show only the counts.</p>
+
+<h2>7. Every signature payment we matched</h2>
+<p>Every 2026 row in the state's candidate, PAC and party year files with "signature" in its purpose, plus every payment to In The Field / Black Peak. In-kind rows are the candidate's side of help a PAC paid for, so don't add them to the PAC rows. Some PAC rows may be for initiative petitions; a row doesn't say which petition.</p>
+<div class="filters"><input id="sTx" type="search" placeholder="Search a name"><select id="sKind"><option value="">All types</option></select></div>
+<p class="note" id="ssum"></p>
+<div class="tbl-wrap"><table id="stbl"><thead><tr><th data-k="date">Date</th><th data-k="payer">Filer</th><th data-k="paidTo">Paid to or from (as filed)</th><th data-k="kind">Type</th><th data-k="purpose">Purpose line</th><th class="num" data-k="amount">Amount</th></tr></thead><tbody></tbody></table></div>
+<p class="note">Click a column heading to sort. Amounts as filed in the state year files, read Nov. 17, 2026.</p>
+
+<h2>8. Where it happens</h2>
+<div id="map" style="height:460px;border-radius:10px;border:2px solid #0f1b2d"></div>
+<p class="note">Pins: the State Capitol (where S.B. 54, H.B. 32 and S.B. 194 passed, and where the Lieutenant Governor's Office keeps the signature totals and disclosure reports); Elevate PAC's address on its state report; and the Weber and Davis county clerks, who check candidate signatures. We do not map private addresses.</p>
+
+<h2>9. What the Legislature did, and didn't do</h2>
+<p><b>H.B. 32 (2026), Signature Gathering and Verification Amendments.</b> Primary sponsor: Rep. Paul Cutler. Signed March 23.</p>
+<ul><li>Starting May 6, anyone collecting petition signatures must first take the state's online training. That includes candidate petitions.</li><li>People who carry candidate petitions may be paid by the hour or per valid signature.</li><li>Starting July 1, 2027, signers get an email or text notice.</li></ul>
+<p>Every payment in the section 4 table is dated January through March, before the training rule began.</p>
+<p><b>S.B. 194 (2026), Election Modifications.</b> Primary sponsor: Sen. Mike McKell. Signed March 23. A county clerk running for reelection must hand signature checking to another county's clerk.</p>
+<p><b>H.B. 95 (2025), Financial Disclosure Revisions.</b> Primary sponsor: Rep. Michael J. Petersen. In effect since Jan. 1, 2026. The state's disclosure website must let anyone search every filer for one person's contributions or spending.</p>
+<p>Five 2026 bills failed: H.B. 25, H.B. 27, H.B. 167, H.B. 223 and H.B. 460. Their verdicts are in the table below.</p>
+
+<h2>10. An auditor's look</h2>
+<div class="plain">
+<p style="margin-top:0"><b>What the records let us confirm:</b></p>
+<ul><li>Every payment and in-kind entry on this page, as filed, with date, amount, name and purpose.</li><li>Each In The Field client's office and party, from the state's candidate lists.</li><li>What each recruiting group says it does, from its own website.</li><li>Elevate PAC's and CMV PAC's officers, from their Statements of Organization.</li><li>That the Elevate PAC donor "The Frosty Group" matches Frosty Group, Inc.'s principal-office address.</li><li>The final action on each bill, from the Legislature's records.</li></ul>
+<p><b>What the records don't show, so we don't claim it:</b></p>
+<ul><li>Who encouraged any candidate to run.</li><li>How many signatures each payment bought, how many were valid, and the price per signature.</li><li>What the "Campaign Expense" and "Advertising" payments to In The Field covered.</li><li>Who owns or funds Frosty Group, Inc. or Curiosity Holdings, LLC.</li><li>Whether the "Utah Legacy Endowed Fund" on CMV PAC's reports is the LLC in the SEC filing.</li></ul>
+<p style="margin-bottom:0"><b>Where it's hard to follow:</b> one company appears under at least six spellings; one PAC files as "Elevate PAC" but the year file lists it as "Life Elevated"; payments to the same vendor appear under different purposes; and donated signature work shows up twice, sometimes on different dates.</p>
+</div>
+
+<h2>People named on this page, and why</h2>
+<ul>
+<li><b>Gov. Gary Herbert</b>: signed S.B. 54 (2014); listed as founder of Republican Roundtable PAC.</li>
+<li><b>Rep. Paul Cutler, Sen. Mike McKell, Rep. Michael J. Petersen</b>: primary sponsors of H.B. 32 (2026), S.B. 194 (2026) and H.B. 95 (2025).</li>
+<li><b>Becky Edwards, Owen Fuller, Jonathan Freedman, Dan Hemmert</b>: founders or leaders of Governing Group PAC and All In For Utah. Hemmert also appears in <a href="follow-the-money-uwha.html">Case 02</a>.</li>
+<li><b>Gabrielle (Gabi) Finlayson, Jacqueline Morgan, Benjamin Haynes</b>: Elevate PAC's president, vice president and treasurer on its Statement of Organization. News coverage calls Finlayson a senior partner at Elevate Strategies.</li>
+<li><b>Aaron Frost</b>: incorporator of Frosty Group, Inc. and registered agent of Curiosity Holdings, LLC, per state records. We have not identified him further.</li>
+<li><b>Val Oveson, Rich McKeown, Taylor Morgan, David May</b>: CMV PAC's treasurer, directors and officer on its state Statement of Organization. Morgan is a registered lobbyist who lists CMV PAC as a client. McKeown is also on Republican Roundtable PAC's executive committee.</li>
+<li><b>David May</b>: also Taylor Morgan's colleague at Morgan May Public Affairs; lists Count My Vote as a lobbying client.</li>
+<li><b>Michael Okerlund Leavitt, Gail Miller</b>: members of the manager of Utah Legacy Endowed Fund, LLC in an SEC filing; not matched to CMV PAC's donor.</li>
+<li><b>The candidates in sections 4 to 6</b>: campaigns that reported signature payments or in-kind help. Many appear in the <a href="https://weber-county-hive.github.io/candidates2026/">2026 voter guide</a>; Stephanie Hollist and Bob Stevenson have race files there.</li>
+<li><b>The 10 lawmakers on the Elevate / Vote Save America target list</b>: named in KSL's July 29, 2025 report.</li>
+</ul>
+<div class="fair"><b>For fairness:</b> Paying people to gather signatures is legal in Utah, and H.B. 32 now says candidate-petition circulators may be paid hourly or per valid signature. PACs may pay for help a candidate receives, if it's reported. Recruiting candidates is legal and common across parties. The transactions here do not, by themselves, establish wrongdoing.</div>
+
+<h2>Graded by the Collective Rubric</h2>
+<p class="note">These grades are not a personal opinion. They are The Weber County Hive's standing, published five-part rubric. <b>C</b> means the disclosure records we reviewed meet the basic reporting requirement; we did not audit each report for completeness or timeliness. These grades are for the system as it works today, not for any one candidate or group.</p>
+<div class="tbl-wrap" style="max-height:none"><table><thead><tr><th>Criterion</th><th>Grade</th><th>Why, from the record</th></tr></thead><tbody>
+<tr><td><b>Power</b><br><span class="note">Who decides who runs and who reaches the ballot?</span></td><td style="font-size:26px;font-weight:700">C</td><td>The signature path lets candidates reach the primary without delegates, which widens who can run. But in 2026, PACs paid for signature gathering for at least 18 candidates (CMV PAC alone, $118,125 for 16), and each PAC chooses whom to help out of public view. Recruiting isn't disclosed.</td></tr>
+<tr><td><b>Transparency</b><br><span class="note">Can the public see it?</span></td><td style="font-size:26px;font-weight:700">C</td><td>For the reports we reviewed, payments and in-kind gifts are reported with date, name and amount, and voters can look up petitions they signed. But vendors appear under many names, payments to the same vendor appear under different purposes, one PAC appears under a different name in the state's year file than on its own reports, and recruiting isn't reportable.</td></tr>
+<tr><td><b>Financial Accountability</b><br><span class="note">Is the money disclosed plainly?</span></td><td style="font-size:26px;font-weight:700">C</td><td>The payments and in-kind gifts we found were reported. Reports don't say what each payment bought or how many signatures it produced. When a corporation gives, as with a $400,000 gift from a company formed five months earlier, reports show the corporation, not who owns or funds it.</td></tr>
+<tr><td><b>Environmental Impact</b></td><td style="font-size:26px;font-weight:700">N/A</td><td>Not applicable to this topic.</td></tr>
+<tr><td><b>Community Impact</b><br><span class="note">Does it help or hurt the people affected?</span></td><td style="font-size:26px;font-weight:700">C</td><td>More paths to the ballot give voters more choices. Paid gatherers must now be trained (H.B. 32), but that began after the 2026 candidate season, and help paying for signatures varies widely from campaign to campaign.</td></tr>
+<tr><td><b>Overall</b></td><td style="font-size:30px;font-weight:700">C</td><td>An editorial assessment under the Hive's rubric: basic reporting is there for what we reviewed, with gaps in what voters can see before they vote.</td></tr>
+</tbody></table></div>
+
+<h2>The Legislature's record: does it help, harm, or stay neutral for the collective?</h2>
+<p class="note">Same verdict labels we use on every bill: <b>Help</b>, <b>Mixed</b>, <b>Leans help</b>, <b>Leans harm</b>, plus <b>Gap</b> where no law exists.</p>
+<div class="tbl-wrap" style="max-height:none"><table><thead><tr><th>Law or bill</th><th>Result</th><th>What it does, or would have done</th><th>Verdict</th></tr></thead><tbody>
+<tr><td>H.B. 95 (2025)</td><td>Signed March 24, 2025; in effect Jan. 1, 2026</td><td>The state's disclosure website must let anyone search across all filers for contributions or expenditures by a specific person.</td><td><b>Help</b></td></tr>
+<tr><td>Actual-source rule (Utah Code 20A-11-101.5)</td><td>Current law</td><td>Filers must report the actual source of a contribution and the person or entity a payment ultimately goes to.</td><td><b>Help</b></td></tr>
+<tr><td>S.B. 54 (2014)</td><td>Signed March 10, 2014</td><td>Gave members seeking a qualified party's nomination an additional route to the primary ballot by signatures.</td><td><b>Help</b></td></tr>
+<tr><td>H.B. 32 (2026)</td><td>Signed March 23, 2026</td><td>State training before gathering any petition signatures; candidate-petition circulators may be paid hourly or per valid signature; signer notices from July 1, 2027.</td><td><b>Help</b></td></tr>
+<tr><td>S.B. 194 (2026)</td><td>Signed March 23, 2026</td><td>An incumbent county clerk running for reelection must hand signature duties to another clerk.</td><td><b>Help</b></td></tr>
+<tr><td>H.B. 25 (2026)</td><td>Filed March 6, did not pass</td><td>Each signer's home county clerk would verify signatures; deadline moved from 14 to 21 days before convention.</td><td><b>Mixed</b></td></tr>
+<tr><td>H.B. 27 (2026)</td><td>Filed March 6, did not pass</td><td>Would have posted signers' names, precincts and signing dates online for at least 90 days, even for private voter records, and moved the deadline to 21 days. More ways to catch misuse, less privacy.</td><td><b>Mixed</b></td></tr>
+<tr><td>H.B. 167 (2026)</td><td>Held in House committee 5-2-5</td><td>Would have posted verified signers' names and dates, required a referral when someone says they didn't sign, and set removal deadlines.</td><td><b>Leans help</b></td></tr>
+<tr><td>H.B. 223 (2026)</td><td>Failed in the Senate 11-18</td><td>Would have phased initiative and referendum petitions to electronic signatures (10% in 2028, 50% in 2030, electronic only from 2032). Candidate petitions were left out of that transition.</td><td><b>Mixed</b></td></tr>
+<tr><td>H.B. 460 (2026)</td><td>Filed March 6, did not pass</td><td>Each party would choose signatures-only or convention-only; a convention party's nominees would appear without a party label.</td><td><b>Leans harm</b></td></tr>
+<tr><td>Candidate recruiting</td><td>No law</td><td>Reports have no field for who encouraged a candidate to run.</td><td><b>Gap</b></td></tr>
+<tr><td>Corporate donors</td><td>No ownership reporting</td><td>Reports list a corporate donor's name and address, not who owns or funds it. Since May 12, 2015, corporations don't have to report expenditures made to an entity that reports them on the state's site.</td><td><b>Gap</b></td></tr>
+<tr><td>One vendor, many names</td><td>No law</td><td>No rule requires a vendor to be filed under one consistent name.</td><td><b>Gap</b></td></tr>
+<tr><td>PAC-paid signatures</td><td>Reporting gap</td><td>The PAC's expense and the candidate's in-kind receipt are one benefit, but they can appear on different dates and in different words, and neither shows how many signatures it bought.</td><td><b>Gap</b></td></tr>
+</tbody></table></div>
+
+<h2 class="qs-h">Questions to ask, and whom to ask</h2>
+<div class="qs">
+<h3>For the Lieutenant Governor's Office (<a href="https://vote.utah.gov">vote.utah.gov</a>)</h3>
+<ol>
+<li>How many valid signatures did each 2026 signature candidate submit, and who gathered them?</li>
+<li>Could reports list each vendor under one standard name? Why does the downloadable year file list Elevate PAC as "Life Elevated"?</li>
+</ol>
+<h3>For CMV PAC</h3>
+<ol start="3"><li>How did you choose the 16 candidates whose signature gathering you paid for in January and February 2026?</li></ol>
+<h3>For Elevate PAC</h3>
+<ol start="4"><li>Is the committee on file with the state also the one that runs elevateutahpac.com, and does it use the name "Life Elevated"?</li></ol>
+<h3>For campaigns that filed "Campaign Expense" or "Advertising"</h3>
+<ol start="5"><li>What did the In The Field payment cover?</li></ol>
+<h3>For recruiting groups</h3>
+<ol start="6"><li>Whom did you encourage to run in 2026, and did you pay for their signatures or consultants?</li></ol>
+<h3>For legislators (<a href="https://le.utah.gov">le.utah.gov</a>)</h3>
+<ol start="7"><li>Should paid signature help from a PAC be reported the same way in both reports? Should corporate donors have to show who owns them?</li></ol>
+</div>
+
+<h2>Check it yourself</h2>
+<ol>
+<li>See which petitions you signed: <a href="https://vote.utah.gov">vote.utah.gov</a> (past six months).</li>
+<li>See 2026 signature totals: <a href="https://vote.utah.gov/?p=14425">vote.utah.gov, 2026 Signature Gathering Candidates</a>.</li>
+<li>See a campaign's payments: <a href="https://disclosures.utah.gov">disclosures.utah.gov</a>, Advanced Search, Expenditures, then search "In the Field," "Black Peak" or "Gathering." Try every spelling.</li>
+<li>See Elevate PAC's October report: <a href="https://disclosures.utah.gov/Search/PublicSearch/Report/207607">report 207607</a>.</li>
+</ol>
+
+<h2>Where this connects</h2>
+<ul>
+<li><a href="marketing-in-utah-politics.html">Case 18: Who Gets Paid to Sell You a Candidate</a>: the marketing money that comes next, including Gathering Inc. and Election Hive.</li>
+<li><a href="polling-and-targeting.html">Case 19: Who's Asking?</a>: polling, voter data and targeting.</li>
+<li><a href="follow-the-money-uwha.html">Case 02: Follow the Money</a>: UWHA and Election Hive.</li>
+<li><a href="https://weber-county-hive.github.io/candidates2026/">2026 voter guide (candidates2026)</a>: race files, and Case 14 on Doers Network.</li>
+<li><a href="https://weber-county-hive.github.io/Bill-Tracker/">Bill-Tracker</a>: the Hive's bill case files.</li>
+</ul>
+
+<h2>How we checked</h2>
+<p>We searched the 2026 PCC, PAC and party year files (100,202 rows) for every row with "signature" in its purpose and every payment to In The Field or Black Peak under any spelling, and read Elevate PAC's Sept. 26 to Oct. 22 report line by line. We read the enacted texts of H.B. 32, S.B. 194 and H.B. 95 and the final versions and status records of the five failed bills. We read the Frosty Group, Inc. Articles of Incorporation as rendered pages, and the business records for Frosty Group, Curiosity Holdings, HeroDevs and Joel Frost for Sandy City Council. Signature totals come from the state's April 24, 2026 list. Three outside reviews of the draft were checked against the records; their factual fixes were applied and the grade letters left unchanged.</p>
+
+<details><summary>Sources</summary>
+<ul>
+<li>Utah Lieutenant Governor, 2026 campaign finance year files (PCC, PAC, party), read Nov. 17, 2026; Elevate PAC <a href="https://disclosures.utah.gov/Search/PublicSearch/Report/207607">report 207607</a> (Sept. 26–Oct. 22, filed Oct. 27, 2026); <a href="https://disclosures.utah.gov/File/299">PAC Financial Disclosures Quick Guide</a>; corporate-reporting note on the <a href="https://disclosures.utah.gov/Search/PublicSearch">Public Search page</a>.</li>
+<li>vote.utah.gov: <a href="https://vote.utah.gov/2026-candidate-filings/">2026 candidate filings</a>; <a href="https://vote.utah.gov/?p=14425">2026 Signature Gathering Candidates</a> (finalized April 24, 2026).</li>
+<li>Bills: <a href="https://le.utah.gov/Session/2026/bills/enrolled/HB0032.pdf">H.B. 32 (2026)</a> (p. 82, lines 2777–2780); <a href="https://le.utah.gov/Session/2026/bills/enrolled/SB0194.pdf">S.B. 194 (2026)</a>; <a href="https://le.utah.gov/Session/2025/bills/enrolled/HB0095.pdf">H.B. 95 (2025)</a>; H.B. 25, H.B. 27, H.B. 167, H.B. 223 and H.B. 460 (2026) texts and status records, <a href="https://le.utah.gov">le.utah.gov</a>; S.B. 54 (2014); Utah Code 20A-11-101.5 and 20A-9-408.</li>
+<li>Elevate Utah PAC, <a href="https://elevateutahpac.com">elevateutahpac.com</a>; ActBlue, <a href="https://secure.actblue.com/donate/ws-elevatepac">Elevate PAC donation page</a>; Republican Roundtable PAC, <a href="https://rrpacutah.com/about">rrpacutah.com/about</a>; Salt Lake County Democrats, <a href="https://slcountydems.com/talent-bank">talent bank</a> (read Nov. 17, 2026).</li>
+<li>KSL, <a href="https://www.ksl.com/article/51352449">Vote Save America PAC invests to find Utah candidates</a> (July 29, 2025); KUER, <a href="https://www.kuer.org/politics-government/2025-07-29/vote-save-america-sends-20k-to-utah-to-recruit-democratic-candidates-for-2026">Vote Save America sends $20K to Utah</a> (July 29, 2025); The Salt Lake Tribune, <a href="https://sltrib.com/news/politics/2025/07/29/pod-save-america-pac-puts-20k">July 29, 2025</a>; Deseret News via KSL, "The moderate money network quietly reshaping Utah Republican politics" (Oct. 11, 2026).</li>
+<li>Elevate PAC Statement of Organization, disclosures.utah.gov (created May 3, 2022; read Nov. 17, 2026).</li>
+<li>Utah Division of Corporations: Frosty Group, Inc. (entity no. 14695176-0142) and its Articles of Incorporation (filing no. 260515995564B, May 14, 2026); Curiosity Holdings, LLC (entity no. 14722982-0160, formed Aug. 5, 2026); HeroDevs, Inc. (10933662-0143); Joel Frost for Sandy City Council (11354826-0140); In The Field LLC and Black Peak (June 2026 research). <a href="https://opencorporates.com">OpenCorporates</a> search of Utah "Frosty" companies (Nov. 17, 2026). HeroDevs press releases (Jan. 4, 2026; April 28, 2024).</li>
+<li>disclosures.utah.gov Public Search, Corporation list, sections F, T and U (viewed Nov. 17, 2026).</li>
+<li>Utah Lieutenant Governor, <a href="https://lobbyist.utah.gov/Search/LobbyistByPrincipal">Lobbyist lookup by Principal Organization</a> (10,225 records; read Nov. 17, 2026).</li>
+<li>U.S. SEC, Form D for Utah Legacy Endowed Fund, LLC (signed Dec. 30, 2025). CMV PAC Statement of Organization, disclosures.utah.gov (created Jan. 15, 2016; read Nov. 17, 2026).</li>
+</ul>
+<p class="note">Reported from public records. The Hive did not contact the people or companies named.</p>
+</details>
+</main>
+
+<div class="hb-foot"><img src="hive-bee.png" alt=""><span class="hb-name">Utah Hive Politics</span><span class="hb-sub">from the publisher of The Weber County Hive</span><span class="hb-tag">Independent · Accountability · Journalism</span><p class="hb-line">The Weber County Hive and Utah Hive Politics: the people's publication. We investigate what's best for the public as a whole, not for any party or special interest group. We report public records. You decide.</p><p class="hb-tips"><a class="hb-btn" href="https://weber-county-hive.github.io/-weber-county-hive-index/tips.html#send">Send a tip</a><a class="hb-btn hb-btn2" href="https://weber-county-hive.github.io/-weber-county-hive-index/tips.html">Tips we checked</a><a class="hb-btn hb-btn2" href="https://weber-county-hive.github.io/-weber-county-hive-index/tips.html#send">See a mistake? Tell us</a></p><p class="hb-small">We never name tipsters. When we correct a page, the fix and its date are shown on the page.</p><p class="hb-small"><a href="index.html" style="color:#d4af37">The Ledger home</a> · <a href="https://weber-county-hive.github.io/-weber-county-hive-index/" style="color:#d4af37">Master Index (Hive library)</a> · <a href="https://webercountyhive.substack.com/" style="color:#d4af37">Read on Substack</a></p></div>
+
+<script src="signatures-2026-data.js"></script>
+<script>
+const R=window.SIG_ROWS||[];
+const fmt=n=>'$'+n.toLocaleString('en-US',{minimumFractionDigits:n%1?2:0,maximumFractionDigits:2});
+const key=d=>{const p=d.split('/');return `${p[2]}-${p[0].padStart(2,'0')}-${p[1].padStart(2,'0')}`};
+R.forEach(r=>r._k=key(r.date));
+function cards(el,C){el.innerHTML=C.map(c=>`<div class="flip" tabindex="0" onclick="this.classList.toggle('on')" onkeydown="if(event.key==='Enter')this.classList.toggle('on')"><div class="flip-in"><div class="face front"><h4>${c.n}</h4><div>${c.w}</div><div class="amt" style="margin-top:14px;font-size:24px">${c.big}</div><div class="tap">Tap for more →</div></div><div class="face back"><b>${c.n}</b><ul>${c.b.map(x=>`<li>${x}</li>`).join('')}</ul></div></div></div>`).join('')}
+cards(groupcards,[
+{n:'Republican Roundtable PAC',w:'Says it "recruits and supports principled candidates."',big:'Recruits',b:['Former Gov. Gary Herbert is listed as founder; Jorge Dennis as chairman.','Executive committee includes Lew Cramer, Natalie Gochnour, Dan Hemmert and Rich McKeown.']},
+{n:'Salt Lake County Democrats',w:'Volunteer "Candidate Recruiter" role.',big:'Recruits',b:['First job: "identify potential candidates in Salt Lake County."','Gauges their interest and alignment with party positions.']},
+{n:'Elevate PAC',w:'Looks for "community-rooted people ready to lead."',big:'$745,482.12 raised',b:['Partnered with Vote Save America ($20,000 announced July 2025) to recruit candidates.','2026: $400,000 from The Frosty Group; $200,000 to the Utah Democratic Party.']},
+{n:'Governing Group PAC',w:'Created by Becky Edwards to build a bench of moderate local officials.',big:'$334,947 raised',b:['Largest donors: Brynn Kelley ($162,000) and John and Becky Edwards ($160,000).','$13,396.08 to individual signature gatherers.','Per a Deseret News report via KSL (Oct. 11, 2026): over $666,000 in three years for 100+ candidates.']},
+{n:'All In For Utah PAC',w:'Goals include "preserving the signature path to the ballot."',big:'$92,885.02 raised',b:['Run by Owen Fuller, Jonathan Freedman and Dan Hemmert.','Largest payee: Election Hive, $68,750.83 (see Case 18).','$10,000 from A. Scott Anderson.']},
+{n:'Utah Doers PAC',w:'Doers Network describes regional councils that work with candidates.',big:'$51,000 raised',b:['From Utah Doers Network.','Independent expenditures through Roost Company supporting Republican incumbents, including Jim Dunnigan and Matt MacPherson.','See Candidates 2026 Case 14.']}
+]);
+function bars(el,rows){const m=Math.max(...rows.map(r=>r[1]));el.innerHTML=rows.map(([k,v,c])=>`<div class="br"><span>${k}</span><div class="t"><div class="f ${c||''}" style="width:${v/m*100}%"></div></div><span class="v">${fmt(v)}</span></div>`).join('')}
+bars(elevbars,[['In: The Frosty Group (Oct. 19)',400000,'b'],['Out: Utah Democratic Party (Oct. 13, 22)',200000],['In: Substack subscriptions',30270.25,'b'],['In: Vote Save America (June 18)',25000,'b'],['Out: Elevate Strategies',25000.14],['Out: Michael Finch campaign',25000]]);
+bars(pacbars,[['CMV PAC (16 candidates)',118125,'b'],['Utah Association of Realtors (2, in-kind)',25500,'b'],['Checks & Balances PAC',17569.63,'b'],['Utah Republican Senate Campaign Committee',10000,'b']]);
+['Campaign paid','PAC paid','Party paid','In-kind received'].forEach(c=>sKind.add(new Option(c,c)));
+(function(){let k='_k',asc=true;const cols=['date','payer','paidTo','kind','purpose','amount'];
+function draw(){const t=sTx.value.toLowerCase(),c=sKind.value;let r=R.filter(x=>(!c||x.kind===c)&&(!t||[x.payer,x.paidTo,x.vendor,x.purpose].join(' ').toLowerCase().includes(t)));
+r.sort((a,b)=>{const x=a[k],y=b[k];return (x>y?1:x<y?-1:0)*(asc?1:-1)});
+stbl.tBodies[0].innerHTML=r.map(x=>'<tr>'+cols.map(c=>c==='amount'?`<td class="num">${fmt(x[c])}</td>`:`<td>${x[c]||''}</td>`).join('')+'</tr>').join('');
+const pay=r.filter(x=>x.kind!=='In-kind received');
+ssum.textContent=`${r.length} rows · payments ${fmt(Math.round(pay.reduce((s,x)=>s+x.amount,0)*100)/100)}`+(r.length>pay.length?` · in-kind received ${fmt(Math.round(r.filter(x=>x.kind==='In-kind received').reduce((s,x)=>s+x.amount,0)*100)/100)}`:'')}
+sTx.oninput=draw;sKind.onchange=draw;stbl.querySelectorAll('th').forEach(th=>th.onclick=()=>{const n=th.dataset.k==='date'?'_k':th.dataset.k;asc=k===n?!asc:true;k=n;draw()});draw()})();
+try{const m=L.map('map',{scrollWheelZoom:false});
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap'}).addTo(m);
+const F=[[40.7774,-111.8882,'State Capitol and Lieutenant Governor\'s Office','S.B. 54, H.B. 32 and S.B. 194 passed here. The Lieutenant Governor\'s Office posts signature totals and campaign finance reports.','left'],[40.7250,-111.8560,'Elevate PAC (address on its state report)','1055 E 2100 S, Suite 204, Salt Lake City','right'],[41.2230,-111.9738,'Weber County Clerk (Ogden)','Checks candidate signatures for Weber County races','right'],[40.9806,-111.8873,'Davis County Clerk (Farmington)','Checks signatures for Davis County races, including House District 17','left']];
+F.forEach(p=>L.circleMarker([p[0],p[1]],{radius:11,color:'#1d5fbf',fillColor:'#0f1b2d',fillOpacity:.9,weight:3}).addTo(m).bindPopup('<b>'+p[2]+'</b><br>'+p[3]).bindTooltip(p[2],{permanent:true,direction:p[4],offset:p[4]==='left'?[-10,0]:[10,0]}));
+m.fitBounds(F.map(p=>[p[0],p[1]]),{padding:[60,60]});}catch(e){}
+mermaid.initialize({startOnLoad:true,securityLevel:'loose'});
+
+</script>
+<script src="lg-shelf.js?v=3"></script>
+<script data-goatcounter="https://weberhive.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

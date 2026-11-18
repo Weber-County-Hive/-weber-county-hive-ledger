@@ -83,6 +83,16 @@ var HBX = {
       "name": "Case 19 (easy version): Who's Asking? Polling, Voter Data and Targeting"
     },
     {
+      "callNumber": "LG 100.14",
+      "slug": "before-the-ballot",
+      "name": "Case 20: Before the Ballot: Who Recruits Utah Candidates, and Who Pays to Get Them On It"
+    },
+    {
+      "callNumber": "LG 100.15",
+      "slug": "before-the-ballot-plain",
+      "name": "Case 20 (easy version): Before the Ballot"
+    },
+    {
       "callNumber": "LG 200.01",
       "slug": "biggest-donors-flip",
       "name": "Case 06: The Biggest Donors, So Far"
