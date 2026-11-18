@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Who's Asking? Polling, Voter Data and Targeting in Utah | The Ledger</title>
+<meta name="description" content="How polling changed, what's public on a Utah voter record, how campaigns target and retarget voters, what the law allows, and what Utah's 2026 reports show, from the public record.">
+<link rel="icon" type="image/png" href="hive-bee.png">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Source+Sans+3:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="leaflet.css">
+<script src="leaflet.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<style>
+:root{--felt:#0f1b2d;--felt2:#13233F;--gold:#1d5fbf;--ink:#1b2430;--muted:#55606e;--line:#d9dde3;--bg:#ffffff;--soft:#f3f6fa}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:18px/1.6 'Source Sans 3',Arial,sans-serif}
+a{color:#1d5fa8}
+.hb-bar{background:#0d0b0a;border-bottom:1px solid #3a2f1c;padding:8px 16px}
+.hb-bar a{display:flex;align-items:center;gap:12px;text-decoration:none}
+.hb-bar img{height:44px;width:auto}
+.hb-name{font-family:'Cinzel',Georgia,serif;color:#d4af37;font-size:14px;letter-spacing:.14em;text-transform:uppercase;display:block}
+.hb-sub{font-family:Georgia,serif;font-style:italic;color:#b8956a;font-size:12px;display:block}
+.hb-line-top{display:block;font-family:Georgia,serif;color:#e8d9b5;font-size:12px;margin-top:3px}
+header.case{background:var(--felt);color:#fff;padding:34px 16px 30px;border-bottom:6px solid var(--gold)}
+.wrap{max-width:1000px;margin:0 auto;padding:0 16px}
+.eyebrow{color:var(--gold);font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:14px;margin:0}
+h1{font-family:'Playfair Display',Georgia,serif;font-size:clamp(30px,5vw,46px);line-height:1.15;margin:8px 0 10px}
+.sub{font-size:20px;color:#e6efe9;margin:0 0 10px}
+.dates{font-size:15px;color:#cfe0d6;margin:0}
+h2{font-family:'Playfair Display',Georgia,serif;color:var(--felt);font-size:30px;margin:44px 0 12px;border-bottom:3px solid var(--gold);padding-bottom:6px}
+h3{color:var(--felt2);font-size:22px;margin:24px 0 8px}
+.plain{background:var(--soft);border-left:6px solid var(--gold);padding:16px 20px;border-radius:6px;font-size:19px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:18px 0}
+.tile{border:2px solid var(--felt);border-radius:10px;padding:16px;text-align:center;background:#fff}
+.tile b{display:block;font-size:34px;color:var(--felt);line-height:1.1}
+.tile span{font-size:15px;color:var(--muted)}
+.counter{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;background:var(--felt2);color:#fff;border-radius:10px;padding:14px;margin:18px 0}
+.counter div{text-align:center}.counter b{display:block;font-size:26px;color:var(--gold)}.counter span{font-size:14px}
+.counter p{grid-column:1/-1;margin:4px 0 0;font-size:13px;color:#cfe0d6;text-align:center}
+table{width:100%;border-collapse:collapse;font-size:16px}
+th,td{border-bottom:1px solid var(--line);padding:8px 6px;text-align:left;vertical-align:top}
+th{background:var(--felt);color:#fff;position:sticky;top:0}
+td.num,th.num{text-align:right;white-space:nowrap}
+.tbl-wrap{max-height:560px;overflow:auto;border:1px solid var(--line);border-radius:8px}
+.filters{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0}
+.filters select,.filters input{font-size:16px;padding:8px;border:1px solid #9aa5b1;border-radius:6px}
+.note{font-size:14px;color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.flip{perspective:1000px;min-height:300px;cursor:pointer}
+.flip-in{position:relative;width:100%;height:100%;min-height:300px;transition:transform .6s;transform-style:preserve-3d}
+.flip.on .flip-in{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;padding:18px;overflow:auto}
+.front{background:var(--felt);color:#fff;border:3px solid var(--gold)}
+.front h4{font-family:'Playfair Display',Georgia,serif;font-size:24px;margin:0 0 6px;color:var(--gold)}
+.front .amt{font-size:30px;font-weight:700}
+.back{background:#fff;border:3px solid var(--felt);transform:rotateY(180deg);font-size:15.5px}
+.back ul{padding-left:18px;margin:6px 0}
+.tap{font-size:13px;color:#cfe0d6;margin-top:10px}
+.timeline{border-left:4px solid var(--gold);margin:10px 0 0 8px;padding-left:20px}
+.ev{margin:0 0 16px;position:relative}
+.ev:before{content:"";position:absolute;left:-30px;top:6px;width:14px;height:14px;border-radius:50%;background:var(--felt);border:3px solid var(--gold)}
+.ev b{color:var(--felt)}
+.ev.money:before{background:var(--gold);border-color:var(--felt)}
+#map{height:460px;border-radius:10px;border:2px solid var(--felt)}
+.mermaid{background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;overflow-x:auto}
+.fair{background:#eef4fb;border-left:6px solid #1d5fbf;padding:14px 18px;border-radius:6px}
+.qs h3{margin-top:18px}
+.qs ol{padding-left:22px}.qs li{margin:0 0 8px}
+details{border:1px solid var(--line);border-radius:8px;padding:10px 14px;margin:14px 0}
+summary{font-weight:700;color:var(--felt);cursor:pointer;font-size:19px}
+.hb-foot{background:#0d0b0a;color:#b8956a;text-align:center;padding:26px 16px 30px;font-family:Georgia,serif;margin-top:50px}
+.hb-foot img{height:40px}
+.hb-tag{font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:#8a7650;margin-top:8px;display:block}
+.hb-line{max-width:720px;margin:14px auto 0;color:#e8d9b5;font-size:15.5px;line-height:1.5}
+.hb-tips{margin:16px 0 4px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.hb-btn{display:inline-block;border:2px solid #d4af37;background:#d4af37;color:#0d0b0a;font:700 15px Georgia,serif;padding:10px 18px;border-radius:6px;text-decoration:none}
+.hb-btn2{background:transparent;color:#d4af37}
+.hb-small{font-size:12.5px;color:#8a7650;margin:6px 0 0}
+@media (max-width:600px){body{font-size:17px}h2{font-size:25px}.tile b{font-size:28px}th,td{font-size:14.5px}}
+.eyebrow{color:#9ec0ea}.counter b{color:#9ec0ea}.front h4{color:#9ec0ea}.ev.money:before{background:#9ec0ea}
+.hbx-top{margin:0}
+.hbx-slim{background:#0e2438;color:#dbe7f0;font:600 14px/1.4 Arial,sans-serif;padding:7px 20px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.hbx-slim a{color:#F3E3B3;text-decoration:underline}
+.hbx-tools{max-width:980px;margin:14px auto 4px;padding:0 20px;display:flex;flex-wrap:wrap;gap:8px;align-items:flex-start;font-family:Arial,sans-serif;position:relative;z-index:2}
+.hbx-tool{display:inline-block;font:700 15px Arial,sans-serif;color:#13233F!important;background:#fff;border:1px solid #c8cfd6;border-radius:6px;padding:9px 13px;text-decoration:none!important;cursor:pointer;line-height:1.2}
+.hbx-tool:hover{border-color:#13233F}.hbx-cnchip b{color:#1f5f9e;font-family:ui-monospace,Menlo,monospace}
+.hbx-jump{flex-basis:100%;order:5;border:1px solid #c8cfd6;border-radius:6px;background:#fff;color:#13233F}.hbx-jump summary{cursor:pointer;padding:9px 13px;font:700 15px Arial,sans-serif}
+.hbx-jump ol{margin:0;padding:4px 16px 12px 36px}.hbx-jump li{margin:6px 0;font-size:16.5px}.hbx-jump a{color:#13233F}
+.hbx-shelfwrap{background:#0e2438;color:#dbe7f0;padding:26px 20px 30px;font:16px/1.5 Arial,sans-serif;margin-top:48px;position:relative;z-index:1}
+.hbx-shelfwrap .in{max-width:900px;margin:0 auto}
+.hbx-shelf{border:2px dashed #9fd0ee;border-radius:10px;padding:16px 18px}
+.hbx-cn-big{font:600 17px ui-monospace,Menlo,monospace;margin-bottom:12px;color:#fff}.hbx-cn-big b{color:#9fd0ee}
+.hbx-nav{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.hbx-nav-btn{flex:1;min-width:220px;background:#12304a;border:1px solid #4d86ad;border-radius:8px;padding:12px 14px;color:#fff!important;text-decoration:none!important;font-size:16px}.hbx-nav-btn b{color:#9fd0ee;font-family:ui-monospace,Menlo,monospace}.hbx-off{opacity:.5}
+.hbx-list summary{cursor:pointer;font-weight:700;padding:6px 0}.hbx-list ol{list-style:none;margin:6px 0 0;padding:0}.hbx-list li{padding:6px 0;border-bottom:1px solid #2b4a63}.hbx-list a{color:#fff!important;text-decoration:none}
+.hbx-shelf-head{color:#9fd0ee;font:600 13px ui-monospace,Menlo,monospace;letter-spacing:.1em}.hbx-cn{font-family:ui-monospace,Menlo,monospace;color:#9fd0ee;margin-right:6px}
+.hbx-find{margin:14px 0 4px}.hbx-find label{display:block;font-weight:700;margin-bottom:6px}.hbx-find div{display:flex;gap:8px;flex-wrap:wrap}.hbx-find input{flex:1;min-width:0;width:100%;padding:12px 14px;font-size:17px;border:2px solid #4d86ad;border-radius:6px;color:#13233F;background:#fff}.hbx-find button{padding:12px 18px;font-size:16px;font-weight:700;background:#9fd0ee;color:#0e2438;border:0;border-radius:6px;cursor:pointer}
+.hbx-search{font-size:15px;margin-top:12px}.hbx-search a,.hbx-search b{color:#9fd0ee}
+.hbx-totop{display:none;position:fixed;right:16px;bottom:16px;z-index:50;background:#0e2438;color:#fff!important;border:2px solid #9fd0ee;border-radius:24px;padding:10px 16px;font:700 15px Arial,sans-serif;text-decoration:none!important;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+.hbx-dates{font-family:ui-monospace,Menlo,monospace;font-size:13px}
+@media print{.hbx-tools,.hbx-totop{display:none}}
+.hbx-tools{margin-top:16px;margin-bottom:14px}
+.hbx-shelfwrap+.hb-foot{margin-top:0}
+.hbx-shelf details.hbx-list li,.hbx-shelf details.hbx-list p{font-size:16px!important}
+.hbx-pagedates,p.hive-updated{font-family:ui-monospace,Menlo,monospace!important;font-size:14px!important;letter-spacing:.02em;opacity:.95!important;margin:10px 0 0!important}
+</style>
+<style>
+.bars{margin:12px 0 4px}.br{display:grid;grid-template-columns:minmax(120px,240px) 1fr 110px;gap:10px;align-items:center;margin:7px 0;font-size:16px}
+.br .t{height:24px;background:#e8eef6;border-radius:4px;overflow:hidden}.br .f{height:100%;background:#0f1b2d}.br .f.b{background:#1d5fbf}.br .v{text-align:right;font-weight:700}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:4px}.two .f{height:12px}
+.months{display:flex;align-items:flex-end;gap:8px;height:260px;border-bottom:2px solid #0f1b2d;padding:0 4px;margin-top:10px}
+.mo{flex:1;display:flex;gap:3px;align-items:flex-end;height:100%;position:relative}
+.mo i{display:block;flex:1;background:#0f1b2d;border-radius:3px 3px 0 0}.mo i.b{background:#1d5fbf}
+.mol{display:flex;gap:8px;padding:4px 4px 0;font-size:14px;color:#55606e}.mol span{flex:1;text-align:center}
+.key{font-size:15px;margin:8px 0}.key b{display:inline-block;width:14px;height:14px;vertical-align:-2px;margin:0 4px 0 12px}
+.mermaid .edgeLabel,.mermaid .edgeLabel p,.mermaid .edgeLabel span{color:#0f1b2d!important;fill:#0f1b2d!important;background:#e8eef6!important;font-weight:600}
+.mermaid{text-align:center}.mermaid svg{display:block;margin:0 auto}
+@media(max-width:600px){.br{grid-template-columns:110px 1fr 86px;font-size:14px}.months{height:200px}}
+</style>
+</head>
+<body>
+<div class="hb-bar"><a href="https://webercountyhive.substack.com/" target="_blank" rel="noopener"><img src="uhp-badge.png" alt="Utah Hive Politics logo"><span><span class="hb-name">Utah Hive Politics</span><span class="hb-sub">from the publisher of The Weber County Hive</span><span class="hb-line-top">The people's publication. We investigate what's best for the public as a whole, not any party or special interest.</span></span></a></div>
+<div class="hbx-slim" style="background:#0e2438;color:#dbe7f0;font:600 14px/1.4 Arial,sans-serif;padding:7px 20px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap"><span>The Ledger · LG 100.12</span><span><a href="index.html" style="color:#F3E3B3">← The Ledger home</a> · <a href="https://weber-county-hive.github.io/-weber-county-hive-index/" style="color:#F3E3B3">← Hive library (every repo)</a></span></div>
+<header class="case"><div class="wrap">
+<p class="eyebrow">The Ledger · Case 19 · Polling, Voter Data and Targeting</p>
+<h1>Who's Asking?</h1>
+<p class="sub">How polling changed, what's public on your Utah voter record, how campaigns find you and follow you, what the law allows, and what Utah's 2026 campaign reports show. From the public record.</p>
+<p class="dates">Posted Nov. 17, 2026 · Updated Nov. 17, 2026 · Figures as of Nov. 17, 2026</p>
+</div></header>
+
+<main class="wrap">
+
+<div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px;background:#eef4fb;border:2px dashed #1d5fbf;padding:14px 18px;margin:24px 0 0;border-radius:8px"><span>New to this? Start with the easy version: short, simple words, no tables.</span><a href="polling-and-targeting-plain.html" style="background:#1d5fbf;color:#fff;padding:8px 14px;border-radius:6px;font-weight:700;text-decoration:none">Read the easy version →</a></div>
+
+<h2>In plain words</h2>
+<div class="plain">
+<p style="margin-top:0">A poll used to be a phone call at dinner. Now it is more often a text with a link, or an online panel people join for reward points. Campaigns and vendors can use the same voter and commercial data for polls and for ads, texts and mailers.</p>
+<p>In 2026 Utah made most voter records public again. Anyone can buy the statewide list for $1,050 unless a voter qualifies as "at-risk." Phone numbers and emails are not on that list, so campaigns match the list against other data to reach you.</p>
+<p style="margin-bottom:0"><b>What the records show:</b> what's public and what's protected on your record, which laws apply to campaign calls, texts and email, and who Utah campaigns paid for polling, texting, data and digital ads in 2026. They don't show what any poll asked or who was targeted.</p>
+</div>
+
+<div class="tiles">
+<div class="tile"><b>$1,050</b><span>Price of Utah's statewide voter list since May 25, 2026</span></div>
+<div class="tile"><b>~1.3 million</b><span>Voters whose "private" or "withheld" status ended under S.B. 153, unless they qualify as at-risk</span></div>
+<div class="tile"><b>21 days</b><span>The state's "Who Has Voted" file is emailed daily for 21 days before Election Day ($35 per election)</span></div>
+<div class="tile"><b>84%</b><span>Of national polls just before the 2020 election used online methods (56% in 2016)</span></div>
+<div class="tile"><b>3.3 pts</b><span>Average error on the margin in 611 late 2024 polls (5.3 in 2020, 5.2 in 2016)</span></div>
+<div class="tile"><b>$52,796.21</b><span>Paid to VOTTIV, the largest texting platform in Utah's 2026 reports, by 17 filers</span></div>
+</div>
+
+<div class="counter">
+<div><b>41</b><span>records read</span></div>
+<div><b>984</b><span>payment rows matched</span></div>
+<div><b>9</b><span>laws and bills read</span></div>
+<div><b>~40</b><span>searches run</span></div>
+<p>Behind this piece (estimate). Records read: the state's 2026 campaign finance year files (100,202 rows), seven Utah voter-privacy bills from 2018 to 2026, the state's voter-privacy and data-request pages, two committee agendas and one set of minutes, Pew and AAPOR reports, the FCC's political texting guide and 2020 ruling, a Supreme Court decision, UWHA's two reports to the state, Envision Utah's release, and two outside reviews of the draft.</p>
+</div>
+
+<h2>1. How polling changed</h2>
+<p>Pew Research Center studied national pollsters from 2000 to 2022. <b>61%</b> of them used different methods in 2022 than in 2016, and <b>17%</b> used three or more ways to reach people, up from 2% in 2016. Those count polling organizations. Counting individual polls instead, AAPOR estimated that <b>56%</b> of national polls just before the 2016 election used online methods; for 2020 it was <b>84%</b>.</p>
+
+<h3>Share of national polls using online methods</h3>
+<div class="bars" id="onlinebars"></div>
+<h3>How far off were the final polls? (average error on the two-party margin)</h3>
+<div class="bars" id="errbars"></div>
+<p class="note">AAPOR, Task Force on 2024 Pre-Election Polling: 611 polls in the final two weeks of 2024 races.</p>
+
+<h3>The kinds of polls you'll run into</h3>
+<div class="cards" id="pollcards"></div>
+<p class="note">Tap a card to flip it.</p>
+
+<h3>Who runs Utah's best-known poll</h3>
+<div class="timeline">
+<div class="ev"><b>Through 2024</b> · The Deseret News/Hinckley Institute of Politics poll was conducted for years by Utah pollster Dan Jones.</div>
+<div class="ev"><b>June 2024</b> · The Deseret News announces HarrisX will conduct the poll.</div>
+<div class="ev"><b>2026</b> · Morning Consult conducts it; the September 2026 Utah poll is described as an online poll of 744 registered voters.</div>
+<div class="ev"><b>2025–2026</b> · Noble Predictive Insights' Utah Public Opinion Pulse lists its method as an online opt-in panel and text-to-online survey.</div>
+</div>
+
+<div class="plain"><b>A Utah example: same question, different groups.</b> On Amendment B in 2026, Noble Predictive Insights' September poll surveyed 602 registered voters through an opt-in online panel (±3.99). Its Oct. 26–27 poll surveyed 527 <i>likely</i> voters by text-to-online (±4.27) and found 34% yes, 56% no and 10% unsure. The two polls reached different groups in different ways, so the change between them can't be credited entirely to voters changing their minds.</div>
+
+<p><b>Online doesn't always mean random or not random.</b> Probability-based online panels are recruited at random. <b>Opt-in</b> panels are not, so pollsters weight the answers to match the population. Weighting helps; it doesn't guarantee the sample represents everyone. For an opt-in survey, ask how its "plus or minus" was calculated; that figure doesn't necessarily measure selection bias, nonresponse or other errors.</p>
+
+<h2>2. A poll, a message test, or a "push poll"?</h2>
+<div class="mermaid">
+%%{init: {'theme':'base','themeVariables':{'fontSize':'22px','primaryColor':'#0f1b2d','primaryTextColor':'#ffffff','lineColor':'#1d5fbf','primaryBorderColor':'#1d5fbf','edgeLabelBackground':'#e8eef6'}}}%%
+flowchart TB
+  A["A call or text says<br/>it's a survey"] --> B{"Does it ask<br/>about you?<br/>(age, party, etc.)"}
+  B -->|"Yes"| C{"Many questions,<br/>balanced wording?"}
+  B -->|"No"| W["Look closer"]
+  C -->|"Yes"| P["Likely a real poll<br/>or message test"]
+  C -->|"Only one or two,<br/>all negative"| W
+  W --> X["Ask which firm<br/>is conducting it"]
+  X -->|"Won't say,<br/>or evasive"| PP["Signs of a<br/>push poll"]
+</div>
+<p>AAPOR calls a "push poll" negative campaigning disguised as a poll: political telemarketing to large numbers of people under the cover of research. Signs include only one or a few questions about one candidate or issue, uniformly negative (or positive) wording, no organization named or a fake one, and evasive answers. No single sign settles it. A <b>message test</b> is a real poll a campaign runs privately to see which arguments work; negative statements alone don't make it fake. Message tests usually run 400 to 1,500 interviews.</p>
+<div class="fair">AAPOR also notes that legitimate polling firms will often choose not to identify the client who is sponsoring the research, because naming the sponsor could bias the answers. <b>Utah law is different:</b> since 2013 (H.B. 44, primary sponsor Rep. Greg Hughes), anyone who conducts a poll about a person who has filed for office, or a ballot proposition that has qualified for the ballot, must tell the person surveyed who paid for it, before or at the end. The lieutenant governor imposes a $100 fine for not doing so. In-person focus groups of 4 to 12 people are exempt, and so is a caller whose respondent ends the survey early (Utah Code 20A-11-905). Nothing is filed with the state, so the public can't check it afterward. A survey that ends with a donate button deserves a closer look at its purpose, but unpublished results alone don't make a poll fake.</div>
+
+<h2>3. Where they get your name</h2>
+<h3>What's on your Utah voter record now</h3>
+<div class="two-col" style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+<div class="plain" style="margin:0"><b>Public (anyone can buy, $1,050 statewide)</b><ul style="margin:6px 0 0"><li>Full legal name</li><li>Voter ID number</li><li>Home and mailing address</li><li>Precinct and districts</li><li>Party</li><li>Active or inactive status</li><li>Date the record was last updated</li><li>Elections you voted in</li></ul></div>
+<div class="plain" style="margin:0;background:#f2f4f7"><b>Protected for every voter</b><ul style="margin:6px 0 0"><li>Social Security number</li><li>Driver license or state ID number</li><li>Full date of birth</li><li>Email and phone number*</li><li>Signature</li><li>How you voted (the ballot is secret)</li></ul></div>
+</div>
+<p class="note">*Starting in 2027, the registration form asks whether you agree to share your phone and email with the party you're affiliated with. It's optional, and giving a phone or email at all is optional. The law limits the list to political purposes and makes knowingly posting it online a class A misdemeanor.</p>
+
+<p><b>They can see that you voted, before Election Day.</b> The state sells a "Who Has Voted" report for $35 per election. During regular primary and general elections it's emailed every day, starting 21 days before Election Day. It lists each voter whose ballot was processed, with name, address, party, how they voted (by mail or in person) and the date the ballot was processed. It never shows how you voted. Campaigns can use it to stop contacting people who already voted.</p>
+<p><b>Counties sell voter data too.</b> Sharon Bolos's 2026 Weber County Commission report lists $169.13 paid to Weber County for "voter data." The line doesn't say what the data included.</p>
+<p><b>Where do phone numbers come from?</b> Not from the state list. Campaigns and vendors match names and addresses against commercial data; Aristotle, a national vendor, advertises a Utah voter file with hundreds of thousands of cell numbers and emails attached. Numbers also come from anything you give a campaign: a petition, a sign-up, a donation, an RSVP. The Utah Republican Party's candidate page lists RNC voter data and a canvassing app for candidates who won at convention, and the party has announced a partnership with Right Impact, which it describes as a voter contact and data provider.</p>
+
+<h3>Utah voter privacy, 2018 to 2026</h3>
+<div class="mermaid">
+%%{init: {'theme':'base','themeVariables':{'fontSize':'21px','primaryColor':'#0f1b2d','primaryTextColor':'#ffffff','lineColor':'#1d5fbf','primaryBorderColor':'#1d5fbf','edgeLabelBackground':'#e8eef6'}}}%%
+flowchart TB
+  A["Before 2018<br/>Voter records public<br/>on request"] --> B["2018 · S.B. 74, H.B. 218<br/>Any voter can choose<br/>'private'"]
+  B --> C["2020 · S.B. 83<br/>Parties and candidates can see<br/>private records; 'withheld'<br/>option for at-risk voters"]
+  C --> D["2023 · H.B. 303<br/>Limited non-identifying data<br/>on withheld voters to parties"]
+  D --> E["2025 · H.B. 270<br/>Passes House, stalls"]
+  E --> F["2026 · S.B. 153<br/>Broad privacy ends for<br/>~1.3 million voters;<br/>at-risk protections kept"]
+  F --> G["Nov. 18, 2026<br/>Draft to change at-risk rules<br/>before a legislative committee"]
+</div>
+<div class="timeline">
+<div class="ev"><b>2018</b> · S.B. 74 (Sen. Karen Mayne, House sponsor Rep. Becky Edwards) and H.B. 218 (Rep. Rebecca Chavez-Houck, Senate sponsor Sen. Deidre Henderson) let any voter ask for a private record, for any reason. S.B. 74 also limited buyers to month and year of birth. Edwards and activist Ron Mortensen were the leading proponents.</div>
+<div class="ev"><b>July 31, 2019</b> · 206,832 of 1.67 million voters (12.4%) had chosen privacy. That September the Utah Republican and Democratic party chairs testified together asking lawmakers to change the law.</div>
+<div class="ev"><b>2020</b> · S.B. 83 (Sen. Jake Anderegg, House sponsor Rep. Brian King) let parties and candidates get certain information from private records and kept existing private records protected. It created a withholding request: domestic and dating violence victims could ask without extra proof; officers, service members, public figures and protective-order holders had to provide verification. Misuse became a class A misdemeanor with a possible civil fine.</div>
+<div class="ev"><b>2023</b> · H.B. 303 (Rep. Norm Thurston, Senate sponsor Anderegg), as enacted, let parties and candidates receive limited non-identifying data about withheld voters (a code from the voter ID and address, the address, party, precinct, voting history and an age range), with verification, use limits, security, penalties and notice. The privacy classification stayed in effect.</div>
+<div class="ev"><b>Feb. 27, 2025</b> · H.B. 270 (Rep. Trevor Lee), to make no-reason private records public, passes the House and does not become law that year.</div>
+<div class="ev"><b>March 2026</b> · S.B. 153 (Sen. John Johnson, R-North Ogden; House sponsor Rep. Trevor Lee) removes broad privacy protections, ending the "withheld" status used by nearly 300,000 voters and the "private" status used by about 1 million, while keeping and revising at-risk protections. Gov. Spencer Cox signs it in mid-March.</div>
+<div class="ev"><b>April–May 2026</b> · The Lieutenant Governor's Office notifies more than 300,000 voters; records become public May 25.</div>
+<div class="ev"><b>Nov. 18, 2026</b> · The Government Operations Interim Committee's agenda lists draft Voter Registration Records Amendments, which it says would change access to voter records and expand and modify at-risk eligibility.</div>
+</div>
+
+<h2>4. How targeting and retargeting work</h2>
+<div class="mermaid">
+%%{init: {'theme':'base','themeVariables':{'fontSize':'21px','primaryColor':'#0f1b2d','primaryTextColor':'#ffffff','lineColor':'#1d5fbf','primaryBorderColor':'#1d5fbf','edgeLabelBackground':'#e8eef6'}}}%%
+flowchart TB
+  V["State voter list<br/>($1,050)"] --> M["Vendor matches it to<br/>commercial data<br/>(phones, emails)"]
+  W["'Who Has Voted'<br/>daily file ($35)"] --> M
+  S["Your own sign-ups,<br/>petitions, donations"] --> M
+  M --> T["Texts<br/>(texting platforms)"]
+  M --> FB["Uploaded lists on<br/>Facebook/Instagram<br/>('custom audiences')"]
+  M --> ML["Mailers and<br/>door knocking"]
+  M --> TV["Streaming TV<br/>and web ads"]
+  G["Google and YouTube<br/>election ads"] -.->|"Only age, gender,<br/>zip code, topic"| U["You"]
+  T --> U
+  FB --> U
+  ML --> U
+  TV --> U
+</div>
+<ul>
+<li><b>Uploaded lists.</b> Meta (Facebook and Instagram) still lets political advertisers upload lists and build "lookalike" audiences. Meta removed targeting by political affiliation and social-issue interests in early 2022.</li>
+<li><b>Google and YouTube.</b> Since late 2019, Google limits election ads to age, gender, general location (zip code) and context. It dropped voter-record and party targeting, list uploads and remarketing for election ads.</li>
+<li><b>Streaming and web ads.</b> In 2026 Rosemary Lesser's campaign reported paying StackAdapt, an ad-buying platform, $17,600 (Sept. 12 and 28).</li>
+<li><b>Retargeting</b> means showing you more ads after you visit a site or open a message. A campaign that collects your phone or email can add it to a list and reach you again.</li>
+<li><b>Texting.</b> In the 2026 Weber County Commission primary, county reports list VOTTIV Campaigns for texts on at least three campaigns: James Ebert, Richard Hyer ($1,654) and Sharon Bolos ($1,154.96). The payments don't show what the texts said, who got them, or whether recipients had agreed.</li>
+</ul>
+
+<h2>5. When public money pays for the survey and the targeting</h2>
+<p>Utah Workforce Housing Advocacy (UWHA), a nonprofit formed Nov. 20, 2023, received $1 million from the Legislature in 2024 and another $1 million for FY 2025-26 as pass-through appropriations, not competitive procurement. It ran the "Demand More Supply" campaign. Its reports to the Governor's Office of Economic Opportunity (contract #250632475) show how a research, message and survey campaign works:</p>
+<div class="mermaid">
+%%{init: {'theme':'base','themeVariables':{'fontSize':'21px','primaryColor':'#0f1b2d','primaryTextColor':'#ffffff','lineColor':'#1d5fbf','primaryBorderColor':'#1d5fbf','edgeLabelBackground':'#e8eef6'}}}%%
+flowchart TB
+  A["Legislature<br/>$1M (2024) + $1M (FY 2025-26)"] --> B["UWHA"]
+  B -->|"$100,000"| C["Envision Utah research<br/>~600 adults + 36-person<br/>online focus group"]
+  C --> D["Message: housing<br/>supply, helping others"]
+  B -->|"$16,800"| E["Message review<br/>(Gray Impact Consulting)"]
+  D --> F["Ads: TV, streaming,<br/>YouTube, social, search<br/>(planned $600,000)"]
+  F --> G["Ad-recruited surveys<br/>(1,243 via Meta;<br/>5,000+ overall)"]
+  G -.->|"Who owns the answers<br/>and contact info? (not shown)"| H["?"]
+</div>
+<ul>
+<li><b>Why wording matters:</b> in Envision Utah's Jan. 27, 2025 release, 35% named insufficient housing supply as a cause of rising costs (one of 15 causes rated), while 69% agreed that "we need to build more homes." Those are different questions.</li>
+<li><b>Two different surveys:</b> the research sample and the people who answered after clicking campaign ads are not the same group. The reports we reviewed don't say which questionnaire produced which finding.</li>
+<li><b>Activity, not people:</b> the final report lists 65,491,018 impressions; Google 6.8 million impressions; Meta 885,945 impressions. An impression is one showing of an ad, not one person. Survey answers were quoted in campaign material by first name and last initial.</li>
+<li><b>Influencers and texts:</b> two paid influencer partnerships, and $376.45 to G1 Consulting for "text messages."</li>
+<li><b>A payment that changed between reports:</b> the interim report's bank ledger lists two checks to BizDevOps Consulting, LLC totaling $62,500 (Oct. 25 and Nov. 29, 2024). They were not located in the final report's itemized budget we reviewed. That is a reporting discrepancy; it does not by itself show where the money went or that it was misspent. State records list RHRD, LLC as BizDevOps' registered agent and manager, and Dan Hemmert, now MIDA's executive director, as a manager of RHRD, LLC.</li>
+</ul>
+<p>Full case file: <a href="follow-the-money-uwha.html">Case 02: Follow the Money — UWHA, Election Hive, and the PAC That Isn't a PAC</a>.</p>
+
+<h2>6. Did you sign up for this? What the law says</h2>
+<div class="cards" id="lawcards"></div>
+<p class="note">Tap a card to flip it.</p>
+<ul>
+<li><b>Calls and texts:</b> campaign calls and texts are exempt from the National Do Not Call Registry. Under the federal Telephone Consumer Protection Act, autodialed or prerecorded political calls and autodialed texts to cell phones need prior consent.</li>
+<li><b>Person-sent texts:</b> in 2020 the FCC ruled that a peer-to-peer platform it reviewed, where a person hits send on each message, was not an autodialer. In 2021, in <i>Facebook v. Duguid</i>, the U.S. Supreme Court read "autodialer" narrowly. So some political texts fall outside the consent rule. Whether a system qualifies depends on its technology, not on whether a vendor calls it "peer-to-peer." An FCC public notice (DA 26-940) seeks comment on a petition to treat high-volume "click to send" systems as autodialers (read in search excerpts only).</li>
+<li><b>Email:</b> the federal CAN-SPAM Act covers commercial email. Noncommercial political messages fall outside it because of what they are, not who sends them.</li>
+<li><b>"Paid for by":</b> Utah's rule covers mailers, billboards, broadcast, print and "any other type of general public political advertising," but doesn't name texts or social media. See <a href="marketing-in-utah-politics.html">Case 18</a>.</li>
+<li><b>AI:</b> since May 1, 2024, Utah political ads using AI-made images, video or audio must say so (S.B. 131).</li>
+</ul>
+<div class="fair"><b>The short answer:</b> you can receive political outreach without having subscribed to that campaign. Being a registered voter puts your name, address, party and voting history on a list campaigns can buy. Phone numbers are matched from other sources. Some political texts and noncommercial political email don't require your consent.</div>
+
+<h2>7. How to tell if you're being targeted, and what you can do</h2>
+<ol>
+<li><b>Facebook or Instagram:</b> tap the three dots on an ad and choose <b>"Why am I seeing this ad?"</b> It shows some reasons, such as location or age, or that the advertiser used a list.</li>
+<li><b>Meta Ad Library</b> (<a href="https://www.facebook.com/ads/library/">facebook.com/ads/library</a>): search a candidate or group to see its political ads and available information on spending and who saw them. It doesn't fully explain why a particular person got an ad. Meta keeps political ads for seven years.</li>
+<li><b>Opt out of a list:</b> Meta has a setting to stop seeing ads from an advertiser's custom audience from a list.</li>
+<li><b>Google Ads Transparency Center</b> (<a href="https://adstransparency.google.com/political?region=US">adstransparency.google.com</a>): search an advertiser's election ads.</li>
+<li><b>Texts:</b> reply <b>STOP</b>. Forward unwanted texts to <b>7726</b> (SPAM). Report possible violations to the FCC at <a href="https://www.fcc.gov/complaints">fcc.gov/complaints</a>.</li>
+<li><b>Calls that sound like polls:</b> ask which firm is conducting it and who paid for it. In Utah, a poll about a declared candidate or a qualified ballot measure must tell you who paid, before or at the end (Utah Code 20A-11-905).</li>
+<li><b>Your voter record:</b> look up your registration at <a href="https://votesearch.utah.gov">votesearch.utah.gov</a>. You can apply to your county clerk for at-risk status at any time if you qualify.</li>
+</ol>
+
+<h2>8. What Utah's 2026 reports show</h2>
+<p>We searched the state's 2026 campaign finance year files (candidates, PACs and parties; 100,202 rows) for direct payments to polling, texting, data and digital-ad firms, matching every spelling we found. This is a partial accounting, not a statewide total: spending routed through consultants or filed under other names isn't captured. A firm's name doesn't prove what a payment bought.</p>
+<h3>Direct payments by firm, 2026</h3>
+<div class="key"><b style="background:#0f1b2d"></b>Polling or research name<b style="background:#1d5fbf"></b>Texting<b style="background:#b8860b"></b>Data or voter contact<b style="background:#2f6b3b"></b>Digital ads</div>
+<div class="bars" id="vendorbars"></div>
+<p class="note">Right Insight (data or voter contact) was filed mostly as "campaign expense" or advertising; the reports don't say what it provided. It is a different name from Right Impact, the firm in the Utah GOP's announcement; we haven't established any relationship. Reveille Research: Sen. Dan McCay's campaign, June 8. Riviera Research: Stephanie Hollist's campaign (May 22, June 10, filed as advertising) and Better Boundaries (March 18). Noble Predictive Insights: Raymond Ward's campaign, June 18. Tavern Research: Majorities Matter PAC, Oct. 16. Civic Polling: Governing Group PAC, Aug. 10.</p>
+
+<h3>Every matched payment</h3>
+<div class="filters"><input id="vTx" type="search" placeholder="Search a name"><select id="vCat"><option value="">All types</option></select></div>
+<p class="note" id="vsum"></p>
+<div class="tbl-wrap"><table id="vtbl"><thead><tr><th data-k="date">Date</th><th data-k="payer">Paid by</th><th data-k="vendor">Firm</th><th data-k="filedAs">Filed as</th><th data-k="cat">Type</th><th data-k="purpose">Purpose line</th><th class="num" data-k="amount">Amount</th></tr></thead><tbody></tbody></table></div>
+<p class="note">Click a column heading to sort. Amounts are expenditure rows from the state year files, as filed.</p>
+
+<h2>9. Where it happens</h2>
+<div id="map" style="height:460px;border-radius:10px;border:2px solid #0f1b2d"></div>
+<p class="note">Places named on this page. Pins mark the State Capitol and Lieutenant Governor's Office (where the 2026 law passed, the Nov. 18 committee meets, and the voter list is sold), the Weber County Clerk (which sold "voter data" in 2026), and UWHA's and Envision Utah's listed addresses.</p>
+
+<h2>10. An auditor's look</h2>
+<div class="plain">
+<p style="margin-top:0"><b>What the records let us confirm:</b></p>
+<ul><li>Who was paid, when and how much, for every payment filed with the state in 2026.</li><li>What the voter list contains, what it costs and who can buy it.</li><li>That the state sells a daily "Who Has Voted" file during elections.</li><li>What each voter-privacy law from 2018 to 2026 did, from the enacted texts.</li><li>UWHA's spending, from its own interim and final reports to the state.</li></ul>
+<p><b>What the records don't show, so we don't claim it:</b></p>
+<ul><li>What any poll asked, who was contacted, or whether results were released.</li><li>Who was targeted by any ad, text or mailer, or how lists were matched.</li><li>Whether any pollster shared respondents' answers with a campaign.</li><li>What Right Insight provided, or whether it is related to Right Impact.</li><li>Whether UWHA's ad-recruited survey answers were kept separate from its research sample, or reused.</li><li>What the Nov. 18 draft says line by line (its posted PDF text doesn't read cleanly); we quote the agenda's description.</li></ul>
+<p style="margin-bottom:0"><b>Where the money is hard to follow:</b> ad buying and polling often run through consultants; "purpose" lines are often just "campaign expense" or "advertising"; Utah's poll-sponsor disclosure is spoken during the poll, not filed; and UWHA's interim report shows a $62,500 payment we did not locate in its final report.</p>
+</div>
+
+<h2>People named on this page, and why</h2>
+<ul>
+<li><b>Sen. John Johnson (R-North Ogden) and Rep. Trevor Lee (R-Layton)</b>: sponsors of S.B. 153 (2026); Lee also sponsored H.B. 270 (2025).</li>
+<li><b>Sen. Karen Mayne, Rep. Becky Edwards, Rep. Rebecca Chavez-Houck, Sen. Deidre Henderson</b>: sponsors of the 2018 privacy laws. Henderson is now lieutenant governor, the state's chief election officer.</li>
+<li><b>Ron Mortensen</b>: activist who pushed the 2018 privacy law; also a source on UWHA (see <a href="follow-the-money-uwha.html">Case 02</a>).</li>
+<li><b>Sen. Jake Anderegg, Rep. Brian King, Rep. Norm Thurston</b>: sponsors of the 2020 and 2023 laws.</li>
+<li><b>Gov. Spencer Cox</b>: signed S.B. 153.</li>
+<li><b>Sen. Dan McCay, Stephanie Hollist, Raymond Ward, Rosemary Lesser</b>: campaigns that reported payments to research or ad firms in section 8. Sen. McCay also voted no on H.B. 112's motion (see <a href="marketing-in-utah-politics.html">Case 18</a>).</li>
+<li><b>James Ebert, Richard Hyer, Sharon Bolos</b>: 2026 Weber County Commission campaigns that reported texting payments; Bolos also reported buying county voter data.</li>
+<li><b>Steve Waldrip, Matthew Lusty, Dan Hemmert</b>: UWHA board member, registered agent, and manager of the company behind BizDevOps, respectively (see <a href="follow-the-money-uwha.html">Case 02</a>).</li>
+</ul>
+<div class="fair"><b>For fairness:</b> The transactions shown here do not, by themselves, establish wrongdoing. A public voter list also helps challengers, initiative sponsors, pollsters and news media reach voters, and supporters of S.B. 153 presented it as a transparency measure. Paying a pollster, texting platform or ad platform is legal and common across parties.</div>
+
+<h2>Graded by the Collective Rubric</h2>
+<p class="note">These grades are not a personal opinion. They are The Weber County Hive's standing, published five-part rubric, applied the same way to every bill, official, board and money system we cover. <b>C</b> means the law's minimum was met. These grades are for the system as it works today, not for any one campaign.</p>
+<div class="tbl-wrap" style="max-height:none"><table><thead><tr><th>Criterion</th><th>Grade</th><th>Why, from the record</th></tr></thead><tbody>
+<tr><td><b>Power</b><br><span class="note">Does it add or remove a check on power the public would otherwise have no say over?</span></td><td style="font-size:26px;font-weight:700">D</td><td>Since May 25, 2026, voters can no longer keep their record private for any reason; only "at-risk" voters can. The parties and candidates who use the list most are also the people who write the rules for it. Voters can still decline to give a phone or email, reply STOP, and opt out of Meta list targeting.</td></tr>
+<tr><td><b>Transparency</b><br><span class="note">Can the public actually see the process?</span></td><td style="font-size:26px;font-weight:700">D</td><td>Reports name vendors but not what a poll asked or who was targeted. Texts and social media aren't named in the "paid for by" rule. Utah does require pollsters to say who paid for a poll about a candidate or ballot measure, but only on the call, with a $100 fine. The Meta Ad Library shows some information, but not why a particular person saw an ad.</td></tr>
+<tr><td><b>Financial Accountability</b><br><span class="note">Who actually pays, and is that disclosed plainly?</span></td><td style="font-size:26px;font-weight:700">C</td><td>The campaign payments we reviewed are reported with date, payee and amount, the legal minimum. Spending routed through consultants isn't broken out. UWHA's public-money reports show a payment in one report that we didn't locate in the next.</td></tr>
+<tr><td><b>Environmental Impact</b><br><span class="note">Is the effect on land, water and wildlife a real constraint?</span></td><td style="font-size:26px;font-weight:700">N/A</td><td>Not applicable to this topic.</td></tr>
+<tr><td><b>Community Impact</b><br><span class="note">Who bears the cost or holds a stake, and did they get real standing to be heard?</span></td><td style="font-size:26px;font-weight:700">D</td><td>Harms: about 1.3 million voters lost a privacy choice they had used, and texts can arrive without consent. Benefits: a public list helps challengers, initiative sponsors, pollsters and news media, and posting the list online is a crime.</td></tr>
+<tr><td><b>Overall</b></td><td style="font-size:30px;font-weight:700">D</td><td>An editorial assessment under the Hive's rubric: the reporting floor is mostly met, but voters have less say over their data and can't see who is targeting them or why.</td></tr>
+</tbody></table></div>
+
+<h2>The Legislature's record: does it help, harm, or stay neutral for the collective?</h2>
+<p class="note">Same verdict labels we use on every bill: <b>Help</b>, <b>Mixed</b>, <b>Harm</b>, <b>Neutral</b>, plus <b>Gap</b> where no law exists and <b>Watch</b> for pending items.</p>
+<div class="tbl-wrap" style="max-height:none"><table><thead><tr><th>Law or decision</th><th>Verdict</th><th>Why</th></tr></thead><tbody>
+<tr><td>S.B. 74 and H.B. 218 (2018)</td><td><b>Help</b></td><td>Let any voter make their record private; limited buyers to month and year of birth.</td></tr>
+<tr><td>S.B. 83 (2020)</td><td><b>Mixed</b></td><td>Let parties and candidates see private records (harm to privacy). Created a withholding option for domestic-violence victims, officers, service members, public figures and protective-order holders, with criminal and civil penalties for misuse (help).</td></tr>
+<tr><td>H.B. 303 (2023)</td><td><b>Mixed</b></td><td>Let parties and candidates get limited non-identifying data on withheld voters, with verification, use limits, penalties and notice; the privacy classification stayed in effect.</td></tr>
+<tr><td>S.B. 131 (2024)</td><td><b>Help</b></td><td>Requires a label on political ads using AI-made images, video or audio.</td></tr>
+<tr><td>H.B. 270 (2025)</td><td><b>Did not pass</b></td><td>Would have made no-reason private records public; passed the House Feb. 27, 2025, stalled in the Senate.</td></tr>
+<tr><td>S.B. 153 (2026)</td><td><b>Mixed</b></td><td>Removed broad privacy protections for most voters (harm to privacy) while keeping and revising at-risk protections, changing penalties for unlawful disclosure, limiting the list to political purposes, and adding a 2027 consent box before phone and email go to a voter's party (help).</td></tr>
+<tr><td>H.B. 112 (2026)</td><td><b>Killed</b></td><td>Would have added paid social media ads to "paid for by." On March 3, 2026, the motion to send it out favorably failed 2-3 in Senate Revenue and Taxation, with two senators absent.</td></tr>
+<tr><td>"Who Has Voted" daily file</td><td><b>Neutral</b></td><td>Shows who voted and when, never how; useful to campaigns and to voters checking their own ballot.</td></tr>
+<tr><td>Campaign texts</td><td><b>Gap</b></td><td>No Utah "do not text" option for political texts; federal rules depend on the sending technology.</td></tr>
+<tr><td>H.B. 44 (2013), poll sponsor disclosure</td><td><b>Help</b></td><td>Requires anyone polling about a declared candidate or qualified ballot measure to tell the person surveyed who paid, by the end of the poll; $100 fine, imposed by the lieutenant governor. Nothing is filed, and we have not found a public count of fines.</td></tr>
+<tr><td>Public money for opinion campaigns</td><td><b>Gap</b></td><td>UWHA's $2 million came as a legislative pass-through appropriation, not competitive procurement. The question is what reporting the state required and whether it reconciled the interim and final reports.</td></tr>
+<tr><td>Voter Registration Records Amendments (2027 draft)</td><td><b>Watch</b></td><td>Heard Oct. 21, 2026, and on the Government Operations Interim Committee agenda again Wednesday, Nov. 18, 2026, 1:15 p.m., Room 210 Senate Building. The agenda says it would change access to voter records and expand and modify at-risk eligibility. Same meeting: the Privacy Commission's annual report and candidate financial-disclosure policy options.</td></tr>
+</tbody></table></div>
+
+<h2 class="qs-h">Questions to ask, and whom to ask</h2>
+<div class="qs">
+<h3>For the Lieutenant Governor's Office (<a href="https://vote.utah.gov">vote.utah.gov</a>)</h3>
+<ol>
+<li>How many voter lists and "Who Has Voted" files were sold in 2026, and to whom? Is that list public? How many $100 poll-disclosure fines have been imposed since 2013?</li>
+<li>How many voters applied for at-risk status, and how many were approved?</li>
+</ol>
+<h3>For the Government Operations Interim Committee (<a href="https://le.utah.gov">le.utah.gov</a>)</h3>
+<ol start="3">
+<li>What does the Voter Registration Records Amendments draft change, and who would qualify as at-risk?</li>
+<li>Should "paid for by" cover texts and social media? Should campaign texts have a do-not-text option?</li>
+</ol>
+<h3>For campaigns, PACs and pollsters</h3>
+<ol start="5">
+<li>Who conducted your poll, and will you release the questions and results?</li>
+<li>Was it a random sample or an opt-in panel? How were answers weighted?</li>
+</ol>
+<h3>For UWHA and the Governor's Office of Economic Opportunity</h3>
+<ol start="7">
+<li>Who owns the survey answers and contact information collected through the ads, and can they be reused?</li>
+<li>Why doesn't the final report show the $62,500 in BizDevOps payments listed in the interim report?</li>
+<li>Were research findings that cut against the campaign's message reported?</li>
+</ol>
+<h3>For your county clerk</h3>
+<ol start="10">
+<li>What voter data does the county sell, at what price, and to whom?</li>
+</ol>
+</div>
+
+<h2>Check it yourself</h2>
+<ol>
+<li>See what's on your record: <a href="https://votesearch.utah.gov">votesearch.utah.gov</a>.</li>
+<li>See what the state sells: <a href="https://vote.utah.gov/obtain-voter-registration-or-election-data/">vote.utah.gov, Obtain Voter Registration or Election Data</a>.</li>
+<li>See a campaign's vendors: <a href="https://disclosures.utah.gov">disclosures.utah.gov</a>, Advanced Search, Expenditures, then search a firm name such as "Vottiv" or "Facebook." Try every spelling.</li>
+<li>See political ads: the Meta Ad Library and Google Ads Transparency Center (links in section 7).</li>
+</ol>
+
+<h2>Where this connects</h2>
+<ul>
+<li><a href="marketing-in-utah-politics.html">Case 18: Who Gets Paid to Sell You a Candidate</a>: billboards, mailers, texts, campaign firms and the "paid for by" rule.</li>
+<li><a href="follow-the-money-uwha.html">Case 02: Follow the Money</a>: UWHA, Election Hive and the PAC that isn't a PAC.</li>
+<li><a href="https://weber-county-hive.github.io/candidates2026/">2026 voter guide (candidates2026)</a>: the campaigns behind many of the payments in section 8.</li>
+<li><a href="https://weber-county-hive.github.io/committees/">Committees Board</a>: the Government Operations Interim Committee and other committees the Hive watches.</li>
+<li><a href="https://weber-county-hive.github.io/Bill-Tracker/">Bill-Tracker</a>: the Hive's bill case files and the 2027 bill watch.</li>
+</ul>
+
+<h2>How we checked</h2>
+<p>We read the enacted texts of S.B. 74 and H.B. 218 (2018), S.B. 83 (2020), H.B. 303 (2023) and S.B. 153 (2026), and the introduced versions of H.B. 270 (2025). We read the state's voter-privacy and data-request pages, the Nov. 18, 2026 committee agenda and the March 3, 2026 committee minutes. For section 8, we searched the 2026 PCC, PAC and party year files for expenditure rows under each firm's name and spellings. The Amendment B poll details come from Noble Predictive Insights' releases as recorded in Hive notes on Oct. 31, 2026. UWHA figures come from its interim and final reports to the state, read for Ledger Case 02. Two outside reviews of the draft were checked against the records, and their factual fixes were applied.</p>
+
+<details><summary>Sources</summary>
+<ul>
+<li>Pew Research Center, <a href="https://www.pewresearch.org/methods/2023/04/19/how-public-polling-has-changed-in-the-21st-century/">How Public Polling Has Changed in the 21st Century</a> (April 19, 2023)</li>
+<li>AAPOR, <a href="https://aapor.org/wp-content/uploads/2025/10/Task-Force-on-2024-Pre-Election-Polling-Report-Executive-Summary.pdf">Task Force on 2024 Pre-Election Polling, executive summary</a>; <a href="https://aapor.org/wp-content/uploads/2022/12/Push-Poll-508.pdf">statement on "push polls"</a>; Poynter, <a href="https://www.poynter.org/news/how-identify-push-poll">How to identify a push poll</a></li>
+<li>Deseret News: <a href="https://www.deseret.com/deseret-news-pr/2024/06/13/deseret-news-and-the-hinckley-institute-of-politics-partner-with-harrisx-for-utah-statewide-polling">HarrisX partnership</a> (June 13, 2024); <a href="https://www.deseret.com/u-s-world/2026/09/24/trump-iran-war-polls/">Sept. 24, 2026 poll</a>; <a href="https://www.deseret.com/politics/2026/04/13/utah-changes-its-voter-privacy-law-as-trump-administration-sues-state-for-access-to-voter-rolls/">April 13, 2026</a></li>
+<li>Noble Predictive Insights, <a href="https://www.noblepredictiveinsights.com/post/back-on-the-right-track-confidence-in-state-leadership-and-elections-rebounds-amid-national-divisio">UTPOP methodology</a>; Amendment B releases (Sept. and Oct. 29, 2026)</li>
+<li>KSL NewsRadio, <a href="https://kslnewsradio.com/?p=1974839">2022 poll methods</a></li>
+<li>Bills: <a href="https://legiscan.com/UT/text/SB0074/id/1763430/Utah-2018-SB0074-Enrolled.pdf">S.B. 74 (2018)</a>; <a href="https://le.utah.gov/~2018/bills/hbillenr/HB0218.htm">H.B. 218 (2018)</a>; <a href="https://le.utah.gov/~2020/bills/sbillenr/SB0083.pdf">S.B. 83 (2020)</a>; <a href="https://le.utah.gov/~2023/bills/hbillenr/HB0303.pdf">H.B. 303 (2023)</a>; <a href="https://le.utah.gov/Session/2025/bills/introduced/HB0270.pdf">H.B. 270 (2025)</a>; <a href="https://le.utah.gov/Session/2026/bills/enrolled/SB0153.pdf">S.B. 153 (2026)</a>; <a href="https://le.utah.gov/~2024/bills/sbillenr/SB0131.pdf">S.B. 131 (2024)</a>; <a href="https://le.utah.gov/~2013/bills/hbillamd/HB0044S01.htm">H.B. 44 (2013), poll disclosure, now Utah Code 20A-11-905</a></li>
+<li>Salt Lake Tribune: <a href="https://sltrib.com/news/politics/2019/09/16/utah-voters-uses-new">Sept. 16, 2019</a>; <a href="https://www.sltrib.com/news/politics/2019/09/18/new-voter-privacy-law/">Sept. 18, 2019</a>; <a href="https://www.sltrib.com/news/politics/2026/04/14/300k-utahns-voter-registrations/">April 14, 2026</a>. KSL: <a href="https://www.ksl.com/article/news/utah/voter-privacy-law-a-step-too-far-utah-lawmaker-says/46643671">2019</a>; <a href="https://www.ksl.com/article/51483063/utahs-massive-voter-data-shift">April 2026</a>. KPCW: <a href="https://www.kpcw.org/state-regional/2026-04-15/utah-voters-info-will-soon-be-available-to-anyone-with-1-050">April 15, 2026</a>. TownLift: <a href="https://townlift.com/2026/04/some-utah-voters-weigh-unregistering-because-of-new-law-lifting-certain-privacy-protections/">April 2026</a>.</li>
+<li>Utah Lieutenant Governor: <a href="https://vote.utah.gov/voter-privacy-information/">Voter Privacy Information</a>; <a href="https://vote.utah.gov/obtain-voter-registration-or-election-data/">Obtain Voter Registration or Election Data</a>. Salt Lake County Clerk, <a href="https://www.saltlakecounty.gov/clerk/elections/voter-privacy">Voter Privacy</a>.</li>
+<li>Government Operations Interim Committee: <a href="https://le.utah.gov/interim/2026/pdf/00003700.pdf">Oct. 21, 2026 agenda</a>; <a href="https://le.utah.gov/interim/2026/pdf/00003995.pdf">Nov. 18, 2026 agenda</a>; <a href="https://le.utah.gov/interim/2026/pdf/00003754.pdf">draft Voter Registration Records Amendments</a>. Senate Revenue and Taxation Committee, <a href="https://le.utah.gov/interim/2026/html/00002057.htm">March 3, 2026 minutes</a>.</li>
+<li>Aristotle, <a href="https://www.aristotle.com/data/political-data/voter-data-by-state/utah-voter-data/">Utah voter data</a>. Utah Republican Party, <a href="https://www.utgop.org/candidates">candidate resources</a> and <a href="https://www.utgop.org/right_impact_questions_2025">Right Impact page</a>.</li>
+<li>Google election-ad targeting (<a href="https://9to5google.com/2019/11/20/google-political-ad-targeting/">9to5Google, Nov. 2019</a>); Meta, <a href="https://about.fb.com/news/2020/01/political-ads/">political ads transparency</a> and <a href="https://developers.facebook.com/docs/ad-targeting-dataset/overview">Ad Targeting Dataset</a>.</li>
+<li>FCC, <a href="https://www.fcc.gov/sites/default/files/Political-Campaign-Robocalls-and-Robotexts-Rules-Consumer-Guide.pdf">Political Campaign Robocalls and Robotexts guide</a>; 2020 P2P ruling (<a href="https://www.hollandhart.com/fcc-rules-peer-to-peer-text-messaging-platform-does-not-violate-the-tcpa">Holland &amp; Hart summary</a>); <a href="https://docs.fcc.gov/public/attachments/DA-26-940A1.pdf">DA 26-940</a>. <i>Facebook, Inc. v. Duguid</i> (2021), <a href="https://www.supremecourt.gov/opinions/20pdf/19-511_p86b.pdf">opinion</a>. FTC, <a href="https://search.ftc.gov/business-guidance/blog/2015/08/candid-answers-can-spam-questions">CAN-SPAM questions</a>.</li>
+<li>Envision Utah release, <a href="https://www.utahbusiness.com/press-releases/2025/01/27/envison-utah-housing-report/">Jan. 27, 2025</a>. UWHA interim report (Jan. 24, 2025) and final report to GOEO (contract #250632475, June 26, 2025); Utah Division of Corporations records for UWHA, BizDevOps Consulting LLC and RHRD, LLC (see Case 02).</li>
+<li>Utah Lieutenant Governor, 2026 campaign finance year files (PCC, PAC, party), read Nov. 17, 2026. Weber County 2026 campaign financial reports (Bolos, Hyer, Ebert).</li>
+</ul>
+<p class="note">Reported from public records. The Hive did not contact the people or companies named.</p>
+</details>
+</main>
+
+<div class="hb-foot"><img src="hive-bee.png" alt=""><span class="hb-name">Utah Hive Politics</span><span class="hb-sub">from the publisher of The Weber County Hive</span><span class="hb-tag">Independent · Accountability · Journalism</span><p class="hb-line">The Weber County Hive and Utah Hive Politics: the people's publication. We investigate what's best for the public as a whole, not for any party or special interest group. We report public records. You decide.</p><p class="hb-tips"><a class="hb-btn" href="https://weber-county-hive.github.io/-weber-county-hive-index/tips.html#send">Send a tip</a><a class="hb-btn hb-btn2" href="https://weber-county-hive.github.io/-weber-county-hive-index/tips.html">Tips we checked</a><a class="hb-btn hb-btn2" href="https://weber-county-hive.github.io/-weber-county-hive-index/tips.html#send">See a mistake? Tell us</a></p><p class="hb-small">We never name tipsters. When we correct a page, the fix and its date are shown on the page.</p><p class="hb-small"><a href="index.html" style="color:#d4af37">The Ledger home</a> · <a href="https://weber-county-hive.github.io/-weber-county-hive-index/" style="color:#d4af37">Master Index (Hive library)</a> · <a href="https://webercountyhive.substack.com/" style="color:#d4af37">Read on Substack</a></p></div>
+
+<script src="polling-2026-data.js"></script>
+<script>
+const R=window.POLL_ROWS||[];
+const fmt=n=>'$'+n.toLocaleString('en-US',{minimumFractionDigits:n%1?2:0,maximumFractionDigits:2});
+const fd=d=>{const p=d.split(/[\/-]/);return p[0].length===4?`${+p[1]}/${+p[2]}/${p[0]}`:`${+p[0]}/${+p[1]}/${p[2]}`};
+const key=d=>{const p=d.split('/');return p.length===3?`${p[2]}-${p[0].padStart(2,'0')}-${p[1].padStart(2,'0')}`:d};
+R.forEach(r=>r._k=key(r.date));
+// simple % / pts bars
+function pbars(el,rows,suf,cls){const m=Math.max(...rows.map(r=>r[1]));el.innerHTML=rows.map(([k,v])=>`<div class="br"><span>${k}</span><div class="t"><div class="f ${cls||''}" style="width:${v/m*100}%"></div></div><span class="v">${v}${suf}</span></div>`).join('')}
+pbars(onlinebars,[['2016',56],['2020',84]],'%','b');
+pbars(errbars,[['2016',5.2],['2020',5.3],['2024',3.3]],' pts','');
+// flip cards
+function cards(el,C){el.innerHTML=C.map(c=>`<div class="flip" tabindex="0" onclick="this.classList.toggle('on')" onkeydown="if(event.key==='Enter')this.classList.toggle('on')"><div class="flip-in"><div class="face front"><h4>${c.n}</h4><div>${c.w}</div><div class="amt" style="margin-top:14px;font-size:24px">${c.big}</div><div class="tap">Tap for more →</div></div><div class="face back"><b>${c.n}</b><ul>${c.b.map(x=>`<li>${x}</li>`).join('')}</ul></div></div></div>`).join('')}
+cards(pollcards,[
+{n:'Live phone',w:'A person calls you.',big:'Costly',b:['Still used, but expensive and fewer people answer.','Often drawn from voter files instead of random dialing.']},
+{n:'Robo-poll (IVR)',w:'A recorded voice asks the questions.',big:'Cheap',b:['Automatic dialing with a recorded voice.','Autodialed calls to cell phones need consent under federal law.']},
+{n:'Online opt-in panel',w:'People sign up, often for rewards.',big:'Not random',b:['Recruited through ads, social posts or reward sites.','Answers are weighted to match the population.','A "plus or minus" may not capture all error.']},
+{n:'Probability panel',w:'People picked at random, then invited.',big:'Random start',b:['Recruited from random addresses or phone numbers.','Usually answered online.','Pew counted 23 national pollsters using them by 2022.']},
+{n:'Text-to-web',w:'A text with a link to a survey.',big:'Growing',b:['Pew found text and address-recruited panels growing after 2020.','Noble Predictive Insights used it for its Oct. 2026 Utah poll.']}
+]);
+cards(lawcards,[
+{n:'Polls in Utah',w:'Must a poll say who paid?',big:'Yes, by the end',b:['Polls about a declared candidate or qualified ballot measure (Utah Code 20A-11-905).','$100 fine. Nothing is filed.']},
+{n:'Do Not Call',w:'Does the registry stop campaign calls?',big:'No',b:['Campaign calls and texts are exempt from the National Do Not Call Registry.']},
+{n:'Autodialed texts',w:'Do they need your consent?',big:'Yes, to cell phones',b:['Autodialed or prerecorded political calls and autodialed texts to cell phones need prior consent (TCPA).']},
+{n:'Person-sent texts',w:'Do they need your consent?',big:'Depends',b:['FCC 2020: a platform where a person hits send was not an autodialer.','Facebook v. Duguid (2021) read "autodialer" narrowly.','It depends on the technology, not the label.']},
+{n:'Political email',w:'Covered by CAN-SPAM?',big:'No',b:['CAN-SPAM covers commercial email.','Noncommercial political messages fall outside it.']},
+{n:'Texts and social ads',w:'Need a "paid for by" in Utah?',big:'Not named',b:['Utah\'s rule doesn\'t name texts or social media.','H.B. 112 (2026) would have added social ads; its motion failed 2-3.']}
+]);
+// vendor bars
+const CC={'Polling/research':'#0f1b2d','Texting':'#1d5fbf','Data/voter contact':'#b8860b','Digital ads':'#2f6b3b'};
+const T={};R.forEach(r=>{const t=T[r.vendor]||(T[r.vendor]={v:r.vendor,c:r.cat,a:0,n:0,p:new Set()});t.a+=r.amount;t.n++;t.p.add(r.payer)});
+const V=Object.values(T).sort((a,b)=>b.a-a.a);const vm=V[0].a;
+vendorbars.innerHTML=V.map(t=>`<div class="br"><span>${t.v}<br><small style="color:#55606e">${t.p.size} payer${t.p.size>1?'s':''} · ${t.n} payment${t.n>1?'s':''}</small></span><div class="t"><div class="f" style="width:${t.a/vm*100}%;background:${CC[t.c]}"></div></div><span class="v">${fmt(Math.round(t.a*100)/100)}</span></div>`).join('');
+// table
+Object.keys(CC).forEach(c=>vCat.add(new Option(c,c)));
+(function(){let k='_k',asc=true;const cols=['date','payer','vendor','filedAs','cat','purpose','amount'];
+function draw(){const t=vTx.value.toLowerCase(),c=vCat.value;let r=R.filter(x=>(!c||x.cat===c)&&(!t||[x.payer,x.vendor,x.filedAs,x.purpose].join(' ').toLowerCase().includes(t)));
+r.sort((a,b)=>{const x=a[k],y=b[k];return (x>y?1:x<y?-1:0)*(asc?1:-1)});
+vtbl.tBodies[0].innerHTML=r.map(x=>'<tr>'+cols.map(c=>c==='amount'?`<td class="num">${fmt(x[c])}</td>`:c==='date'?`<td>${fd(x[c])}</td>`:`<td>${x[c]||''}</td>`).join('')+'</tr>').join('');
+vsum.textContent=`${r.length} payments · ${fmt(Math.round(r.reduce((s,x)=>s+x.amount,0)*100)/100)}`}
+vTx.oninput=draw;vCat.onchange=draw;vtbl.querySelectorAll('th').forEach(th=>th.onclick=()=>{const n=th.dataset.k==='date'?'_k':th.dataset.k;asc=k===n?!asc:true;k=n;draw()});draw()})();
+// map
+try{const m=L.map('map',{scrollWheelZoom:false});
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap'}).addTo(m);
+const F=[[40.7774,-111.8882,'State Capitol and Lieutenant Governor\'s Office','S.B. 153 passed here; the Nov. 18 committee meets in Room 210, Senate Building. The Lieutenant Governor\'s Office sells the statewide voter list ($1,050) and "Who Has Voted" files ($35).','top'],[41.2230,-111.9738,'Weber County Clerk (Ogden)','Sold "voter data" to a 2026 county campaign ($169.13)','right'],[40.7668,-111.8910,'UWHA registered office','136 S. Main St., Ste. A200 (Case 02)','left'],[40.7640,-111.8740,'Envision Utah','254 S. 600 E.; did UWHA\'s survey research','bottom']];
+F.forEach(p=>L.circleMarker([p[0],p[1]],{radius:11,color:'#1d5fbf',fillColor:'#0f1b2d',fillOpacity:.9,weight:3}).addTo(m).bindPopup('<b>'+p[2]+'</b><br>'+p[3]).bindTooltip(p[2],{permanent:true,direction:p[4],offset:p[4]==='left'?[-10,0]:p[4]==='top'?[0,-10]:p[4]==='bottom'?[0,10]:[10,0]}));
+m.fitBounds(F.map(p=>[p[0],p[1]]),{padding:[60,60]});}catch(e){}
+mermaid.initialize({startOnLoad:true,securityLevel:'loose'});
+
+</script>
+<script src="lg-shelf.js?v=3"></script>
+<script data-goatcounter="https://weberhive.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

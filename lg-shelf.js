@@ -73,6 +73,16 @@ var HBX = {
       "name": "Case 18 (easy version): Who Gets Paid to Sell You a Candidate"
     },
     {
+      "callNumber": "LG 100.12",
+      "slug": "polling-and-targeting",
+      "name": "Case 19: Who's Asking? Polling, Voter Data and Targeting in Utah"
+    },
+    {
+      "callNumber": "LG 100.13",
+      "slug": "polling-and-targeting-plain",
+      "name": "Case 19 (easy version): Who's Asking? Polling, Voter Data and Targeting"
+    },
+    {
       "callNumber": "LG 200.01",
       "slug": "biggest-donors-flip",
       "name": "Case 06: The Biggest Donors, So Far"
