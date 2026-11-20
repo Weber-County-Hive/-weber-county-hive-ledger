@@ -128,17 +128,17 @@ const LEDGER_ENTRIES = [
     tag: "Case 10",
     title: "Tech Money",
     dek: "The tech sector's slice of the donor ledger — telecom, semiconductors, national tech PACs, and Utah's own tech-industry groups, with who runs each committee.",
-    summary: "Meta's Forge the Future Project ($251,446 spent on two candidates in a single day), Lumen Technologies, Micron Technology, Dell Technologies PAC, Utah Tech PAC, and the Silicon Slopes Commons → Slopes PAC → Utah Tech Leads chain. Updated 9/30/26: Lumen, Micron and Dell are now complete, and Utah Tech PAC's 2017-2018 activity is confirmed from its own exports.",
+    summary: "Meta's Forge the Future Project ($251,446 spent on two candidates in a single day), Lumen Technologies, Micron Technology, Dell Technologies PAC, Utah Tech PAC, and the Silicon Slopes Commons → Slopes PAC → Utah Tech Leads chain. Updated 9/30/26: Lumen, Micron and Dell are now complete, and Utah Tech PAC's 2017-2018 activity is confirmed from its own exports. Updated 11/19/26: 15 donors added (Entrata, Utah Technology Council, Vivint, Domo and more, plus four individual donors marked \"being checked\"), Utah Tech PAC's 2008-2016 years added, and a new section on what campaigns paid tech companies.",
     url: "tech.html",
-    total: 650510,
+    total: 2885163,
     totalPlus: true,
     date: "2026-09-10",
-    updated: "2026-09-30",
+    updated: "2026-11-19",
     tags: [
       "Meta", "Forge the Future Project", "Lumen Technologies", "Micron Technology",
       "IM Flash Technologies", "Dell Technologies PAC", "Silicon Slopes Commons",
       "Slopes PAC", "Utah Tech Leads", "Utah Tech PAC", "Tami Tran", "Logan Monson",
-      "Spencer Cox", "campaign finance", "donor ledger"
+      "Spencer Cox", "campaign finance", "donor ledger", "Entrata", "Utah Technology Council", "Vivint", "Domo", "Instructure", "Qualtrics", "Pluralsight", "Aaron Skonnard", "Silicon Slopes", "Cotopaxi", "Keep My Voice", "Our Schools Now"
     ]
   },
   {
